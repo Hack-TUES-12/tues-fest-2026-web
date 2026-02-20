@@ -127,7 +127,6 @@ import project62$image1 from '@/../public/projects/62/1.webp';
 import project62$image2 from '@/../public/projects/62/2.webp';
 import project62$image3 from '@/../public/projects/62/3.webp';
 import project62$image4 from '@/../public/projects/62/4.webp';
-import project63$thumbnail from '@/../public/projects/63/thumbnail.webp';
 import project64$thumbnail from '@/../public/projects/64/thumbnail.webp';
 import project65$image1 from '@/../public/projects/65/1.webp';
 import project65$image2 from '@/../public/projects/65/2.webp';
@@ -1944,42 +1943,6 @@ export const PROJECTS = [
 		],
 		thumbnail: null,
 		images: [project62$image1, project62$image2, project62$image3, project62$image4],
-	},
-	{
-		id: 63,
-		title: 'Plan The Meet',
-		category: 'software',
-		description:
-			'– Колко пъти си писал „Кога сте свободни?“ и си получил... тишина?\nИли още по-лошо – 17 съобщения с „аз мога вторник“, „не, вторник не мога“, „а бе коя седмица беше това?“\n\nPlanTheMeet казва СТОП.\n\nВлизаш.\nВиждаш календара.\nПопълваш кога си свободен.\nИзбираш приятелите, с които искаш да излезеш –\nи… бум!\nПоказва ти дните, в които всички сте свободни.\nБез драми. Без бъркане на седмици. Без „А чакай... то било рождения ден на леля ми“.\n\nИ не спираме дотук.\nPlanTheMeet ти вади предложения къде да ходите –\nфестивали, барове, настолни игри, планина, киносалон с кресла като легла…\nИ всичко е съобразено с това къде иска да ходи всеки от групата.\n\nВсе едно Netflix и Google Calendar са си направили бебе... което обича да купонясва.\n\nChat с приятелите? Има.\nЛесна покана? С един клик.\nПриложение, което прави плановете вместо теб? Добре дошъл в бъдещето.\n\n📅 PlanTheMeet – защото животът е прекалено кратък за „Кой кога може?“',
-		links: {
-			demoUrl: null,
-			repoUrls: ['https://github.com/Sveji/PlanTheMeet'],
-		},
-		youtubeId: 'sRpRpNtDa6U',
-		contributors: [
-			{
-				name: 'Мартин Велчев',
-				class: '10 В',
-			},
-			{
-				name: 'Александър Харалампиев',
-				class: '10 В',
-			},
-			{
-				name: 'Александра Ставрева',
-				class: '10 В',
-			},
-			{
-				name: 'Никола Алексов ',
-				class: '11 Г',
-			},
-			{
-				name: 'Йоан Михайлов',
-				class: '10 В',
-			},
-		],
-		thumbnail: project63$thumbnail,
-		images: [],
 	},
 	{
 		id: 64,
