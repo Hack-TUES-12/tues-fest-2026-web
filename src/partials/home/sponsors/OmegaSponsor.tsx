@@ -75,8 +75,6 @@ export default function OmegaSponsor() {
 	const [isPaused, setIsPaused] = useState(false);
 
 	const logoSrc = OMEGA_SPONSOR.logo;
-	const isStringSrc = typeof logoSrc === 'string';
-	const unoptimized = isStringSrc && (logoSrc as string).endsWith('.svg');
 
 	return (
 		<div className="relative z-10 mb-72 flex max-w-3xl flex-col items-center">
@@ -101,7 +99,7 @@ export default function OmegaSponsor() {
 			>
 				<div className="absolute inset-0 box-border flex items-center justify-center p-4">
 					<Image
-						src={logoSrc as string}
+						src={logoSrc}
 						alt={OMEGA_SPONSOR.name}
 						width={160}
 						height={112}
@@ -116,7 +114,6 @@ export default function OmegaSponsor() {
 							WebkitTransform: 'translateZ(0)',
 							transform: 'translateZ(0)',
 						}}
-						unoptimized={unoptimized}
 						loading="eager"
 						priority
 					/>

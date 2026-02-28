@@ -1,54 +1,55 @@
-import a1Logo from '@/sponsors/alpha/a1.png';
-import boschECSLogo from '@/sponsors/alpha/bosch-engineering-center-sofia.png';
-import dxcLogo from '@/sponsors/alpha/dxc.png';
-import elevenVenturesLogo from '@/sponsors/alpha/eleven-ventures.png';
-import festoLogo from '@/sponsors/alpha/festo.png';
-import globalFoundriesLogo from '@/sponsors/alpha/globalfoundries.png';
-import gttLogo from '@/sponsors/alpha/gttLogo.png';
-import itGixLogo from '@/sponsors/alpha/itGix.png';
-import m2m from '@/sponsors/alpha/m2m.png';
-import sapLogo from '@/sponsors/alpha/sap.png';
-import tbsLogo from '@/sponsors/alpha/tbs.png';
-import trading212Logo from '@/sponsors/alpha/trading212.png';
+// Alpha sponsors
+const a1Logo = '/sponsors/alpha/a1.png';
+const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.png';
+const dxcLogo = '/sponsors/alpha/dxc.png';
+const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
+const festoLogo = '/sponsors/alpha/festo.png';
+const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
+const gttLogo = '/sponsors/alpha/gttLogo.png';
+const itGixLogo = '/sponsors/alpha/itGix.png';
+const m2m = '/sponsors/alpha/m2m.png';
+const sapLogo = '/sponsors/alpha/sap.png';
+const tbsLogo = '/sponsors/alpha/tbs.png';
+const trading212Logo = '/sponsors/alpha/trading212.png';
 
+// Beta sponsors
+const chaosLogo = '/sponsors/beta/chaos.png';
+const cognyteLogo = '/sponsors/beta/cognyte.png';
+const devrixLogo = '/sponsors/beta/devrix.png';
+const haemimontLogo = '/sponsors/beta/haemimont.png';
+const ibm = '/sponsors/beta/ibm.jpg';
+const ocadoLogo = '/sponsors/beta/ocado-technology.png';
+const stamsoftLogo = '/sponsors/beta/stamsoft.png';
+const yettelLogo = '/sponsors/beta/yettelLogo.png';
 
-import chaosLogo from '@/sponsors/beta/chaos.png';
-import cognyteLogo from '@/sponsors/beta/cognyte.png';
-import devrixLogo from '@/sponsors/beta/devrix.png';
-import haemimontLogo from '@/sponsors/beta/haemimont.png';
-import ibm from '@/sponsors/beta/ibm.jpg';
-import ocadoLogo from '@/sponsors/beta/ocado-technology.png';
-import stamsoftLogo from '@/sponsors/beta/stamsoft.png';
-import yettelLogo from '@/sponsors/beta/yettelLogo.png';
+// Gamma sponsors
+const axlessoftLogo = '/sponsors/gamma/axlessoft.png';
+const nemetschekLogo = '/sponsors/gamma/nemetschek.png';
+const strypesLogo = '/sponsors/gamma/strypes.png';
+const telebidProLogo = '/sponsors/gamma/telebidPro.png';
 
+// Partners
+const aztuesLogo = '/sponsors/partners/aztues.png';
+const corporateLogo = '/sponsors/partners/corporate.png';
+const culligan = '/sponsors/partners/culligan.jpg';
+const greenCherryLogo = '/sponsors/partners/green_cherry.png';
+const jmrLogo = '/sponsors/partners/joker-media-rental.png';
+const smartcomLogo = '/sponsors/partners/smartcom.png';
+const roobarLogo = '/sponsors/partners/roobar_logo.png';
+const nezavisimostLogo = '/sponsors/partners/nezavisimost_logo.png';
+const sofiaTechParkLogo = '/sponsors/partners/sofia-tech-park.png';
+const zayobayoLogo = '/sponsors/partners/zayobayoLogo.png';
 
-import axlessoftLogo from '@/sponsors/gamma/axlessoft.png';
-import nemetschekLogo from '@/sponsors/gamma/nemetschek.png';
-import strypesLogo from '@/sponsors/gamma/strypes.png';
-import telebidProLogo from '@/sponsors/gamma/telebidPro.png';
-
-
-import aztuesLogo from '@/sponsors/partners/aztues.png';
-import corporateLogo from '@/sponsors/partners/corporate.png';
-import culligan from '@/sponsors/partners/culligan.jpg';
-import greenCherryLogo from '@/sponsors/partners/green_cherry.png';
-import jmrLogo from '@/sponsors/partners/joker-media-rental.png';
-import smartcomLogo from '@/sponsors/partners/smartcom.png';
-import roobarLogo from '@/sponsors/partners/roobar_logo.png';
-import nezavisimostLogo from '@/sponsors/partners/nezavisimost_logo.png';
-import sofiaTechParkLogo from '@/sponsors/partners/sofia-tech-park.png';
-import zayobayoLogo from '@/sponsors/partners/zayobayoLogo.png';
-
-
-import darikBusinessReviewLogo from '@/media//dbr.webp';
-import bloombergLogo from '@/media/bloomberg.webp';
-import btvLogo from '@/media/btv.png';
-import devstylerArticleLogo from '@/media/devstyler.webp';
-import economyBgLogo from '@/media/economy-bg.webp';
-import inzhenerBgLogo from '@/media/inzhener-bg.webp';
-import managerLogo from '@/media/manager.png';
-import obektiBgLogo from '@/media/obekti.jpg';
-import ttlMedia from '@/media/ttl.png';
+// Media partners
+const darikBusinessReviewLogo = '/media/dbr.webp';
+const bloombergLogo = '/media/bloomberg.webp';
+const btvLogo = '/media/btv.png';
+const devstylerArticleLogo = '/media/devstyler.webp';
+const economyBgLogo = '/media/economy-bg.webp';
+const inzhenerBgLogo = '/media/inzhener-bg.webp';
+const managerLogo = '/media/manager.png';
+const obektiBgLogo = '/media/obekti.jpg';
+const ttlMedia = '/media/ttl.png';
 
 const ALPHA_SPONSORS = [
 	{
