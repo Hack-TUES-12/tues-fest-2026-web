@@ -413,6 +413,15 @@ const MEDIA_PARTNERS = [
 	// },
 ];
 
+// Temporary placeholder – replace with the real omega sponsor when confirmed
+export const OMEGA_SPONSOR = {
+	name: 'Trading 212',
+	logo: trading212Logo,
+	url: 'https://www.trading212.com/',
+	description:
+		'Trading 212 is a fintech company that democratises the financial markets with free, smart and easy to use apps, enabling anyone to trade Stocks, ETFs, Forex, Commodities, and more.\nOur mission is to enable everyone to build wealth.\nWe reinvent how trading and investing work by creating exceptional products people love.\nFostering a culture of excellence and high velocity is the key to our success.\nWe operate across five office locations, bringing together top talent from diverse backgrounds to drive innovation in fintech.',
+};
+
 export { ALPHA_SPONSORS, BETA_SPONSORS, GAMMA_SPONSORS, PARTNERS, MEDIA_PARTNERS };
 
 export type Podkrepqsht =
