@@ -18,7 +18,9 @@ export default function PartnersPage() {
             </div>
 			<div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 place-items-center">
 				<OmegaSponsor />
-				<Sponsors />
+				<div className="relative z-20 w-full">
+					<Sponsors />
+				</div>
 			</div>
 		</section>
 	);

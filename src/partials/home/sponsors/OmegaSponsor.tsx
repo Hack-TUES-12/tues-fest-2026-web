@@ -83,19 +83,39 @@ export default function OmegaSponsor() {
 				Omega Sponsor
 			</h2>
 
-			{/* Logo card */}
+		{/* Logo card — wrapper gives us a positioned anchor for the background SVG */}
+		<div
+			className="relative mb-16 w-36 sm:w-56 md:w-92"
+			style={{ aspectRatio: '13/7' } as React.CSSProperties}
+		>
+			{/* Background decoration: starts at the vertical midpoint of the logo box */}
+			{/* eslint-disable-next-line @next/next/no-img-element */}
+			<img
+				src="/decorations/orange-circle.svg"
+				alt=""
+				aria-hidden="true"
+			className="w-[110vw] pointer-events-none absolute"
+			style={{
+				top: '50%',
+				left: '50%',
+				transform: 'translate(-50%, 0)',
+				maxWidth: '100rem',
+				minWidth: '70rem',
+				zIndex: -1,
+			}}
+			/>
+
 			<Link
 				href={OMEGA_SPONSOR.url}
 				target="_blank"
 				className={cn(
-					'relative mb-16 w-36 rounded-sm shadow-[0_4px_6px_-1px_rgba(0,0,0,0.7)] transition-all duration-700 ease-in-out sm:w-56 md:w-92',
+					'absolute inset-0 rounded-sm shadow-[0_4px_6px_-1px_rgba(0,0,0,0.7)] transition-all duration-700 ease-in-out',
 					'customClass' in OMEGA_SPONSOR &&
 						typeof OMEGA_SPONSOR.customClass === 'string' &&
 						OMEGA_SPONSOR.customClass
 						? OMEGA_SPONSOR.customClass
 						: 'bg-white'
 				)}
-				style={{ aspectRatio: '13/7' } as React.CSSProperties}
 			>
 				<div className="absolute inset-0 box-border flex items-center justify-center p-4">
 					<Image
@@ -119,6 +139,7 @@ export default function OmegaSponsor() {
 					/>
 				</div>
 			</Link>
+		</div>
 
 			{/* Info card */}
 			<div className="relative w-full">
