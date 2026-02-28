@@ -76,11 +76,15 @@
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
 
-	--font-sans: var(--font-geist-sans), 'sans-serif';
+	--font-sans: var(--font-pt-sans), 'sans-serif';
 	/* --font-warzone: var(--font-warzone), 'sans-serif'; */
-	--font-title: var(--font-rubik-mono-one), 'sans-serif';
-	--font-glitch: var(--font-glitch), 'sans-serif';
+	--font-title: var(--font-pt-mono), 'monospace';
+	--font-mighty: var(--font-mighty), 'sans-serif';
 	/* --font-origin: var(--font-origin), 'sans-serif'; */
+}
+
+@theme {
+	--font-mighty: var(--font-mighty);
 }
 
 @layer base {
