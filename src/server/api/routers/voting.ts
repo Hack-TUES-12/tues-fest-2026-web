@@ -341,13 +341,26 @@ function sendNewVerificationCodeAfterRequest(email: string, name: string, isSusp
 				verificationCodeExpiryMinutes: Duration.toMinutes(VOTE_VERIFICATION_CODE_EXPIRATION_DURATION),
 			});
 
-			await mailer.sendMail({
-				from: env.EMAIL_SMTP_FROM,
-				to: email,
-				subject: `[${TF_TITLE}] Вашият код за потвърждение: ${realGeneratedCode}`,
-				html,
-				text,
-			});
+			try {
+				await mailer.sendMail({
+					from: env.EMAIL_SMTP_FROM,
+					to: email,
+					subject: `[${TF_TITLE}] Вашият код за потвърждение: ${realGeneratedCode}`,
+					html,
+					text,
+				});
+			} catch (error) {
+				// Nodemailer v8 renamed this code from "NoAuth" to "ENOAUTH".
+				if (isMailerAuthError(error)) {
+					console.error('Could not send verification email due to SMTP auth error', {
+						code: error.code,
+						email,
+					});
+					return;
+				}
+
+				console.error('Could not send verification email', { email, error });
+			}
 		});
 	}
 
@@ -368,3 +381,14 @@ const impossibleCode = Array.from({ length: VOTE_VERIFICATION_CODE_LENGTH }, () 
 
 const REVERSE_ENGINEERING_PROTECTION_MESSAGE =
 	'Тази услуга е САМО за вътрешно използване и всеки опит за манипулиране на гласовете ще бъде санкциониран подобаващо! Организационният екип на TUES Fest запазва правото си да дисквалифицира всеки замесен участник или екип.';
+
+type MailerErrorWithCode = Error & { code?: string };
+
+function isMailerAuthError(error: unknown): error is MailerErrorWithCode {
+	if (!(error instanceof Error)) {
+		return false;
+	}
+
+	const errorCode = (error as MailerErrorWithCode).code;
+	return errorCode === 'ENOAUTH' || errorCode === 'NoAuth';
+}
