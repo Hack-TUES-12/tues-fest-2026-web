@@ -1,4 +1,3 @@
-import { StaticImageData } from 'next/image';
 import { create } from 'zustand';
 import { combine, persist } from 'zustand/middleware';
 
@@ -9,7 +8,7 @@ import { PROJECT_VOTE_LIMIT } from '@/constants/voting';
 export type LocalVotedProject = {
 	id: number;
 	title: string;
-	thumbnail: StaticImageData;
+	thumbnail: string;
 	category: ProjectCategory;
 };
 

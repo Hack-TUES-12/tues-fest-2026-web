@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { StaticImageData } from 'next/image';
 import { TbChevronLeft, TbChevronRight, TbX } from 'react-icons/tb';
 import invariant from 'tiny-invariant';
 
@@ -12,7 +11,7 @@ const GalleryModal = ({
 	startingIndex,
 	closeModal,
 }: {
-	images: readonly StaticImageData[];
+	images: readonly string[];
 	startingIndex: number;
 	closeModal: () => void;
 }) => {
@@ -149,7 +148,7 @@ const GalleryModal = ({
 						<div className="flex h-full items-center justify-center gap-4 p-4">
 							<div className="flex h-full max-h-screen w-full shrink-0 items-center justify-center overflow-hidden object-contain">
 								<img
-									src={activeImage.src}
+									src={activeImage}
 									alt={`снимка ${index + 1} на проект`}
 									className=" h-full rounded-xl object-contain"
 								/>
@@ -162,7 +161,7 @@ const GalleryModal = ({
 	);
 };
 
-const Gallery = ({ name, images }: { name: string; images: readonly StaticImageData[] }) => {
+const Gallery = ({ name, images }: { name: string; images: readonly string[] }) => {
 	const [modal, setModal] = useState(false);
 	const [index, setIndex] = useState(0);
 
@@ -183,11 +182,11 @@ const Gallery = ({ name, images }: { name: string; images: readonly StaticImageD
 						<div className="flex h-full items-center justify-start gap-4 overflow-x-auto p-4">
 							{images.map((image, index) => (
 								<div
-									key={image.src}
+									key={image}
 									className="border-border !aspect-square h-full shrink-0 overflow-hidden rounded-xl"
 								>
 									<img
-										src={image.src}
+										src={image}
 										alt={`снимка ${index + 1} от проект ${name}`}
 										width={512}
 										height={512}
