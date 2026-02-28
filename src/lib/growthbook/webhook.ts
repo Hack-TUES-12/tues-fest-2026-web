@@ -9,7 +9,7 @@ export const POST = StandardWebhookHandler({
 	webhook,
 	handleData: (data) => {
 		if (isPayloadChangedEvent(data)) {
-			revalidateTag('growthbook');
+			revalidateTag('growthbook', "max");
 		}
 	},
 });

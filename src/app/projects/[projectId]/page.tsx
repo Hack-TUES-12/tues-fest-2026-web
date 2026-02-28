@@ -62,7 +62,7 @@ export async function generateMetadata(props: { params: Promise<{ projectId: str
 			title: `${project.title} | ${TF_TITLE}`,
 			description: project.description,
 			images: project.images.map((image) => ({
-				url: image.src,
+				url: image,
 			})),
 		},
 		openGraph: {
@@ -71,7 +71,7 @@ export async function generateMetadata(props: { params: Promise<{ projectId: str
 			description: project.description,
 			url: `https://tuesfest.bg/projects/${project.id}`,
 			images: project.images.map((image) => ({
-				url: image.src,
+				url: image,
 			})),
 		},
 	};
