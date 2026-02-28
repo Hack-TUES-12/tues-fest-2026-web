@@ -6,7 +6,7 @@ export const TFLogo = (props: React.ComponentProps<'span'>) => {
 		<span
 			{...props}
 			className={cn(
-				'text-md font-glitch text-primary text-center !leading-none !tracking-wide drop-shadow-lg',
+				'text-md font-mighty text-primary text-center !leading-none !tracking-wide drop-shadow-lg',
 				props.className
 			)}
 		>

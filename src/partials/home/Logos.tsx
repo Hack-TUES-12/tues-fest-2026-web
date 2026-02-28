@@ -19,10 +19,10 @@ export default function EventLanding() {
 					{/* Logo section */}
 					<div className="relative flex flex-col items-center justify-center text-center">
 						<h1>
-							<span className="font-glitch text-primary block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+							<span className="font-mighty text-primary block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
 								TUES FEST
 							</span>
-							<span className="font-glitch text-3xl text-indigo-500 sm:text-4xl md:text-5xl lg:text-6xl">
+							<span className="font-mighty text-3xl text-indigo-500 sm:text-4xl md:text-5xl lg:text-6xl">
 								{TF_YEAR}
 							</span>
 						</h1>
