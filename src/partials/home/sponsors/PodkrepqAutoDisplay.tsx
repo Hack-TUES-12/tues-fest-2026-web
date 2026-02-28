@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback, Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Globe } from 'lucide-react';
@@ -8,123 +8,57 @@ import invariant from 'tiny-invariant';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+	Dialog,
+	DialogContent,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog';
+import { Separator } from '@/components/ui/separator';
 import { Podkrepqsht } from '@/constants/home/sponsors';
-// import { getHackathonById } from '../_configs/archive';
-// import { Podkrepqsht } from '../_configs/podkrepq';
-import { cn } from '@/lib/utils';
+import { cn, parseBoldText } from '@/lib/utils';
 
-const readMoreClasses =
-	'rounded-sm font-bold ring-offset-background cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
-const readMoreText = 'Покажи повече';
+// ─── Constants ────────────────────────────────────────────────────────────────
 
-export default function PodkrepqAutoDisplay({
-	podkrepqshti,
-	imagePriority,
-	startIndex,
-}: {
-	podkrepqshti: Podkrepqsht[];
-	imagePriority?: boolean;
-	startIndex?: number;
-}) {
-	invariant(!startIndex || (startIndex >= 0 && startIndex < podkrepqshti.length), 'startIndex must be a valid index');
+const CENTER_SLOT_INDEX = 3;
+const VISIBLE_SLOTS = 7;
+const AUTO_ADVANCE_INTERVAL = 4000;
+const ROLL_STEP_DELAY = 200;
 
-	const [liveIndex, setLiveIndex] = useState(startIndex ?? 0);
-	const [isPaused, setIsPaused] = useState(false);
-	const nextIndex = liveIndex < podkrepqshti.length - 1 ? liveIndex + 1 : 0;
-	const prevIndex = liveIndex === 0 ? podkrepqshti.length - 1 : liveIndex - 1;
-	const prevPervIndex = prevIndex === 0 ? podkrepqshti.length - 1 : prevIndex - 1;
-	const nextNextIndex = nextIndex < podkrepqshti.length - 1 ? nextIndex + 1 : 0;
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
-	useEffect(() => {
-		if (isPaused) return;
-		const intervalId = setInterval(() => {
-			setLiveIndex((prevIndex) => (prevIndex === podkrepqshti.length - 1 ? 0 : prevIndex + 1));
-		}, 4000);
-		return () => clearInterval(intervalId);
-	}, [liveIndex, podkrepqshti.length, isPaused]);
+function normalizeIndex(index: number, length: number): number {
+	if (index < 0) return length + index;
+	if (index >= length) return index - length;
+	return index;
+}
 
-	const livePodkrepqsht = podkrepqshti[liveIndex];
-	invariant(livePodkrepqsht, 'Invalid sponsor/partner index');
+function calculateShortestDistance(from: number, to: number, length: number): number {
+	const directDistance = to - from;
+	const wrappedDistance = directDistance > 0 ? directDistance - length : directDistance + length;
+	return Math.abs(directDistance) <= length / 2 ? directDistance : wrappedDistance;
+}
 
-	return (
-		<div className="flex flex-wrap items-center justify-center align-middle">
-			<ul className="relative mx-auto mt-20 w-64 sm:w-72 md:w-80 lg:w-96">
-				<div className="pb-[50%] pt-[20%]">
-					{podkrepqshti.map((podkrepqsht, index) => (
-						<PodkrepqLogo
-							key={podkrepqsht.name}
-							podkrepqsht={podkrepqsht}
-							index={index}
-							prevIndex={prevIndex}
-							liveIndex={liveIndex}
-							nextIndex={nextIndex}
-							nextNextIndex={nextNextIndex}
-							prevPrevIndex={prevPervIndex}
-							onClick={() => setLiveIndex(index)}
-							priority={[prevIndex, liveIndex, nextIndex].includes(index) && imagePriority}
-						/>
-					))}
-				</div>
-			</ul>
-			<div className="ml-10 hidden h-96 items-center md:mt-10 md:flex md:w-[400px] lg:mt-20 lg:w-[600px]">
-				<Card className="flex w-full flex-col p-2">
-					<CardTitle className="pt-5 text-center">{livePodkrepqsht.name}</CardTitle>
-					<CardContent className="h-full flex-shrink flex-grow p-5">
-						<div className="h-full">
-							{shouldShowDescription(livePodkrepqsht.description) ? (
-								<>
-									<div className="flex h-24 flex-shrink flex-grow flex-col overflow-clip">
-										<div className="inline-flex h-full flex-1 flex-shrink flex-grow flex-col [mask-image:linear-gradient(to_bottom,white,calc(100%-20px),transparent)]">
-											{livePodkrepqsht.description.split('\n').map((p, i) => (
-												<p key={i}>{p}</p>
-											))}
-										</div>
-									</div>
-									<PodkrepqReadMore
-										name={livePodkrepqsht.name}
-										url={livePodkrepqsht.url}
-										description={livePodkrepqsht.description}
-										onOpenChange={setIsPaused}
-									/>
-								</>
-							) : (
-								<div className="flex h-[150px] flex-col items-center justify-center gap-1">
-									<p className="text-center text-xl font-bold">
-										Благодарим на {livePodkrepqsht.name} за подкрепата!
-									</p>
-									<p>
-										<Link href={livePodkrepqsht.url} className={readMoreClasses} target="_blank">
-											{readMoreText}
-										</Link>
-									</p>
-								</div>
-							)}
-						</div>
-						<div
-							className="flex flex-wrap justify-center align-middle"
-							title={`Издания на Hack TUES, които ${livePodkrepqsht.name} подкрепи`}
-						>
-							{/* {livePodkrepqsht.supportedEditions?.map((h) => {
-								const hackathon = getHackathonById(h);
-								if (hackathon)
-									return (
-										<div className="p-2" key={h}>
-											{hackathon.logo}
-										</div>
-									);
-							})} */}
-						</div>
-					</CardContent>
-				</Card>
-			</div>
-		</div>
-	);
+/** Vertical offset for non-center logos so the row has a slight arc shape */
+function getTranslateY(distance: number): string {
+	const abs = Math.abs(distance);
+	if (abs === 1) return '-50%';
+	if (abs === 2) return '-25%';
+	if (abs === 3) return '25%';
+	return '0%';
 }
 
 function shouldShowDescription(description?: string) {
 	return description && !description.toLowerCase().includes('lorem ipsum');
 }
+
+function isHorizontalRule(p: string) {
+	return p.startsWith('==');
+}
+
+// ─── Read-more dialog ────────────────────────────────────────────────────────
 
 function PodkrepqReadMore({
 	name,
@@ -138,96 +72,233 @@ function PodkrepqReadMore({
 	onOpenChange?: (open: boolean) => void;
 }) {
 	return (
-		<Dialog onOpenChange={onOpenChange}>
-			<DialogTrigger asChild>
-				<button className={readMoreClasses}>{readMoreText}</button>
-			</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>{name}</DialogTitle>
-				</DialogHeader>
-				{description?.split('\n').map((p) => <p key={p}>{p}</p>)}
-				<DialogFooter>
-					<Button asChild variant="outline">
-						<Link href={url} target="_blank">
-							<Globe className="mr-2 h-4 w-4" />
-							Уебсайт на {name}
-						</Link>
-					</Button>
-				</DialogFooter>
-			</DialogContent>
-		</Dialog>
+		<div className="mt-4 flex justify-center">
+			<Dialog onOpenChange={onOpenChange}>
+				<DialogTrigger asChild>
+					<Button variant="ghost">Покажи повече</Button>
+				</DialogTrigger>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>{name}</DialogTitle>
+					</DialogHeader>
+					<div className="space-y-1 text-sm">
+						{description?.split('\n').map((p, i) =>
+							isHorizontalRule(p) ? <Separator key={i} /> : <p key={i}>{parseBoldText(p)}</p>
+						)}
+					</div>
+					<DialogFooter>
+						<Button asChild variant="outline" className="w-full min-w-0 break-words sm:w-auto">
+							<Link href={url} target="_blank" className="flex items-center justify-center break-words">
+								<Globe className="mr-2 h-4 w-4 shrink-0" />
+								<span className="break-words">Уебсайт на {name}</span>
+							</Link>
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		</div>
 	);
 }
 
-function PodkrepqLogo({
+// ─── Partner info card ────────────────────────────────────────────────────────
+
+function PartnerCard({
 	podkrepqsht,
-	index,
-	prevIndex,
-	liveIndex,
-	nextIndex,
-	nextNextIndex,
-	prevPrevIndex,
-	onClick,
-	priority,
+	setIsPaused = () => {},
 }: {
 	podkrepqsht: Podkrepqsht;
-	index: number;
-	prevIndex: number;
-	liveIndex: number;
-	nextIndex: number;
-	nextNextIndex: number;
-	prevPrevIndex: number;
-	onClick: () => void;
-	priority?: boolean;
+	setIsPaused?: Dispatch<SetStateAction<boolean>>;
 }) {
 	return (
-		<li
-			className={cn('absolute inset-0 my-4 [perspective:800px]', index === liveIndex && 'z-10')}
-			title={podkrepqsht.name}
-		>
-			<Link
-				href={podkrepqsht.url}
-				onClick={
-					[prevIndex, nextIndex].includes(index)
-						? (e) => {
-								e.preventDefault();
-								onClick();
-							}
-						: undefined
-				}
-				tabIndex={[prevIndex, liveIndex, nextIndex].includes(index) ? 0 : -1}
-				className={cn(
-					'group z-0 grid aspect-video place-content-center overflow-clip rounded-lg bg-white p-4 opacity-0 shadow-md transition-all duration-700',
-					index === prevIndex &&
-						'z-10 opacity-50 [transform:rotateX(45deg)_translateY(-130%)] hover:opacity-75',
-					index === liveIndex && 'z-50 opacity-100 hover:scale-[112.5%]',
-					index === nextIndex &&
-						'z-10 opacity-50 [transform:rotateX(-45deg)_translateY(130%)] hover:opacity-75',
-					index === nextNextIndex &&
-						'pointer-events-none opacity-0 [transform:translateY(110%)_rotateX(-90deg)_translateY(100%)]',
-					index === prevPrevIndex &&
-						'pointer-events-none opacity-0 [transform:translateY(-110%)_rotateX(90deg)_translateY(-100%)]',
-					podkrepqsht.name == 'Yettel Bulgaria' && 'bg-[#B4FF00]',
-					podkrepqsht.name == 'Инженер.bg' &&
-						'bg-[linear-gradient(180deg,_#24587d_0%,_#1578b2_68%,_#1578b2_100%)]'
-				)}
-				target="_blank"
-			>
-				<Image
-					className={cn(
-						'h-[8rem] max-w-[14.2rem] object-contain px-3 py-5 sm:h-[9rem] sm:max-w-[16rem] md:h-[10rem] md:max-w-[17.7rem] lg:h-[12rem] lg:max-w-[21.3rem]',
-						index === prevIndex && 'z-10',
-						index === liveIndex && 'z-50',
-						index === nextIndex && 'z-10 ',
-						index === nextNextIndex && 'z-0',
-						index === prevPrevIndex && 'z-0'
+		<Card className="relative flex w-full flex-col p-8">
+			<CardTitle className="mb-6 text-center font-medium">{podkrepqsht.name}</CardTitle>
+			<CardContent className="min-h-0 flex-shrink flex-grow p-5">
+				<div className="h-full">
+					{shouldShowDescription(podkrepqsht.description) ? (
+						<>
+							<div className="flex h-42 flex-shrink flex-grow flex-col overflow-clip">
+								<div className="inline-flex h-full flex-1 flex-shrink flex-grow flex-col text-center [mask-image:linear-gradient(to_bottom,black,black_calc(100%_-_1.5rem),transparent)]">
+									{podkrepqsht.description!.split('\n').map((p, i) =>
+										isHorizontalRule(p) ? (
+											<Separator key={i} />
+										) : (
+											<p key={i}>{parseBoldText(p)}</p>
+										)
+									)}
+								</div>
+							</div>
+							<PodkrepqReadMore
+								name={podkrepqsht.name}
+								url={podkrepqsht.url}
+								description={podkrepqsht.description!}
+								onOpenChange={setIsPaused}
+							/>
+						</>
+					) : (
+						<div className="flex h-[150px] flex-col items-center justify-center gap-1">
+							<p className="flex flex-1 flex-col justify-center text-center text-xl font-bold">
+								Благодарим на {podkrepqsht.name} за подкрепата!
+							</p>
+							<p className="justify-self-end">
+								<Link href={podkrepqsht.url} target="_blank">
+									<Button variant="ghost">Уебсайт</Button>
+								</Link>
+							</p>
+						</div>
 					)}
-					src={podkrepqsht.logo}
-					alt={podkrepqsht.name}
-					priority={priority}
-				/>
-			</Link>
-		</li>
+				</div>
+			</CardContent>
+		</Card>
+	);
+}
+
+// ─── Main carousel ────────────────────────────────────────────────────────────
+
+export default function PodkrepqAutoDisplay({
+	podkrepqshti,
+	imagePriority,
+	startIndex,
+}: {
+	podkrepqshti: Podkrepqsht[];
+	imagePriority?: boolean;
+	startIndex?: number;
+}) {
+	invariant(
+		!startIndex || (startIndex >= 0 && startIndex < podkrepqshti.length),
+		'startIndex must be a valid index'
+	);
+
+	// Duplicate the array until we have at least VISIBLE_SLOTS entries
+	const expandedList = useMemo(() => {
+		if (podkrepqshti.length > VISIBLE_SLOTS) return podkrepqshti;
+		const repeatCount = Math.floor(VISIBLE_SLOTS / podkrepqshti.length) + 1;
+		return Array.from({ length: repeatCount }, () => podkrepqshti).flat();
+	}, [podkrepqshti]);
+
+	const [liveIndex, setLiveIndex] = useState(startIndex ?? 0);
+	const [isPaused, setIsPaused] = useState(false);
+	const [isRolling, setIsRolling] = useState(false);
+
+	// Auto-advance
+	useEffect(() => {
+		if (isPaused || isRolling) return;
+		const id = setInterval(() => {
+			setLiveIndex((prev) => (prev === expandedList.length - 1 ? 0 : prev + 1));
+		}, AUTO_ADVANCE_INTERVAL);
+		return () => clearInterval(id);
+	}, [expandedList.length, isPaused, isRolling]);
+
+	// Animated roll to a specific slot
+	const rollToIndex = useCallback(
+		(targetIndex: number) => {
+			if (targetIndex === liveIndex || isRolling) return;
+			setIsRolling(true);
+			const steps = calculateShortestDistance(liveIndex, targetIndex, expandedList.length);
+			const stepCount = Math.abs(steps);
+			const direction = steps > 0 ? 1 : -1;
+			let currentStep = 0;
+
+			const rollInterval = setInterval(() => {
+				currentStep++;
+				setLiveIndex((prev) => {
+					if (direction > 0) return prev === expandedList.length - 1 ? 0 : prev + 1;
+					return prev === 0 ? expandedList.length - 1 : prev - 1;
+				});
+				if (currentStep >= stepCount) {
+					clearInterval(rollInterval);
+					setIsRolling(false);
+				}
+			}, ROLL_STEP_DELAY);
+		},
+		[liveIndex, isRolling, expandedList.length]
+	);
+
+	// Which array items fill each of the 7 visible slots
+	const visibleLogos = useMemo(() => {
+		return Array.from({ length: VISIBLE_SLOTS }, (_, slotIndex) => {
+			const offset = slotIndex - CENTER_SLOT_INDEX;
+			const index = normalizeIndex(liveIndex + offset, expandedList.length);
+			return { podkrepqsht: expandedList[index], actualIndex: index };
+		});
+	}, [liveIndex, expandedList]);
+
+	return (
+		<div className="flex flex-col items-center justify-center gap-12">
+			{/* ── Logo row ── */}
+			<div className="relative mx-auto h-40 w-full max-w-7xl px-4 sm:h-40 md:h-52 mb-4">
+				{visibleLogos.map(({ podkrepqsht, actualIndex }, slotIndex) => {
+					const distanceFromCenter = slotIndex - CENTER_SLOT_INDEX;
+					const isCenter = slotIndex === CENTER_SLOT_INDEX;
+					const logoSrc = podkrepqsht.logo;
+					const isStringSrc = typeof logoSrc === 'string';
+					const unoptimized = isStringSrc && (logoSrc as string).endsWith('.svg');
+
+					return (
+						<Link
+							key={actualIndex}
+							href={podkrepqsht.url}
+							target="_blank"
+							className={cn(
+								'absolute left-1/2 top-1/2 flex items-center justify-center transition-all duration-700 ease-in-out',
+								isCenter ? 'z-25' : 'z-20'
+							)}
+							style={{
+								transform: `translateX(calc(-50% + ${distanceFromCenter * 110}%)) translateY(${getTranslateY(distanceFromCenter)}) scale(${isCenter ? 1.6 : 1})`,
+							}}
+							onClick={(e) => {
+								e.preventDefault();
+								if (!isCenter) {
+									rollToIndex(actualIndex);
+								} else {
+									window.open(podkrepqsht.url, '_blank');
+								}
+							}}
+						>
+							<div
+								className={cn(
+									'relative w-36 rounded-sm shadow-[0_4px_6px_-1px_rgba(0,0,0,0.7)] transition-all duration-700 ease-in-out md:w-56',
+									'customClass' in podkrepqsht &&
+										typeof podkrepqsht.customClass === 'string' &&
+										podkrepqsht.customClass
+										? podkrepqsht.customClass
+										: 'bg-white'
+								)}
+								style={{ aspectRatio: '13/7' } as React.CSSProperties}
+							>
+								<div className="absolute inset-0 box-border flex items-center justify-center p-4">
+									<Image
+										src={logoSrc as string}
+										alt={podkrepqsht.name}
+										width={160}
+										height={112}
+										className="object-contain"
+										style={{
+											objectFit: 'contain',
+											width: '100%',
+											height: '100%',
+											maxWidth: '100%',
+											maxHeight: '100%',
+											display: 'block',
+											WebkitTransform: 'translateZ(0)',
+											transform: 'translateZ(0)',
+										}}
+										priority={imagePriority}
+										unoptimized={unoptimized}
+										loading={imagePriority ? 'eager' : 'lazy'}
+									/>
+								</div>
+							</div>
+						</Link>
+					);
+				})}
+			</div>
+
+			{/* ── Partner info card ── */}
+			<div className="relative mt-4 flex w-full items-start justify-center min-h-[1000px] sm:min-h-[600px] md:w-[500px] md:min-h-[500px] lg:w-[600px] lg:min-h-[650px] 2xl:min-h-[750px]">
+				<div className="w-full">
+					<PartnerCard podkrepqsht={expandedList[liveIndex]} setIsPaused={setIsPaused} />
+				</div>
+			</div>
+		</div>
 	);
 }
