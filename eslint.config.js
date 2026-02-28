@@ -1,5 +1,15 @@
-import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import { FlatCompat } from "@eslint/eslintrc";
+import { dirname } from "node:path";
+// @ts-ignore - typescript-eslint has type definitions but TypeScript cannot resolve them in this context
 import tseslint from 'typescript-eslint';
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+	baseDirectory: __dirname,
+});
 
 export default tseslint.config(
 	{
