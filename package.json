@@ -97,8 +97,8 @@
     "react-email": "4.0.7",
     "tailwindcss": "^4.2.1",
     "tw-animate-css": "^1.2.5",
-    "typescript": "5.8.2",
-    "typescript-eslint": "^8.28.0"
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.56.1"
   },
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
   "main": "next-sitemap.config.js",
