@@ -13,11 +13,11 @@ importers:
   .:
     dependencies:
       '@growthbook/growthbook':
-        specifier: ^1.4.1
-        version: 1.4.1
+        specifier: ^1.6.5
+        version: 1.6.5
       '@growthbook/growthbook-react':
-        specifier: ^1.4.1
-        version: 1.4.1(react@19.2.4)
+        specifier: ^1.6.5
+        version: 1.6.5(react@19.2.4)
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.55.0(react@19.2.4))
@@ -208,9 +208,6 @@ importers:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
-      '@eslint/eslintrc':
-        specifier: ^3.3.1
-        version: 3.3.1
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@4.0.17)
@@ -906,14 +903,14 @@ packages:
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
-  '@growthbook/growthbook-react@1.4.1':
-    resolution: {integrity: sha512-HqqtkOwKoVKmtTN7H9qjQ6Nw6RICn+STL1FS9l/7CoDaBJA2r3HiXXGvm2W1bYMwDmhu9pt3XqBxhlD3N9ymAA==}
+  '@growthbook/growthbook-react@1.6.5':
+    resolution: {integrity: sha512-afi/RUbwazVNKv2acn6wDQz4BJNRAEpwIuHfggQup2/aE5PLAxy3+95gjjRMgCcPR0Pf3sFmhYGvOmxLD0ZRbQ==}
     engines: {node: '>=10'}
     peerDependencies:
-      react: ^16.8.0-0 || ^17.0.0-0 || ^18.0.0-0
+      react: ^16.8.0-0 || ^17.0.0-0 || ^18.0.0-0 || ^19.0.0-0
 
-  '@growthbook/growthbook@1.4.1':
-    resolution: {integrity: sha512-Cl+q1SPwTYHvV2mcsjDcAuT4ezzpA6pOJr7nGCKiPaIZ4BN+pNt2kQM/dtCiwwse7vFz26S1/UJ+mb6qSSW8sQ==}
+  '@growthbook/growthbook@1.6.5':
+    resolution: {integrity: sha512-mUaMsgeUTpRIUOTn33EUXHRK6j7pxBjwqH4WpQyq+pukjd1AIzWlEa6w7i6bInJUcweGgP2beXZmaP6b6UPn7A==}
     engines: {node: '>=10'}
 
   '@hookform/resolvers@3.10.0':
@@ -5252,12 +5249,12 @@ snapshots:
 
   '@floating-ui/utils@0.2.9': {}
 
-  '@growthbook/growthbook-react@1.4.1(react@19.2.4)':
+  '@growthbook/growthbook-react@1.6.5(react@19.2.4)':
     dependencies:
-      '@growthbook/growthbook': 1.4.1
+      '@growthbook/growthbook': 1.6.5
       react: 19.2.4
 
-  '@growthbook/growthbook@1.4.1':
+  '@growthbook/growthbook@1.6.5':
     dependencies:
       dom-mutator: 0.6.0
 
