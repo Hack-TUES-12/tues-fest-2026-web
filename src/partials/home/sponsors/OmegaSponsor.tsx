@@ -79,8 +79,8 @@ export default function OmegaSponsor() {
 	return (
 		<div className="relative z-10 mb-72 flex max-w-3xl flex-col items-center">
 			{/* Section title */}
-			<h2 className="font-title scroll-m-20 mb-6 text-center text-4xl font-black tracking-tight first:mt-0 md:text-5xl">
-				Омега Спонсор
+			<h2 className="font-mighty scroll-m-20 mb-6 text-center text-4xl first:mt-0 md:text-5xl">
+				Omega Sponsor
 			</h2>
 
 			{/* Logo card */}

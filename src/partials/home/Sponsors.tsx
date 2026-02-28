@@ -14,7 +14,7 @@ async function randomStartIndex(podkrepqshti: Podkrepqsht[]) {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
 	return (
-		<h2 className="font-title scroll-m-20 mb-6 text-center text-4xl font-black tracking-tight first:mt-0 md:text-5xl">
+		<h2 className="font-mighty scroll-m-20 mb-6 text-center text-4xl first:mt-0 md:text-5xl">
 			{children}
 		</h2>
 	);
@@ -33,7 +33,7 @@ export default async function Sponsors() {
 	return (
 		<div className="grid grid-cols-1 place-items-center">
 			<div className="mb-52 relative w-full">
-				<SectionTitle>Алфа Спонсори</SectionTitle>
+				<SectionTitle>Alfa Sponsors</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={ALPHA_SPONSORS}
 					imagePriority
@@ -42,7 +42,7 @@ export default async function Sponsors() {
 			</div>
 
 			<div className="mb-52 relative w-full">
-				<SectionTitle>Бета Спонсори</SectionTitle>
+				<SectionTitle>Beta Sponsors</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={BETA_SPONSORS}
 					startIndex={betaStartIndex}
@@ -50,7 +50,7 @@ export default async function Sponsors() {
 			</div>
 
 			<div className="mb-52 relative w-full">
-				<SectionTitle>Гама Спонсори</SectionTitle>
+				<SectionTitle>Gamma Sponsors</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={GAMMA_SPONSORS}
 					startIndex={gammaStartIndex}
@@ -58,7 +58,7 @@ export default async function Sponsors() {
 			</div>
 
 			<div className="mb-52 relative w-full">
-				<SectionTitle>Партньори</SectionTitle>
+				<SectionTitle>Partners</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={PARTNERS}
 					startIndex={partnersStartIndex}
@@ -66,7 +66,7 @@ export default async function Sponsors() {
 			</div>
 
 			<div className="mb-20 place-self-center w-full">
-				<SectionTitle>Медийни Партньори</SectionTitle>
+				<SectionTitle>Media Partners</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={MEDIA_PARTNERS}
 					startIndex={mediaPartnersStartIndex}
