@@ -31,7 +31,7 @@ export default async function Sponsors() {
 		]);
 
 	return (
-		<div className="w-full grid grid-cols-1 place-items-center">
+		<div className="grid grid-cols-1 place-items-center">
 			<div className="mb-52 relative w-full">
 				<SectionTitle>Alfa Sponsors</SectionTitle>
 				<PodkrepqAutoDisplay
