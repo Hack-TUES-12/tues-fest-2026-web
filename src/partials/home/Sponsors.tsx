@@ -50,13 +50,14 @@ export default async function Sponsors() {
 			/>
 		</div>
 
-			<div className="mb-52 relative w-full">
-				<SectionTitle>Gamma Sponsors</SectionTitle>
-				<PodkrepqAutoDisplay
-					podkrepqshti={GAMMA_SPONSORS}
-					startIndex={gammaStartIndex}
-				/>
-			</div>
+		<div className="mb-52 relative w-full">
+			<SectionTitle>Gamma Sponsors</SectionTitle>
+			<PodkrepqAutoDisplay
+				podkrepqshti={GAMMA_SPONSORS}
+				startIndex={gammaStartIndex}
+				showPurpleCircle
+			/>
+		</div>
 
 			<div className="mb-52 relative w-full">
 				<SectionTitle>Partners</SectionTitle>

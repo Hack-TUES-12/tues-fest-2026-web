@@ -159,11 +159,13 @@ export default function PodkrepqAutoDisplay({
 	imagePriority,
 	startIndex,
 	showGreenCircles,
+	showPurpleCircle,
 }: {
 	podkrepqshti: Podkrepqsht[];
 	imagePriority?: boolean;
 	startIndex?: number;
 	showGreenCircles?: boolean;
+	showPurpleCircle?: boolean;
 }) {
 	invariant(
 		!startIndex || (startIndex >= 0 && startIndex < podkrepqshti.length),
@@ -329,6 +331,29 @@ export default function PodkrepqAutoDisplay({
 						}}
 					/>
 				</>
+			)}
+			{showPurpleCircle && (
+				<div 
+					className="pointer-events-none absolute inset-0"
+					style={{
+						width: '100vw',
+						marginLeft: 'calc(-50vw + 50%)',
+					}}
+				>
+					{/* Center purple circle decoration */}
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
+						src="/decorations/purple-circle.svg"
+						alt=""
+						aria-hidden="true"
+						className='w-[60vw] max-w-4xl top-1/2 left-[50vw] absolute -translate-x-1/2 -translate-y-1/2'
+						style={{
+							height: 'auto',
+							position: 'absolute',
+							zIndex: -1,
+						}}
+					/>
+				</div>
 			)}
 			<div className="w-full">
 				<PartnerCard podkrepqsht={expandedList[liveIndex]!} setIsPaused={setIsPaused} />
