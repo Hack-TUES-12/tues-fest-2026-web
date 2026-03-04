@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ABOUT_IMAGE } from '@/constants/home/about';
+import { ABOUT_IMAGE_1, ABOUT_IMAGE_2, ABOUT_TEXT } from '@/constants/home/about';
 import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
 
 const About = () => (
@@ -38,8 +38,7 @@ const About = () => (
 			<div className="relative z-10 flex w-full flex-col items-center gap-8">
 				{/* Main text */}
 				<p className="max-w-2xl">
-					Денят на отворените врати на Технологично училище &quot;Електронни системи&quot; към
-					Техническия университет - София, познат като ТУЕС ФЕСТ, наближава.
+					{ABOUT_TEXT}
 				</p>
 
 				{/* Cards grid */}
@@ -72,14 +71,56 @@ const About = () => (
 			</div>
 		</div>
 
-		{/* Photo (commented out) */}
-		{/* <div className="mt-8 overflow-hidden rounded-lg">
-			<img
-				src={ABOUT_IMAGE || '/placeholder.svg'}
-				alt="TUES FEST"
-				className="aspect-video w-full rounded-lg object-cover object-bottom shadow-md transition-all duration-300 hover:scale-105"
-			/>
-		</div> */}
+		{/* Images — overlapping on desktop, stacked on mobile */}
+		<div className="mx-auto mt-12 w-full max-w-4xl px-4 md:px-8">
+
+			{/* Mobile: clean stacked cascade */}
+			<div className="flex flex-col gap-3 md:hidden">
+				<img
+					src={ABOUT_IMAGE_1}
+					alt="TUES FEST — публика на събитието"
+					className="w-full rounded-2xl object-cover aspect-video shadow-xl transition-all duration-300 hover:scale-105"
+				/>
+				<img
+					src={ABOUT_IMAGE_2}
+					alt="TUES FEST — зала пълна с хора"
+					className="w-full rounded-2xl object-cover aspect-video shadow-xl transition-all duration-300 hover:scale-105"
+				/>
+			</div>
+
+			{/* Desktop: diagonal overlapping layout */}
+			<div className="relative hidden md:block w-full" style={{ paddingBottom: '62%' }}>
+				{/* Green + decoration — top-left */}
+				<span
+					className="absolute left-4 -top-4 z-30 select-none text-8xl font-black leading-none text-muted -translate-y-1/2"
+					aria-hidden="true"
+				>
+					+
+				</span>
+
+				{/* Image 1 — top-left */}
+				<img
+					src={ABOUT_IMAGE_1}
+					alt="TUES FEST — публика на събитието"
+					className="absolute left-0 top-0 z-10 w-[65%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
+				/>
+
+				{/* Image 2 — bottom-right, on top */}
+				<img
+					src={ABOUT_IMAGE_2}
+					alt="TUES FEST — зала пълна с хора"
+					className="absolute bottom-0 right-0 z-20 w-[65%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
+				/>
+
+				{/* Orange + decoration — bottom-right */}
+				<span
+					className="absolute bottom-12 -right-3 translate-x-1/2 z-30 select-none text-7xl font-black leading-none text-secondary"
+					aria-hidden="true"
+				>
+					+
+				</span>
+			</div>
+		</div>
 	</section>
 );
 
