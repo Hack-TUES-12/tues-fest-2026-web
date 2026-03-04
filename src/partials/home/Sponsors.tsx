@@ -64,6 +64,7 @@ export default async function Sponsors() {
 				<PodkrepqAutoDisplay
 					podkrepqshti={PARTNERS}
 					startIndex={partnersStartIndex}
+					showGreenCircles
 				/>
 			</div>
 
@@ -72,6 +73,7 @@ export default async function Sponsors() {
 				<PodkrepqAutoDisplay
 					podkrepqshti={MEDIA_PARTNERS}
 					startIndex={mediaPartnersStartIndex}
+					showPurpleCircle
 				/>
 			</div>
 		</div>
