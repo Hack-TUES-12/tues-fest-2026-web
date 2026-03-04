@@ -30,6 +30,10 @@ const LINKS = [
 		href: '/#schedule',
 		title: 'Програма',
 	},
+	{
+		href: '/partners',
+		title: 'Спонсори && Партньори',
+	},
 	// {
 	// 	href: '/projects',
 	// 	title: 'Гласуване',

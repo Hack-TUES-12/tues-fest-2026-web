@@ -6,11 +6,11 @@
 :root {
 	--radius: 0.625rem;
 	--background: oklch(0 0 0);
-	--foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--foreground: oklch(0.6797 0 0);
 	--card: oklch(0.2002 0 0);
-	--card-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--card-foreground: oklch(0.6797 0 0);
 	--popover: oklch(0.13706080477877133 0.035971529864239155 258.5258092148068);
-	--popover-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--popover-foreground: oklch(0.6797 0 0);
 	--primary: oklch(0.5519 0.1877 350.13);
 	--primary-foreground: oklch(0 0 0);
 	--secondary: oklch(0.7318 0.1756 55.61);
@@ -18,9 +18,9 @@
 	--muted: oklch(0.7303 0.1717 121.25);
 	--muted-foreground: oklch(0.7107047358019949 0.03506895022720996 256.7877103453806);
 	--accent: oklch(0.5248 0.1086 94.96);
-	--accent-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--accent-foreground: oklch(0.6797 0 0);
 	--destructive: oklch(0.58 0.22 27);
-	--destructive-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--destructive-foreground: oklch(0.6797 0 0);
 	--border: oklch(1 0 0 / 10%);
 	--input: oklch(1 0 0 / 15%);
 	--ring: oklch(0.4877966176606344 0.21703616957199678 264.3876389094794);
@@ -30,11 +30,11 @@
 	--chart-4: oklch(0.5248 0.1086 94.96);
 	--chart-5: oklch(0.5639 0.1892 327.36);
 	--sidebar: oklch(0.13706080477877133 0.035971529864239155 258.5258092148068);
-	--sidebar-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--sidebar-foreground: oklch(0.6797 0 0);
 	--sidebar-primary: oklch(0.5639 0.1892 327.36);
-	--sidebar-primary-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--sidebar-primary-foreground: oklch(0.6797 0 0);
 	--sidebar-accent: oklch(0.6318 0.1721 33.01);
-	--sidebar-accent-foreground: oklch(0.9838344580991609 0.003481204997597072 247.85829642025803);
+	--sidebar-accent-foreground: oklch(0.6797 0 0);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.4877966176606344 0.21703616957199678 264.3876389094794);
 }
@@ -93,5 +93,8 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		color: oklch(1 0 0);
 	}
 }
