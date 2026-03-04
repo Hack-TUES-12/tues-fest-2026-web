@@ -62,7 +62,7 @@ export async function generateMetadata(props: { params: Promise<{ projectId: str
 			title: `${project.title} | ${TF_TITLE}`,
 			description: project.description,
 			images: project.images.map((image) => ({
-				url: image,
+				url: image.src,
 			})),
 		},
 		openGraph: {
@@ -71,7 +71,7 @@ export async function generateMetadata(props: { params: Promise<{ projectId: str
 			description: project.description,
 			url: `https://tuesfest.bg/projects/${project.id}`,
 			images: project.images.map((image) => ({
-				url: image,
+				url: image.src,
 			})),
 		},
 	};
@@ -166,10 +166,10 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 									</div>
 									<VoteSelectProjectButton
 										project={{
-											id: project.id,
-											title: project.title,
-											thumbnail,
-											category: project.category,
+								id: project.id,
+										title: project.title,
+										thumbnail: thumbnail.src,
+										category: project.category,
 										}}
 										className="w-full"
 										size="lg"
@@ -183,7 +183,7 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 				<div className="m-auto mx-auto mt-4 w-[96%] md:w-[90%] lg:w-[80%]">
 					<Gallery
 						name={project.title}
-						images={project.images.length > 0 ? project.images : [project.thumbnail!]}
+						images={project.images.length > 0 ? project.images.map((img) => img.src) : [thumbnail.src]}
 					/>
 				</div>
 				<LinksContainer links={project.links} />

@@ -41,10 +41,10 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 				<CardFooter className="pt-0">
 					<VoteSelectProjectButton
 						project={{
-							id: project.id,
-							title: project.title,
-							thumbnail,
-							category: project.category,
+					id: project.id,
+						title: project.title,
+						thumbnail: thumbnail.src,
+						category: project.category,
 						}}
 						className="bg-primary hover:bg-primary/90 text-primary-foreground w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
 						size="lg"
