@@ -18,7 +18,7 @@ function Card({ className, variant = 'default', ...props }: React.ComponentProps
 		<div
 			data-slot="card"
 			className={cn(
-				'bg-card/50 text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm backdrop-blur-xl',
+				'bg-card/50 text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm backdrop-blur-xl',
 				cardVariantClasses[variant],
 				className
 			)}
@@ -44,7 +44,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
 		<div
 			data-slot="card-title"
-			className={cn('font-semibold leading-none [color:var(--card-title-color,inherit)]', className)}
+			className={cn('text-4xl font-semibold leading-none [color:var(--card-title-color,inherit)]', className)}
 			{...props}
 		/>
 	);

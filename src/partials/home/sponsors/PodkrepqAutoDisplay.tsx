@@ -113,8 +113,8 @@ function PartnerCard({
 }) {
 	return (
 		<Card className="relative flex w-full flex-col p-8" variant={cardVariant}>
-			<CardTitle className="mb-6 text-center font-medium">{podkrepqsht.name}</CardTitle>
-			<CardContent className="min-h-0 flex-shrink flex-grow p-5">
+			<CardTitle className="text-center font-medium">{podkrepqsht.name}</CardTitle>
+			<CardContent className="min-h-0 flex-shrink flex-grow">
 				<div className="h-full">
 					{shouldShowDescription(podkrepqsht.description) ? (
 						<>
