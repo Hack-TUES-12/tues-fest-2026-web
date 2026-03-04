@@ -158,10 +158,12 @@ export default function PodkrepqAutoDisplay({
 	podkrepqshti,
 	imagePriority,
 	startIndex,
+	showGreenCircles,
 }: {
 	podkrepqshti: Podkrepqsht[];
 	imagePriority?: boolean;
 	startIndex?: number;
+	showGreenCircles?: boolean;
 }) {
 	invariant(
 		!startIndex || (startIndex >= 0 && startIndex < podkrepqshti.length),
@@ -218,7 +220,7 @@ export default function PodkrepqAutoDisplay({
 		return Array.from({ length: VISIBLE_SLOTS }, (_, slotIndex) => {
 			const offset = slotIndex - CENTER_SLOT_INDEX;
 			const index = normalizeIndex(liveIndex + offset, expandedList.length);
-			return { podkrepqsht: expandedList[index], actualIndex: index };
+			return { podkrepqsht: expandedList[index]!, actualIndex: index };
 		});
 	}, [liveIndex, expandedList]);
 
@@ -293,12 +295,45 @@ export default function PodkrepqAutoDisplay({
 				})}
 			</div>
 
-			{/* ── Partner info card ── */}
-			<div className="relative mt-4 flex w-full items-start justify-center min-h-[1000px] sm:min-h-[600px] md:w-[500px] md:min-h-[500px] lg:w-[600px] lg:min-h-[650px] 2xl:min-h-[750px]">
-				<div className="w-full">
-					<PartnerCard podkrepqsht={expandedList[liveIndex]} setIsPaused={setIsPaused} />
-				</div>
+		{/* ── Partner info card ── */}
+		<div className="relative mt-4 flex w-full items-start justify-center min-h-[1000px] sm:min-h-[600px] md:w-[500px] md:min-h-[500px] lg:w-[600px] lg:min-h-[650px] 2xl:min-h-[750px]">
+			{showGreenCircles && (
+				<>
+					{/* Left green circle decoration */}
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
+						src="/decorations/green-circle.svg"
+						alt=""
+						aria-hidden="true"
+						className="w-[50vw] pointer-events-none absolute"
+						style={{
+							top: '50%',
+							left: '-50vw',
+							transform: 'translateY(-50%)',
+							zIndex: -1,
+						}}
+					/>
+					
+					{/* Right green circle decoration */}
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
+						src="/decorations/green-circle.svg"
+						alt=""
+						aria-hidden="true"
+						className="w-[50vw] pointer-events-none absolute"
+						style={{
+							top: '50%',
+							right: '-50vw',
+							transform: 'translateY(-50%)',
+							zIndex: -1,
+						}}
+					/>
+				</>
+			)}
+			<div className="w-full">
+				<PartnerCard podkrepqsht={expandedList[liveIndex]!} setIsPaused={setIsPaused} />
 			</div>
+		</div>
 		</div>
 	);
 }

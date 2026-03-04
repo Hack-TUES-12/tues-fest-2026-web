@@ -31,7 +31,7 @@ export default async function Sponsors() {
 		]);
 
 	return (
-		<div className="grid grid-cols-1 place-items-center">
+		<div className="w-full grid grid-cols-1 place-items-center">
 			<div className="mb-52 relative w-full">
 				<SectionTitle>Alfa Sponsors</SectionTitle>
 				<PodkrepqAutoDisplay
@@ -41,13 +41,14 @@ export default async function Sponsors() {
 				/>
 			</div>
 
-			<div className="mb-52 relative w-full">
-				<SectionTitle>Beta Sponsors</SectionTitle>
-				<PodkrepqAutoDisplay
-					podkrepqshti={BETA_SPONSORS}
-					startIndex={betaStartIndex}
-				/>
-			</div>
+		<div className="mb-52 relative w-full">
+			<SectionTitle>Beta Sponsors</SectionTitle>
+			<PodkrepqAutoDisplay
+				podkrepqshti={BETA_SPONSORS}
+				startIndex={betaStartIndex}
+				showGreenCircles
+			/>
+		</div>
 
 			<div className="mb-52 relative w-full">
 				<SectionTitle>Gamma Sponsors</SectionTitle>
