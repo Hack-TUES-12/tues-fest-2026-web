@@ -143,7 +143,7 @@ export default function OmegaSponsor() {
 
 			{/* Info card */}
 			<div className="relative w-full">
-				<Card className="relative flex w-full flex-col p-8">
+				<Card variant='secondary' className="relative flex w-full flex-col p-8">
 					<CardTitle className="mb-6 text-center font-medium">{OMEGA_SPONSOR.name}</CardTitle>
 					<CardContent className="min-h-0 flex-shrink flex-grow p-5">
 						<div className="h-full">

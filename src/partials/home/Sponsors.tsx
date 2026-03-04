@@ -32,14 +32,15 @@ export default async function Sponsors() {
 
 	return (
 		<div className="grid grid-cols-1 place-items-center">
-			<div className="mb-52 relative w-full">
-				<SectionTitle>Alfa Sponsors</SectionTitle>
-				<PodkrepqAutoDisplay
-					podkrepqshti={ALPHA_SPONSORS}
-					imagePriority
-					startIndex={alphaStartIndex}
-				/>
-			</div>
+		<div className="mb-52 relative w-full">
+			<SectionTitle>Alfa Sponsors</SectionTitle>
+			<PodkrepqAutoDisplay
+				podkrepqshti={ALPHA_SPONSORS}
+				imagePriority
+				startIndex={alphaStartIndex}
+				cardVariant="secondary"
+			/>
+		</div>
 
 		<div className="mb-52 relative w-full">
 			<SectionTitle>Beta Sponsors</SectionTitle>
@@ -47,6 +48,7 @@ export default async function Sponsors() {
 				podkrepqshti={BETA_SPONSORS}
 				startIndex={betaStartIndex}
 				showGreenCircles
+				cardVariant="muted"
 			/>
 		</div>
 
@@ -56,6 +58,7 @@ export default async function Sponsors() {
 				podkrepqshti={GAMMA_SPONSORS}
 				startIndex={gammaStartIndex}
 				showPurpleCircle
+				cardVariant="primary"
 			/>
 		</div>
 
@@ -65,6 +68,7 @@ export default async function Sponsors() {
 					podkrepqshti={PARTNERS}
 					startIndex={partnersStartIndex}
 					showGreenCircles
+					cardVariant="muted"
 				/>
 			</div>
 
@@ -74,6 +78,7 @@ export default async function Sponsors() {
 					podkrepqshti={MEDIA_PARTNERS}
 					startIndex={mediaPartnersStartIndex}
 					showPurpleCircle
+					cardVariant="primary"
 				/>
 			</div>
 		</div>

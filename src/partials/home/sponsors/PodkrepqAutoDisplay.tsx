@@ -7,7 +7,7 @@ import { Globe } from 'lucide-react';
 import invariant from 'tiny-invariant';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardTitle, type CardVariant } from '@/components/ui/card';
 import {
 	Dialog,
 	DialogContent,
@@ -105,12 +105,14 @@ function PodkrepqReadMore({
 function PartnerCard({
 	podkrepqsht,
 	setIsPaused = () => {},
+	cardVariant,
 }: {
 	podkrepqsht: Podkrepqsht;
 	setIsPaused?: Dispatch<SetStateAction<boolean>>;
+	cardVariant?: CardVariant;
 }) {
 	return (
-		<Card className="relative flex w-full flex-col p-8">
+		<Card className="relative flex w-full flex-col p-8" variant={cardVariant}>
 			<CardTitle className="mb-6 text-center font-medium">{podkrepqsht.name}</CardTitle>
 			<CardContent className="min-h-0 flex-shrink flex-grow p-5">
 				<div className="h-full">
@@ -160,12 +162,14 @@ export default function PodkrepqAutoDisplay({
 	startIndex,
 	showGreenCircles,
 	showPurpleCircle,
+	cardVariant,
 }: {
 	podkrepqshti: Podkrepqsht[];
 	imagePriority?: boolean;
 	startIndex?: number;
 	showGreenCircles?: boolean;
 	showPurpleCircle?: boolean;
+	cardVariant?: CardVariant;
 }) {
 	invariant(
 		!startIndex || (startIndex >= 0 && startIndex < podkrepqshti.length),
@@ -356,7 +360,7 @@ export default function PodkrepqAutoDisplay({
 				</div>
 			)}
 			<div className="w-full">
-				<PartnerCard podkrepqsht={expandedList[liveIndex]!} setIsPaused={setIsPaused} />
+				<PartnerCard podkrepqsht={expandedList[liveIndex]!} setIsPaused={setIsPaused} cardVariant={cardVariant} />
 			</div>
 		</div>
 		</div>
