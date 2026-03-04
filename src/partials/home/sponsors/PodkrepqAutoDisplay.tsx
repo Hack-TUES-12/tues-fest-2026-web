@@ -87,7 +87,7 @@ function PodkrepqReadMore({
 						)}
 					</div>
 					<DialogFooter>
-						<Button asChild variant="outline" className="w-full min-w-0 break-words sm:w-auto">
+						<Button asChild variant="ghost" className="w-full min-w-0 break-words sm:w-auto">
 							<Link href={url} target="_blank" className="flex items-center justify-center break-words">
 								<Globe className="mr-2 h-4 w-4 shrink-0" />
 								<span className="break-words">Уебсайт на {name}</span>
