@@ -49,20 +49,31 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 			</CardHeader>
 			<IfTFFeatureOn feature="project-voting">
 				<CardFooter className="pt-0">
-					<VoteSelectProjectButton
-						project={{
-							id: project.id,
-							title: project.title,
-							thumbnail,
-							category: project.category,
-						}}
-						className="bg-primary hover:bg-primary/90 text-primary-foreground w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
-						size="lg"
-					/>
+				<VoteSelectProjectButton
+					project={{
+						id: project.id,
+						title: project.title,
+						thumbnail,
+						category: project.category,
+					}}
+					variant={CATEGORY_BUTTON_VARIANTS[project.category] ?? 'default'}
+					className="w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
+					size="lg"
+				/>
 				</CardFooter>
 			</IfTFFeatureOn>
 		</Card>
 	);
+};
+
+import type { ComponentProps } from 'react';
+import type { Button } from '@/components/ui/button';
+
+const CATEGORY_BUTTON_VARIANTS: Record<string, ComponentProps<typeof Button>['variant']> = {
+	software: 'muted',
+	embedded: 'default',
+	networks: 'secondary',
+	battlebot: 'accent',
 };
 
 const CATEGORY_STYLES: Record<string, string> = {

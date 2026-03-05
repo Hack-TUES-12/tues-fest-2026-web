@@ -37,11 +37,13 @@ export function VoteSelectProjectButton({
 	project,
 	className,
 	size = 'lg',
+	variant = 'default',
 	...props
 }: {
 	project: LocalVotedProject;
 	className?: string;
 	size?: React.ComponentProps<typeof Button>['size'];
+	variant?: React.ComponentProps<typeof Button>['variant'];
 }) {
 	const { isSelected, hasReachedVoteLimit } = useProjectVoteStatus(project.id);
 	const selectProject = useSelectProject();
@@ -90,7 +92,7 @@ export function VoteSelectProjectButton({
 	return (
 		<AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 			<Button
-				variant={isSelected ? 'secondary' : 'default'}
+				variant={isSelected ? 'secondary' : variant}
 				className={cn(
 					className,
 					'cursor-pointer',
