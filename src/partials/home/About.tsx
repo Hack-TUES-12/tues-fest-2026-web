@@ -1,83 +1,147 @@
 import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { GradientHeading } from '@/components/ui/gradient-heading';
-import { ABOUT_BUTTON, ABOUT_IMAGE, ABOUT_TITLE } from '@/constants/home/about';
+import { ABOUT_IMAGE_1, ABOUT_IMAGE_2, ABOUT_TEXT } from '@/constants/home/about';
+import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
 
 const About = () => (
-	<section id="about" className="px-4 py-12 md:px-8">
-		<div className="flex flex-col gap-8 lg:flex-row">
-			{/* Text info */}
-			<div className="flex w-full flex-col gap-4">
-				<GradientHeading size="lg">{ABOUT_TITLE}</GradientHeading>
+	<section id="about" className="relative overflow-hidden px-4 py-12 md:px-8">
+		<div className="mx-auto flex max-w-4xl flex-col items-center gap-4 text-center">
 
-				<p className="text-foreground">
-					Денят на отворените врати на Технологично училище &quot;Електронни системи&quot; към Техническия университет -
-					София, познат като ТУЕС ФЕСТ, наближава. Той ще се проведе на 27 Април 2025 година на
-					територията на площад &quot;Независимост&quot; под куполите на &quot;Ларгото&quot;.
-				</p>
+			{/* Title area — circle is positioned relative to this wrapper */}
+			<div className="relative flex w-full flex-col items-center gap-1">
+				{/* Subtitle */}
+				<p className="text-xl text-white tracking-widest">Какво е</p>
 
-				<p className="text-foreground">
-					Ще имате възможност да се запознаете с ТУЕС към ТУ-София отблизо и с това какво ни прави различното
-					училище:
-				</p>
+				{/* Title */}
+				<h2 className="relative z-10 font-mighty text-7xl leading-none text-primary md:text-8xl">
+					TUES Fest
+				</h2>
 
-				<ul className="text-foreground">
-					<li>✔️ Връзката ни с ИТ бизнеса; </li>
-					<li>✔️ Образователния ни модел;</li>
-					<li>✔️ Силната и задружна общност;</li>
-					<li>✔️ Връзката между настоящи и завършили възпитаници; </li>
-					<li>✔️ Специалностите и предметите, които се изучават в ТУЕС към ТУ-София.</li>
-				</ul>
-
-				<p className="text-foreground">
-					TUES FEST 2025 &quot;IT ALL STARTS HERE&quot; се организира от
-					ученици за ученици, под менторството на АЗТУЕС! Доброволческият екип на организаторите вярват, че за поредна година ще покажат
-					на света какво е да си ученик в ТУЕС към ТУ - София.
-				</p>
-
-				<p className="text-foreground">
-					Следете страницата на събитието{' '}
-					<Link
-						href="https://www.facebook.com/HackTUES"
-						target="_blank"
-						className="text-primary hover:text-primary/80 font-medium underline underline-offset-4"
-					>
-						Hack TUES § TUES FEST
-					</Link>
-					!
-				</p>
-
-				<Button asChild variant="default" size="lg" className="font-bold uppercase">
-					<Link href="https://elsys-bg.org" target="_blank" className="flex items-center gap-2">
-						{ABOUT_BUTTON}
-						<ExternalLink className="h-4 w-4" />
-					</Link>
-				</Button>
+				{/* Purple circle decoration: top starts at bottom of title area, centered, 75vw wide */}
+				<img
+					src="/decorations/purple-circle.svg"
+					alt=""
+					aria-hidden="true"
+					className="pointer-events-none absolute max-w-3xl min-w-lg"
+					style={{
+						top: '100%',
+						left: '50%',
+						transform: 'translateX(-50%)',
+						width: '50vw',
+					}}
+				/>
 			</div>
 
-			{/* Image */}
-			<div className="w-full">
-				<div className="overflow-hidden rounded-lg">
-					<img
-						src={ABOUT_IMAGE || '/placeholder.svg'}
-						alt="TUES FEST"
-						className="aspect-video w-full rounded-lg object-cover object-bottom shadow-md transition-all duration-300 hover:scale-105"
-					/>
+			{/* Content below title — z-10 to appear above the circle decoration */}
+			<div className="relative z-10 flex w-full flex-col items-center gap-8">
+				{/* Main text */}
+				<p className="max-w-2xl">
+					{ABOUT_TEXT}
+				</p>
+
+				{/* Cards grid */}
+				<div className="grid w-full grid-cols-1 gap-4 text-left md:grid-cols-2">
+					<Card className="px-8 py-7">
+						<CardContent className="p-0">
+							<h3 className="mb-2 text-2xl font-bold text-primary">Кога и къде?</h3>
+							<p className="text-md text-foreground/80">
+								ТУЕС ФЕСТ {TF_YEAR} ще се проведе на {TF_DATE_STRING} на територията на площад
+								&quot;Независимост&quot; под куполите на &quot;Ларгото&quot;, София.
+							</p>
+						</CardContent>
+					</Card>
+
+					<Card className="px-8 py-7">
+						<CardContent className="p-0">
+							<h3 className="mb-2 text-2xl font-bold text-primary">Какво ще видите?</h3>
+							<p className="text-xl text-foreground/80">
+								Ще имате възможност да се запознаете с ТУЕС към ТУ-София отблизо и с това какво ни прави
+								различното училище.
+							</p>
+						</CardContent>
+					</Card>
 				</div>
+
+				{/* CTA button */}
+				<Button asChild variant="default" size="lg" className="font-bold">
+					<Link href="/schedule">Виж програмата</Link>
+				</Button>
 			</div>
 		</div>
 
-		{/* <div className="mt-8 flex justify-center">
-					<Button asChild variant="default" size="lg" className="font-bold uppercase">
-						<Link href="https://elsys-bg.org" target="_blank" className="flex items-center gap-2">
-							{ABOUT_BUTTON}
-							<ExternalLink className="h-4 w-4" />
-						</Link>
-					</Button>
-				</div> */}
+		{/* Images — overlapping on desktop, stacked on mobile */}
+		<div className="mx-auto mt-12 w-full max-w-4xl px-4 md:px-8">
+
+			{/* Mobile: clean stacked cascade */}
+			<div className="flex flex-col gap-3 md:hidden">
+				<img
+					src={ABOUT_IMAGE_1}
+					alt="TUES FEST — публика на събитието"
+					className="w-full rounded-2xl object-cover aspect-video shadow-xl transition-all duration-300 hover:scale-105"
+				/>
+				<img
+					src={ABOUT_IMAGE_2}
+					alt="TUES FEST — зала пълна с хора"
+					className="w-full rounded-2xl object-cover aspect-video shadow-xl transition-all duration-300 hover:scale-105"
+				/>
+			</div>
+
+			{/* Desktop: diagonal overlapping layout */}
+			<div className="relative hidden md:block w-full" style={{ paddingBottom: '62%' }}>
+				{/* Green + decoration — top-left */}
+				<span
+					className="absolute left-4 -top-4 z-30 select-none text-8xl font-black leading-none text-muted -translate-y-1/2"
+					aria-hidden="true"
+				>
+					+
+				</span>
+
+				{/* Image 1 — top-left */}
+				<img
+					src={ABOUT_IMAGE_1}
+					alt="TUES FEST — публика на събитието"
+					className="absolute left-0 top-0 z-10 w-[65%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
+				/>
+
+				{/* Image 2 — bottom-right, on top */}
+				<img
+					src={ABOUT_IMAGE_2}
+					alt="TUES FEST — зала пълна с хора"
+					className="absolute bottom-0 right-0 z-20 w-[65%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
+				/>
+
+				{/* Orange + decoration — bottom-right */}
+				<span
+					className="absolute bottom-12 -right-3 translate-x-1/2 z-30 select-none text-7xl font-black leading-none text-secondary"
+					aria-hidden="true"
+				>
+					+
+				</span>
+			</div>
+		</div>
+
+		{/* Organizers section */}
+		<div className="mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center md:px-8">
+			<div className='space-y-1'>
+				<p className="text-primary tracking-widest">Организатори</p>
+
+				<h2 className="font-title text-4xl md:text-5xl">Кой стои зад TUES Fest?</h2>
+			</div>
+
+			<p>
+				TUES FEST {TF_YEAR} &quot;<span className="text-primary">IT ALL STARTS HERE</span>&quot; се
+				организира от ученици за ученици, под менторството на АЗТУЕС! Доброволческият екип на организаторите
+				вярват, че за поредна година ще покажат на света какво е да си ученик в ТУЕС към ТУ - София.
+			</p>
+
+			<Button asChild variant="default" size="lg" className="font-bold">
+				<Link href="/about">
+					Повече за ТУЕС
+				</Link>
+			</Button>
+		</div>
 	</section>
 );
 

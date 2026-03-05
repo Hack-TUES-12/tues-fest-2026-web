@@ -14,14 +14,8 @@ export default function Home() {
 			<section className="flex min-h-[calc(100vh-var(--header-height))] w-full flex-col items-center justify-center gap-4 overflow-hidden p-1 pt-4 sm:p-4 md:gap-16 ">
 				<EventLanding />
 			</section>
-			<div className="mx-6 max-w-screen-2xl md:mx-20 2xl:m-auto">
-				<Card>
-					<CardContent className="p-6 md:p-8">
-						<About />
-						<Statistics />
-					</CardContent>
-				</Card>
-			</div>
+			<About />
+			<Statistics />
 			<div className="mx-auto w-full max-w-screen-2xl">
 				<Expectations />
 				<Schedule />

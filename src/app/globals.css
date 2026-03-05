@@ -12,6 +12,7 @@
 	--popover: oklch(0.13706080477877133 0.035971529864239155 258.5258092148068);
 	--popover-foreground: oklch(0.6797 0 0);
 	--primary: oklch(0.5519 0.1877 350.13);
+	--primary-end: #8D1C5C;
 	--primary-foreground: oklch(0 0 0);
 	--secondary: oklch(0.7318 0.1756 55.61);
 	--secondary-foreground: oklch(0 0 0);
@@ -51,6 +52,7 @@
 	--color-popover: var(--popover);
 	--color-popover-foreground: var(--popover-foreground);
 	--color-primary: var(--primary);
+	--color-primary-end: var(--primary-end);
 	--color-primary-foreground: var(--primary-foreground);
 	--color-secondary: var(--secondary);
 	--color-secondary-foreground: var(--secondary-foreground);
@@ -92,7 +94,7 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-background text-foreground text-lg;
 	}
 	h1, h2, h3, h4, h5, h6 {
 		color: oklch(1 0 0);
