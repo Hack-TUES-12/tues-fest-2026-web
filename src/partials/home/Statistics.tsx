@@ -130,50 +130,90 @@ function FolderNavigation({
 		}
 	};
 
-	// Where the selected item should appear within the 3-item window (0 = left, 1 = center, 2 = right)
+	// ── Desktop (3-item window) ──────────────────────────────────────────────
+	// Where the selected item appears within the 3-item window (0 = left, 1 = center, 2 = right)
 	const displayPosition =
 		currentIndex === 0 ? 0
 		: currentIndex === FOLDERS.length - 1 ? 2
 		: 1;
-
 	// Shift the track so the selected item lands on its display position
-	const translateX = ((displayPosition - currentIndex) / FOLDERS.length) * 100;
+	const desktopTranslateX = ((displayPosition - currentIndex) / FOLDERS.length) * 100;
+	// Line split at the center of the selected dot as % of viewport
+	const desktopLineSplit = ((displayPosition + 0.5) / 3) * 100;
 
-	// The line splits at the center of the selected dot (as % of the viewport)
-	const lineSplitPercent = ((displayPosition + 0.5) / 3) * 100;
+	// ── Mobile (1-item window) ────────────────────────────────────────────────
+	// Selected is always centered → split always 50 %, translateX centres the item
+	const mobileTranslateX = (-currentIndex / FOLDERS.length) * 100;
 
 	return (
 		<div className="w-full space-y-10">
-			{/* Timeline */}
+			{/* ── Timeline ─────────────────────────────────────────────────── */}
 			<div className="relative" style={{ height: '72px' }}>
-				{/* Line — 100vw wide, centered on the element to always reach both screen edges */}
+
+				{/* Line: mobile — always split at 50 % */}
 				<div
-					className="absolute flex pointer-events-none"
-					style={{
-						top: '13px',
-						height: '2px',
-						left: '50%',
-						transform: 'translateX(-50%)',
-						width: '100vw',
-					}}
+					className="md:hidden absolute flex pointer-events-none"
+					style={{ top: '13px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+				>
+					<div className="w-1/2 bg-muted" />
+					<div className="flex-1 bg-dark-muted" />
+				</div>
+
+				{/* Line: desktop — split animates with the selected dot */}
+				<div
+					className="hidden md:flex absolute pointer-events-none"
+					style={{ top: '13px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
 				>
 					<div
 						className="bg-muted"
 						style={{
-							width: `${lineSplitPercent}%`,
+							width: `${desktopLineSplit}%`,
 							transition: 'width 350ms cubic-bezier(0.4, 0, 0.2, 1)',
 						}}
 					/>
-					<div className="bg-dark-muted flex-1" />
+					<div className="flex-1 bg-dark-muted" />
 				</div>
 
-				{/* Sliding track — clips off-screen dots */}
-				<div className="absolute inset-x-0" style={{ height: '72px' }}>
+				{/* Track: mobile — 1 item fills the full viewport */}
+				<div className="md:hidden absolute inset-x-0" style={{ height: '72px' }}>
+					<div
+						className="flex will-change-transform"
+						style={{
+							width: `${FOLDERS.length * 100}%`,
+							transform: `translateX(${mobileTranslateX}%)`,
+							transition: 'transform 350ms cubic-bezier(0.4, 0, 0.2, 1)',
+						}}
+					>
+						{FOLDERS.map((folder, index) => {
+							const isSelected = folder.id === selectedFolderIndex;
+							return (
+								<div
+									key={folder.id}
+									className="flex flex-col items-center gap-3"
+									style={{ width: `${100 / FOLDERS.length}%` }}
+								>
+									<div className="w-9 h-9 rounded-full border-2 border-black flex items-center justify-center">
+										<div
+											className="w-7 h-7 rounded-full bg-muted"
+											style={{ boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)' }}
+										/>
+									</div>
+									<span className={`whitespace-nowrap font-mono text-2xl transition-opacity duration-350 ${isSelected ? 'text-white opacity-100' : 'opacity-0'}`}>
+										TUES Fest {folder.name}
+									</span>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+
+				{/* Track: desktop — 3 items visible */}
+				<div className="hidden md:block absolute inset-x-0" style={{ height: '72px' }}>
 					<div
 						className="flex will-change-transform"
 						style={{
 							width: `${(FOLDERS.length / 3) * 100}%`,
-							transform: `translateX(${translateX}%)`,
+							transform: `translateX(${desktopTranslateX}%)`,
 							transition: 'transform 350ms cubic-bezier(0.4, 0, 0.2, 1)',
 						}}
 					>
@@ -198,10 +238,8 @@ function FolderNavigation({
 												className={`rounded-full border-2 border-black flex items-center justify-center transition-all duration-350 ${isSelected ? 'w-9 h-9' : 'w-7 h-7 cursor-pointer'}`}
 											>
 												<div
-													className={`${isSelected ? "w-7 h-7" : "w-5 h-5"} rounded-full bg-muted`}
-													style={{
-														boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)',
-													}}
+													className={`${isSelected ? 'w-7 h-7' : 'w-5 h-5'} rounded-full bg-muted`}
+													style={{ boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)' }}
 												/>
 											</div>
 										) : (
