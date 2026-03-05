@@ -161,17 +161,27 @@ function FolderNavigation({
 								<button
 									key={folder.id}
 									onClick={() => setSelectedFolderIndex(folder.id)}
-									className="relative z-10 focus:outline-none group"
+									className="relative z-10 focus:outline-none group flex flex-col items-center justify-center h-full"
 									title={`TUES Fest ${folder.name}`}
 								>
-									{/* Point circle */}
-									<div
-										className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
-											isPassed
-												? 'border-white bg-muted shadow-[0_0_24px_var(--color-muted)]'
-												: 'border-dark-muted bg-dark-muted'
-										} ${isSelected ? 'scale-125' : ''}`}
-									/>
+									{isPassed ? (
+										<div className="w-7 h-7 rounded-full border-2 border-black flex items-center justify-center transition-all duration-300">
+											{/* Point circle */}
+											<div
+												className={`w-5 h-5 rounded-full bg-muted ${isSelected ? 'scale-125' : ''}`}
+												style={{
+													boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)',
+												}}
+											/>
+										</div>
+									) : (
+										<div
+											className="w-5 h-5 rounded-full bg-dark-muted transition-all duration-300"
+											style={{
+												boxShadow: '0 0 0 2px var(--background)',
+											}}
+										/>
+									)}
 									{/* Year label */}
 									<span
 										className={`absolute top-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-mono transition-all duration-300 ${
