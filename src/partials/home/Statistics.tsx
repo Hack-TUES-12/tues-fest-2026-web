@@ -167,12 +167,10 @@ function FolderNavigation({
 									{/* Point circle */}
 									<div
 										className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
-											isSelected
-												? 'border-muted bg-muted scale-125'
-												: isPassed
-													? 'border-muted bg-muted/60'
-													: 'border-dark-muted bg-dark-muted'
-										}`}
+											isPassed
+												? 'border-white bg-muted shadow-[0_0_24px_var(--color-muted)]'
+												: 'border-dark-muted bg-dark-muted'
+										} ${isSelected ? 'scale-125' : ''}`}
 									/>
 									{/* Year label */}
 									<span
