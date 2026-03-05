@@ -216,10 +216,10 @@ function FolderNavigation({
 									<span
 										className={`whitespace-nowrap font-mono transition-all duration-350 ${
 											isSelected
-												? 'text-muted text-base font-bold'
+												? 'text-white text-2xl'
 												: isPrev
-													? 'text-muted/60 text-sm'
-													: 'text-dark-muted text-sm'
+													? 'text-muted text-md'
+													: 'text-dark-muted text-md'
 										}`}
 									>
 										TUES Fest {folder.name}
