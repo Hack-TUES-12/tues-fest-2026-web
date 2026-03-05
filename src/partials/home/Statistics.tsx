@@ -16,9 +16,15 @@ export default function Statistics() {
 
 	return (
 		<section id="statistics" className="px-4 py-12 md:px-8">
-			<GradientHeading size="lg" className="mb-8">
-				ТУЕС Фест през годините
-			</GradientHeading>
+			<div className="mb-12 max-w-4xl mx-auto text-center flex flex-col items-center">
+				<p className="text-muted text-xl tracking-widest mb-1">История</p>
+				<h2 className="font-title text-4xl md:text-5xl text-white mb-4">
+					Пътят ни досега
+				</h2>
+				<p className="text-foreground max-w-3xl text-lg">
+					TUES Fest през годините. Разгледайте историята на емблематичния ден на отворените врати на ТУЕС. Вижте откъде започна всичко и как събитието достигна успеха, който има днес.
+				</p>
+			</div>
 
 			<div className="block w-full xl:flex xl:gap-8">
 				{/* Folder Navigation */}
