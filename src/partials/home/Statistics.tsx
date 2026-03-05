@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GradientHeading } from '@/components/ui/gradient-heading';
 import { FOLDERS } from '@/info/folders';
 import { STATISTICS } from '@/info/statistics';
+import { statistics } from 'effect/FastCheck';
 
 export default function Statistics() {
 	const [selectedFolderIndex, setSelectedFolderIndex] = useState(9);
@@ -57,14 +58,11 @@ export default function Statistics() {
 
 function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number }) {
 	return (
-		<div className="space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0 xl:flex xl:flex-col">
-			{STATISTICS.map((statistic) => (
-				<Card key={statistic.title} className="bg-card/80 border-border backdrop-blur-sm">
-					<CardHeader className="flex flex-row items-center gap-2">
-						<statistic.icon className="text-primary h-5 w-5" />
-						<CardTitle>{statistic.title}</CardTitle>
-					</CardHeader>
-					<CardContent>
+		<div className="space-y-6 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 xl:flex xl:flex-col">
+			{STATISTICS.map((statistic, i) => (
+				<Card variant='muted' key={statistic.title} className="bg-card/80 border-border backdrop-blur-sm">
+					<CardTitle className='text-lg px-8'>{statistic.title} - {statistic.data[i]?.total}</CardTitle>
+					<CardContent className='pl-0'>
 						<BarStatistic selectedFolderIndex={selectedFolderIndex} data={statistic.data} />
 					</CardContent>
 				</Card>
@@ -100,7 +98,7 @@ function BarStatistic({
 					{data.map((entry, index) => (
 						<Cell
 							key={`cell-${index}`}
-							fill={folder?.name === entry.name ? 'var(--primary)' : 'var(--muted)'}
+							fill={folder?.name === entry.name ? 'var(--muted)' : 'var(--gray-dark)'}
 						/>
 					))}
 				</Bar>
