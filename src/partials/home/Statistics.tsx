@@ -325,7 +325,7 @@ function FestCard({ selectedFolderIndex, className }: { selectedFolderIndex: num
 					className="absolute inset-0"
 					style={{
 						background:
-							'linear-gradient(to bottom, transparent 0%, transparent 50%, color-mix(in srgb, var(--muted) 50%, transparent) 100%)',
+							'linear-gradient(to bottom, transparent 0%, transparent 50%, color-mix(in srgb, var(--muted-end) 50%, transparent) 100%)',
 					}}
 				/>
 
