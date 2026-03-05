@@ -1,8 +1,10 @@
+import type { ComponentProps } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-// import { FaYoutube } from 'react-icons/fa';
+import { TbBrandGithub, TbBrandYoutube } from 'react-icons/tb';
 import invariant from 'tiny-invariant';
 
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import type { ProjectType } from '@/app/projects/actions';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
@@ -37,37 +39,49 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 			</CardContent>
 		<CardHeader className="flex h-full flex-col items-start gap-4">
 				<CategoryTag category={project.category} />
-				<div className='flex flex-col gap-1'>
-					<CardTitle className="font-title font-normal text-2xl text-white">
-						<Link href={href}>{project.title}</Link>
-					</CardTitle>
-					{/* {project.youtubeId && (
-						<YoutubeLink href={`https://www.youtube.com/watch?v=${encodeURIComponent(project.youtubeId)}`} />
-					)} */}
-					<p className="text-sm text-foreground">{description}</p>
-				</div>
+			<div className='flex flex-col gap-2'>
+				<CardTitle className="font-title font-normal text-2xl text-white">
+					<Link href={href}>{project.title}</Link>
+				</CardTitle>
+				<p className="text-sm text-foreground">{description}</p>
+			</div>
 			</CardHeader>
-			<IfTFFeatureOn feature="project-voting">
-				<CardFooter className="pt-0">
-				<VoteSelectProjectButton
-					project={{
-						id: project.id,
-						title: project.title,
-						thumbnail,
-						category: project.category,
-					}}
-					variant={CATEGORY_BUTTON_VARIANTS[project.category] ?? 'default'}
-					className="w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
-					size="lg"
-				/>
-				</CardFooter>
-			</IfTFFeatureOn>
+			<CardFooter className="flex flex-col items-end gap-4 pt-0">
+				{(project.youtubeId || project.links.repoUrls.length > 0) && (
+					<div className="flex gap-2 pt-1">
+						{project.youtubeId && (
+							<Button variant="default-secondary" size="icon" className="rounded-full" asChild>
+								<Link href={`https://www.youtube.com/watch?v=${encodeURIComponent(project.youtubeId)}`} target="_blank">
+									<TbBrandYoutube size={20} />
+								</Link>
+							</Button>
+						)}
+						{project.links.repoUrls[0] && (
+							<Button variant="muted-secondary" size="icon" className="rounded-full" asChild>
+								<Link href={project.links.repoUrls[0]} target="_blank">
+									<TbBrandGithub size={20} />
+								</Link>
+							</Button>
+						)}
+					</div>
+				)}
+				<IfTFFeatureOn feature="project-voting">
+					<VoteSelectProjectButton
+						project={{
+							id: project.id,
+							title: project.title,
+							thumbnail,
+							category: project.category,
+						}}
+						variant={CATEGORY_BUTTON_VARIANTS[project.category] ?? 'default'}
+						className="w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
+						size="lg"
+					/>
+				</IfTFFeatureOn>
+			</CardFooter>
 		</Card>
 	);
 };
-
-import type { ComponentProps } from 'react';
-import type { Button } from '@/components/ui/button';
 
 const CATEGORY_BUTTON_VARIANTS: Record<string, ComponentProps<typeof Button>['variant']> = {
 	software: 'muted',
@@ -93,12 +107,3 @@ const CategoryTag = ({ category }: { category: string }) => {
 	);
 };
 
-// const YoutubeLink = ({ href }: { href: string }) => {
-// 	return (
-// 		<div className="hover:text-primary m-1 rounded-lg p-1 transition-all duration-100 hover:scale-110">
-// 			<Link href={href} target="_blank">
-// 				<FaYoutube size={32} />
-// 			</Link>
-// 		</div>
-// 	);
-// };
