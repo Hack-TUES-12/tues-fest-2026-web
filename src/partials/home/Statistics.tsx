@@ -34,17 +34,17 @@ export default function Statistics() {
 				/>
 			</div>
 
-			<div className="block w-full xl:flex xl:gap-8">
+			<div className="block mx-auto w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
 				{/* Desktop Statistics */}
-				<div className="hidden w-full xl:block xl:w-1/3">
+				<div className="hidden w-full xl:block">
 					<StatisticsCards selectedFolderIndex={selectedFolderIndex} />
 				</div>
 
-				{/* Images Container */}
-				<div className="py-16 xl:hidden">
-					<ImagesContainer selectedFolderIndex={selectedFolderIndex} />
+				{/* Fest Card */}
+				<div className="py-8 xl:hidden">
+					<FestCard selectedFolderIndex={selectedFolderIndex} />
 				</div>
-				<ImagesContainer className="hidden xl:block xl:w-1/2" selectedFolderIndex={selectedFolderIndex} />
+				<FestCard className="hidden xl:flex" selectedFolderIndex={selectedFolderIndex} />
 
 				{/* Mobile/Tablet Statistics */}
 				<div className="block w-full xl:hidden">
@@ -292,56 +292,52 @@ function FolderNavigation({
 	);
 }
 
-function ImagesContainer({ selectedFolderIndex, className }: { selectedFolderIndex: number; className?: string }) {
-	const folder = FOLDERS.find((folder) => folder.id === selectedFolderIndex);
-	const [isFirstImageVisible, setIsFirstImageVisible] = useState(false);
-	const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
+function FestCard({ selectedFolderIndex, className }: { selectedFolderIndex: number; className?: string }) {
+	const folder = FOLDERS.find((f) => f.id === selectedFolderIndex);
+	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
-		setIsFirstImageVisible(false);
-		setIsSecondImageVisible(false);
-
-		const timer1 = setTimeout(() => {
-			setIsFirstImageVisible(true);
-		}, 300);
-
-		const timer2 = setTimeout(() => {
-			setIsSecondImageVisible(true);
-		}, 600);
-
-		return () => {
-			clearTimeout(timer1);
-			clearTimeout(timer2);
-		};
+		setVisible(false);
+		const t = setTimeout(() => setVisible(true), 100);
+		return () => clearTimeout(t);
 	}, [selectedFolderIndex]);
 
 	if (!folder) return null;
 
 	return (
-		<div className={`relative h-[500px] ${className ?? 'w-full'}`}>
+		<div className={`flex items-stretch ${className ?? 'w-full'}`}>
 			<div
-				className={`absolute left-4 top-4 z-20 w-[280px] overflow-hidden rounded-lg shadow-lg transition-all 
-          duration-500 sm:w-[310px] lg:w-[360px] xl:w-[400px] 2xl:w-[450px] 
-          ${isFirstImageVisible ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0'}`}
+				className="relative w-full overflow-hidden rounded-2xl"
+				style={{ minHeight: '480px' }}
 			>
+				{/* Background image */}
 				<Image
-					key={`${folder.id}-image-1`}
-					alt={`${folder.name} image 1`}
-					src={folder.image1 || '/placeholder.svg'}
-					className="h-auto w-full"
+					key={folder.id}
+					src={folder.image1}
+					alt={`TUES Fest ${folder.name}`}
+					fill
+					className="object-cover transition-opacity duration-500"
+					style={{ opacity: visible ? 1 : 0 }}
 				/>
-			</div>
-			<div
-				className={`absolute bottom-4 right-4 z-30 w-[280px] overflow-hidden rounded-lg shadow-lg transition-all 
-          duration-500 sm:w-[310px] lg:w-[360px] xl:w-[400px] 2xl:w-[450px] 
-          ${isSecondImageVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
-			>
-				<Image
-					key={`${folder.id}-image-2`}
-					alt={`${folder.name} image 2`}
-					src={folder.image2 || '/placeholder.svg'}
-					className="h-auto w-full"
+
+				{/* Gradient overlay */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background:
+							'linear-gradient(to bottom, transparent 0%, transparent 50%, color-mix(in srgb, var(--muted) 50%, transparent) 100%)',
+					}}
 				/>
+
+				{/* Bottom content */}
+				<div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-3">
+					<h3 className="font-mighty text-white text-4xl">TUES Fest {folder.name}</h3>
+					<div>
+						<a href={folder.website} target="_blank" rel="noopener noreferrer">
+							<Button variant="muted">Виж повече</Button>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
