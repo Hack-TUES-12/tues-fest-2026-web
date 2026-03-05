@@ -162,7 +162,7 @@ function FolderNavigation({
 				</div>
 
 				{/* Sliding track — clips off-screen dots */}
-				<div className="absolute inset-x-0 overflow-hidden" style={{ height: '72px' }}>
+				<div className="absolute inset-x-0" style={{ height: '72px' }}>
 					<div
 						className="flex will-change-transform"
 						style={{
