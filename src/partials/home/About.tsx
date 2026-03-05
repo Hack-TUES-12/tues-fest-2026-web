@@ -121,6 +121,27 @@ const About = () => (
 				</span>
 			</div>
 		</div>
+
+		{/* Organizers section */}
+		<div className="mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center md:px-8">
+			<div className='space-y-1'>
+				<p className="text-primary tracking-widest">Организатори</p>
+
+				<h2 className="font-title text-4xl md:text-5xl">Кой стои зад TUES Fest?</h2>
+			</div>
+
+			<p>
+				TUES FEST {TF_YEAR} &quot;<span className="text-primary">IT ALL STARTS HERE</span>&quot; се
+				организира от ученици за ученици, под менторството на АЗТУЕС! Доброволческият екип на организаторите
+				вярват, че за поредна година ще покажат на света какво е да си ученик в ТУЕС към ТУ - София.
+			</p>
+
+			<Button asChild variant="default" size="lg" className="font-bold">
+				<Link href="/about">
+					Повече за ТУЕС
+				</Link>
+			</Button>
+		</div>
 	</section>
 );
 
