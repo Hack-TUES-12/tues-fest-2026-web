@@ -198,7 +198,7 @@ function FolderNavigation({
 												className={`rounded-full border-2 border-black flex items-center justify-center transition-all duration-350 ${isSelected ? 'w-9 h-9' : 'w-7 h-7'}`}
 											>
 												<div
-													className="w-5 h-5 rounded-full bg-muted"
+													className={`${isSelected ? "w-7 h-7" : "w-5 h-5"} rounded-full bg-muted`}
 													style={{
 														boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)',
 													}}
