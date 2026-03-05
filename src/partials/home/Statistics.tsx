@@ -233,24 +233,22 @@ function FolderNavigation({
 
 			{/* Navigation Buttons */}
 			<div className="flex justify-center gap-4">
-				<Button
-					variant="outline"
-					size="icon"
+				<button
 					onClick={handlePrevious}
 					disabled={currentIndex === 0}
-					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-30 disabled:cursor-not-allowed"
+					className="cursor-pointer size-11 rounded-full border flex items-center justify-center hover:bg-muted/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+					style={{ borderColor: 'var(--color-muted)', color: 'var(--color-muted)' }}
 				>
 					<ChevronLeft className="h-4 w-4" />
-				</Button>
-				<Button
-					variant="outline"
-					size="icon"
+				</button>
+				<button
 					onClick={handleNext}
 					disabled={currentIndex === FOLDERS.length - 1}
-					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-30 disabled:cursor-not-allowed"
+					className="cursor-pointer size-11 rounded-full border flex items-center justify-center hover:bg-muted/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+					style={{ borderColor: 'var(--color-muted)', color: 'var(--color-muted)' }}
 				>
 					<ChevronRight className="h-4 w-4" />
-				</Button>
+				</button>
 			</div>
 		</div>
 	);
