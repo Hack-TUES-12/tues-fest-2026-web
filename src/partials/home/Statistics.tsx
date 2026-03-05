@@ -26,8 +26,8 @@ export default function Statistics() {
 				</p>
 			</div>
 
-			{/* Timeline Navigation */}
-			<div className="mb-16 px-4">
+			{/* Timeline Navigation — breaks out of section's horizontal padding so line spans full width */}
+			<div className="mb-16 -mx-4 md:-mx-8">
 				<FolderNavigation
 					selectedFolderIndex={selectedFolderIndex}
 					setSelectedFolderIndex={setSelectedFolderIndex}
@@ -146,8 +146,17 @@ function FolderNavigation({
 		<div className="w-full space-y-10">
 			{/* Timeline */}
 			<div className="relative" style={{ height: '72px' }}>
-				{/* Line — split point animates with the selected dot's position */}
-				<div className="absolute inset-x-0 flex" style={{ top: '13px', height: '2px' }}>
+				{/* Line — 100vw wide, centered on the element to always reach both screen edges */}
+				<div
+					className="absolute flex pointer-events-none"
+					style={{
+						top: '13px',
+						height: '2px',
+						left: '50%',
+						transform: 'translateX(-50%)',
+						width: '100vw',
+					}}
+				>
 					<div
 						className="bg-muted"
 						style={{
@@ -155,10 +164,7 @@ function FolderNavigation({
 							transition: 'width 350ms cubic-bezier(0.4, 0, 0.2, 1)',
 						}}
 					/>
-					<div
-						className="bg-dark-muted flex-1"
-						style={{ transition: 'flex 350ms cubic-bezier(0.4, 0, 0.2, 1)' }}
-					/>
+					<div className="bg-dark-muted flex-1" />
 				</div>
 
 				{/* Sliding track — clips off-screen dots */}
