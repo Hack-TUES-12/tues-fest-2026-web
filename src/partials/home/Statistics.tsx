@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Folder, FolderOpen } from 'lucide-react';
+import { Folder, FolderOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 import { Button } from '@/components/ui/button';
@@ -26,13 +26,15 @@ export default function Statistics() {
 				</p>
 			</div>
 
-			<div className="block w-full xl:flex xl:gap-8">
-				{/* Folder Navigation */}
+			{/* Timeline Navigation */}
+			<div className="mb-16 px-4">
 				<FolderNavigation
 					selectedFolderIndex={selectedFolderIndex}
 					setSelectedFolderIndex={setSelectedFolderIndex}
 				/>
+			</div>
 
+			<div className="block w-full xl:flex xl:gap-8">
 				{/* Desktop Statistics */}
 				<div className="hidden w-full xl:block xl:w-1/3">
 					<StatisticsCards selectedFolderIndex={selectedFolderIndex} />
@@ -114,24 +116,103 @@ function FolderNavigation({
 	selectedFolderIndex: number;
 	setSelectedFolderIndex: (id: number) => void;
 }) {
+	const handlePrevious = () => {
+		const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
+		if (currentIndex > 0 && FOLDERS[currentIndex - 1]) {
+			setSelectedFolderIndex(FOLDERS[currentIndex - 1]!.id);
+		}
+	};
+
+	const handleNext = () => {
+		const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
+		if (currentIndex < FOLDERS.length - 1 && FOLDERS[currentIndex + 1]) {
+			setSelectedFolderIndex(FOLDERS[currentIndex + 1]!.id);
+		}
+	};
+
+	const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
+	const selectedFolder = FOLDERS[currentIndex];
+
 	return (
-		<div className="w-full xl:w-1/6">
-			<div className="grid grid-cols-3 gap-2 lg:grid-cols-9 xl:grid-cols-2">
-				{FOLDERS.map((folder) => (
-					<Button
-						key={folder.id}
-						variant={selectedFolderIndex === folder.id ? 'default' : 'outline'}
-						className="flex h-auto flex-col items-center gap-2 p-4"
-						onClick={() => setSelectedFolderIndex(folder.id)}
-					>
-						{selectedFolderIndex === folder.id ? (
-							<FolderOpen className="h-8 w-8" />
-						) : (
-							<Folder className="h-8 w-8" />
-						)}
-						<span>{folder.name}</span>
-					</Button>
-				))}
+		<div className="w-full space-y-8">
+			{/* Timeline */}
+			<div className="w-full">
+				<div className="relative h-12 flex items-center">
+					{/* Timeline Line */}
+					<div className="absolute inset-0 flex items-center">
+						<div className="w-full h-1 bg-dark-muted relative">
+							{/* Left part (muted color) */}
+							<div
+								className="h-full bg-muted absolute left-0 transition-all duration-300"
+								style={{
+									width: `${(currentIndex / (FOLDERS.length - 1)) * 100}%`,
+								}}
+							/>
+						</div>
+					</div>
+
+					{/* Timeline Points */}
+					<div className="relative w-full h-full flex justify-between">
+						{FOLDERS.map((folder, index) => {
+							const isSelected = folder.id === selectedFolderIndex;
+							const isPassed = index <= currentIndex;
+
+							return (
+								<button
+									key={folder.id}
+									onClick={() => setSelectedFolderIndex(folder.id)}
+									className="relative z-10 focus:outline-none group"
+									title={`TUES Fest ${folder.name}`}
+								>
+									{/* Point circle */}
+									<div
+										className={`w-5 h-5 rounded-full border-2 transition-all duration-300 ${
+											isSelected
+												? 'border-muted bg-muted scale-125'
+												: isPassed
+													? 'border-muted bg-muted/60'
+													: 'border-dark-muted bg-dark-muted'
+										}`}
+									/>
+									{/* Year label */}
+									<span
+										className={`absolute top-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-mono transition-all duration-300 ${
+											isSelected
+												? 'text-muted font-bold'
+												: isPassed
+													? 'text-muted/70'
+													: 'text-dark-muted'
+										}`}
+									>
+										TUES Fest {folder.name}
+									</span>
+								</button>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+
+			{/* Navigation Buttons */}
+			<div className="flex justify-center gap-4">
+				<Button
+					variant="outline"
+					size="icon"
+					onClick={handlePrevious}
+					disabled={currentIndex === 0}
+					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-50 disabled:cursor-not-allowed"
+				>
+					<ChevronLeft className="h-4 w-4" />
+				</Button>
+				<Button
+					variant="outline"
+					size="icon"
+					onClick={handleNext}
+					disabled={currentIndex === FOLDERS.length - 1}
+					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-50 disabled:cursor-not-allowed"
+				>
+					<ChevronRight className="h-4 w-4" />
+				</Button>
 			</div>
 		</div>
 	);
