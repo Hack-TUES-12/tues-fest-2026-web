@@ -206,7 +206,7 @@ function FolderNavigation({
 											</div>
 										) : (
 											<div
-												className="w-5 h-5 rounded-full bg-dark-muted"
+												className="w-5 h-5 translate-y-[4px] rounded-full bg-dark-muted"
 												style={{ boxShadow: '0 0 0 2px var(--background)' }}
 											/>
 										)}
