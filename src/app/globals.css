@@ -15,6 +15,7 @@
 	--primary-end: #8D1C5C;
 	--primary-foreground: oklch(0 0 0);
 	--secondary: oklch(0.7318 0.1756 55.61);
+	--secondary-end: #BE650D;
 	--secondary-foreground: oklch(0 0 0);
 	--muted: oklch(0.7303 0.1717 121.25);
 	--muted-end: #84A614;
@@ -58,6 +59,7 @@
 	--color-primary-end: var(--primary-end);
 	--color-primary-foreground: var(--primary-foreground);
 	--color-secondary: var(--secondary);
+	--color-secondary-end: var(--secondary-end);
 	--color-secondary-foreground: var(--secondary-foreground);
 	--color-muted: var(--muted);
 	--color-muted-end: var(--muted-end);

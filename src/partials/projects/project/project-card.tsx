@@ -6,6 +6,8 @@ import invariant from 'tiny-invariant';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import type { ProjectType } from '@/app/projects/actions';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
+import { PROJECT_CATEGORIES } from '@/constants/projects';
+import { cn } from '@/lib/utils';
 import { VoteSelectProjectButton } from './VoteButton';
 
 export const ProjectCard = ({ project }: { project: ProjectType }) => {
@@ -33,14 +35,17 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 					/>
 				</Link>
 			</CardContent>
-			<CardHeader className="flex h-full flex-col items-start gap-1">
-				<CardTitle className="font-title text-2xl text-white">
-					<Link href={href}>{project.title}</Link>
-				</CardTitle>
-				{/* {project.youtubeId && (
-					<YoutubeLink href={`https://www.youtube.com/watch?v=${encodeURIComponent(project.youtubeId)}`} />
-				)} */}
-				<p className="text-sm text-foreground">{description}</p>
+		<CardHeader className="flex h-full flex-col items-start gap-4">
+				<CategoryTag category={project.category} />
+				<div className='flex flex-col gap-1'>
+					<CardTitle className="font-title font-normal text-2xl text-white">
+						<Link href={href}>{project.title}</Link>
+					</CardTitle>
+					{/* {project.youtubeId && (
+						<YoutubeLink href={`https://www.youtube.com/watch?v=${encodeURIComponent(project.youtubeId)}`} />
+					)} */}
+					<p className="text-sm text-foreground">{description}</p>
+				</div>
 			</CardHeader>
 			<IfTFFeatureOn feature="project-voting">
 				<CardFooter className="pt-0">
@@ -57,6 +62,23 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 				</CardFooter>
 			</IfTFFeatureOn>
 		</Card>
+	);
+};
+
+const CATEGORY_STYLES: Record<string, string> = {
+	software: 'bg-gradient-to-br from-muted/30 to-muted-end/30 border border-muted text-muted',
+	embedded: 'bg-gradient-to-br from-primary/30 to-primary-end/30 border border-primary text-primary',
+	networks: 'bg-gradient-to-br from-secondary/30 to-secondary-end/30 border border-secondary text-secondary',
+	battlebot: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
+};
+
+const CategoryTag = ({ category }: { category: string }) => {
+	const label = PROJECT_CATEGORIES[category as keyof typeof PROJECT_CATEGORIES] ?? category;
+	const className = CATEGORY_STYLES[category] ?? CATEGORY_STYLES.software;
+	return (
+		<span className={cn('inline-block tracking-widest rounded-full px-4 py-1 text-xs font-medium', className)}>
+			{label}
+		</span>
 	);
 };
 
