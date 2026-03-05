@@ -195,7 +195,7 @@ function FolderNavigation({
 									>
 										{isSelected || isPrev ? (
 											<div
-												className={`rounded-full border-2 border-black flex items-center justify-center transition-all duration-350 ${isSelected ? 'w-9 h-9' : 'w-7 h-7'}`}
+												className={`rounded-full border-2 border-black flex items-center justify-center transition-all duration-350 ${isSelected ? 'w-9 h-9' : 'w-7 h-7 cursor-pointer'}`}
 											>
 												<div
 													className={`${isSelected ? "w-7 h-7" : "w-5 h-5"} rounded-full bg-muted`}
@@ -206,7 +206,7 @@ function FolderNavigation({
 											</div>
 										) : (
 											<div
-												className="w-5 h-5 translate-y-[4px] rounded-full bg-dark-muted"
+												className="cursor-pointer w-5 h-5 translate-y-[4px] rounded-full bg-dark-muted"
 												style={{ boxShadow: '0 0 0 2px var(--background)' }}
 											/>
 										)}
