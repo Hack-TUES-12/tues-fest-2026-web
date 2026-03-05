@@ -130,18 +130,35 @@ function FolderNavigation({
 		}
 	};
 
-	// Each item occupies 1/3 of the viewport. The track is FOLDERS.length/3 wide.
-	// To center the selected item we shift by: (1 - currentIndex) / FOLDERS.length * 100%
-	const translateX = ((1 - currentIndex) / FOLDERS.length) * 100;
+	// Where the selected item should appear within the 3-item window (0 = left, 1 = center, 2 = right)
+	const displayPosition =
+		currentIndex === 0 ? 0
+		: currentIndex === FOLDERS.length - 1 ? 2
+		: 1;
+
+	// Shift the track so the selected item lands on its display position
+	const translateX = ((displayPosition - currentIndex) / FOLDERS.length) * 100;
+
+	// The line splits at the center of the selected dot (as % of the viewport)
+	const lineSplitPercent = ((displayPosition + 0.5) / 3) * 100;
 
 	return (
 		<div className="w-full space-y-10">
 			{/* Timeline */}
 			<div className="relative" style={{ height: '72px' }}>
-				{/* Static line — left half muted, right half dark-muted, always split at 50% since selected is always centered */}
+				{/* Line — split point animates with the selected dot's position */}
 				<div className="absolute inset-x-0 flex" style={{ top: '13px', height: '2px' }}>
-					<div className="w-1/2 bg-muted" />
-					<div className="w-1/2 bg-dark-muted" />
+					<div
+						className="bg-muted"
+						style={{
+							width: `${lineSplitPercent}%`,
+							transition: 'width 350ms cubic-bezier(0.4, 0, 0.2, 1)',
+						}}
+					/>
+					<div
+						className="bg-dark-muted flex-1"
+						style={{ transition: 'flex 350ms cubic-bezier(0.4, 0, 0.2, 1)' }}
+					/>
 				</div>
 
 				{/* Sliding track — clips off-screen dots */}
