@@ -11,7 +11,7 @@ const buttonVariants = cva(
 			variant: {
 				default: 'bg-gradient-to-br from-primary to-primary-end text-primary-foreground shadow-xs hover:opacity-90',
 				secondary: 'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
-				muted: 'bg-muted text-muted-foreground shadow-xs hover:bg-muted/80',
+				muted: 'bg-gradient-to-br from-muted to-muted-end text-background shadow-xs hover:opacity-90',
 				accent: 'bg-accent text-accent-foreground shadow-xs hover:bg-accent/80',
 				destructive:
 					'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
