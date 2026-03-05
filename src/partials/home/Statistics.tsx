@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Folder, FolderOpen, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 import { Button } from '@/components/ui/button';
@@ -116,85 +116,92 @@ function FolderNavigation({
 	selectedFolderIndex: number;
 	setSelectedFolderIndex: (id: number) => void;
 }) {
+	const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
+
 	const handlePrevious = () => {
-		const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
 		if (currentIndex > 0 && FOLDERS[currentIndex - 1]) {
 			setSelectedFolderIndex(FOLDERS[currentIndex - 1]!.id);
 		}
 	};
 
 	const handleNext = () => {
-		const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
 		if (currentIndex < FOLDERS.length - 1 && FOLDERS[currentIndex + 1]) {
 			setSelectedFolderIndex(FOLDERS[currentIndex + 1]!.id);
 		}
 	};
 
-	const currentIndex = FOLDERS.findIndex((f) => f.id === selectedFolderIndex);
-	const selectedFolder = FOLDERS[currentIndex];
+	// Each item occupies 1/3 of the viewport. The track is FOLDERS.length/3 wide.
+	// To center the selected item we shift by: (1 - currentIndex) / FOLDERS.length * 100%
+	const translateX = ((1 - currentIndex) / FOLDERS.length) * 100;
 
 	return (
-		<div className="w-full space-y-8">
+		<div className="w-full space-y-10">
 			{/* Timeline */}
-			<div className="w-full">
-				<div className="relative h-12 flex items-center">
-					{/* Timeline Line */}
-					<div className="absolute inset-0 flex items-center">
-						<div className="w-full h-1 bg-dark-muted relative">
-							{/* Left part (muted color) */}
-							<div
-								className="h-full bg-muted absolute left-0 transition-all duration-300"
-								style={{
-									width: `${(currentIndex / (FOLDERS.length - 1)) * 100}%`,
-								}}
-							/>
-						</div>
-					</div>
+			<div className="relative" style={{ height: '72px' }}>
+				{/* Static line — left half muted, right half dark-muted, always split at 50% since selected is always centered */}
+				<div className="absolute inset-x-0 flex" style={{ top: '13px', height: '2px' }}>
+					<div className="w-1/2 bg-muted" />
+					<div className="w-1/2 bg-dark-muted" />
+				</div>
 
-					{/* Timeline Points */}
-					<div className="relative w-full h-full flex justify-between">
+				{/* Sliding track — clips off-screen dots */}
+				<div className="absolute inset-x-0 overflow-hidden" style={{ height: '72px' }}>
+					<div
+						className="flex will-change-transform"
+						style={{
+							width: `${(FOLDERS.length / 3) * 100}%`,
+							transform: `translateX(${translateX}%)`,
+							transition: 'transform 350ms cubic-bezier(0.4, 0, 0.2, 1)',
+						}}
+					>
 						{FOLDERS.map((folder, index) => {
 							const isSelected = folder.id === selectedFolderIndex;
-							const isPassed = index <= currentIndex;
+							const isPrev = index < currentIndex;
 
 							return (
-								<button
+								<div
 									key={folder.id}
-									onClick={() => setSelectedFolderIndex(folder.id)}
-									className="relative z-10 focus:outline-none group flex flex-col items-center justify-center h-full"
-									title={`TUES Fest ${folder.name}`}
+									className="flex flex-col items-center gap-3"
+									style={{ width: `${100 / FOLDERS.length}%` }}
 								>
-									{isPassed ? (
-										<div className="w-7 h-7 rounded-full border-2 border-black flex items-center justify-center transition-all duration-300">
-											{/* Point circle */}
+									{/* Dot */}
+									<button
+										onClick={() => setSelectedFolderIndex(folder.id)}
+										className="focus:outline-none"
+										title={`TUES Fest ${folder.name}`}
+									>
+										{isSelected || isPrev ? (
 											<div
-												className={`w-5 h-5 rounded-full bg-muted ${isSelected ? 'scale-125' : ''}`}
-												style={{
-													boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)',
-												}}
+												className={`rounded-full border-2 border-black flex items-center justify-center transition-all duration-350 ${isSelected ? 'w-9 h-9' : 'w-7 h-7'}`}
+											>
+												<div
+													className="w-5 h-5 rounded-full bg-muted"
+													style={{
+														boxShadow: '0 0 0 2px white, 0 0 24px 6px var(--color-muted)',
+													}}
+												/>
+											</div>
+										) : (
+											<div
+												className="w-5 h-5 rounded-full bg-dark-muted"
+												style={{ boxShadow: '0 0 0 2px var(--background)' }}
 											/>
-										</div>
-									) : (
-										<div
-											className="w-5 h-5 rounded-full bg-dark-muted transition-all duration-300"
-											style={{
-												boxShadow: '0 0 0 2px var(--background)',
-											}}
-										/>
-									)}
-									{/* Year label */}
+										)}
+									</button>
+
+									{/* Label */}
 									<span
-										className={`absolute top-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-mono transition-all duration-300 ${
+										className={`whitespace-nowrap font-mono transition-all duration-350 ${
 											isSelected
-												? 'text-muted font-bold'
-												: isPassed
-													? 'text-muted/70'
-													: 'text-dark-muted'
+												? 'text-muted text-base font-bold'
+												: isPrev
+													? 'text-muted/60 text-sm'
+													: 'text-dark-muted text-sm'
 										}`}
 									>
 										TUES Fest {folder.name}
 									</span>
-								</button>
+								</div>
 							);
 						})}
 					</div>
@@ -208,7 +215,7 @@ function FolderNavigation({
 					size="icon"
 					onClick={handlePrevious}
 					disabled={currentIndex === 0}
-					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-50 disabled:cursor-not-allowed"
+					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-30 disabled:cursor-not-allowed"
 				>
 					<ChevronLeft className="h-4 w-4" />
 				</Button>
@@ -217,7 +224,7 @@ function FolderNavigation({
 					size="icon"
 					onClick={handleNext}
 					disabled={currentIndex === FOLDERS.length - 1}
-					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-50 disabled:cursor-not-allowed"
+					className="border-muted text-muted hover:bg-muted/10 disabled:opacity-30 disabled:cursor-not-allowed"
 				>
 					<ChevronRight className="h-4 w-4" />
 				</Button>
