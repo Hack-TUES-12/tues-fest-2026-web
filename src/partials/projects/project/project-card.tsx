@@ -1,11 +1,15 @@
+import type { ComponentProps } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaYoutube } from 'react-icons/fa';
+import { TbBrandGithub, TbBrandYoutube } from 'react-icons/tb';
 import invariant from 'tiny-invariant';
 
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import type { ProjectType } from '@/app/projects/actions';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
+import { PROJECT_CATEGORIES } from '@/constants/projects';
+import { cn } from '@/lib/utils';
 import { VoteSelectProjectButton } from './VoteButton';
 
 export const ProjectCard = ({ project }: { project: ProjectType }) => {
@@ -14,6 +18,10 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 	invariant(thumbnail, `Project with ID ${project.id} (${project.title}) has no thumbnail or images`);
 
 	const href = `/projects/${project.id}`;
+
+	const description = project.description.length > 100
+		? project.description.slice(0, 100) + '...'
+		: project.description;
 
 	return (
 		<Card className="group z-20 max-w-[500px] transition-all duration-300 hover:shadow-lg">
@@ -29,16 +37,35 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 					/>
 				</Link>
 			</CardContent>
-			<CardHeader className="flex h-full flex-row items-start justify-between">
-				<CardTitle className="text-xl font-semibold">
+		<CardHeader className="flex h-full flex-col items-start gap-4">
+				<CategoryTag category={project.category} />
+			<div className='flex flex-col gap-2'>
+				<CardTitle className="font-title font-normal text-2xl text-white">
 					<Link href={href}>{project.title}</Link>
 				</CardTitle>
-				{project.youtubeId && (
-					<YoutubeLink href={`https://www.youtube.com/watch?v=${encodeURIComponent(project.youtubeId)}`} />
-				)}
+				<p className="text-sm text-foreground">{description}</p>
+			</div>
 			</CardHeader>
-			<IfTFFeatureOn feature="project-voting">
-				<CardFooter className="pt-0">
+			<CardFooter className="flex flex-col items-end gap-4 pt-0">
+				{(project.youtubeId || project.links.repoUrls.length > 0) && (
+					<div className="flex gap-2 pt-1">
+						{project.youtubeId && (
+							<Button variant="default-secondary" size="icon" className="rounded-full" asChild>
+								<Link href={`https://www.youtube.com/watch?v=${encodeURIComponent(project.youtubeId)}`} target="_blank">
+									<TbBrandYoutube size={20} />
+								</Link>
+							</Button>
+						)}
+						{project.links.repoUrls[0] && (
+							<Button variant="muted-secondary" size="icon" className="rounded-full" asChild>
+								<Link href={project.links.repoUrls[0]} target="_blank">
+									<TbBrandGithub size={20} />
+								</Link>
+							</Button>
+						)}
+					</div>
+				)}
+				<IfTFFeatureOn feature="project-voting">
 					<VoteSelectProjectButton
 						project={{
 							id: project.id,
@@ -46,21 +73,37 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 							thumbnail,
 							category: project.category,
 						}}
-						className="bg-primary hover:bg-primary/90 text-primary-foreground w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
+						variant={CATEGORY_BUTTON_VARIANTS[project.category] ?? 'default'}
+						className="w-full font-medium transition-all duration-300 group-hover:scale-[1.02]"
 						size="lg"
 					/>
-				</CardFooter>
-			</IfTFFeatureOn>
+				</IfTFFeatureOn>
+			</CardFooter>
 		</Card>
 	);
 };
 
-const YoutubeLink = ({ href }: { href: string }) => {
+const CATEGORY_BUTTON_VARIANTS: Record<string, ComponentProps<typeof Button>['variant']> = {
+	software: 'muted',
+	embedded: 'default',
+	networks: 'secondary',
+	battlebot: 'accent',
+};
+
+const CATEGORY_STYLES: Record<string, string> = {
+	software: 'bg-gradient-to-br from-muted/30 to-muted-end/30 border border-muted text-muted',
+	embedded: 'bg-gradient-to-br from-primary/30 to-primary-end/30 border border-primary text-primary',
+	networks: 'bg-gradient-to-br from-secondary/30 to-secondary-end/30 border border-secondary text-secondary',
+	battlebot: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
+};
+
+const CategoryTag = ({ category }: { category: string }) => {
+	const label = PROJECT_CATEGORIES[category as keyof typeof PROJECT_CATEGORIES] ?? category;
+	const className = CATEGORY_STYLES[category] ?? CATEGORY_STYLES.software;
 	return (
-		<div className="hover:text-primary m-1 rounded-lg p-1 transition-all duration-100 hover:scale-110">
-			<Link href={href} target="_blank">
-				<FaYoutube size={32} />
-			</Link>
-		</div>
+		<span className={cn('inline-block tracking-widest rounded-full px-4 py-1 text-xs font-medium', className)}>
+			{label}
+		</span>
 	);
 };
+

@@ -33,15 +33,24 @@ import {
 	useVotedProjects,
 } from '@/stores/vote';
 
+const SECONDARY_VARIANT_MAP: Partial<Record<NonNullable<React.ComponentProps<typeof Button>['variant']>, React.ComponentProps<typeof Button>['variant']>> = {
+	default: 'default-secondary',
+	muted: 'muted-secondary',
+	secondary: 'secondary-secondary',
+	accent: 'accent-secondary',
+};
+
 export function VoteSelectProjectButton({
 	project,
 	className,
 	size = 'lg',
+	variant = 'default',
 	...props
 }: {
 	project: LocalVotedProject;
 	className?: string;
 	size?: React.ComponentProps<typeof Button>['size'];
+	variant?: React.ComponentProps<typeof Button>['variant'];
 }) {
 	const { isSelected, hasReachedVoteLimit } = useProjectVoteStatus(project.id);
 	const selectProject = useSelectProject();
@@ -90,12 +99,8 @@ export function VoteSelectProjectButton({
 	return (
 		<AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
 			<Button
-				variant={isSelected ? 'secondary' : 'default'}
-				className={cn(
-					className,
-					'cursor-pointer',
-					isSelected && 'border-primary bg-secondary/80 hover:bg-secondary/90 border-2'
-				)}
+				variant={isSelected ? (SECONDARY_VARIANT_MAP[variant ?? 'default'] ?? 'secondary') : variant}
+				className={cn(className, 'cursor-pointer')}
 				size={size}
 				onClick={handleClick}
 				{...props}

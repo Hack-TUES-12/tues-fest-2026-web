@@ -1,0 +1,32 @@
+# Project Design Consistency Rules
+
+When generating or modifying UI code for this project, always reference the existing design patterns implemented in:
+
+- Home page "About" section
+- Home page "Statistics" section
+- /partners page
+
+These sections represent the current visual design system of the website.
+
+## Design Consistency Requirements
+
+When creating or updating components or pages:
+
+1. Match the layout patterns used in the reference sections
+2. Reuse existing component structures where possible
+3. Follow the same spacing scale and section padding
+4. Maintain consistent typography hierarchy (headings, subheadings, body)
+5. Use the same card styles, grid systems, and alignment patterns
+6. Follow the same button styles and interaction patterns
+7. Maintain consistent responsive behavior
+
+## Implementation Guidance
+
+- Prefer reusing existing components instead of creating new ones
+- If a similar pattern exists in the reference sections, adapt it rather than inventing a new layout
+- Keep styling consistent with the existing Tailwind/CSS patterns already used
+- Avoid introducing new design systems, spacing rules, or typography styles
+
+## Goal
+
+All new sections and pages should visually feel like they belong to the same design system established by the About section, Statistics section, and Partners page.
