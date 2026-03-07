@@ -1,8 +1,10 @@
-import { Metadata } from 'next';
+import { type Metadata } from 'next';
+import Link from 'next/link';
+import { TbBus, TbCar, TbExternalLink, TbMap2, TbTrain, TbWalk } from 'react-icons/tb';
 
-import { Card } from '@/components/ui/card';
-import { GradientHeading } from '@/components/ui/gradient-heading';
-import { TF_DATE_STRING } from '@/constants/event';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
 import { TF_TITLE } from '@/constants/seo';
 
 const LOCATION_MAP_URL =
@@ -13,98 +15,143 @@ export const metadata = {
 	description: `Информация за локацията ${TF_TITLE} - Ларго, пл. Независимост, София и как да стигнете до там.`,
 } satisfies Metadata;
 
-// TODO: change the page content in a future pull request. THIS IS PLACEHOLDER TEXT. Placeholder text is okay for now because the page is not live yet
-
-// export default function Location() {
-// 	return (
-// 		<div className="m-auto min-h-screen max-w-screen-2xl p-8 !pt-28 md:p-12">
-// 			<div className="rounded-xl border  bg-opacity-0 bg-clip-padding p-10 drop-shadow-lg backdrop-blur-sm backdrop-filter">
-// 				<GradientHeading size="lg">Локация</GradientHeading>
-
-// 				<div className="flex flex-col gap-8 pt-0 sm:flex-row md:pt-12 lg:flex-row">
-// 					<div className="flex w-full flex-col gap-8 sm:w-[50%]">
-// 						<p className="text-justify text-xl">
-// 							TUES Fest 2025 ще се проведе на 27ми Април 2025 от 10:00 на площад "Независимост" под куполите на "Ларгото", София. До там може да се
-// 							стигне лесно с обществен транспорт, като метростанция "Сердика" се намира на минута пеша от локацията. Има и множество автобусни линии, които минават в близост.
-// 							До площад "Независимост" може да се стигне и с автомобил, като има паркинг в близост. Друга опция е да дойдете пеша.
-// 						</p>
-// 						<p className="text-justify text-xl">
-// 							Над 150 проекта ще бъдат представени на тазгодишното издание на TUES Fest. Ще имате възможност да се запознаете с учениците и техните проекти, както и да гласувате за най-добрия проект.
-// 							Всички проекти ще бъдат изложени на място. Ще се потопите в духа на ТУЕС докато се разхождате из лабиринта от проекти. Ще може да се започнаете и със компаниите спонсори на TUES Fest.
-// 						</p>
-// 					</div>
-// <div className="w-full overflow-hidden rounded-lg border border-gray-300 sm:w-[50%]">
-// 	<iframe
-// 		src={LOCATION_MAP_URL}
-// 		title="Карта на локацията - Ларго, пл. Независимост, София"
-// 		width="100%"
-// 		height="400"
-// 		className="border-0"
-// 		allowFullScreen={true}
-// 		loading="lazy"
-// 		referrerPolicy="no-referrer-when-downgrade"
-// 	></iframe>
-// </div>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
-// }
+const TRANSPORT_OPTIONS = [
+	{
+		icon: TbTrain,
+		title: 'Метро',
+		description: 'Метростанция „Сердика" е буквално на входа на локацията — най-бързият начин за пристигане.',
+	},
+	{
+		icon: TbBus,
+		title: 'Автобус и трамвай',
+		description: 'Множество автобусни и трамвайни линии минават в близост до площад „Независимост".',
+	},
+	{
+		icon: TbCar,
+		title: 'Автомобил',
+		description: 'Платени паркинги се намират в радиус от 5–10 минути пеша от локацията.',
+	},
+	{
+		icon: TbWalk,
+		title: 'Пеша',
+		description: 'Ако сте в центъра на София, локацията е лесно достижима пеша от много точки.',
+	},
+];
 
 export default function Location() {
 	return (
-		<div className="p-4 md:p-12">
-			<Card className="p-10">
-				<GradientHeading size="lg">Локация</GradientHeading>
+		<section className="relative overflow-x-hidden flex flex-col items-center gap-14 px-4 pb-14 pt-14 md:px-8">
+			{/* Background decoration */}
+			<img
+				src="/decorations/purple-circle.svg"
+				alt=""
+				aria-hidden="true"
+				className="pointer-events-none absolute right-0 top-0 w-[50vw] max-w-2xl translate-x-1/3 -translate-y-1/3 select-none"
+				style={{ zIndex: -1 }}
+			/>
 
-				<div className="flex flex-col gap-8 pt-0 sm:flex-row md:pt-12 lg:flex-row">
-					<div className="flex w-full flex-col gap-8 sm:w-[50%]">
-						<p className="text-justify text-xl">
-							TUES Fest 2025 ще се проведе на 27 април 2025 г. от 10:00 часа на площад
-							&quot;Независимост&quot; в София. Локацията се намира в подлеза на метростанция
-							&quot;Сердика&quot;, в закритото пространство под стъклените куполи на Ларгото, в самия
-							център на града. Мястото е емблематично за София със своите впечатляващи стъклени куполи и
-							археологически останки.
-						</p>
-						<p className="text-justify text-xl">
-							Достъпът до мястото е изключително удобен - метростанция &quot;Сердика&quot; се намира
-							буквално на входа на локацията. В близост минават и множество автобусни и трамвайни линии.
-							За пристигащите с автомобил има няколко платени паркинга в радиус от 5-10 минути пеша.
-						</p>
-						<p className="text-justify text-xl">
-							На тазгодишното издание на TUES Fest ще бъдат представени над 150 ученически проекта.
-							Посетителите ще имат възможност да разговарят директно с учениците, които са създали
-							проектите, да разгледат техните разработки и да гласуват за най-добрите сред тях. Ще можете
-							да се потопите в творческата атмосфера на ТУЕС, разхождайки се между различните изложбени
-							щандове, както и да осъществите контакт с представителите на компаниите спонсори на
-							събитието.
-						</p>
-						<p className="text-justify text-xl">
-							<a
-								href="https://maps.app.goo.gl/j2Q4m2hV6aXeUWGG8"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-blue-500 hover:underline"
-							>
-								Разгледайте 3D изглед на локацията в Google Maps
-							</a>
-							, за да се ориентирате по-лесно и да планирате вашето посещение предварително.
-						</p>
-					</div>
-					<div className="w-full overflow-hidden rounded-lg border border-gray-300 sm:h-[50%] sm:w-[50%]">
-						<iframe
-							src={LOCATION_MAP_URL}
-							title="Карта на локацията - Ларго, пл. Независимост, София"
-							width="100%"
-							height="400"
-							className="border-0"
-							allowFullScreen={true}
-							loading="lazy"
-							referrerPolicy="no-referrer-when-downgrade"
-						></iframe>
-					</div>
+			{/* Hero */}
+			<div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+				<p className="text-primary tracking-widest">Локация</p>
+				<h1 className="font-title text-5xl text-white md:text-6xl">Намери ни</h1>
+				<p className="text-lg text-foreground/70">
+					{TF_TITLE} {TF_YEAR} ще се проведе на {TF_DATE_STRING} на{' '}
+					<span className="text-white">{TF_LOCATION}</span> под стъклените куполи на „Ларгото", в самия
+					център на София.
+				</p>
+				<Button asChild variant="default" size="lg" className="font-bold">
+					<Link
+						href="https://maps.app.goo.gl/j2Q4m2hV6aXeUWGG8"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<TbMap2 size={20} />
+						Отвори в Google Maps
+					</Link>
+				</Button>
+			</div>
+
+			{/* Map + details grid */}
+			<div className="mx-auto grid w-full max-w-5xl gap-6 md:grid-cols-[1fr,1fr]">
+				{/* Map */}
+				<div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl md:row-span-2">
+					<iframe
+						src={LOCATION_MAP_URL}
+						title="Карта на локацията - Ларго, пл. Независимост, София"
+						width="100%"
+						height="100%"
+						className="min-h-80 border-0 md:min-h-full"
+						style={{ minHeight: '420px' }}
+						allowFullScreen
+						loading="lazy"
+						referrerPolicy="no-referrer-when-downgrade"
+					/>
 				</div>
-			</Card>
-		</div>
+
+				{/* Address card */}
+				<Card className="px-8 py-7">
+					<CardContent className="p-0 flex flex-col gap-3">
+						<h2 className="text-2xl font-bold text-primary">Адрес</h2>
+						<p className="text-foreground/80 leading-relaxed">
+							Пл. „Независимост", 1000 София — закритото пространство под стъклените куполи на
+							Ларгото, в подлеза на метростанция „Сердика".
+						</p>
+						<p className="text-foreground/80 leading-relaxed">
+							Мястото е емблематично за центъра на София с впечатляващите си стъклени куполи и
+							видимите археологически останки от античния град Сердика.
+						</p>
+						<Link
+							href="https://maps.app.goo.gl/j2Q4m2hV6aXeUWGG8"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex items-center gap-1.5 text-sm text-primary underline-offset-4 hover:underline"
+						>
+							<TbExternalLink size={16} />
+							3D изглед на локацията в Google Maps
+						</Link>
+					</CardContent>
+				</Card>
+
+				{/* Date & time card */}
+				<Card className="px-8 py-7">
+					<CardContent className="p-0 flex flex-col gap-3">
+						<h2 className="text-2xl font-bold text-primary">Кога?</h2>
+						<p className="text-foreground/80 leading-relaxed">
+							Събитието ще се проведе на{' '}
+							<span className="font-semibold text-white">{TF_DATE_STRING}</span>, като вратите се
+							отварят в <span className="font-semibold text-white">10:00 часа</span>.
+						</p>
+						<p className="text-foreground/80 leading-relaxed">
+							Над 150 ученически проекта ще бъдат изложени на място. Влезте в контакт с авторите,
+							гласувайте за любимите си проекти и се срещнете с компаниите спонсори.
+						</p>
+					</CardContent>
+				</Card>
+			</div>
+
+			{/* Transport options */}
+			<div className="mx-auto w-full max-w-5xl">
+				<div className="mb-6 text-center">
+					<p className="text-primary tracking-widest mb-1">Транспорт</p>
+					<h2 className="font-title text-4xl text-white">Как да стигнете до там?</h2>
+				</div>
+				<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+					{TRANSPORT_OPTIONS.map(({ icon: Icon, title, description }) => (
+						<div
+							key={title}
+							className="flex gap-4 rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm"
+						>
+							<div className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+								<Icon size={22} />
+							</div>
+							<div>
+								<h3 className="mb-1 font-semibold text-white">{title}</h3>
+								<p className="text-sm text-foreground/70 leading-relaxed">{description}</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
 	);
 }
