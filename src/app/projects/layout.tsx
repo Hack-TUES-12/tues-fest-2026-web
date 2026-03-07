@@ -1,7 +1,7 @@
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { FloatingVoteOverlay } from '@/components/ui/floating-vote-overlay';
-import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
+import { TF_DATE_STRING, TF_LOCATION, TF_ROUNDED_PROJECT_COUNT, TF_YEAR } from '@/constants/event';
 import { OG_METADATA, TF_TITLE, TWITTER_METADATA } from '@/constants/seo';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
@@ -11,7 +11,7 @@ export const metadata = {
 		default: 'Проекти',
 		template: `%s – Проект на ТУЕС Фест ${TF_YEAR}`,
 	},
-	description: `Тук може да откриете проектите на учениците на ТУЕС. Тази година над 120 проекта ще бъдат представени само на ${TF_DATE_STRING} в ${TF_LOCATION}.`,
+	description: `Тук може да откриете проектите на учениците на ТУЕС. Тази година над ${TF_ROUNDED_PROJECT_COUNT} проекта ще бъдат представени само на ${TF_DATE_STRING} в ${TF_LOCATION}.`,
 	keywords: [
 		'туес',
 		'туес фест',
@@ -37,12 +37,12 @@ export const metadata = {
 	twitter: {
 		...TWITTER_METADATA,
 		title: `Проекти | ${TF_TITLE}`,
-		description: `Разгледайте над 120 ученически проекта на ${TF_TITLE}.`,
+		description: `Разгледайте над ${TF_ROUNDED_PROJECT_COUNT} ученически проекта на ${TF_TITLE}.`,
 	},
 	openGraph: {
 		...OG_METADATA,
 		title: `Проекти | ${OG_METADATA.siteName}`,
-		description: `Разгледайте над 120 ученически проекта на ${TF_TITLE}.`,
+		description: `Разгледайте над ${TF_ROUNDED_PROJECT_COUNT} ученически проекта на ${TF_TITLE}.`,
 	},
 };
 

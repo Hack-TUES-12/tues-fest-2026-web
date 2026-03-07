@@ -4,7 +4,7 @@ import { TbBus, TbCar, TbExternalLink, TbMap2, TbTrain, TbWalk } from 'react-ico
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { LOCATION_EMBED_URL, LOCATION_MAP_URL, LOCATION_STREET_VIEW_URL, TF_DATE_STRING, TF_LOCATION, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
+import { LOCATION_EMBED_URL, LOCATION_MAP_URL, LOCATION_STREET_VIEW_URL, TF_DATE_STRING, TF_LOCATION, TF_ROUNDED_PROJECT_COUNT, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
 import { TF_TITLE } from '@/constants/seo';
 
 export const metadata = {
@@ -119,7 +119,7 @@ export default function Location() {
 							отварят в <span className="font-semibold text-white">{TF_TIME_STRING} часа</span>.
 						</p>
 						<p className="text-foreground/80 leading-relaxed">
-							Над 150 ученически проекта ще бъдат изложени на място. Влезте в контакт с авторите,
+							Над {TF_ROUNDED_PROJECT_COUNT} ученически проекта ще бъдат изложени на място. Влезте в контакт с авторите,
 							гласувайте за любимите си проекти и се срещнете с компаниите спонсори.
 						</p>
 					</CardContent>
