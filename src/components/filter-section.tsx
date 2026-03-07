@@ -62,8 +62,8 @@ const CATEGORIES = [
 	{
 		...PROJECT_CATEGORY_MAP.networks,
 		text: 'Мрежи',
-		activeClass: 'bg-gradient-to-br from-secondary/30 to-secondary-end/30 border-secondary text-secondary',
-		inactiveClass: 'border-secondary/20 text-secondary/50 hover:border-secondary/50 hover:text-secondary/80',
+		activeClass: 'bg-gradient-to-br from-accent/30 to-accent/30 border-accent text-accent',
+		inactiveClass: 'border-accent/20 text-accent/50 hover:border-accent/50 hover:text-accent/80',
 	},
 ] as const;
 

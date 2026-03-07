@@ -87,14 +87,14 @@ export async function generateStaticParams() {
 const CATEGORY_STYLES: Record<string, string> = {
 	software: 'bg-gradient-to-br from-muted/30 to-muted-end/30 border border-muted text-muted',
 	embedded: 'bg-gradient-to-br from-primary/30 to-primary-end/30 border border-primary text-primary',
-	networks: 'bg-gradient-to-br from-secondary/30 to-secondary-end/30 border border-secondary text-secondary',
+	networks: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
 	battlebot: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
 };
 
 const CATEGORY_VOTE_VARIANTS: Record<string, 'default' | 'muted' | 'secondary' | 'accent'> = {
 	software: 'muted',
 	embedded: 'default',
-	networks: 'secondary',
+	networks: 'accent',
 	battlebot: 'accent',
 };
 
