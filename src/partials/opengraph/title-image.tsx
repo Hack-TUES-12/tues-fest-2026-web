@@ -1,4 +1,4 @@
-import { TF_YEAR } from '@/constants/event';
+import { TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { cn } from '@/lib/utils';
 
 const headingSizes = {
@@ -79,7 +79,7 @@ export function OpengraphTitleImage(props: {
 
 				{!props.subtitle && (
 					<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-3xl text-[#f8fafc]/90 mb-2">
-						IT ALL STARTS HERE
+						{TF_SLOGAN.toUpperCase()}
 					</p>
 				)}
 
@@ -163,7 +163,7 @@ export function TwitterTitleImage(props: {
 
 				{/* Motto */}
 				<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-4xl text-[#f8fafc]/90 tracking-widest mb-8">
-					IT ALL STARTS HERE
+					{TF_SLOGAN.toUpperCase()}
 				</p>
 
 				{/* Twitter-specific call to action */}

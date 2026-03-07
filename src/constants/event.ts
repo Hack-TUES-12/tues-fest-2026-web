@@ -2,6 +2,8 @@ export const TF_YEAR = 2026;
 
 export const TF_LOCATION = 'София Тех Парк, форум "Джон Атанасов"';
 
+export const TF_SLOGAN = 'Where steps tell stories'
+
 export const TF_DATE = new Date(TF_YEAR, 3, 26, 9, 0);
 
 export const TF_YEAR_SHORT = TF_YEAR % 100;

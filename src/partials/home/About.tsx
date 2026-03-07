@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ABOUT_IMAGE_1, ABOUT_IMAGE_2, ABOUT_TEXT } from '@/constants/home/about';
-import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
+import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 
 const About = () => (
 	<section id="about" className="relative overflow-hidden px-4 py-12 md:px-8">
@@ -131,7 +131,7 @@ const About = () => (
 			</div>
 
 			<p>
-				TUES FEST {TF_YEAR} &quot;<span className="text-primary">IT ALL STARTS HERE</span>&quot; се
+				TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се
 				организира от ученици за ученици, под менторството на АЗТУЕС! Доброволческият екип на организаторите
 				вярват, че за поредна година ще покажат на света какво е да си ученик в ТУЕС към ТУ - София.
 			</p>
