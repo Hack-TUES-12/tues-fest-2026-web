@@ -52,7 +52,7 @@ const Quote = ({
 	desc: string;
 	colorIndex?: number;
 }) => {
-	const color = COLORS[colorIndex % 4];
+	const color = COLORS[(colorIndex ?? 0) % 4] ?? 'primary';
 	const cls = colorClasses[color];
 
 	return (
