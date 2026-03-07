@@ -1,17 +1,8 @@
 'use client';
 
-import React, { use, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
-
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { Card } from '@/components/ui/card';
+import { TbChevronRight, TbHome } from 'react-icons/tb';
 
 export type PathItem = {
 	name: string;
@@ -22,28 +13,45 @@ const ProjectsPath = ({ path }: { path?: PathItem[] | null | undefined }) => {
 	if (!path) return null;
 
 	return (
-		<section>
-			<Card className="rounded-lg px-8 py-5">
-				<Breadcrumb>
-					<BreadcrumbList className="text-white">
-						{path.map((item, index) => (
+		<nav aria-label="breadcrumb">
+			<div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-3">
+				<ol className="flex flex-wrap items-center gap-1.5 text-sm">
+					{path.map((item, index) => {
+						const isLast = index === path.length - 1;
+						const isFirst = index === 0;
+
+						return (
 							<React.Fragment key={item?.url || `end-${index}`}>
-								<BreadcrumbItem>
+								<li className="inline-flex items-center gap-1.5">
 									{item?.url ? (
-										<BreadcrumbLink asChild className="hover:text-primary text-white">
-											<Link href={item.url}>{item.name}</Link>
-										</BreadcrumbLink>
+										<Link
+											href={item.url}
+											className="inline-flex items-center gap-1.5 tracking-wide text-white/50 transition-colors duration-200 hover:text-white/90"
+										>
+											{isFirst && <TbHome className="size-3.5 shrink-0" />}
+											{item.name}
+										</Link>
 									) : (
-										<BreadcrumbPage className="text-white">{item?.name}</BreadcrumbPage>
+										<span
+											aria-current="page"
+											className="font-medium tracking-wide text-white"
+										>
+											{item.name}
+										</span>
 									)}
-								</BreadcrumbItem>
-								{index < path.length - 1 && <BreadcrumbSeparator className="text-white" />}
+								</li>
+
+								{!isLast && (
+									<li role="presentation" aria-hidden="true">
+										<TbChevronRight className="size-3.5 text-white/25" />
+									</li>
+								)}
 							</React.Fragment>
-						))}
-					</BreadcrumbList>
-				</Breadcrumb>
-			</Card>
-		</section>
+						);
+					})}
+				</ol>
+			</div>
+		</nav>
 	);
 };
 
