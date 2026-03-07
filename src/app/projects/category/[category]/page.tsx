@@ -80,7 +80,7 @@ export default async function ProjectsPage(props: PageProps) {
 	const shuffledProjects = [...projects].sort(() => Math.random() - 0.5);
 
 	return (
-		<ProjectContainer>
+		<ProjectContainer category={category}>
 			<ProjectsPath path={[...PATH, { name: PROJECT_CATEGORIES[category], url: '' }]} />
 
 			{/* HACK: weird inconsistency in the names, this is a code smell... */}
