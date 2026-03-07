@@ -1,5 +1,3 @@
-import { start } from "repl";
-
 export const SCHEDULE = [
 	{
 		start: '10:00',
