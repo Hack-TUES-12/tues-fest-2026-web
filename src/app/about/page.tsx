@@ -85,7 +85,7 @@ const EDUCATION_ITEMS = [
 	'Cisco академия за актуалните мрежови технологии',
 	'Вградени микроконтролерни системи (Arduino)',
 	'Участие в национални и международни състезания',
-	'HackTUES — хакатон, организиран от ученици за ученици',
+	'Hack TUES — хакатон, организиран от ученици за ученици',
 	'Работилници и лекции от ИТ професионалисти',
 	'Разнообразни извънкласни клубове',
 ];
@@ -256,7 +256,7 @@ export default function AboutPage() {
 				</Card>
 			</div>
 
-			{/* ── HackTUES ──────────────────────────────────────────────── */}
+			{/* ── Hack TUES ──────────────────────────────────────────────── */}
 			<div className="mx-auto w-full max-w-5xl">
 				<div className="mb-6 text-center">
 					<p className="text-primary mb-1 tracking-widest">Събитие</p>
@@ -266,7 +266,7 @@ export default function AboutPage() {
 				<div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
 					<img
 						src="/assets/about/ht11_image.jpg"
-						alt="HackTUES 11 организатори"
+						alt="Hack TUES 11 организатори"
 						className="w-full object-cover"
 					/>
 				</div>
@@ -275,7 +275,7 @@ export default function AboutPage() {
 					<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
 						<p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">Какво е?</p>
 						<p className="text-sm leading-relaxed text-white/80">
-							HackTUES е един от ключовите събития за ТУЕС — ученици в отбори от 3–5 участници
+							Hack TUES е един от ключовите събития за ТУЕС — ученици в отбори от 3–5 участници
 							създават от нулата ИТ проект за два дни по зададена тема и го представят пред
 							професионално жури от преподаватели и ИТ специалисти.
 						</p>

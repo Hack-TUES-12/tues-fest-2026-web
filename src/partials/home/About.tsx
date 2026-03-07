@@ -47,8 +47,7 @@ const About = () => (
 						<CardContent className="p-0">
 							<h3 className="mb-2 text-2xl font-bold text-primary">Кога и къде?</h3>
 							<p className="text-md text-foreground/80">
-								ТУЕС ФЕСТ {TF_YEAR} ще се проведе на {TF_DATE_STRING} на територията на площад
-								&quot;Независимост&quot; под куполите на &quot;Ларгото&quot;, София.
+								TUES Fest {TF_YEAR} ще се проведе на {TF_DATE_STRING} на територията на {TF_LOCATION}.
 							</p>
 						</CardContent>
 					</Card>
@@ -56,7 +55,7 @@ const About = () => (
 					<Card className="px-8 py-7">
 						<CardContent className="p-0">
 							<h3 className="mb-2 text-2xl font-bold text-primary">Какво ще видите?</h3>
-							<p className="text-xl text-foreground/80">
+							<p className="text-md text-foreground/80">
 								Ще имате възможност да се запознаете с ТУЕС към ТУ-София отблизо и с това какво ни прави
 								различното училище.
 							</p>
@@ -131,9 +130,7 @@ const About = () => (
 			</div>
 
 			<p>
-				TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се
-				организира от ученици за ученици, под менторството на АЗТУЕС! Доброволческият екип на организаторите
-				вярват, че за поредна година ще покажат на света какво е да си ученик в ТУЕС към ТУ - София.
+				TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
 			</p>
 
 			<Button asChild variant="default" size="lg" className="font-bold">

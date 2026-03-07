@@ -2,7 +2,7 @@ import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '../event';
 
 export const ABOUT_TITLE = 'За събитието';
 
-export const ABOUT_TEXT = `Денят на отворените врати на Технологично училище “Електронни системи” към Техническия университет - София, познат като ТУЕС ФЕСТ, наближава.
+export const ABOUT_TEXT = `Денят на отворените врати на Технологично училище “Електронни системи” към Техническия университет - София, познат като TUES Fest, наближава.
 Той ще се проведе на ${TF_DATE_STRING} на територията на ${TF_LOCATION}.`;
 
 export const ABOUT_BUTTON = 'научете повече за ТУЕС';
