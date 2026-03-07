@@ -14,7 +14,7 @@ const ProjectsPath = ({ path }: { path?: PathItem[] | null | undefined }) => {
 
 	return (
 		<nav aria-label="breadcrumb">
-			<div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-3">
+			<div className="rounded-2xl border border-white/10 bg-card/50 px-6 py-3 backdrop-blur-xl">
 				<ol className="flex flex-wrap items-center gap-1.5 text-sm">
 					{path.map((item, index) => {
 						const isLast = index === path.length - 1;

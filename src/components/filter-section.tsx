@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 export function FilterSectionContainer({ children }: { children: React.ReactNode }) {
 	return (
 		<section>
-			<div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
+			<div className="rounded-2xl border border-white/10 bg-card/50 px-6 py-5 backdrop-blur-xl">
 				<div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
 					{children}
 				</div>
