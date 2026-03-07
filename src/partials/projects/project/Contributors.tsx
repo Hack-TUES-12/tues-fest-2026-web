@@ -1,25 +1,20 @@
-import { buttonVariants } from '@/components/ui/button';
 import { Contributor } from '@/app/projects/[projectId]/page';
-import { cn } from '@/lib/utils';
 
 const Contributors = ({ contributors }: { contributors: readonly Contributor[] }) => (
-	<div className="w-full max-w-screen-lg">
-		<div className="flex flex-col gap-4 px-8 py-4">
-			<div className="flex flex-wrap items-center justify-center gap-4">
-				{contributors?.map((creator) => (
-					<div
-						key={creator?.name}
-						className={cn(
-							buttonVariants({ variant: 'outline', size: 'xl' }),
-							'w-full md:w-[calc(50%-1rem)]'
-						)}
-					>
-						<p className="flex w-full break-before-avoid flex-col gap-1 whitespace-pre-line text-center sm:block">
-							{creator?.name} <span className="text-sm opacity-70">от {creator?.class} клас</span>
-						</p>
-					</div>
-				))}
-			</div>
+	<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
+		<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">
+			{contributors.length > 1 ? 'Автори' : 'Автор'}
+		</p>
+		<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+			{contributors.map((creator) => (
+				<div
+					key={creator?.name}
+					className="flex flex-col gap-0.5 rounded-xl border border-white/10 bg-white/5 px-5 py-4 transition-colors duration-200 hover:bg-white/10"
+				>
+					<span className="font-semibold text-white">{creator?.name}</span>
+					<span className="text-sm text-white/50">от {creator?.class} клас</span>
+				</div>
+			))}
 		</div>
 	</div>
 );

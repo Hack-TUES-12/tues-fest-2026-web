@@ -86,14 +86,14 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 const CATEGORY_BUTTON_VARIANTS: Record<string, ComponentProps<typeof Button>['variant']> = {
 	software: 'muted',
 	embedded: 'default',
-	networks: 'secondary',
+	networks: 'accent',
 	battlebot: 'accent',
 };
 
 const CATEGORY_STYLES: Record<string, string> = {
 	software: 'bg-gradient-to-br from-muted/30 to-muted-end/30 border border-muted text-muted',
 	embedded: 'bg-gradient-to-br from-primary/30 to-primary-end/30 border border-primary text-primary',
-	networks: 'bg-gradient-to-br from-secondary/30 to-secondary-end/30 border border-secondary text-secondary',
+	networks: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
 	battlebot: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
 };
 

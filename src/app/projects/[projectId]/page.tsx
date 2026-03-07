@@ -1,10 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import invariant from 'tiny-invariant';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { OG_METADATA, TF_TITLE, TWITTER_METADATA } from '@/constants/seo';
+import { PROJECT_CATEGORIES, PROJECT_TYPES, type ProjectCategory } from '@/constants/projects';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 import { cn } from '@/lib/utils';
 import ProjectsPath from '@/partials/layout/ProjectsPath';
@@ -84,6 +84,20 @@ export async function generateStaticParams() {
 	}));
 }
 
+const CATEGORY_STYLES: Record<string, string> = {
+	software: 'bg-gradient-to-br from-muted/30 to-muted-end/30 border border-muted text-muted',
+	embedded: 'bg-gradient-to-br from-primary/30 to-primary-end/30 border border-primary text-primary',
+	networks: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
+	battlebot: 'bg-gradient-to-br from-accent/30 to-accent/30 border border-accent text-accent',
+};
+
+const CATEGORY_VOTE_VARIANTS: Record<string, 'default' | 'muted' | 'secondary' | 'accent'> = {
+	software: 'muted',
+	embedded: 'default',
+	networks: 'accent',
+	battlebot: 'accent',
+};
+
 const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) => {
 	const params = await props.params;
 	const projectId = parseInt(params.projectId, 10);
@@ -109,85 +123,117 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 	const thumbnail = project.thumbnail ?? project.images[0];
 	invariant(thumbnail, `Project with ID ${project.id} (${project.title}) has no thumbnail or images`);
 
-	return (
-		<ProjectContainer>
-			<ProjectsPath path={path} />
-			<div className="container">
-				<Card className="m-auto w-full border sm:px-4 md:w-[90%] lg:w-[80%]">
-					<CardHeader className="pt-10">
-						<CardTitle className="text-center text-3xl">{project.title}</CardTitle>
-					</CardHeader>
-					<CardContent className="my-4">
-						{project.youtubeId && (
-							<div className="m-auto w-full overflow-hidden rounded-xl border-2">
-								<Video name={project.title} id={project.youtubeId} />
-							</div>
-						)}
-						{!project.youtubeId && (
-							<div
-								className="relative m-auto w-full rounded-xl border-2"
-								style={{ paddingTop: '56.25%' }}
-							>
-								<Image
-									key={project.id}
-									src={thumbnail}
-									alt={project.title}
-									className="absolute left-0 top-0 rounded-lg object-cover"
-									layout="fill"
-									objectFit="cover"
-								/>
-							</div>
-						)}
-						<div className="grid gap-6 md:grid-cols-[2fr,1fr]">
-							<CardDescription className="prose prose-sm prose-slate sm:prose-lg max-w-none">
-								<ScrollArea
-									className={cn({
-										'relative h-[175px] [mask-image:linear-gradient(to_bottom,transparent,black_20px,black_calc(100%-40px),transparent)]':
-											project.description.length > 250,
-									})}
-								>
-									<ProjectDescription description={project.description} />
-								</ScrollArea>
-							</CardDescription>
+	const categoryLabel = PROJECT_CATEGORIES[project.category as keyof typeof PROJECT_CATEGORIES] ?? project.category;
+	const categoryStyle = CATEGORY_STYLES[project.category] ?? CATEGORY_STYLES.software;
+	const voteVariant = CATEGORY_VOTE_VARIANTS[project.category] ?? 'default';
+	// @ts-expect-error TODO: fix
+	const typeLabel = PROJECT_TYPES[project.type] as string | undefined;
 
-							<IfTFFeatureOn feature="project-voting">
-								<div className="bg-primary/5 relative flex flex-col gap-4 rounded-xl border p-6">
-									<div className="flex items-start justify-between gap-4">
-										<div className="space-y-1">
-											<h3 className="font-semibold">
-												Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
-											</h3>
-											<p className="text-muted-foreground text-sm">
-												Ако смяташ, че проектът {project.contributors.length > 1 ? 'ни' : 'ми'}{' '}
-												заслужава да спечели наградата за избор на публиката, гласувай за него
-												сега!
-											</p>
-										</div>
-									</div>
-									<VoteSelectProjectButton
-										project={{
-											id: project.id,
-											title: project.title,
-											thumbnail,
-											category: project.category,
-										}}
-										className="w-full"
-										size="lg"
-									/>
-								</div>
-							</IfTFFeatureOn>
+	return (
+		<ProjectContainer category={project.category as ProjectCategory}>
+			{/* Breadcrumb */}
+			<ProjectsPath path={path} />
+
+			{/* Hero — video/thumbnail */}
+			<div className="mx-auto w-full max-w-5xl">
+				<div className="overflow-hidden rounded-2xl border border-white/10 bg-card/50 shadow-2xl backdrop-blur-sm">
+					{project.youtubeId ? (
+						<Video name={project.title} id={project.youtubeId} />
+					) : (
+						<div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+							<Image
+								key={project.id}
+								src={thumbnail}
+								alt={project.title}
+								className="absolute left-0 top-0 object-cover"
+								fill
+							/>
 						</div>
-						<Contributors contributors={project.contributors} />
-					</CardContent>
-				</Card>
-				<div className="m-auto mx-auto mt-4 w-[96%] md:w-[90%] lg:w-[80%]">
+					)}
+				</div>
+			</div>
+
+			{/* Title + meta */}
+			<div className="mx-auto w-full max-w-5xl space-y-3">
+				<div className="flex flex-wrap items-center gap-3">
+					<span
+						className={cn(
+							'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
+							categoryStyle,
+						)}
+					>
+						{categoryLabel}
+					</span>
+					{typeLabel && (
+						<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
+							{typeLabel}
+						</span>
+					)}
+				</div>
+				<h1 className="font-title text-4xl text-white md:text-5xl">{project.title}</h1>
+			</div>
+
+			{/* Main content grid */}
+			<div className="mx-auto grid w-full max-w-5xl gap-6 md:grid-cols-[2fr,1fr]">
+				{/* Description */}
+				<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
+					<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">Описание</p>
+					<div className="prose prose-sm prose-invert max-w-none leading-relaxed text-foreground/80">
+						<ProjectDescription description={project.description} />
+					</div>
+				</div>
+
+				{/* Sidebar */}
+				<div className="flex flex-col gap-4">
+					{/* Vote card */}
+					<IfTFFeatureOn feature="project-voting">
+						<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
+							<p className="mb-1 text-xs font-medium uppercase tracking-widest text-white/40">
+								Гласуване
+							</p>
+							<h3 className="mb-2 text-lg font-semibold text-white">
+								Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
+							</h3>
+							<p className="mb-4 text-sm text-white/60">
+								Ако смяташ, че проектът{' '}
+								{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
+								публиката — гласувай сега!
+							</p>
+							<VoteSelectProjectButton
+								project={{
+									id: project.id,
+									title: project.title,
+									thumbnail,
+									category: project.category,
+								}}
+								variant={voteVariant}
+								className="w-full"
+								size="lg"
+							/>
+						</div>
+					</IfTFFeatureOn>
+
+					{/* Links */}
+					<LinksContainer links={project.links} />
+				</div>
+			</div>
+
+			{/* Contributors */}
+			{project.contributors.length > 0 && (
+				<div className="mx-auto w-full max-w-5xl">
+					<Contributors contributors={project.contributors} />
+				</div>
+			)}
+
+			{/* Gallery */}
+			{project.images.length > 0 && (
+				<div className="mx-auto w-full max-w-5xl">
 					<Gallery
 						name={project.title}
 						images={project.images.length > 0 ? project.images : [project.thumbnail!]}
 					/>
 				</div>
-				<LinksContainer links={project.links} />
-			</div>
+			)}
 		</ProjectContainer>
 	);
 };

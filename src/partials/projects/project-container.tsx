@@ -4,7 +4,7 @@ const CATEGORY_CIRCLE: Record<ProjectCategory | 'all', string> = {
 	all: '/decorations/blue-circle.svg',
 	embedded: '/decorations/purple-circle.svg',
 	software: '/decorations/green-circle.svg',
-	networks: '/decorations/orange-circle.svg',
+	networks: '/decorations/blue-circle.svg',
 	battlebot: '/decorations/blue-circle.svg',
 };
 
