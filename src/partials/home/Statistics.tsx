@@ -13,7 +13,7 @@ import { STATISTICS } from '@/info/statistics';
 import { statistics } from 'effect/FastCheck';
 
 export default function Statistics() {
-	const [selectedFolderIndex, setSelectedFolderIndex] = useState(9);
+	const [selectedFolderIndex, setSelectedFolderIndex] = useState(FOLDERS.length);
 
 	return (
 		<section id="statistics" className="px-4 py-12 md:px-8">
