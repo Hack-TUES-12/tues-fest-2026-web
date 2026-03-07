@@ -16,6 +16,7 @@ import tf2023_2 from './folders_images/tf2023_battlebots.jpg';
 import tf2023 from './folders_images/tf2023_ekip.jpg';
 import tf2024_3 from './folders_images/tf2024_3.jpg';
 import tf2024 from './folders_images/tf2024_img1.jpg';
+import tf2025 from './folders_images/tf2025.jpg'
 
 export const FOLDERS = [
 	{
@@ -80,5 +81,12 @@ export const FOLDERS = [
 		image1: tf2024_3,
 		image2: tf2024,
 		website: 'https://2024.tuesfest.bg',
+	},
+	{
+		id: 10,
+		name: '2025',
+		image1: tf2025,
+		image2: tf2025,
+		website: 'https://2025.tuesfest.bg',
 	},
 ];
