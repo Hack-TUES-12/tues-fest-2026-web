@@ -1,3 +1,5 @@
+import { TF_PROJECT_COUNT, TF_YEAR } from "../event";
+
 export const SCHEDULE = [
 	{
 		start: '10:00',
@@ -16,7 +18,7 @@ export const SCHEDULE = [
 				<li className="bg-background rounded-xl border px-4 py-2">
 					Всеки посетител ще има възможността:
 				</li>
-				<li className="bg-background rounded-xl border px-4 py-2">Да разгледа <b>120 ученически проекта</b> и да поговори с техните създатели</li>
+				<li className="bg-background rounded-xl border px-4 py-2">Да разгледа <b>{TF_PROJECT_COUNT} ученически проекта</b> и да поговори с техните създатели</li>
 				<li className="bg-background rounded-xl border px-4 py-2">
 					Да се запознае с <b>преподавателския екип</b> от ТУЕС
 				</li>
@@ -38,7 +40,7 @@ export const SCHEDULE = [
 		start: '17:30',
 		end: '20:30',
 		title: 'Закриваща церемония',
-		description: 'Време е за награждаване на победителите в различните категории на TUES Fest 2025. Започва се с наградите на нашите спонсори и партньори и след това с почетните първи три места във всяка категория.',
+		description: `Време е за награждаване на победителите в различните категории на TUES Fest ${TF_YEAR}. Започва се с наградите на нашите спонсори и партньори и след това с почетните първи три места във всяка категория.`,
 		icon: '',
 		pos: 'left',
 	},

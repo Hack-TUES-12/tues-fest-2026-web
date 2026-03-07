@@ -4,37 +4,34 @@ import { TbBus, TbCar, TbExternalLink, TbMap2, TbTrain, TbWalk } from 'react-ico
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
+import { LOCATION_EMBED_URL, LOCATION_MAP_URL, LOCATION_STREET_VIEW_URL, TF_DATE_STRING, TF_LOCATION, TF_ROUNDED_PROJECT_COUNT, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
 import { TF_TITLE } from '@/constants/seo';
-
-const LOCATION_MAP_URL =
-	'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d733.0729700320611!2d23.32159637614092!3d42.6975400791878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa856ee63f96cf%3A0xa6d65ce76c5bbe5f!2sSofia%20Center%2C%20pl.%20%22Nezavisimost%22%2C%201000%20Sofia!5e0!3m2!1sen!2sbg!4v1742839905608!5m2!1sen!2sbg&hl=bg';
 
 export const metadata = {
 	title: 'Локация',
-	description: `Информация за локацията ${TF_TITLE} - Ларго, пл. Независимост, София и как да стигнете до там.`,
+	description: `Информация за локацията на ${TF_TITLE} - ${TF_LOCATION} и как да стигнете до там.`,
 } satisfies Metadata;
 
 const TRANSPORT_OPTIONS = [
 	{
-		icon: TbTrain,
-		title: 'Метро',
-		description: 'Метростанция „Сердика" е буквално на входа на локацията — най-бързият начин за пристигане.',
+		icon: TbBus,
+		title: 'Автобус и тролейбус',
+		description: 'Множество автобусни и тролейбусни линии спират в непосредствена близост до София Тех Парк по бул. „Цариградско шосе".',
 	},
 	{
-		icon: TbBus,
-		title: 'Автобус и трамвай',
-		description: 'Множество автобусни и трамвайни линии минават в близост до площад „Независимост".',
+		icon: TbTrain,
+		title: 'Метро',
+		description: 'Слезте на метростанция „Младост 1" и продължете с автобус 73 до София Тех Парк.',
 	},
 	{
 		icon: TbCar,
 		title: 'Автомобил',
-		description: 'Платени паркинги се намират в радиус от 5–10 минути пеша от локацията.',
+		description: 'На територията на Sofia Tech Park има безплатен паркинг с голям капацитет.',
 	},
 	{
 		icon: TbWalk,
-		title: 'Пеша',
-		description: 'Ако сте в центъра на София, локацията е лесно достижима пеша от много точки.',
+		title: 'Пеша / велосипед',
+		description: 'Ако идвате от Младост или Business Park Sofia, локацията е достижима пеша или с велосипед.',
 	},
 ];
 
@@ -55,13 +52,12 @@ export default function Location() {
 				<p className="text-primary tracking-widest">Локация</p>
 				<h1 className="font-title text-5xl text-white md:text-6xl">Намери ни</h1>
 				<p className="text-lg text-foreground/70">
-					{TF_TITLE} {TF_YEAR} ще се проведе на {TF_DATE_STRING} на{' '}
-					<span className="text-white">{TF_LOCATION}</span> под стъклените куполи на „Ларгото", в самия
-					център на София.
+					{TF_TITLE} ще се проведе на {TF_DATE_STRING} в{' '}
+					<span className="text-white">{TF_LOCATION}</span> {' '}- дом на стотици технологични, бизнес и образователни конференции, семинари, обучения и изложения всяка година.
 				</p>
 				<Button asChild variant="default" size="lg" className="font-bold">
 					<Link
-						href="https://maps.app.goo.gl/j2Q4m2hV6aXeUWGG8"
+						href={LOCATION_MAP_URL}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -76,8 +72,8 @@ export default function Location() {
 				{/* Map */}
 				<div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl md:row-span-2">
 					<iframe
-						src={LOCATION_MAP_URL}
-						title="Карта на локацията - Ларго, пл. Независимост, София"
+						src={LOCATION_EMBED_URL}
+						title="Карта на локацията - форум Джон Атанасов, София Тех Парк, София"
 						width="100%"
 						height="100%"
 						className="min-h-80 border-0 md:min-h-full"
@@ -93,21 +89,22 @@ export default function Location() {
 					<CardContent className="p-0 flex flex-col gap-3">
 						<h2 className="text-2xl font-bold text-primary">Адрес</h2>
 						<p className="text-foreground/80 leading-relaxed">
-							Пл. „Независимост", 1000 София — закритото пространство под стъклените куполи на
-							Ларгото, в подлеза на метростанция „Сердика".
+							бул. „Цариградско шосе" 111И, 1784 София — иновационен форум „Джон Атанасов" в
+							рамките на София Тех Парк.
 						</p>
 						<p className="text-foreground/80 leading-relaxed">
-							Мястото е емблематично за центъра на София с впечатляващите си стъклени куполи и
-							видимите археологически останки от античния град Сердика.
+							Форумът е модерно конферентно пространство, кръстено на Джон Атанасов — пионер в
+							компютърната наука с български корени, чието наследство вдъхновява поколения
+							технолози.
 						</p>
 						<Link
-							href="https://maps.app.goo.gl/j2Q4m2hV6aXeUWGG8"
+							href={LOCATION_STREET_VIEW_URL}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="inline-flex items-center gap-1.5 text-sm text-primary underline-offset-4 hover:underline"
 						>
 							<TbExternalLink size={16} />
-							3D изглед на локацията в Google Maps
+							Разгледай локацията в Google Maps
 						</Link>
 					</CardContent>
 				</Card>
@@ -118,11 +115,11 @@ export default function Location() {
 						<h2 className="text-2xl font-bold text-primary">Кога?</h2>
 						<p className="text-foreground/80 leading-relaxed">
 							Събитието ще се проведе на{' '}
-							<span className="font-semibold text-white">{TF_DATE_STRING}</span>, като вратите се
-							отварят в <span className="font-semibold text-white">10:00 часа</span>.
+							<span className="font-semibold text-white">{TF_DATE_STRING}</span>, като вратите
+							отварят в <span className="font-semibold text-white">{TF_TIME_STRING} часа</span>.
 						</p>
 						<p className="text-foreground/80 leading-relaxed">
-							Над 150 ученически проекта ще бъдат изложени на място. Влезте в контакт с авторите,
+							Над {TF_ROUNDED_PROJECT_COUNT} ученически проекта ще бъдат изложени на място. Влезте в контакт с авторите,
 							гласувайте за любимите си проекти и се срещнете с компаниите спонсори.
 						</p>
 					</CardContent>

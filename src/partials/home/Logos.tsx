@@ -5,7 +5,7 @@ import { ChevronDown, MapPin, Clock4, Rocket } from 'lucide-react';
 
 import Countdown from '@/components/countdown';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { TF_DATE_STRING, TF_LOCATION, TF_YEAR } from '@/constants/event';
+import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { cn } from '@/lib/utils';
 
 export default function EventLanding() {
@@ -31,7 +31,7 @@ export default function EventLanding() {
 			{/* Year badge */}
 			<div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
 				<span className="size-2 animate-pulse rounded-full bg-primary" />
-				<span className="text-sm font-medium tracking-widest text-white/70">It all starts here</span>
+				<span className="text-sm font-medium tracking-widest text-white/70">{TF_SLOGAN}</span>
 			</div>
 
 			{/* Main title */}

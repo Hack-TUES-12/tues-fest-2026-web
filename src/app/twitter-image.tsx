@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { ImageResponse } from 'next/og';
 
-import { TF_DATE, TF_DATE_STRING, TF_DATE_STRING_SHORT, TF_LOCATION, TF_YEAR } from '@/constants/event';
+import { TF_DATE, TF_DATE_STRING, TF_DATE_STRING_SHORT, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { TF_TITLE } from '@/constants/seo';
 
 // Image metadata - Twitter specific dimensions
@@ -51,7 +51,7 @@ export default async function Image() {
 					</h1>
 
 					<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-[#f8fafc]/90 mt-12 text-4xl tracking-widest">
-						IT ALL STARTS HERE
+						{TF_SLOGAN.toUpperCase()}
 					</p>
 
 					{/* Twitter-specific call to action */}

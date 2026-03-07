@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { ImageResponse } from 'next/og';
 
-import { TF_YEAR } from '@/constants/event';
+import { TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { TF_TITLE } from '@/constants/seo';
 
 // Image metadata
@@ -35,7 +35,7 @@ export default async function Image() {
 						</span>
 					</h1>
 					<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-[#f8fafc]/90 mt-8 text-3xl tracking-widest">
-						IT ALL STARTS HERE
+						{TF_SLOGAN.toUpperCase()}
 					</p>
 				</div>
 			</div>
