@@ -4,8 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { TbChevronLeft, TbChevronRight, TbX } from 'react-icons/tb';
 import invariant from 'tiny-invariant';
 
-import { Card } from '@/components/ui/card';
-
 const GalleryModal = ({
 	images,
 	startingIndex,
@@ -19,142 +17,92 @@ const GalleryModal = ({
 	const modalRef = useRef<HTMLDivElement>(null);
 
 	const next = useCallback(() => {
-		if (index === images.length - 1) {
-			setIndex(0);
-		} else {
-			setIndex(index + 1);
-		}
-	}, [index, images.length]);
+		setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+	}, [images.length]);
 
 	const prev = useCallback(() => {
-		if (index === 0) {
-			setIndex(images.length - 1);
-		} else {
-			setIndex(index - 1);
-		}
-	}, [index, images.length]);
+		setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+	}, [images.length]);
 
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				closeModal();
-			}
-
-			if (e.key === 'ArrowRight') {
-				next();
-			}
-
-			if (e.key === 'ArrowLeft') {
-				prev();
-			}
-
-			if (e.key === ' ') {
-				e.preventDefault();
-			}
-
-			if (e.key === 'Enter') {
-				e.preventDefault();
-			}
-
-			if (e.key === 'Tab') {
-				e.preventDefault();
-			}
-
-			if (e.key === 'Backspace') {
-				e.preventDefault();
-			}
+			if (e.key === 'Escape') closeModal();
+			if (e.key === 'ArrowRight') next();
+			if (e.key === 'ArrowLeft') prev();
+			if ([' ', 'Enter', 'Tab', 'Backspace'].includes(e.key)) e.preventDefault();
 		};
 
 		const handleWheel = (e: WheelEvent) => {
 			e.preventDefault();
-
-			setTimeout(() => {
-				if (e.deltaY > 0) {
-					next();
-				} else {
-					prev();
-				}
-			}, 500);
+			setTimeout(() => (e.deltaY > 0 ? next() : prev()), 500);
 		};
 
-		// const handleTouch = (e: TouchEvent) => {
-		// 	e.preventDefault();
-
-		// 	setTimeout(() => {
-		// 		if (e.touches[0].clientX < e.touches[1].clientX) {
-		// 			next();
-		// 		} else {
-		// 			prev();
-		// 		}
-		// 	}, 500);
-		// };
-
 		const handleOutsideClick = (e: MouseEvent) => {
-			if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-				closeModal();
-			}
+			if (modalRef.current && !modalRef.current.contains(e.target as Node)) closeModal();
 		};
 
 		document.addEventListener('keydown', handleKeyDown);
-		document.addEventListener('wheel', handleWheel);
-		// modalRef.current?.addEventListener('touchstart', handleTouch);
+		document.addEventListener('wheel', handleWheel, { passive: false });
 		document.addEventListener('click', handleOutsideClick);
 
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown);
 			document.removeEventListener('wheel', handleWheel);
-			// modalRef.current?.removeEventListener('touchstart', handleTouch);
 			document.removeEventListener('click', handleOutsideClick);
 		};
-	}, [closeModal, modalRef, next, prev]);
+	}, [closeModal, next, prev]);
 
 	const activeImage = images[index];
 	invariant(activeImage, 'Invalid gallery image index');
 
 	return (
-		<div className="fixed left-0 top-0 z-[1001] flex h-full w-full items-center justify-center bg-black bg-opacity-50 backdrop-blur-md">
-			<div ref={modalRef} className="relative h-full w-full max-w-screen-lg">
-				<div className="absolute left-0 top-12 z-[1001] p-4">
+		<div className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/70 backdrop-blur-md">
+			<div ref={modalRef} className="relative flex h-full w-full max-w-screen-lg flex-col">
+				{/* Close */}
+				<div className="absolute left-4 top-4 z-10">
 					<button
-						className="hover:bg-background-hover border-border bg-background flex items-center gap-2 rounded-xl px-4 py-2"
+						className="flex items-center gap-2 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/10"
 						onClick={closeModal}
 					>
-						<TbX className="h-6 w-6" />
-						<span className="text-sm">Затвори</span>
+						<TbX className="size-4" />
+						Затвори
 					</button>
 				</div>
-				<div className="absolute left-0 top-1/2 z-[1001] p-4 !pl-10">
+
+				{/* Counter */}
+				<div className="absolute right-4 top-4 z-10">
+					<span className="rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-sm text-white/70 backdrop-blur-sm">
+						{index + 1} / {images.length}
+					</span>
+				</div>
+
+				{/* Image */}
+				<div className="flex h-full items-center justify-center p-16">
+					<img
+						src={activeImage}
+						alt={`снимка ${index + 1} на проект`}
+						className="max-h-full max-w-full rounded-2xl object-contain shadow-2xl"
+					/>
+				</div>
+
+				{/* Prev */}
+				<div className="absolute left-4 top-1/2 z-10 -translate-y-1/2">
 					<button
-						className="border-border bg-background hover:bg-border flex items-center gap-2 rounded-xl px-4 py-2 transition-all duration-300 ease-in-out"
+						className="flex items-center justify-center rounded-xl border border-white/20 bg-black/60 p-3 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/10"
 						onClick={prev}
 					>
-						<span className="text-sm">
-							<TbChevronLeft size={32} />
-						</span>
+						<TbChevronLeft size={24} />
 					</button>
 				</div>
-				<div className="absolute right-0 top-1/2 z-[1001] p-4 pr-10">
+
+				{/* Next */}
+				<div className="absolute right-4 top-1/2 z-10 -translate-y-1/2">
 					<button
-						className="border-border bg-background hover:bg-border flex items-center gap-2 rounded-xl px-4 py-2 transition-all duration-300 ease-in-out"
+						className="flex items-center justify-center rounded-xl border border-white/20 bg-black/60 p-3 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/10"
 						onClick={next}
 					>
-						<span className="text-sm">
-							<TbChevronRight size={32} />
-						</span>
+						<TbChevronRight size={24} />
 					</button>
-				</div>
-				<div className="h-full">
-					<div className="flex h-full flex-col gap-4">
-						<div className="flex h-full items-center justify-center gap-4 p-4">
-							<div className="flex h-full max-h-screen w-full shrink-0 items-center justify-center overflow-hidden object-contain">
-								<img
-									src={activeImage}
-									alt={`снимка ${index + 1} на проект`}
-									className=" h-full rounded-xl object-contain"
-								/>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -165,41 +113,33 @@ const Gallery = ({ name, images }: { name: string; images: readonly string[] }) 
 	const [modal, setModal] = useState(false);
 	const [index, setIndex] = useState(0);
 
-	const openModal = (index: number) => {
-		setIndex(index);
+	const openModal = (i: number) => {
+		setIndex(i);
 		setModal(true);
-	};
-
-	const closeModal = () => {
-		setModal(false);
 	};
 
 	return (
 		<>
-			<Card className="relative mx-auto flex h-64 w-full flex-col">
-				<div className="h-full">
-					<div className="flex h-full shrink-0 flex-col gap-4">
-						<div className="flex h-full items-center justify-start gap-4 overflow-x-auto p-4">
-							{images.map((image, index) => (
-								<div
-									key={image}
-									className="border-border !aspect-square h-full shrink-0 overflow-hidden rounded-xl"
-								>
-									<img
-										src={image}
-										alt={`снимка ${index + 1} от проект ${name}`}
-										width={512}
-										height={512}
-										onClick={() => openModal(index)}
-										className="!aspect-square h-full shrink-0 cursor-pointer object-cover transition-transform duration-300 ease-in-out hover:scale-110"
-									/>
-								</div>
-							))}
-						</div>
-					</div>
+			<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
+				<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">Галерия</p>
+				<div className="flex gap-3 overflow-x-auto pb-2">
+					{images.map((image, i) => (
+						<button
+							key={image}
+							onClick={() => openModal(i)}
+							className="group relative aspect-square h-40 shrink-0 overflow-hidden rounded-xl border border-white/10 transition-all duration-300 hover:border-white/30 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:h-48"
+						>
+							<img
+								src={image}
+								alt={`снимка ${i + 1} от проект ${name}`}
+								className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+							/>
+							<div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+						</button>
+					))}
 				</div>
-			</Card>
-			{modal && <GalleryModal images={images} startingIndex={index} closeModal={closeModal} />}
+			</div>
+			{modal && <GalleryModal images={images} startingIndex={index} closeModal={() => setModal(false)} />}
 		</>
 	);
 };
