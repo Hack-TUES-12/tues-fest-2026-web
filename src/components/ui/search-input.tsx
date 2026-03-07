@@ -31,8 +31,13 @@ export function SearchInput(props: Exclude<React.ComponentProps<typeof Input>, '
 
 	return (
 		<div className="grow-1 relative flex items-center lg:max-w-lg">
-			<Input {...props} ref={inputRef} className="h-10 pl-8" placeholder="Търси сред проектите..." />
-			<Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+			<Input
+				{...props}
+				ref={inputRef}
+				className="h-10 rounded-full border-white/10 bg-white/5 pl-9 tracking-wide placeholder:text-white/30 focus-visible:border-white/25 focus-visible:ring-0"
+				placeholder="Търси сред проектите..."
+			/>
+			<Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 select-none opacity-40" />
 		</div>
 	);
 }
