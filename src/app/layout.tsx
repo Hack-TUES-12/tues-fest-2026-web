@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					mighty.variable,
 					// origin.variable,
 					'font-sans',
-					'dark h-full w-screen items-center justify-center overflow-hidden overflow-x-hidden overflow-y-scroll'
+					'dark w-screen overflow-x-hidden'
 				)}
 			>
 				<GrowthBookServerProvider>
