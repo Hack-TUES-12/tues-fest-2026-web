@@ -50,7 +50,7 @@ export const metadata = {
 } satisfies Metadata;
 
 const STATS = [
-	{ icon: TbSchool,    value: '3012', label: 'завършили ученици' },
+	{ icon: TbSchool,    value: '3500+', label: 'завършили ученици' },
 	{ icon: TbTrophy,    value: '96',   label: 'награди и отличия' },
 	{ icon: TbBriefcase, value: '140',  label: 'стажа на година' },
 	{ icon: TbHistory,   value: `${TUES_AGE}`, label: 'годишна история' },
@@ -76,25 +76,23 @@ const SPECIALTIES = [
 		title: 'Програмиране на изкуствен интелект',
 		description:
 			'Специалността, която ще ви подготви за работа в една от най-бързо развиващите се области на ИТ — ще се научите да създавате софтуер, който мисли.',
-		href: 'https://elsys-bg.org/priem/specialnost-sistemno-programirane',
+		href: 'https://elsys-bg.org/priem/specialnost-programirane-na-izkustven-intelekt',
 	},
 ];
 
 const EDUCATION_ITEMS = [
-	'Разширено изучаване на английски език',
-	'Учебни програми, покриващи всички общообразователни предмети',
-	'Cisco академия за актуалните мрежови технологии',
-	'Вградени микроконтролерни системи (Arduino)',
 	'Участие в национални и международни състезания',
 	'Hack TUES — хакатон, организиран от ученици за ученици',
-	'Работилници и лекции от ИТ професионалисти',
-	'Разнообразни извънкласни клубове',
+	'Workshop-и и лекции от ИТ професионалисти',
+	'Cisco академия за актуалните мрежови технологии',
+	'Разнообразни извънкласни дейности',
+	'Разширено изучаване на английски език',
 ];
 
 const SUCCESS_FACTORS = [
 	'Тясна интеграция с Технически университет — София',
 	'Гъвкав специализиран учебен план',
-	'Преподаватели от университета и ИТ практици',
+	'Преподаватели от ИТ бизнеса и университета',
 	'Активната роля на завършилите в живота на училището',
 	'Тясна връзка с реалния бизнес — стажове, дипломни проекти и практики',
 ];
@@ -158,8 +156,8 @@ export default function AboutPage() {
 						която им позволява да се позиционират възможно най-бързо в технологичния сектор.
 					</p>
 					<p>
-						За {TF_YEAR} г. ТУЕС се нареди на{' '}
-						<span className="font-semibold text-white">второ място</span> по минимален бал на
+						За {TF_YEAR - 1} г. ТУЕС се нареди на{' '}
+						<span className="font-semibold text-white">трето място</span> по минимален бал на
 						първо класиране в 7. клас в България.
 					</p>
 					<IfTFFeatureOn feature="tf-show-apply">
@@ -262,7 +260,7 @@ export default function AboutPage() {
 			{/* ── Hack TUES ──────────────────────────────────────────────── */}
 			<div className="mx-auto w-full max-w-5xl">
 				<div className="mb-6 text-center">
-					<p className="text-primary mb-1 tracking-widest">Събитие</p>
+					<p className="text-primary mb-1 tracking-widest">Хакатон</p>
 					<h2 className="font-title text-4xl text-white">Hack TUES</h2>
 				</div>
 
@@ -278,7 +276,7 @@ export default function AboutPage() {
 					<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
 						<p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">Какво е?</p>
 						<p className="text-sm leading-relaxed text-white/80">
-							Hack TUES е един от ключовите събития за ТУЕС — ученици в отбори от 3–5 участници
+							Hack TUES е едно от ключовите събития за ТУЕС — ученици в отбори от 3–5 участници
 							създават от нулата ИТ проект за два дни по зададена тема и го представят пред
 							професионално жури от преподаватели и ИТ специалисти.
 						</p>
@@ -286,7 +284,7 @@ export default function AboutPage() {
 					<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
 						<p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">Значимост</p>
 						<p className="text-sm leading-relaxed text-white/80">
-							Единственият по рода си хакатон в България, организиран от ученици за ученици.
+							Единственият хакатон в България, организиран от ученици за ученици.
 							Намерил е място сред иновативните практики на ЮНЕСКО за техническо и професионално
 							образование — единствената образователна практика от България в тази инициатива.
 						</p>
@@ -295,16 +293,16 @@ export default function AboutPage() {
 						<p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">Организация</p>
 						<p className="text-sm leading-relaxed text-white/80">
 							Събитието стартира през 2015 г. и досега има единадесет издания. Всяка година се
-							организира от координационен екип ученици от 11. клас под менторството на АЗТУЕС.
-							Участниците развиват умения по програмиране, работа в екип и презентация, а
-							запознанствата с ментори понякога прерастват в предложения за стаж.
+							подготвя от организационен екип, съставен от ученици в 11. клас, под менторството на АЗТУЕС.
+							Участниците развиват умения по програмиране, работа в екип и презентиране, а
+							запознанствата с ментори често прерастват в предложения за работа.
 						</p>
 					</div>
 				</div>
 
 				<div className="mt-4 flex justify-center">
 					<Button asChild variant="default" size="lg" className="font-bold">
-						<Link href="https://hacktues.bg" target="_blank" rel="noopener noreferrer">
+						<Link href="https://hack-tues.com" target="_blank" rel="noopener noreferrer">
 							<TbExternalLink size={18} />
 							Виж повече за Hack TUES
 						</Link>
