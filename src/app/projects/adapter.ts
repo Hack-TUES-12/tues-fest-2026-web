@@ -1,6 +1,6 @@
 // Този файл е генериран автоматично от проектите на TUES Fest 2025. Безопасно е да го редактирате ръчно, но промените ще бъдат загубени при следващо генериране.
 
-const DELETE_ME_PLACEHOLDER_FALLBACK_IMAGE = '/logo/motto.png';
+const DELETE_ME_PLACEHOLDER_FALLBACK_IMAGE = '/logo/motto.png?v=20.03.2026';
 const project1$image1 = '/projects/1/1.webp';
 const project1$image2 = '/projects/1/2.webp';
 const project1$thumbnail = '/projects/1/thumbnail.webp';

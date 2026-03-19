@@ -13,7 +13,7 @@ interface VerificationEmailProps {
 }
 
 // const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERVEL_URL}` : 'http://localhost:3000';
-const baseUrl = 'https://tuesfest.bg';
+const baseUrl = 'http://localhost:3000';
 
 export default function VerificationCodeEmail({
 	verificationCode,
@@ -28,7 +28,7 @@ export default function VerificationCodeEmail({
 			<Body style={main}>
 				<Section style={mottoSection}>
 					<Img
-						src={`${baseUrl}/logo/motto.png`}
+						src={`${baseUrl}/logo/motto.png?v=20.03.2026`}
 						width={294}
 						height={122}
 						alt={`Логото на ${TF_TITLE}`}
