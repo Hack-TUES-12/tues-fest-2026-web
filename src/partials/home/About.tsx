@@ -13,7 +13,7 @@ const About = () => (
 			{/* Title area — circle is positioned relative to this wrapper */}
 			<div className="relative flex w-full flex-col items-center gap-1">
 				{/* Subtitle */}
-				<p className="text-xl text-white tracking-widest">Какво е</p>
+				<p className="text-xl text-white tracking-widest">Повече за</p>
 
 				{/* Title */}
 				<h2 className="relative z-10 font-mighty text-7xl leading-none text-primary md:text-8xl">
