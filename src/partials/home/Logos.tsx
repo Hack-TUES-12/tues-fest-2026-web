@@ -5,7 +5,7 @@ import { ChevronDown, MapPin, Clock4, Rocket } from 'lucide-react';
 
 import Countdown from '@/components/countdown';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
+import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
 import { useTFFeature } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 
@@ -73,7 +73,7 @@ export default function EventLanding() {
 					)}
 				>
 					<Clock4 className="text-primary h-4 w-4" />
-					<span>{TF_DATE_STRING}</span>
+					<span>{TF_DATE_STRING} · {TF_TIME_STRING}</span>
 				</div>
 				<Button variant="outline" size="lg" asChild className="gap-2">
 					<Link href="/location">
