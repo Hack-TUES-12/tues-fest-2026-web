@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { TF_LOCATION, TF_YEAR } from '@/constants/event';
+import { useTFFeatureIsOn } from '@/lib/growthbook/react/hooks';
 import { TF_TITLE } from '@/constants/seo';
 import { cn } from '@/lib/utils';
 import { TFLogo } from '../home/TFLogo';
@@ -98,6 +99,10 @@ function NavLink({ href, children, onClick }: { href: string; children: React.Re
 
 export function Navigation() {
 	const [isScrolled, setIsScrolled] = useState(false);
+	const isScheduleEnabled = useTFFeatureIsOn('tf-schedule');
+	const visibleLinks = LINKS.filter(
+		(link) => isScheduleEnabled || (link.href !== '/#schedule' && link.href !== '/schedule' && link.href !== '#schedule')
+	);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -124,7 +129,7 @@ export function Navigation() {
 
 						{/* Desktop Navigation */}
 						<nav className="hidden items-center space-x-2 lg:flex">
-							{LINKS.map((link) => (
+							{visibleLinks.map((link) => (
 								<NavLink key={link.title} href={link.href}>
 									{link.title}
 								</NavLink>
@@ -169,7 +174,7 @@ export function Navigation() {
 									</SheetTitle>
 								</SheetHeader>
 								<div className="grid gap-4">
-									{LINKS.map((link) => (
+									{visibleLinks.map((link) => (
 										<NavLink key={link.title} href={link.href}>
 											{link.title}
 										</NavLink>

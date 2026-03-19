@@ -5,6 +5,7 @@ import EventLanding from '@/partials/home/Logos';
 import Schedule from '@/partials/home/Schedule';
 import Statistics from '@/partials/home/Statistics';
 import Testimonial from '@/partials/home/Testimonial';
+import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 export const revalidate = 0;
 
@@ -33,9 +34,13 @@ export default function Home() {
 			<About />
 			<Statistics />
 			<div className="mx-auto w-full max-w-screen-2xl">
-				<Expectations />
-				<Schedule />
-					<Testimonial />
+				<IfTFFeatureOn feature="tf-expectations-section">
+					<Expectations />
+				</IfTFFeatureOn>
+				<IfTFFeatureOn feature="tf-schedule">
+					<Schedule />
+				</IfTFFeatureOn>
+				<Testimonial />
 			</div>
 		</>
 	);

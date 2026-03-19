@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ABOUT_IMAGE_1, ABOUT_IMAGE_2, ABOUT_TEXT } from '@/constants/home/about';
 import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
+import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 const About = () => (
 	<section id="about" className="relative overflow-hidden px-4 py-12 md:px-8">
@@ -64,9 +65,11 @@ const About = () => (
 				</div>
 
 				{/* CTA button */}
-				<Button asChild variant="default" size="lg" className="font-bold">
-					<Link href="/schedule">Виж програмата</Link>
-				</Button>
+				<IfTFFeatureOn feature="tf-schedule">
+					<Button asChild variant="default" size="lg" className="font-bold">
+						<Link href="/schedule">Виж програмата</Link>
+					</Button>
+				</IfTFFeatureOn>
 			</div>
 		</div>
 
