@@ -5,28 +5,19 @@ import { ChevronDown, MapPin, Clock4, Rocket } from 'lucide-react';
 
 import Countdown from '@/components/countdown';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
+import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
+import { useTFFeature } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 
 export default function EventLanding() {
+	const ctaFeature = useTFFeature('tf-landing-cta');
+	const cta = ctaFeature.value ?? {
+		label: 'Разгледай проектите',
+		link: '/projects',
+	};
+
 	return (
 		<div className="relative flex w-full flex-col items-center justify-center gap-10 px-4 py-8 text-center md:px-8">
-
-			{/* Background decorations */}
-			<img
-				src="/decorations/purple-circle.svg"
-				alt=""
-				aria-hidden="true"
-				className="pointer-events-none absolute left-0 top-0 w-[55vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 select-none"
-				style={{ zIndex: -1 }}
-			/>
-			<img
-				src="/decorations/green-circle.svg"
-				alt=""
-				aria-hidden="true"
-				className="pointer-events-none absolute bottom-0 right-0 w-[40vw] max-w-xl translate-x-1/3 translate-y-1/3 select-none"
-				style={{ zIndex: -1 }}
-			/>
 
 			{/* Year badge */}
 			<div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
@@ -51,9 +42,9 @@ export default function EventLanding() {
 
 			{/* CTA */}
 			<Button size="xl" className="font-bold uppercase" asChild>
-				<Link href="/projects">
+				<Link href={cta.link}>
 					<Rocket className="size-5" />
-					Разгледай проектите
+					{cta.label}
 				</Link>
 			</Button>
 
@@ -66,7 +57,7 @@ export default function EventLanding() {
 					)}
 				>
 					<Clock4 className="text-primary h-4 w-4" />
-					<span>{TF_DATE_STRING}</span>
+					<span>{TF_DATE_STRING} · {TF_TIME_STRING}</span>
 				</div>
 				<Button variant="outline" size="lg" asChild className="gap-2">
 					<Link href="/location">
@@ -78,13 +69,14 @@ export default function EventLanding() {
 
 			{/* Scroll indicator */}
 			<div className="hidden animate-bounce sm:block">
-				<Link
-					href="#about"
+				<button
+					type="button"
+					onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
 					aria-label="Виж повече"
-					className="flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+					className="cursor-pointer flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
 				>
 					<ChevronDown className="size-5 stroke-[2.5]" />
-				</Link>
+				</button>
 			</div>
 		</div>
 	);
