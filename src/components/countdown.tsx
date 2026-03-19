@@ -49,8 +49,8 @@ const Countdown = () => {
 	return (
 		<div className="flex flex-wrap items-center justify-center gap-2">
 			{units.map((unit, i) => (
-				<>
-					<Unit key={unit.label} value={unit.value} label={unit.label} />
+				<div key={i} className="contents">
+					<Unit value={unit.value} label={unit.label} />
 					{i < SEPARATORS.length && (
 						<span
 							key={`sep-${i}`}
@@ -59,7 +59,7 @@ const Countdown = () => {
 							{SEPARATORS[i]}
 						</span>
 					)}
-				</>
+				</div>
 			))}
 		</div>
 	);
