@@ -10,7 +10,7 @@ export const TFLogo = (props: React.ComponentProps<'span'>) => {
 				props.className
 			)}
 		>
-			TUES Fest <span className="text-indigo-500">{TF_YEAR}</span>
+			TUES Fest <span className="text-white">{TF_YEAR}</span>
 		</span>
 	);
 };
