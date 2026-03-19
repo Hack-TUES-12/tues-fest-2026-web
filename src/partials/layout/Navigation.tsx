@@ -101,11 +101,15 @@ export function Navigation() {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const isScheduleEnabled = useTFFeatureIsOn('tf-schedule');
 	const isProjectsEnabled = useTFFeatureIsOn('tf-show-projects');
+	const isPartnersEnabled = useTFFeatureIsOn('tf-show-partners');
+	const isTUESTalksEnabled = useTFFeatureIsOn('tf-show-tuestalks');
 	const visibleLinks = LINKS.filter(
 		(link) =>
 			(isScheduleEnabled || (link.href !== '/#schedule' && link.href !== '/schedule' && link.href !== '#schedule')) &&
-			(isProjectsEnabled || link.href !== '/projects')
+			(isProjectsEnabled || link.href !== '/projects') &&
+			(isPartnersEnabled || link.href !== '/partners')
 	);
+	const visibleSchoolLinks = SCHOOL_LINKS.filter((link) => isTUESTalksEnabled || link.href !== '/tuestalks');
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -149,7 +153,7 @@ export function Navigation() {
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
-								{SCHOOL_LINKS.map((link) => (
+								{visibleSchoolLinks.map((link) => (
 									<DropdownMenuItem asChild key={link.title}>
 										<Link href={link.href} target={link.target}>
 											{link.title}
@@ -182,7 +186,7 @@ export function Navigation() {
 											{link.title}
 										</NavLink>
 									))}
-									{SCHOOL_LINKS.map((link) => (
+									{visibleSchoolLinks.map((link) => (
 										<NavLink key={link.title} href={link.href}>
 											{link.title}
 										</NavLink>
