@@ -6,9 +6,16 @@ import { ChevronDown, MapPin, Clock4, Rocket } from 'lucide-react';
 import Countdown from '@/components/countdown';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
+import { useTFFeature } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 
 export default function EventLanding() {
+	const ctaFeature = useTFFeature('tf-landing-cta');
+	const cta = ctaFeature.value ?? {
+		label: 'Разгледай проектите',
+		link: '/projects',
+	};
+
 	return (
 		<div className="relative flex w-full flex-col items-center justify-center gap-10 px-4 py-8 text-center md:px-8">
 
@@ -51,9 +58,9 @@ export default function EventLanding() {
 
 			{/* CTA */}
 			<Button size="xl" className="font-bold uppercase" asChild>
-				<Link href="/projects">
+				<Link href={cta.link}>
 					<Rocket className="size-5" />
-					Разгледай проектите
+					{cta.label}
 				</Link>
 			</Button>
 
