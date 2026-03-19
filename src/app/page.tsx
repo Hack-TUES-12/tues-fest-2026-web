@@ -37,8 +37,10 @@ export default function Home() {
 				<IfTFFeatureOn feature="tf-expectations-section">
 					<Expectations />
 				</IfTFFeatureOn>
-				<Schedule />
-					<Testimonial />
+				<IfTFFeatureOn feature="tf-schedule">
+					<Schedule />
+				</IfTFFeatureOn>
+				<Testimonial />
 			</div>
 		</>
 	);
