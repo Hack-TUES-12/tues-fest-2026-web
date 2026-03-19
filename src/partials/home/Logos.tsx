@@ -85,13 +85,14 @@ export default function EventLanding() {
 
 			{/* Scroll indicator */}
 			<div className="hidden animate-bounce sm:block">
-				<Link
-					href="#about"
+				<button
+					type="button"
+					onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
 					aria-label="Виж повече"
-					className="flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+					className="cursor-pointer flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
 				>
 					<ChevronDown className="size-5 stroke-[2.5]" />
-				</Link>
+				</button>
 			</div>
 		</div>
 	);
