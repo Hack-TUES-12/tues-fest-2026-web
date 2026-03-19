@@ -1,5 +1,6 @@
 export type TFFeatures = {
 	'project-voting': boolean;
+	'tf-show-projects': boolean;
 	'tf-expectations-section': boolean;
 	'tf-schedule': boolean;
 	'tf-landing-cta': {

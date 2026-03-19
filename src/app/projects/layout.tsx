@@ -1,9 +1,11 @@
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { notFound } from 'next/navigation';
 
 import { FloatingVoteOverlay } from '@/components/ui/floating-vote-overlay';
 import { TF_DATE_STRING, TF_LOCATION, TF_ROUNDED_PROJECT_COUNT, TF_YEAR } from '@/constants/event';
 import { OG_METADATA, TF_TITLE, TWITTER_METADATA } from '@/constants/seo';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
+import { growthbook } from '@/lib/growthbook/server';
 
 export const metadata = {
 	metadataBase: new URL('https://tuesfest.bg/'),
@@ -46,7 +48,12 @@ export const metadata = {
 	},
 };
 
-export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
+export default async function ProjectsLayout({ children }: { children: React.ReactNode }) {
+	const gb = await growthbook();
+	if (gb.isOff('tf-show-projects')) {
+		notFound();
+	}
+
 	return (
 		<NuqsAdapter>
 			{children}

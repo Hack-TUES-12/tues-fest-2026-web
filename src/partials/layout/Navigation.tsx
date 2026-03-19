@@ -100,8 +100,11 @@ function NavLink({ href, children, onClick }: { href: string; children: React.Re
 export function Navigation() {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const isScheduleEnabled = useTFFeatureIsOn('tf-schedule');
+	const isProjectsEnabled = useTFFeatureIsOn('tf-show-projects');
 	const visibleLinks = LINKS.filter(
-		(link) => isScheduleEnabled || (link.href !== '/#schedule' && link.href !== '/schedule' && link.href !== '#schedule')
+		(link) =>
+			(isScheduleEnabled || (link.href !== '/#schedule' && link.href !== '/schedule' && link.href !== '#schedule')) &&
+			(isProjectsEnabled || link.href !== '/projects')
 	);
 
 	useEffect(() => {
