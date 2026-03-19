@@ -19,22 +19,6 @@ export default function EventLanding() {
 	return (
 		<div className="relative flex w-full flex-col items-center justify-center gap-10 px-4 py-8 text-center md:px-8">
 
-			{/* Background decorations */}
-			<img
-				src="/decorations/purple-circle.svg"
-				alt=""
-				aria-hidden="true"
-				className="pointer-events-none absolute left-0 top-0 w-[55vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 select-none"
-				style={{ zIndex: -1 }}
-			/>
-			<img
-				src="/decorations/green-circle.svg"
-				alt=""
-				aria-hidden="true"
-				className="pointer-events-none absolute bottom-0 right-0 w-[40vw] max-w-xl translate-x-1/3 translate-y-1/3 select-none"
-				style={{ zIndex: -1 }}
-			/>
-
 			{/* Year badge */}
 			<div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
 				<span className="size-2 animate-pulse rounded-full bg-primary" />
