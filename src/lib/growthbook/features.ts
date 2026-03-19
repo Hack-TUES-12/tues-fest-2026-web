@@ -3,6 +3,7 @@ export type TFFeatures = {
 	'tf-show-projects': boolean;
 	'tf-show-partners': boolean;
 	'tf-show-tuestalks': boolean;
+	'tf-show-apply': boolean;
 	'tf-expectations-section': boolean;
 	'tf-schedule': boolean;
 	'tf-landing-cta': {

@@ -103,13 +103,16 @@ export function Navigation() {
 	const isProjectsEnabled = useTFFeatureIsOn('tf-show-projects');
 	const isPartnersEnabled = useTFFeatureIsOn('tf-show-partners');
 	const isTUESTalksEnabled = useTFFeatureIsOn('tf-show-tuestalks');
+	const isApplyEnabled = useTFFeatureIsOn('tf-show-apply');
 	const visibleLinks = LINKS.filter(
 		(link) =>
 			(isScheduleEnabled || (link.href !== '/#schedule' && link.href !== '/schedule' && link.href !== '#schedule')) &&
 			(isProjectsEnabled || link.href !== '/projects') &&
 			(isPartnersEnabled || link.href !== '/partners')
 	);
-	const visibleSchoolLinks = SCHOOL_LINKS.filter((link) => isTUESTalksEnabled || link.href !== '/tuestalks');
+	const visibleSchoolLinks = SCHOOL_LINKS.filter(
+		(link) => (isTUESTalksEnabled || link.href !== '/tuestalks') && (isApplyEnabled || link.href !== '/apply')
+	);
 
 	useEffect(() => {
 		const handleScroll = () => {

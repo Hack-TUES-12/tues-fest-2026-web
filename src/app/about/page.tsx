@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TF_YEAR, TUES_AGE } from '@/constants/event';
+import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 export const metadata = {
 	title: 'За ТУЕС',
@@ -161,13 +162,15 @@ export default function AboutPage() {
 						<span className="font-semibold text-white">второ място</span> по минимален бал на
 						първо класиране в 7. клас в България.
 					</p>
-					<Link
-						href="/apply"
-						className="inline-flex items-center gap-1.5 text-sm text-primary underline-offset-4 hover:underline"
-					>
-						<TbArrowRight size={15} />
-						Информация за кандидатстване
-					</Link>
+					<IfTFFeatureOn feature="tf-show-apply">
+						<Link
+							href="/apply"
+							className="inline-flex items-center gap-1.5 text-sm text-primary underline-offset-4 hover:underline"
+						>
+							<TbArrowRight size={15} />
+							Информация за кандидатстване
+						</Link>
+					</IfTFFeatureOn>
 				</div>
 				<div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
 					<img
