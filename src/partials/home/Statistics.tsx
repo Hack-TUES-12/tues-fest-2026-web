@@ -151,12 +151,12 @@ function FolderNavigation({
 	return (
 		<div className="w-full space-y-10">
 			{/* ── Timeline ─────────────────────────────────────────────────── */}
-			<div className="relative" style={{ height: '72px' }}>
+			<div className="relative" style={{ height: '102px' }}>
 
 				{/* Line: mobile — always split at 50 % */}
 				<div
 					className="md:hidden absolute flex pointer-events-none"
-					style={{ top: '13px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+					style={{ top: '43px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
 				>
 					<div className="w-1/2 bg-muted" />
 					<div className="flex-1 bg-dark-muted" />
@@ -165,7 +165,7 @@ function FolderNavigation({
 				{/* Line: desktop — split animates with the selected dot */}
 				<div
 					className="hidden md:flex absolute pointer-events-none"
-					style={{ top: '13px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+					style={{ top: '43px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
 				>
 					<div
 						className="bg-muted"
@@ -178,7 +178,7 @@ function FolderNavigation({
 				</div>
 
 				{/* Track: mobile — 1 item fills the full viewport */}
-				<div className="md:hidden absolute inset-x-0" style={{ height: '72px' }}>
+				<div className="md:hidden pt-[30px] absolute inset-x-0 overflow-hidden" style={{ height: '102px' }}>
 					<div
 						className="flex will-change-transform"
 						style={{
