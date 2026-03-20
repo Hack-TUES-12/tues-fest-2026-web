@@ -7,6 +7,9 @@ import { OG_METADATA, TF_TITLE, TWITTER_METADATA } from '@/constants/seo';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 import { growthbook } from '@/lib/growthbook/server';
 
+const { images: _defaultOgImages, ...openGraphWithoutDefaultImage } = OG_METADATA;
+const { images: _defaultTwitterImages, ...twitterWithoutDefaultImage } = TWITTER_METADATA;
+
 export const metadata = {
 	metadataBase: new URL('https://tuesfest.bg/'),
 	title: {
@@ -37,12 +40,12 @@ export const metadata = {
 		'програмиране за ученици',
 	],
 	twitter: {
-		...TWITTER_METADATA,
+		...twitterWithoutDefaultImage,
 		title: `Проекти | ${TF_TITLE}`,
 		description: `Разгледайте над ${TF_ROUNDED_PROJECT_COUNT} ученически проекта на ${TF_TITLE}.`,
 	},
 	openGraph: {
-		...OG_METADATA,
+		...openGraphWithoutDefaultImage,
 		title: `Проекти | ${OG_METADATA.siteName}`,
 		description: `Разгледайте над ${TF_ROUNDED_PROJECT_COUNT} ученически проекта на ${TF_TITLE}.`,
 	},

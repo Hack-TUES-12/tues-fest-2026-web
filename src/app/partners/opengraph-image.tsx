@@ -7,7 +7,7 @@ import {
 } from '@/lib/opengraph/standard-opengraph-assets';
 import { OpengraphTitleImage } from '@/partials/opengraph/title-image';
 
-export const alt = 'Прием в ТУЕС';
+export const alt = 'Спонсори и Партньори';
 export const size = STANDARD_OG_IMAGE_SIZE;
 export const contentType = STANDARD_OG_CONTENT_TYPE;
 

@@ -72,11 +72,14 @@ export const OG_METADATA = {
 	description: TF_DESCRIPTION,
 	url: 'https://tuesfest.bg',
 	siteName: TF_TITLE,
-	// images: [
-	// 	{
-	// 		url: 'https://tuesfest.bg/logo/motto.png?v=20.03.2026',
-	// 	},
-	// ],
+	images: [
+		{
+			url: '/logo/opengraph-main.png',
+			width: 1200,
+			height: 630,
+			alt: TF_TITLE,
+		},
+	],
 	locale: 'bg-BG',
 	type: 'website',
 } satisfies Metadata['openGraph'];
@@ -86,4 +89,5 @@ export const TWITTER_METADATA = {
 	title: TF_TITLE,
 	description: TF_DESCRIPTION,
 	creator: '@hacktuesfest',
+	images: ['/logo/opengraph-main.png'],
 } satisfies Metadata['twitter'];

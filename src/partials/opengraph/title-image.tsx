@@ -17,6 +17,8 @@ type HeadingSize = keyof typeof headingSizes;
 
 export function OpengraphTitleImage(props: {
 	title: string;
+	/** Shown directly under the title, centered (e.g. venue). Uses PT Mono like the title. */
+	underTitle?: string;
 	subtitle?: string;
 	waveImageUrl: string;
 	headingSize?: HeadingSize;
@@ -38,8 +40,8 @@ export function OpengraphTitleImage(props: {
 				backgroundRepeat: 'no-repeat',
 			}}
 		>
-			{/* Middle section - Main Title */}
-			<div tw="flex flex-1 items-center text-center justify-center">
+			{/* Middle section — title + optional line below (both PT Mono, centered) */}
+			<div tw="flex flex-1 flex-col items-center justify-center text-center px-10">
 				<h1
 					style={{
 						fontFamily: OG_FONT_TITLE_FAMILY,
@@ -50,6 +52,18 @@ export function OpengraphTitleImage(props: {
 				>
 					{props.title}
 				</h1>
+				{!!props.underTitle && (
+					<p
+						style={{
+							fontFamily: OG_FONT_TITLE_FAMILY,
+							color: '#ffffff',
+							fontWeight: 400,
+						}}
+						tw="mt-6 max-w-[1000px] text-3xl leading-snug"
+					>
+						{props.underTitle}
+					</p>
+				)}
 			</div>
 
 			{/* Bottom section - Subtitle with optional Call to Action */}
