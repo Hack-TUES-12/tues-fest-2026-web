@@ -12,7 +12,7 @@ export const revalidate = 0;
 export default function Home() {
 	return (
 		<>
-			<section className="flex min-h-[calc(100vh-var(--header-height))] w-full flex-col items-center justify-center gap-4 overflow-hidden p-1 pt-4 sm:p-4 md:gap-16 ">
+			<section className="relative flex min-h-[calc(100vh-var(--header-height))] w-full flex-col items-center justify-center gap-4 overflow-hidden p-1 pt-4 sm:p-4 md:gap-16">
 				{/* Background decorations */}
 				<img
 					src="/decorations/purple-circle.svg"
