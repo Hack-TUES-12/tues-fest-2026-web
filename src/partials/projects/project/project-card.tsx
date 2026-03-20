@@ -70,7 +70,7 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 						project={{
 					id: project.id,
 						title: project.title,
-						thumbnail: thumbnail.src,
+						thumbnail: thumbnail,
 						category: project.category,
 						}}
 						variant={CATEGORY_BUTTON_VARIANTS[project.category] ?? 'default'}
