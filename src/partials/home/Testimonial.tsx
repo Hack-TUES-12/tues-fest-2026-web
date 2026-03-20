@@ -25,7 +25,7 @@ const Testimonial = () => {
 			</div>
 
 			{/* Carousel */}
-			<div className="flex justify-center">
+			<div className="flex justify-center px-12">
 				<Carousel
 					opts={{ loop: true }}
 					className="w-full max-w-3xl"
