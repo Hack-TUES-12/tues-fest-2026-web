@@ -137,8 +137,8 @@ export function Navigation() {
 							<TFLogo />
 						</Link>
 
-						{/* Desktop Navigation */}
-						<nav className="hidden items-center space-x-2 lg:flex">
+					{/* Desktop Navigation */}
+					<nav className="hidden items-center space-x-2 lg:flex">
 							{visibleLinks.map((link) => (
 								<NavLink key={link.title} href={link.href}>
 									{link.title}
@@ -150,7 +150,7 @@ export function Navigation() {
 					<div className="flex items-center gap-4">
 						<DropdownMenu modal={false}>
 							<DropdownMenuTrigger asChild>
-								<Button className="hidden sm:inline-flex" variant="secondary" size="lg">
+								<Button className="hidden lg:inline-flex" variant="secondary" size="lg">
 									<TbSchool className="mr-2 h-4 w-4" />
 									За ТУЕС
 								</Button>
@@ -165,7 +165,7 @@ export function Navigation() {
 								))}
 							</DropdownMenuContent>
 						</DropdownMenu>
-						<Button className="hidden sm:inline-flex" variant="outline" size="lg" asChild>
+						<Button className="hidden lg:inline-flex" variant="outline" size="lg" asChild>
 							<Link href="/location">
 								<TbMapPin className="mr-2 h-4 w-4" />
 								{TF_LOCATION}
