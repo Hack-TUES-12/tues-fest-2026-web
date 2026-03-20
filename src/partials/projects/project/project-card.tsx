@@ -31,9 +31,9 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 						key={project.id}
 						src={thumbnail}
 						alt={project.title}
+						fill
+						sizes="(max-width: 768px) 90vw, 500px"
 						className="absolute left-0 top-0 rounded-lg object-cover"
-						layout="fill"
-						objectFit="cover"
 					/>
 				</Link>
 			</CardContent>

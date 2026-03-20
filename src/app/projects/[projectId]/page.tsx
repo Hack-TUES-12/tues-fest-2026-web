@@ -54,6 +54,10 @@ export async function generateMetadata(props: { params: Promise<{ projectId: str
 
 	if (project === undefined || project === null) notFound();
 
+	const ogImages = project.thumbnail
+		? [{ url: project.thumbnail, alt: project.title }]
+		: OG_METADATA.images;
+
 	return {
 		title: project.title,
 		description: project.description,
@@ -61,18 +65,14 @@ export async function generateMetadata(props: { params: Promise<{ projectId: str
 			...TWITTER_METADATA,
 			title: `${project.title} | ${TF_TITLE}`,
 			description: project.description,
-			images: project.images.map((image) => ({
-				url: image,
-			})),
+			images: project.thumbnail ? [project.thumbnail] : TWITTER_METADATA.images,
 		},
 		openGraph: {
 			...OG_METADATA,
 			title: `${project.title} | ${OG_METADATA.siteName}`,
 			description: project.description,
 			url: `https://tuesfest.bg/projects/${project.id}`,
-			images: project.images.map((image) => ({
-				url: image,
-			})),
+			images: ogImages,
 		},
 	};
 }
