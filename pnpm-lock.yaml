@@ -12,6 +12,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/pt-mono':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@growthbook/growthbook':
         specifier: ^1.6.5
         version: 1.6.5
@@ -695,6 +698,9 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@fontsource/pt-mono@5.2.8':
+    resolution: {integrity: sha512-rJCYN8NRBQbT6Xvj42JBj7kLuuAV7LXfV2udQc5+2QT8pWXCz9iUb7gHDEvtb6zoljzOLPS+E3IBllSMzwazNg==}
 
   '@growthbook/growthbook-react@1.6.5':
     resolution: {integrity: sha512-afi/RUbwazVNKv2acn6wDQz4BJNRAEpwIuHfggQup2/aE5PLAxy3+95gjjRMgCcPR0Pf3sFmhYGvOmxLD0ZRbQ==}
@@ -4571,6 +4577,8 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@fontsource/pt-mono@5.2.8': {}
 
   '@growthbook/growthbook-react@1.6.5(react@19.2.4)':
     dependencies:

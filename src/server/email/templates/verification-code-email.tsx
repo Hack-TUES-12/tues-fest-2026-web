@@ -28,7 +28,7 @@ export default function VerificationCodeEmail({
 			<Body style={main}>
 				<Section style={mottoSection}>
 					<Img
-						src={`${baseUrl}/logo/motto.png?v=20.03.2026`}
+						src={`${baseUrl}/logo/motto.png`}
 						width={294}
 						height={122}
 						alt={`Логото на ${TF_TITLE}`}

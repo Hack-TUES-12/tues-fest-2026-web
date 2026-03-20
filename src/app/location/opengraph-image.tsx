@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 
 import { TF_DATE_STRING_SHORT, TF_LOCATION } from '@/constants/event';
+import { getPtMonoImageFont } from '@/lib/opengraph/pt-mono-font';
 import { OpengraphTitleImage } from '@/partials/opengraph/title-image';
 
 // Image metadata
@@ -17,13 +18,13 @@ export const contentType = 'image/png';
 
 // Image generation
 export default async function Image() {
-	const [glitchFontData, rubikMonoOneData, waveImage] = await Promise.all([
-		readFile(join(process.cwd(), 'src/assets/fonts/glitch.otf')),
+	const [rubikMonoOneData, waveImage, ptMonoFont] = await Promise.all([
 		readFile(join(process.cwd(), 'src/assets/fonts/RubikMonoOne-Regular.ttf')),
 		readFile(join(process.cwd(), 'src/assets/wave-37.jpg')).then((buffer) => {
 			const base64 = buffer.toString('base64');
 			return `data:image/jpeg;base64,${base64}`;
 		}),
+		getPtMonoImageFont(),
 	]);
 
 	return new ImageResponse(
@@ -38,20 +39,12 @@ export default async function Image() {
 		),
 		{
 			...size,
-			fonts: [
-				{
-					name: 'Glitch',
-					data: glitchFontData,
-					style: 'normal',
-					weight: 400,
-				},
-				{
-					name: 'Rubik Mono One',
-					data: rubikMonoOneData,
-					style: 'normal',
-					weight: 400,
-				},
-			],
+			fonts: [ptMonoFont, {
+				name: 'Rubik Mono One',
+				data: rubikMonoOneData,
+				style: 'normal',
+				weight: 400,
+			}],
 		}
 	);
 }

@@ -6,6 +6,12 @@ import './env.mjs';
 
 /** @type {import('next').NextConfig} */
 export default {
+	images: {
+		localPatterns: [
+			// /logo (e.g. motto.png?v=… cache bust)
+			{ pathname: '/**' },
+		],
+	},
 	redirects: async () => {
 		return [
 			{
