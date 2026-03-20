@@ -11,9 +11,9 @@ export const revalidate = 0;
 
 export default function Home() {
 	return (
-		<>
-			<section className="relative flex min-h-[calc(100vh-var(--header-height))] w-full flex-col items-center justify-center gap-4 overflow-hidden p-1 pt-4 sm:p-4 md:gap-16">
-				{/* Background decorations */}
+		<div className='w-full'>
+			<section className="relative flex min-h-[calc(100vh-var(--header-height))] w-full flex-col items-center justify-center gap-4 p-1 pt-4 sm:p-4 md:gap-16">
+				{/* Background decorations — must stay inside the section so overflow-hidden clips them */}
 				<img
 					src="/decorations/purple-circle.svg"
 					alt=""
@@ -28,7 +28,6 @@ export default function Home() {
 					className="pointer-events-none min-w-xs absolute bottom-0 right-[calc(50%-50vw)] w-[40vw] max-w-xl translate-x-1/3 hidden md:block translate-y-1/3 select-none"
 					style={{ zIndex: -1 }}
 				/>
-				
 				<EventLanding />
 			</section>
 			<About />
@@ -42,6 +41,6 @@ export default function Home() {
 				</IfTFFeatureOn>
 				<Testimonial />
 			</div>
-		</>
+		</div>
 	);
 }
