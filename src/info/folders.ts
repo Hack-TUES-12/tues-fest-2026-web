@@ -87,6 +87,6 @@ export const FOLDERS = [
 		name: '2025',
 		image1: tf2025,
 		image2: tf2025,
-		website: 'https://2025.tuesfest.bg',
+		website: 'https://aztues.bg/tuesfest2025/',
 	},
 ];
