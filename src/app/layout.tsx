@@ -33,8 +33,18 @@ export const metadata: Metadata = {
 	description: TF_DESCRIPTION,
 	keywords: KEYWORDS,
 	icons: {
-		icon: '/favicon.ico',
-		shortcut: '/favicon.png',
+		icon: [
+			{
+				url: '/favicon-light-theme.webp',
+				type: 'image/webp',
+				media: '(prefers-color-scheme: light)',
+			},
+			{
+				url: '/favicon-dark-theme.webp',
+				type: 'image/webp',
+				media: '(prefers-color-scheme: dark)',
+			},
+		],
 		apple: '/favicon.png',
 	},
 	twitter: TWITTER_METADATA,
@@ -78,7 +88,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		>
 			<head>
 				<Script src="https://www.googletagmanager.com/gtag/js?id=G-1H1H1CR559" strategy="afterInteractive" />
-				<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any"></link>
 			</head>
 			<body
 				className={cn(
