@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { TbMapPin, TbMenu2, TbSchool } from 'react-icons/tb';
 
@@ -11,114 +11,114 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { TF_LOCATION, TF_YEAR } from '@/constants/event';
+import {
+	Sheet,
+	SheetContent,
+	SheetDescription,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from '@/components/ui/sheet';
+import { TF_LOCATION } from '@/constants/event';
 import { useTFFeatureIsOn } from '@/lib/growthbook/react/hooks';
-import { TF_TITLE } from '@/constants/seo';
 import { cn } from '@/lib/utils';
 import { TFLogo } from '../home/TFLogo';
 
 const LINKS = [
-	// {
-	// 	href: '/',
-	// 	title: 'Начало',
-	// },
-	{
-		href: '/projects',
-		title: 'Проекти',
-	},
-	{
-		href: '/#schedule',
-		title: 'Програма',
-	},
-	{
-		href: '/partners',
-		title: 'Спонсори && Партньори',
-	},
-	// {
-	// 	href: '/projects',
-	// 	title: 'Гласуване',
-	// },
+	// { href: '/', title: 'Начало' },
+	{ href: '/projects', title: 'Проекти' },
+	{ href: '/#schedule', title: 'Програма' },
+	{ href: '/partners', title: 'Спонсори && Партньори' },
+	// { href: '/projects', title: 'Гласуване' },
 ];
 
 const SCHOOL_LINKS = [
-	{
-		href: '/about',
-		title: 'Училището',
-	},
-	{
-		href: '/apply',
-		title: 'Кандидатстване',
-	},
-	{
-		href: 'https://elsys-bg.org/uchilishteto/prepodavatelski-ekip',
-		title: 'Преподавателски екип',
-		target: '_blank',
-	},
-	{
-		href: '/tuestalks',
-		title: 'TUES Talks',
-	},
+	{ href: '/about', title: 'Училището' },
+	{ href: '/apply', title: 'Кандидатстване' },
+	{ href: '/tuestalks', title: 'TUES Talks' },
 ];
 
-const Linky = ({
+/** Desktop nav link — PT Mono, transitions to primary (pink) on hover. */
+function NavLink({
 	href,
 	children,
-	className,
-	target,
+	onClick,
 }: {
 	href: string;
-	children: string;
-	className?: string | null;
-	target?: string | null;
-}) => {
-	return (
-		<Link
-			href={href}
-			target={target ?? '_self'}
-			className={`mx-2 flex whitespace-nowrap py-2 text-center text-base font-semibold 
-				text-[#bababa]
-			group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${className}`}
-		>
-			{children}
-		</Link>
-	);
-};
-
-function NavLink({ href, children, onClick }: { href: string; children: React.ReactNode; onClick?: () => void }) {
+	children: React.ReactNode;
+	onClick?: () => void;
+}) {
 	return (
 		<Link
 			href={href}
 			onClick={onClick}
-			className="data-[state=open]:bg-accent/50 bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[state=open]:text-accent-foreground data-[state=open]:hover:bg-accent data-[state=open]:focus:bg-accent group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+			className="font-title text-sm tracking-widest text-white/60 transition-colors duration-200 hover:text-primary focus:outline-none focus-visible:text-primary rounded px-3 py-1.5"
 		>
 			{children}
 		</Link>
 	);
 }
 
+/** Mobile drawer link — larger, same typography. */
+function DrawerLink({
+	href,
+	children,
+	target,
+	onClick,
+}: {
+	href: string;
+	children: React.ReactNode;
+	target?: string;
+	onClick?: () => void;
+}) {
+	return (
+		<Link
+			href={href}
+			target={target}
+			onClick={onClick}
+			className="block font-title text-base tracking-widest text-white/70 transition-colors duration-200 hover:text-primary py-2"
+		>
+			{children}
+		</Link>
+	);
+}
+
+/** Small eyebrow label used as section divider in the mobile drawer. */
+function DrawerSectionLabel({ children }: { children: React.ReactNode }) {
+	return (
+		<p className="mt-6 mb-1 font-title text-xs tracking-[0.2em] text-muted uppercase">
+			{children}
+		</p>
+	);
+}
+
 export function Navigation() {
 	const [isScrolled, setIsScrolled] = useState(false);
+
 	const isScheduleEnabled = useTFFeatureIsOn('tf-schedule');
 	const isProjectsEnabled = useTFFeatureIsOn('tf-show-projects');
 	const isPartnersEnabled = useTFFeatureIsOn('tf-show-partners');
 	const isTUESTalksEnabled = useTFFeatureIsOn('tf-show-tuestalks');
 	const isApplyEnabled = useTFFeatureIsOn('tf-show-apply');
+
 	const visibleLinks = LINKS.filter(
 		(link) =>
-			(isScheduleEnabled || (link.href !== '/#schedule' && link.href !== '/schedule' && link.href !== '#schedule')) &&
+			(isScheduleEnabled ||
+				(link.href !== '/#schedule' &&
+					link.href !== '/schedule' &&
+					link.href !== '#schedule')) &&
 			(isProjectsEnabled || link.href !== '/projects') &&
-			(isPartnersEnabled || link.href !== '/partners')
+			(isPartnersEnabled || link.href !== '/partners'),
 	);
+
 	const visibleSchoolLinks = SCHOOL_LINKS.filter(
-		(link) => (isTUESTalksEnabled || link.href !== '/tuestalks') && (isApplyEnabled || link.href !== '/apply')
+		(link) =>
+			(isTUESTalksEnabled || link.href !== '/tuestalks') &&
+			(isApplyEnabled || link.href !== '/apply'),
 	);
 
 	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 50);
-		};
-
+		const handleScroll = () => setIsScrolled(window.scrollY > 50);
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
@@ -126,80 +126,129 @@ export function Navigation() {
 	return (
 		<header
 			className={cn(
-				'sticky top-0 z-50 flex w-full items-center justify-center border-b px-4 shadow-sm backdrop-blur-lg transition-colors duration-300',
-				isScrolled ? 'bg-background/80' : 'bg-background/70'
+				'sticky top-0 z-50 w-full border-b border-white/10 backdrop-blur-xl transition-all duration-300',
+				isScrolled ? 'bg-background/90' : 'bg-background/60',
 			)}
 		>
-			<div className="h-(--header-height) container flex items-center justify-center">
-				<div className="flex h-16 w-full items-center justify-between px-4">
-					<div className="flex items-center gap-4">
-						<Link href="/" className="text-lg font-bold">
-							<TFLogo />
-						</Link>
+			<div className="mx-auto flex h-(--header-height) max-w-screen-2xl items-center justify-between px-6">
+				{/* Logo + desktop nav */}
+				<div className="flex items-center gap-8">
+					<Link href="/" aria-label="Начало">
+						<TFLogo />
+					</Link>
 
-					{/* Desktop Navigation */}
-					<nav className="hidden items-center space-x-2 lg:flex">
-							{visibleLinks.map((link) => (
-								<NavLink key={link.title} href={link.href}>
-									{link.title}
-								</NavLink>
-							))}
-						</nav>
-					</div>
-
-					<div className="flex items-center gap-4">
-						<DropdownMenu modal={false}>
-							<DropdownMenuTrigger asChild>
-								<Button className="hidden lg:inline-flex" variant="secondary" size="lg">
-									<TbSchool className="mr-2 h-4 w-4" />
-									За ТУЕС
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								{visibleSchoolLinks.map((link) => (
-									<DropdownMenuItem asChild key={link.title}>
-										<Link href={link.href} target={link.target}>
-											{link.title}
-										</Link>
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
-						<Button className="hidden lg:inline-flex" variant="outline" size="lg" asChild>
-							<Link href="/location">
-								<TbMapPin className="mr-2 h-4 w-4" />
-								{TF_LOCATION}
-							</Link>
-						</Button>
-						<Sheet>
-							<SheetTrigger asChild>
-								<Button variant="ghost" size="icon" className="inline-flex lg:hidden">
-									<TbMenu2 className="h-5 w-5" />
-								</Button>
-							</SheetTrigger>
-							<SheetContent side="right" className="gap-2 sm:max-w-sm">
-								<SheetHeader>
-									<SheetTitle className="m-auto py-3">
-										<TFLogo />
-									</SheetTitle>
-								</SheetHeader>
-								<div className="grid gap-4">
-									{visibleLinks.map((link) => (
-										<NavLink key={link.title} href={link.href}>
-											{link.title}
-										</NavLink>
-									))}
-									{visibleSchoolLinks.map((link) => (
-										<NavLink key={link.title} href={link.href}>
-											{link.title}
-										</NavLink>
-									))}
-									<NavLink href="/location">Локация</NavLink>
-								</div>
-							</SheetContent>
-						</Sheet>
-					</div>
+					<nav className="hidden items-center gap-1 md:flex">
+						{visibleLinks.map((link) => (
+							<NavLink key={link.href} href={link.href}>
+								{link.title}
+							</NavLink>
+						))}
+					</nav>
 				</div>
+
+				{/* Desktop actions */}
+				<div className="hidden items-center gap-3 md:flex">
+					<DropdownMenu modal={false}>
+						<DropdownMenuTrigger asChild>
+							<Button variant="default-secondary" size="sm" className="gap-2 font-title tracking-widest text-xs">
+								<TbSchool className="h-4 w-4" />
+								За ТУЕС
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent
+							align="end"
+							sideOffset={8}
+							className="min-w-[200px] rounded-xl border border-white/10 bg-background/90 p-2 shadow-xl shadow-black/50 backdrop-blur-xl"
+						>
+							{visibleSchoolLinks.map((link) => (
+								<DropdownMenuItem
+									asChild
+									key={link.href}
+									className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-white/5 focus:text-primary"
+								>
+									<Link
+										href={link.href}
+										className="font-title text-sm tracking-widest text-white/60 transition-colors hover:text-primary"
+									>
+										{link.title}
+									</Link>
+								</DropdownMenuItem>
+							))}
+						</DropdownMenuContent>
+					</DropdownMenu>
+
+					<Button
+						variant="ghost"
+						size="sm"
+						className="gap-2 font-title text-xs tracking-widest text-white/60 hover:text-primary"
+						asChild
+					>
+						<Link href="/location">
+							<TbMapPin className="h-4 w-4" />
+							{TF_LOCATION}
+						</Link>
+					</Button>
+				</div>
+
+				{/* Mobile hamburger */}
+				<Sheet>
+					<SheetTrigger asChild>
+						<Button
+							variant="ghost"
+							size="icon"
+							className="inline-flex md:hidden text-white/60 hover:text-primary"
+							aria-label="Отвори меню"
+						>
+							<TbMenu2 className="h-5 w-5" />
+						</Button>
+					</SheetTrigger>
+
+					<SheetContent side="right" className="w-72 border-l border-white/10 bg-background/95 backdrop-blur-xl px-6 py-6">
+						<SheetHeader className="mb-4">
+							<SheetTitle asChild>
+								<Link href="/" className="block">
+									<TFLogo className="text-2xl" />
+								</Link>
+							</SheetTitle>
+							<SheetDescription className="sr-only">
+								Навигационно меню
+							</SheetDescription>
+						</SheetHeader>
+
+						<div className="flex flex-col">
+							{visibleLinks.length > 0 && (
+								<>
+									<DrawerSectionLabel>Събитие</DrawerSectionLabel>
+									<div className="border-b border-white/10 pb-4">
+										{visibleLinks.map((link) => (
+											<DrawerLink key={link.href} href={link.href}>
+												{link.title}
+											</DrawerLink>
+										))}
+									</div>
+								</>
+							)}
+
+							{visibleSchoolLinks.length > 0 && (
+								<>
+									<DrawerSectionLabel>За ТУЕС</DrawerSectionLabel>
+									<div className="border-b border-white/10 pb-4">
+										{visibleSchoolLinks.map((link) => (
+											<DrawerLink key={link.href} href={link.href}>
+												{link.title}
+											</DrawerLink>
+										))}
+									</div>
+								</>
+							)}
+
+							<DrawerSectionLabel>Локация</DrawerSectionLabel>
+							<DrawerLink href="/location">
+								{TF_LOCATION}
+							</DrawerLink>
+						</div>
+					</SheetContent>
+				</Sheet>
 			</div>
 		</header>
 	);
