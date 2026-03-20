@@ -57,16 +57,21 @@ export default function Statistics() {
 }
 
 function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number }) {
+	const selectedYear = FOLDERS.find((f) => f.id === selectedFolderIndex)?.name;
+
 	return (
 		<div className="space-y-6 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 xl:flex xl:flex-col">
-			{STATISTICS.map((statistic, i) => (
-				<Card variant='muted' key={statistic.title} className="bg-card/80 border-border backdrop-blur-sm">
-					<CardTitle className='text-lg px-8'>{statistic.title} - {statistic.data[i]?.total}</CardTitle>
-					<CardContent className='pl-0'>
-						<BarStatistic selectedFolderIndex={selectedFolderIndex} data={statistic.data} />
-					</CardContent>
-				</Card>
-			))}
+			{STATISTICS.map((statistic) => {
+				const yearTotal = statistic.data.find((d) => d.name === selectedYear)?.total;
+				return (
+					<Card variant='muted' key={statistic.title} className="bg-card/80 border-border backdrop-blur-sm">
+						<CardTitle className='text-lg px-8'>{statistic.title} {yearTotal ? `- ${yearTotal}` : ""}</CardTitle>
+						<CardContent className='pl-0'>
+							<BarStatistic selectedFolderIndex={selectedFolderIndex} data={statistic.data} />
+						</CardContent>
+					</Card>
+				);
+			})}
 		</div>
 	);
 }
