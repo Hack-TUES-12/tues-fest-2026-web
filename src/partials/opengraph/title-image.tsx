@@ -1,4 +1,5 @@
-import { TF_YEAR } from '@/constants/event';
+import { TF_SLOGAN, TF_YEAR } from '@/constants/event';
+import { OG_FONT_TITLE_FAMILY } from '@/lib/opengraph/pt-mono-font';
 import { cn } from '@/lib/utils';
 
 const headingSizes = {
@@ -16,6 +17,8 @@ type HeadingSize = keyof typeof headingSizes;
 
 export function OpengraphTitleImage(props: {
 	title: string;
+	/** Shown directly under the title, centered (e.g. venue). Uses PT Mono like the title. */
+	underTitle?: string;
 	subtitle?: string;
 	waveImageUrl: string;
 	headingSize?: HeadingSize;
@@ -37,49 +40,37 @@ export function OpengraphTitleImage(props: {
 				backgroundRepeat: 'no-repeat',
 			}}
 		>
-			{/* Overlay for better text contrast */}
-			<div tw="absolute inset-0 bg-[#020817]/50" />
-
-			{/* Top section - Logo */}
-			<div tw="absolute top-0 left-0 right-0 flex flex-col items-center pt-12">
-				<span style={{ fontFamily: 'Glitch' }} tw="text-[#e11d48] block text-6xl">
-					TUES FEST
-				</span>
-				<span style={{ fontFamily: 'Glitch' }} tw="text-5xl text-[#6366f1]">
-					{TF_YEAR}
-				</span>
-			</div>
-
-			{/* Middle section - Main Title */}
-			<div tw="flex flex-1 items-center text-center justify-center">
+			{/* Middle section — title + optional line below (both PT Mono, centered) */}
+			<div tw="flex flex-1 flex-col items-center justify-center text-center px-10">
 				<h1
 					style={{
-						fontFamily: 'Rubik Mono One',
-						backgroundImage: 'linear-gradient(to right, #ff1b6b, #45caff)',
-						color: 'transparent',
-						backgroundClip: 'text',
-						WebkitBackgroundClip: 'text',
-						WebkitTextFillColor: 'transparent',
-						textShadow: '0 0 25px rgba(255,27,107,0.2), 0 0 20px rgba(69,202,255,0.2)',
-						display: '-webkit-box',
+						fontFamily: OG_FONT_TITLE_FAMILY,
+						color: '#ffffff',
+						fontWeight: 400,
 					}}
-					tw={cn('font-black leading-tight', headingSizes[headingSize].opengraph)}
+					tw={cn('leading-tight', headingSizes[headingSize].opengraph)}
 				>
 					{props.title}
 				</h1>
+				{!!props.underTitle && (
+					<p
+						style={{
+							fontFamily: OG_FONT_TITLE_FAMILY,
+							color: '#ffffff',
+							fontWeight: 400,
+						}}
+						tw="mt-6 max-w-[1000px] text-3xl leading-snug"
+					>
+						{props.underTitle}
+					</p>
+				)}
 			</div>
 
-			{/* Bottom section - Subtitle or Motto with optional Call to Action */}
+			{/* Bottom section - Subtitle with optional Call to Action */}
 			<div tw="absolute bottom-0 left-0 right-0 flex flex-col items-center justify-center pb-4">
 				{!!props.subtitle && (
 					<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-3xl text-[#f8fafc]/90 tracking-widest mb-2">
 						{props.subtitle}
-					</p>
-				)}
-
-				{!props.subtitle && (
-					<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-3xl text-[#f8fafc]/90 mb-2">
-						IT ALL STARTS HERE
 					</p>
 				)}
 
@@ -130,9 +121,6 @@ export function TwitterTitleImage(props: {
 				backgroundRepeat: 'no-repeat',
 			}}
 		>
-			{/* Overlay for better text contrast */}
-			<div tw="absolute inset-0 bg-[#020817]/60" />
-
 			{/* Content - All centered for Twitter */}
 			<div tw="flex flex-col items-center justify-center text-center relative z-10 px-8">
 				{/* Logo */}
@@ -163,7 +151,7 @@ export function TwitterTitleImage(props: {
 
 				{/* Motto */}
 				<p style={{ fontFamily: 'Rubik Mono One' }} tw="text-4xl text-[#f8fafc]/90 tracking-widest mb-8">
-					IT ALL STARTS HERE
+					{TF_SLOGAN.toUpperCase()}
 				</p>
 
 				{/* Twitter-specific call to action */}

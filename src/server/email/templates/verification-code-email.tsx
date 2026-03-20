@@ -13,7 +13,7 @@ interface VerificationEmailProps {
 }
 
 // const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERVEL_URL}` : 'http://localhost:3000';
-const baseUrl = 'https://tuesfest.bg';
+const baseUrl = 'http://localhost:3000';
 
 export default function VerificationCodeEmail({
 	verificationCode,

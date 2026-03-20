@@ -8,9 +8,8 @@ import './animation.css';
 import './globals.css';
 
 import { Metadata, Viewport } from 'next';
-import { Rubik_Mono_One } from 'next/font/google';
+import { PT_Mono, PT_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
-import { GeistSans } from 'geist/font/sans';
 
 import { Toaster } from '@/components/ui/sonner';
 import { TF_YEAR } from '@/constants/event';
@@ -34,8 +33,18 @@ export const metadata: Metadata = {
 	description: TF_DESCRIPTION,
 	keywords: KEYWORDS,
 	icons: {
-		icon: '/favicon.ico',
-		shortcut: '/favicon.png',
+		icon: [
+			{
+				url: '/favicon-light-theme.webp',
+				type: 'image/webp',
+				media: '(prefers-color-scheme: light)',
+			},
+			{
+				url: '/favicon-dark-theme.webp',
+				type: 'image/webp',
+				media: '(prefers-color-scheme: dark)',
+			},
+		],
 		apple: '/favicon.png',
 	},
 	twitter: TWITTER_METADATA,
@@ -49,10 +58,16 @@ export const metadata: Metadata = {
 // 	variable: '--font-warzone',
 // });
 
-const rubikMonoOne = Rubik_Mono_One({
+const ptSans = PT_Sans({
+	subsets: ['latin', 'cyrillic'],
+	weight: ['400', '700'],
+	variable: '--font-pt-sans',
+});
+
+const ptMono = PT_Mono({
 	subsets: ['latin', 'cyrillic'],
 	weight: '400',
-	variable: '--font-rubik-mono-one',
+	variable: '--font-pt-mono',
 });
 
 // const origin = localFont({
@@ -60,9 +75,9 @@ const rubikMonoOne = Rubik_Mono_One({
 // 	variable: '--font-origin',
 // });
 
-const glitch = localFont({
-	src: '../assets/fonts/glitch.woff2',
-	variable: '--font-glitch',
+const mighty = localFont({
+	src: '../assets/fonts/mightySouly.ttf',
+	variable: '--font-mighty',
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -73,17 +88,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		>
 			<head>
 				<Script src="https://www.googletagmanager.com/gtag/js?id=G-1H1H1CR559" strategy="afterInteractive" />
-				<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any"></link>
 			</head>
 			<body
 				className={cn(
-					GeistSans.variable,
+					ptSans.variable,
 					// warzone.variable,
-					rubikMonoOne.variable,
-					glitch.variable,
+					ptMono.variable,
+					mighty.variable,
 					// origin.variable,
 					'font-sans',
-					'dark h-full w-screen items-center justify-center overflow-hidden overflow-x-hidden overflow-y-scroll bg-[url(../assets/wave-36.jpg)] bg-cover bg-fixed bg-center lg:bg-[url(../assets/wave-39.jpg)]'
+					'dark w-screen overflow-x-hidden'
 				)}
 			>
 				<GrowthBookServerProvider>

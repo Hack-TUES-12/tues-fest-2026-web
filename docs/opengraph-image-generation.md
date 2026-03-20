@@ -511,7 +511,7 @@ Motto:
 	style={{ fontFamily: 'RubikMonoOne-Regular' }}
 	tw="text-[#f8fafc]/90 mt-8 text-xl tracking-widest sm:text-2xl md:text-3xl"
 >
-	IT ALL STARTS HERE
+	WHERE STEPS TELL STORIES
 </p>
 ```
 

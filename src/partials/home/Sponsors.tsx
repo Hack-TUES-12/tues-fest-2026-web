@@ -1,4 +1,3 @@
-import { GradientHeading } from '@/components/ui/gradient-heading';
 import {
 	ALPHA_SPONSORS,
 	BETA_SPONSORS,
@@ -13,6 +12,14 @@ async function randomStartIndex(podkrepqshti: Podkrepqsht[]) {
 	return Math.floor(Math.random() * podkrepqshti.length);
 }
 
+function SectionTitle({ children }: { children: React.ReactNode }) {
+	return (
+		<h2 className="font-mighty scroll-m-20 mb-6 text-center text-4xl first:mt-0 md:text-5xl">
+			{children}
+		</h2>
+	);
+}
+
 export default async function Sponsors() {
 	const [alphaStartIndex, betaStartIndex, gammaStartIndex, partnersStartIndex, mediaPartnersStartIndex] =
 		await Promise.all([
@@ -24,28 +31,56 @@ export default async function Sponsors() {
 		]);
 
 	return (
-		<section id="sponsors" className="relative z-20 mb-20 p-8 md:p-12">
-			<div className="py-4 pb-8">
-				<GradientHeading size="lg">Спонсори</GradientHeading>
+		<div className="grid grid-cols-1 place-items-center">
+		<div className="mb-52 relative w-full">
+			<SectionTitle>Alfa Sponsors</SectionTitle>
+			<PodkrepqAutoDisplay
+				podkrepqshti={ALPHA_SPONSORS}
+				imagePriority
+				startIndex={alphaStartIndex}
+				cardVariant="secondary"
+			/>
+		</div>
+
+		<div className="mb-52 relative w-full">
+			<SectionTitle>Beta Sponsors</SectionTitle>
+			<PodkrepqAutoDisplay
+				podkrepqshti={BETA_SPONSORS}
+				startIndex={betaStartIndex}
+				showGreenCircles
+				cardVariant="muted"
+			/>
+		</div>
+
+		<div className="mb-52 relative w-full">
+			<SectionTitle>Gamma Sponsors</SectionTitle>
+			<PodkrepqAutoDisplay
+				podkrepqshti={GAMMA_SPONSORS}
+				startIndex={gammaStartIndex}
+				showPurpleCircle
+				cardVariant="primary"
+			/>
+		</div>
+
+			<div className="mb-52 relative w-full">
+				<SectionTitle>Partners</SectionTitle>
+				<PodkrepqAutoDisplay
+					podkrepqshti={PARTNERS}
+					startIndex={partnersStartIndex}
+					showGreenCircles
+					cardVariant="muted"
+				/>
 			</div>
-			<h2 className="text-accent-foreground font-title mb-4 mt-32 text-center text-3xl font-black">
-				Алфа Спонсори
-			</h2>
-			<PodkrepqAutoDisplay podkrepqshti={ALPHA_SPONSORS} startIndex={alphaStartIndex} />
-			<h2 className="text-accent-foreground font-title mb-4 mt-32 text-center text-3xl font-black">
-				Бета Спонсори
-			</h2>
-			<PodkrepqAutoDisplay podkrepqshti={BETA_SPONSORS} startIndex={betaStartIndex} />
-			<h2 className="text-accent-foreground font-title mb-4 mt-32 text-center text-3xl font-black">
-				Гама Спонсори
-			</h2>
-			<PodkrepqAutoDisplay podkrepqshti={GAMMA_SPONSORS} startIndex={gammaStartIndex} />
-			<h2 className="text-accent-foreground font-title mb-4 mt-32 text-center text-3xl font-black">Партньори</h2>
-			<PodkrepqAutoDisplay podkrepqshti={PARTNERS} startIndex={partnersStartIndex} />
-			<h2 className="text-accent-foreground font-title mb-4 mt-32 text-center text-3xl font-black">
-				Медийни Партньори
-			</h2>
-			<PodkrepqAutoDisplay podkrepqshti={MEDIA_PARTNERS} startIndex={mediaPartnersStartIndex} />
-		</section>
+
+			<div className="mb-20 place-self-center w-full">
+				<SectionTitle>Media Partners</SectionTitle>
+				<PodkrepqAutoDisplay
+					podkrepqshti={MEDIA_PARTNERS}
+					startIndex={mediaPartnersStartIndex}
+					showPurpleCircle
+					cardVariant="primary"
+				/>
+			</div>
+		</div>
 	);
 }

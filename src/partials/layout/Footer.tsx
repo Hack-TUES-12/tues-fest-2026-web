@@ -44,7 +44,7 @@ const Socials = () => (
 			</svg>
 		</Link>
 		<Link
-			href="https://linktr.ee/hacktuesfest"
+			href="https://linktr.ee/hack.tues.fest"
 			// name="social-link"
 			aria-label="social-link"
 			className="hover:text-primary mr-5 text-white"

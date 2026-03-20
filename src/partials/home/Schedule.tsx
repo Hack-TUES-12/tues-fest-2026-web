@@ -2,9 +2,6 @@
 
 import { useEffect } from 'react';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { GradientHeading } from '@/components/ui/gradient-heading';
-import { Separator } from '@/components/ui/separator';
 import { SCHEDULE } from '@/constants/home/schedule';
 
 function Schedule() {
@@ -21,37 +18,50 @@ function Schedule() {
 	}, []);
 
 	return (
-		<>
-			<section id="schedule" className='gap-16" relative z-20 flex flex-col px-6 py-6 md:px-8'>
-				<GradientHeading size="lg" className="mb-8">
-					Програма
-				</GradientHeading>
+		<section id="schedule" className="relative px-4 py-12 md:px-8">
+			{/* Section header */}
+			<div className="mb-12 flex flex-col items-center gap-2 text-center">
+				<p className="text-accent tracking-widest">Какво предстои</p>
+				<h2 className="font-title text-4xl text-white md:text-5xl">Програма</h2>
+			</div>
 
-				<div className="flex flex-col gap-16 pt-4">
-					{SCHEDULE.map((item) => (
-						<div key={item.title} className="flex flex-col gap-4 sm:flex-row sm:items-start md:gap-6">
-							{/* Time Card */}
-							<Card className="font-title w-full shrink-0 sm:w-32">
-								<CardContent className="flex flex-col items-center justify-center p-4 text-center">
-									<p className="text-primary text-lg font-semibold">{item.start}</p>
-									<Separator className="my-2" />
-									<p className="text-primary text-lg font-semibold">{item.end}</p>
-								</CardContent>
-							</Card>
+			{/* Timeline */}
+			<div className="relative mx-auto max-w-3xl">
+				{/* Vertical connecting line */}
+				<div className="absolute top-4 bottom-4 left-4 w-px bg-gradient-to-b from-accent/40 via-accent/20 to-transparent sm:left-5" />
 
-							{/* Content Card */}
-							<Card className="w-full">
-								<CardHeader>
-									<CardTitle className="font-title text-xl">{item.title}</CardTitle>
-								</CardHeader>
-								<Separator className="mx-6" />
-								<CardContent className="text-muted-foreground">{item.description}</CardContent>
-							</Card>
+				<div className="flex flex-col gap-6">
+					{SCHEDULE.map((item, i) => (
+						<div key={item.title} className="flex gap-6 sm:gap-8">
+							{/* Timeline dot */}
+							<div className="relative z-10 mt-5 flex shrink-0 flex-col items-center">
+								<div className="flex size-9 items-center justify-center rounded-full border border-accent/40 bg-accent/10 backdrop-blur-sm">
+									<div className="size-2.5 rounded-full bg-accent shadow-[0_0_8px_theme(colors.accent/50)]" />
+								</div>
+							</div>
+
+							{/* Content card */}
+							<div className="group w-full rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-accent/30 hover:bg-card/80">
+								{/* Time badge */}
+								<div className="mb-3 flex items-center gap-2">
+									<span className="font-title rounded-full border border-accent/20 bg-accent/10 px-3 py-0.5 text-xs font-semibold tracking-widest text-accent">
+										{item.start} – {item.end}
+									</span>
+								</div>
+
+								{/* Title */}
+								<h3 className="mb-3 text-xl font-bold text-white">{item.title}</h3>
+
+								{/* Description */}
+								<div className="text-sm leading-relaxed text-white/60">
+									{item.description}
+								</div>
+							</div>
 						</div>
 					))}
 				</div>
-			</section>
-		</>
+			</div>
+		</section>
 	);
 }
 

@@ -8,7 +8,7 @@ export function ProjectList({ projects }: { projects: readonly ProjectType[] }) 
 	const projectCards = projects.map((project) => <ProjectCard key={project.title} project={project} />);
 
 	return (
-		<div className="inline-grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+		<div className="inline-grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
 			<Suspense fallback={projectCards}>
 				<InteractiveFilteredProjects ordererdProjectIds={projects.map((project) => project.id)}>
 					{projectCards}

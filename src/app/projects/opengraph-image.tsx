@@ -1,45 +1,24 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-
 import { ImageResponse } from 'next/og';
 
+import {
+	loadStandardOpengraphImageAssets,
+	STANDARD_OG_CONTENT_TYPE,
+	STANDARD_OG_IMAGE_SIZE,
+} from '@/lib/opengraph/standard-opengraph-assets';
 import { OpengraphTitleImage } from '@/partials/opengraph/title-image';
 
-// Image metadata
 export const alt = 'Проекти';
-export const size = {
-	width: 1200,
-	height: 630,
-};
+export const size = STANDARD_OG_IMAGE_SIZE;
+export const contentType = STANDARD_OG_CONTENT_TYPE;
 
-export const contentType = 'image/png';
-
-// Image generation
 export default async function Image() {
-	const [glitchFontData, rubikMonoOneData, waveImage] = await Promise.all([
-		readFile(join(process.cwd(), 'src/assets/fonts/glitch.otf')),
-		readFile(join(process.cwd(), 'src/assets/fonts/RubikMonoOne-Regular.ttf')),
-		readFile(join(process.cwd(), 'src/assets/wave-37.jpg')).then((buffer) => {
-			const base64 = buffer.toString('base64');
-			return `data:image/jpeg;base64,${base64}`;
-		}),
-	]);
+	const { backgroundImageUrl, fonts } = await loadStandardOpengraphImageAssets();
 
-	return new ImageResponse(<OpengraphTitleImage title={alt} waveImageUrl={waveImage} />, {
-		...size,
-		fonts: [
-			{
-				name: 'Glitch',
-				data: glitchFontData,
-				style: 'normal',
-				weight: 400,
-			},
-			{
-				name: 'Rubik Mono One',
-				data: rubikMonoOneData,
-				style: 'normal',
-				weight: 400,
-			},
-		],
-	});
+	return new ImageResponse(
+		<OpengraphTitleImage title={alt} waveImageUrl={backgroundImageUrl} headingSize="sm" />,
+		{
+			...size,
+			fonts,
+		}
+	);
 }
