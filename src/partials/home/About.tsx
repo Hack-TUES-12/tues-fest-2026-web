@@ -7,129 +7,95 @@ import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_TIME_STRING, TF_YEAR } from 
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 const About = () => (
-	<section id="about" className="relative overflow-hidden px-4 py-12 md:px-8">
-		<div className="mx-auto flex max-w-4xl flex-col items-center gap-4 text-center">
+	<section id="about" className="relative overflow-hidden px-4 py-12 lg:px-8">
+		<div className="mx-auto max-w-6xl">
 
-			{/* Title area — circle is positioned relative to this wrapper */}
-			<div className="relative flex w-full flex-col items-center gap-1">
-				{/* Subtitle */}
-				<p className="text-xl text-white tracking-widest">Повече за</p>
+			{/* Unified layout: flex-col on mobile, side-by-side grid on desktop */}
+			<div className="flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
 
-				{/* Title */}
-				<h2 className="relative z-10 font-mighty text-7xl leading-none text-primary md:text-8xl">
-					TUES Fest
-				</h2>
+				{/* Left: overlapping images */}
+				<div className="relative" style={{ paddingBottom: '110%' }}>
+					{/* Green + decoration — top-left */}
+					<span
+						className="absolute -left-4 -top-4 z-30 select-none text-8xl font-black leading-none text-muted"
+						aria-hidden="true"
+					>
+						+
+					</span>
 
-				{/* Purple circle decoration: top starts at bottom of title area, centered, 75vw wide */}
-				<img
-					src="/decorations/purple-circle.svg"
-					alt=""
-					aria-hidden="true"
-					className="pointer-events-none absolute max-w-3xl min-w-lg"
-					style={{
-						top: '100%',
-						left: '50%',
-						transform: 'translateX(-50%)',
-						width: '50vw',
-					}}
-				/>
-			</div>
+					{/* Image 1 — large rectangle, top-left */}
+					<img
+						src={ABOUT_IMAGE_1}
+						alt="TUES FEST — публика на събитието"
+						className="absolute left-[50%] -translate-x-1/2 top-[15%] z-10 w-[75%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
+					/>
 
-			{/* Content below title — z-10 to appear above the circle decoration */}
-			<div className="relative z-10 flex w-full flex-col items-center gap-8">
-				{/* Main text */}
-				<p className="max-w-2xl">
-					{ABOUT_TEXT}
-				</p>
+					{/* Image 3 — smaller rectangle, bottom-left */}
+					<img
+						src={ABOUT_IMAGE_2}
+						alt="TUES FEST — момент от събитието"
+						className="absolute left-[20%] bottom-0 z-10 w-[75%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
+					/>
 
-				{/* Cards grid */}
-				<div className="grid w-full grid-cols-1 gap-4 text-left md:grid-cols-2">
-					<Card className="px-8 py-7">
-						<CardContent className="p-0">
-							<h3 className="mb-2 text-2xl font-bold text-primary">Кога и къде?</h3>
-							<p className="text-md text-foreground/80">
-								TUES Fest {TF_YEAR} ще се проведе на {TF_DATE_STRING} от {TF_TIME_STRING} часа на територията на {TF_LOCATION}.
-							</p>
-						</CardContent>
-					</Card>
+					{/* Image 2 — circle, bottom-right, overlapping both */}
+					{/* <img
+						src={ABOUT_IMAGE_2}
+						alt="TUES FEST — зала пълна с хора"
+						className="absolute top-[50%] -translate-y-1/3 left-[50%] -translate-x-1/2 z-20 w-[40%] rounded-full object-cover aspect-square shadow-2xl transition-all duration-300 hover:scale-105"
+					/> */}
 
-					<Card className="px-8 py-7">
-						<CardContent className="p-0">
-							<h3 className="mb-2 text-2xl font-bold text-primary">Какво ще видите?</h3>
-							<p className="text-md text-foreground/80">
-								Ще имате възможност да се запознаете с ТУЕС към ТУ-София отблизо и с това какво ни прави
-								различното училище.
-							</p>
-						</CardContent>
-					</Card>
+					{/* Orange + decoration — bottom-right */}
+					<span
+						className="absolute bottom-[1%] right-[1%] z-30 select-none text-7xl font-black leading-none text-secondary translate-x-1/2 translate-y-1/2"
+						aria-hidden="true"
+					>
+						+
+					</span>
 				</div>
 
-				{/* CTA button */}
-				<IfTFFeatureOn feature="tf-schedule">
-					<Button asChild variant="default" size="lg" className="font-bold">
-						<Link href="/schedule">Виж програмата</Link>
-					</Button>
-				</IfTFFeatureOn>
-			</div>
-		</div>
+				{/* Right: text content */}
+				<div className="flex flex-col items-center text-center gap-6 lg:items-start lg:text-left">
+					{/* Title */}
+					<div className="flex flex-col gap-1">
+						<p className="text-xl text-white tracking-widest">Повече за</p>
+						<h2 className="font-mighty text-7xl leading-none text-primary lg:text-8xl">TUES Fest</h2>
+					</div>
 
-		{/* Images — overlapping on desktop, stacked on mobile */}
-		<div className="mx-auto mt-12 w-full max-w-4xl px-4 md:px-8">
+					{/* Main text */}
+					<p>{ABOUT_TEXT}</p>
 
-			{/* Mobile: clean stacked cascade */}
-			<div className="flex flex-col gap-3 md:hidden">
-				<img
-					src={ABOUT_IMAGE_1}
-					alt="TUES FEST — публика на събитието"
-					className="w-full rounded-2xl object-cover aspect-video shadow-xl transition-all duration-300 hover:scale-105"
-				/>
-				<img
-					src={ABOUT_IMAGE_2}
-					alt="TUES FEST — зала пълна с хора"
-					className="w-full rounded-2xl object-cover aspect-video shadow-xl transition-all duration-300 hover:scale-105"
-				/>
-			</div>
+					{/* Info sections */}
+					<div className="flex flex-col gap-4">
+						<div>
+							<h3 className="mb-2 text-2xl font-bold text-primary">Кога и къде?</h3>
+							<p className="text-lg text-foreground/80">
+								TUES Fest {TF_YEAR} ще се проведе на {TF_DATE_STRING} от {TF_TIME_STRING} часа на територията на {TF_LOCATION}.
+							</p>
+						</div>
+						<div>
+							<h3 className="mb-2 text-2xl font-bold text-primary">Какво ще видите?</h3>
+							<p className="text-lg text-foreground/80">
+								Ще имате възможност да се запознаете с ТУЕС към ТУ-София отблизо и с това какво ни прави различното училище.
+							</p>
+						</div>
+					</div>
 
-			{/* Desktop: diagonal overlapping layout */}
-			<div className="relative hidden md:block w-full" style={{ paddingBottom: '62%' }}>
-				{/* Green + decoration — top-left */}
-				<span
-					className="absolute left-4 -top-4 z-30 select-none text-8xl font-black leading-none text-muted -translate-y-1/2"
-					aria-hidden="true"
-				>
-					+
-				</span>
-
-				{/* Image 1 — top-left */}
-				<img
-					src={ABOUT_IMAGE_1}
-					alt="TUES FEST — публика на събитието"
-					className="absolute left-0 top-0 z-10 w-[65%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
-				/>
-
-				{/* Image 2 — bottom-right, on top */}
-				<img
-					src={ABOUT_IMAGE_2}
-					alt="TUES FEST — зала пълна с хора"
-					className="absolute bottom-0 right-0 z-20 w-[65%] rounded-2xl object-cover aspect-video shadow-2xl transition-all duration-300 hover:scale-105"
-				/>
-
-				{/* Orange + decoration — bottom-right */}
-				<span
-					className="absolute bottom-12 -right-3 translate-x-1/2 z-30 select-none text-7xl font-black leading-none text-secondary"
-					aria-hidden="true"
-				>
-					+
-				</span>
+					{/* CTA button */}
+					<IfTFFeatureOn feature="tf-schedule">
+						<Button asChild variant="default" size="lg" className="font-bold w-fit">
+							<Link href="/schedule">Виж програмата</Link>
+						</Button>
+					</IfTFFeatureOn>
+				</div>
 			</div>
 		</div>
 
 		{/* Organizers section */}
-		<div className="mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center md:px-8">
+		<div className="mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center lg:px-8">
 			<div className='space-y-1'>
 				<p className="text-primary tracking-widest">Организатори</p>
 
-				<h2 className="font-title text-4xl md:text-5xl">Кой стои зад TUES Fest?</h2>
+				<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
 			</div>
 
 			<p>
