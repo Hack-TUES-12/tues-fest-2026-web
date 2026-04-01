@@ -6,7 +6,6 @@
     "dev": "next dev --turbopack",
     "dev:email": "email dev -d ./src/server/email/templates",
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
