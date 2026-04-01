@@ -8,10 +8,10 @@ import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 const About = () => (
 	<section id="about" className="relative overflow-hidden px-4 py-12 lg:px-8">
-		<div className="mx-auto max-w-6xl">
+		<div className="relative z-10 overflow-hidden pb-48 mx-auto max-w-6xl">
 
 			{/* Unified layout: flex-col on mobile, side-by-side grid on desktop */}
-			<div className="flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+			<div className="relative flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
 
 				{/* Left: overlapping images */}
 				<div className="relative" style={{ paddingBottom: '110%' }}>
@@ -87,11 +87,20 @@ const About = () => (
 						</Button>
 					</IfTFFeatureOn>
 				</div>
+
+				{/* Purple circle decoration — bottom center of layout, half-visible */}
+				<img
+					src="/decorations/purple-circle.svg"
+					alt=""
+					aria-hidden="true"
+					className="pointer-events-none absolute -bottom-48 left-1/2 -z-10 w-[80%] max-w-2xl translate-y-1/2 -translate-x-1/2"
+				/>
 			</div>
 		</div>
 
+
 		{/* Organizers section */}
-		<div className="mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center lg:px-8">
+		<div className="relative z-10 mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center lg:px-8">
 			<div className='space-y-1'>
 				<p className="text-primary tracking-widest">Организатори</p>
 
