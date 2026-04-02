@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { TeamBackground } from './TeamBackground';
+import { OrganizersSection } from './OrganizersSection';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -99,37 +99,7 @@ const About = () => (
 				/>
 			</div>
 		</div>
-		{/* Organizers section */}
-		<div className="relative z-10">
-			{/* Background image — cycles through team1–team6 */}
-			<div className="relative min-h-[100vh] w-full overflow-hidden">
-				<TeamBackground />
-				{/* Gradient — stronger at bottom so card blends in */}
-				<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-			</div>
-
-			{/* Card — negative margin pulls it up to straddle the image bottom */}
-			<div className="relative z-10 flex justify-center px-4 -mt-40">
-				<Card className="w-full max-w-4xl px-8 py-10 text-center">
-					<CardContent className="flex flex-col items-center gap-6 p-0">
-						<div className="space-y-1">
-							<p className="text-muted tracking-widest">Организатори</p>
-							<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
-						</div>
-
-						<p>
-							TUES Fest {TF_YEAR} &quot;<span className="text-muted">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
-						</p>
-
-						<Button asChild variant="muted" size="lg" className="font-bold">
-							<Link href="/about">
-								Повече за ТУЕС
-							</Link>
-						</Button>
-					</CardContent>
-				</Card>
-			</div>
-		</div>
+		<OrganizersSection />
 	</section>
 );
 
