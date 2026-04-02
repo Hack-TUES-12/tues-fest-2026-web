@@ -1,20 +1,24 @@
 'use client';
 
-import { useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
+	type CarouselApi,
 } from '@/components/ui/carousel';
 import { TESTIMONIALS, TESTIMONIALS_TITLE } from '@/constants/home/testimonials';
 import Quote from './testimonial/Quote';
 
 const Testimonial = () => {
 	const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+	const [api, setApi] = useState<CarouselApi>();
+
+	const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
+	const scrollNext = useCallback(() => api?.scrollNext(), [api]);
 
 	return (
 		<section className="relative px-4 py-12 md:px-8">
@@ -25,11 +29,12 @@ const Testimonial = () => {
 			</div>
 
 			{/* Carousel */}
-			<div className="flex justify-center px-12">
+			<div className="flex justify-center">
 				<Carousel
 					opts={{ loop: true }}
-					className="w-full max-w-3xl"
+					className="w-full max-w-4xl"
 					plugins={[plugin.current]}
+					setApi={setApi}
 					onMouseEnter={plugin.current.stop}
 					onMouseLeave={plugin.current.reset}
 				>
@@ -47,9 +52,23 @@ const Testimonial = () => {
 						))}
 					</CarouselContent>
 
-					{/* Custom nav buttons */}
-					<CarouselPrevious className="border-white/10 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-primary/10 hover:text-primary" />
-					<CarouselNext className="border-white/10 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-primary/10 hover:text-primary" />
+					{/* Nav buttons – bottom-right, aligned with the right (text) column */}
+					<div className="mt-8 flex justify-end gap-3">
+						<button
+							onClick={scrollPrev}
+							aria-label="Previous slide"
+							className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-card/50 text-white/50 backdrop-blur-sm transition-colors hover:border-primary/30 hover:text-primary"
+						>
+							<ArrowLeft className="size-4" />
+						</button>
+						<button
+							onClick={scrollNext}
+							aria-label="Next slide"
+							className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-card/50 text-white/50 backdrop-blur-sm transition-colors hover:border-primary/30 hover:text-primary"
+						>
+							<ArrowRight className="size-4" />
+						</button>
+					</div>
 				</Carousel>
 			</div>
 		</section>
