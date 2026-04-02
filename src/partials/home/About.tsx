@@ -113,15 +113,15 @@ const About = () => (
 				<Card className="w-full max-w-4xl px-8 py-10 text-center">
 					<CardContent className="flex flex-col items-center gap-6 p-0">
 						<div className="space-y-1">
-							<p className="text-primary tracking-widest">Организатори</p>
+							<p className="text-muted tracking-widest">Организатори</p>
 							<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
 						</div>
 
 						<p>
-							TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
+							TUES Fest {TF_YEAR} &quot;<span className="text-muted">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
 						</p>
 
-						<Button asChild variant="default" size="lg" className="font-bold">
+						<Button asChild variant="muted" size="lg" className="font-bold">
 							<Link href="/about">
 								Повече за ТУЕС
 							</Link>
