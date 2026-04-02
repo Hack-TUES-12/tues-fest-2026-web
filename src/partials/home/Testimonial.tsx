@@ -1,28 +1,74 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 import { TESTIMONIALS, TESTIMONIALS_TITLE } from '@/constants/home/testimonials';
 import Quote from './testimonial/Quote';
 
-const AUTOPLAY_DELAY = 5000;
+const STICKY_TOP = 80; // px from viewport top where cards stick
+const MARGIN_Y = 10; // vertical offset (px) added per stacked card
 
 const Testimonial = () => {
-	const [current, setCurrent] = useState(0);
-	const [paused, setPaused] = useState(false);
-	const total = TESTIMONIALS.length;
-
-	const prev = useCallback(() => setCurrent(i => (i - 1 + total) % total), [total]);
-	const next = useCallback(() => setCurrent(i => (i + 1) % total), [total]);
+	const containerRef = useRef<HTMLUListElement>(null);
+	const cardRefs = useRef<(HTMLLIElement | null)[]>([]);
 
 	useEffect(() => {
-		if (paused) return;
-		const id = setInterval(next, AUTOPLAY_DELAY);
-		return () => clearInterval(id);
-	}, [paused, next]);
+		const container = containerRef.current;
+		if (!container) return;
 
-	const item = TESTIMONIALS[current]!;
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+		let animationId: number | null = null;
+		let listenerAttached = false;
+
+		const animate = () => {
+			const containerTop = container.getBoundingClientRect().top;
+
+			cardRefs.current.forEach((card, i) => {
+				if (!card) return;
+				const cardHeight = card.offsetHeight;
+				// How many px past this card's natural sticky threshold we've scrolled
+				const scrolled = STICKY_TOP - containerTop - i * (cardHeight + MARGIN_Y);
+
+				if (scrolled > 0) {
+					const scale = Math.max((cardHeight - scrolled * 0.05) / cardHeight, 0.82);
+					card.style.transform = `translateY(${MARGIN_Y * i}px) scale(${scale})`;
+				} else {
+					card.style.transform = `translateY(${MARGIN_Y * i}px)`;
+				}
+			});
+
+			animationId = null;
+		};
+
+		const onScroll = () => {
+			if (animationId) return;
+			animationId = requestAnimationFrame(animate);
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			const entry = entries[0];
+			if (!entry) return;
+
+			if (entry.isIntersecting) {
+				if (listenerAttached) return;
+				window.addEventListener('scroll', onScroll, { passive: true });
+				listenerAttached = true;
+			} else {
+				if (!listenerAttached) return;
+				window.removeEventListener('scroll', onScroll);
+				listenerAttached = false;
+			}
+		});
+
+		observer.observe(container);
+
+		return () => {
+			observer.disconnect();
+			if (listenerAttached) window.removeEventListener('scroll', onScroll);
+			if (animationId) cancelAnimationFrame(animationId);
+		};
+	}, []);
 
 	return (
 		<section className="relative px-4 py-12 md:px-8">
@@ -32,41 +78,29 @@ const Testimonial = () => {
 				<h2 className="font-title text-4xl text-white md:text-5xl">{TESTIMONIALS_TITLE}</h2>
 			</div>
 
-			{/* Slide */}
-			<div
-				className="flex justify-center"
-				onMouseEnter={() => setPaused(true)}
-				onMouseLeave={() => setPaused(false)}
-			>
-				<div className="w-full max-w-4xl">
-					<Quote
-						key={current}
-						img={item.img}
-						name={item.testimonyName}
-						text={item.testimonyBody}
-						desc={item.testimonyDesc}
-						colorIndex={current}
-					/>
-
-					{/* Nav buttons */}
-					<div className="mt-8 flex justify-end gap-3">
-						<button
-							onClick={prev}
-							aria-label="Previous slide"
-							className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-card/50 text-white/50 backdrop-blur-sm transition-colors hover:border-primary/30 hover:text-primary"
-						>
-							<ArrowLeft className="size-4" />
-						</button>
-						<button
-							onClick={next}
-							aria-label="Next slide"
-							className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-card/50 text-white/50 backdrop-blur-sm transition-colors hover:border-primary/30 hover:text-primary"
-						>
-							<ArrowRight className="size-4" />
-						</button>
-					</div>
-				</div>
-			</div>
+			{/* Stacking cards list */}
+			<ul ref={containerRef} className="mx-auto max-w-4xl">
+				{TESTIMONIALS.map((item, i) => (
+					<li
+						key={i}
+						ref={(el) => {
+							cardRefs.current[i] = el;
+						}}
+						className="sticky mb-6"
+						style={{ top: `${STICKY_TOP}px`, transformOrigin: 'center top' }}
+					>
+						<div className="rounded-2xl border border-white/10 bg-card/80 p-8 shadow-2xl backdrop-blur-sm">
+							<Quote
+								img={item.img}
+								name={item.testimonyName}
+								text={item.testimonyBody}
+								desc={item.testimonyDesc}
+								colorIndex={i}
+							/>
+						</div>
+					</li>
+				))}
+			</ul>
 		</section>
 	);
 };
