@@ -7,7 +7,7 @@ import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_TIME_STRING, TF_YEAR } from 
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 const About = () => (
-	<section id="about" className="relative overflow-hidden px-4 py-12 lg:px-8">
+	<section id="about" className="relative px-4 py-12 lg:px-8">
 		<div className="relative z-10 overflow-hidden pb-48 mx-auto max-w-6xl">
 
 			{/* Unified layout: flex-col on mobile, side-by-side grid on desktop */}
@@ -100,33 +100,39 @@ const About = () => (
 
 
 		{/* Organizers section */}
-		<div className="relative z-10 flex min-h-svh w-full items-end justify-center overflow-hidden">
+		<div className="relative z-10">
 			{/* Background image */}
-			<img
-				src="/team/team1.jpg"
-				alt=""
-				aria-hidden="true"
-				className="absolute inset-0 h-full w-full object-cover object-top"
-			/>
-			{/* Dark gradient overlay — fades from transparent at top to dark at bottom */}
-			<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+			<div className="relative min-h-[100vh] w-full overflow-hidden">
+				<img
+					src="/team/team1.jpg"
+					alt=""
+					aria-hidden="true"
+					className="absolute inset-0 h-full w-full object-cover object-top"
+				/>
+				{/* Gradient — stronger at bottom so card blends in */}
+				<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+			</div>
 
-			{/* Content */}
-			<div className="relative z-10 mb-16 flex max-w-2xl flex-col items-center gap-6 px-4 text-center lg:px-8">
-				<div className="space-y-1">
-					<p className="text-primary tracking-widest">Организатори</p>
-					<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
-				</div>
+			{/* Card — negative margin pulls it up to straddle the image bottom */}
+			<div className="relative z-10 flex justify-center px-4 -mt-40">
+				<Card className="w-full max-w-4xl px-8 py-10 text-center">
+					<CardContent className="flex flex-col items-center gap-6 p-0">
+						<div className="space-y-1">
+							<p className="text-primary tracking-widest">Организатори</p>
+							<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
+						</div>
 
-				<p>
-					TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
-				</p>
+						<p>
+							TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
+						</p>
 
-				<Button asChild variant="default" size="lg" className="font-bold">
-					<Link href="/about">
-						Повече за ТУЕС
-					</Link>
-				</Button>
+						<Button asChild variant="default" size="lg" className="font-bold">
+							<Link href="/about">
+								Повече за ТУЕС
+							</Link>
+						</Button>
+					</CardContent>
+				</Card>
 			</div>
 		</div>
 	</section>
