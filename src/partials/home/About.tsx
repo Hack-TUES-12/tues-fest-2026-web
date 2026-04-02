@@ -7,8 +7,8 @@ import { TF_DATE_STRING, TF_LOCATION, TF_SLOGAN, TF_TIME_STRING, TF_YEAR } from 
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 const About = () => (
-	<section id="about" className="relative px-4 py-12 lg:px-8">
-		<div className="relative z-10 overflow-hidden pb-48 mx-auto max-w-6xl">
+	<section id="about" className="relative">
+		<div className="relative px-4 py-12 lg:px-8 z-10 overflow-hidden pb-48 mx-auto max-w-6xl">
 
 			{/* Unified layout: flex-col on mobile, side-by-side grid on desktop */}
 			<div className="relative flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
@@ -97,8 +97,6 @@ const About = () => (
 				/>
 			</div>
 		</div>
-
-
 		{/* Organizers section */}
 		<div className="relative z-10">
 			{/* Background image */}
