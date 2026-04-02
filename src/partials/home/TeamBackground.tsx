@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const IMAGES = [
 	'/team/team1.webp',
@@ -28,21 +29,25 @@ export const TeamBackground = () => {
 		<>
 			{/* Previous image fades out */}
 			{prev !== null && (
-				<img
+				<Image
 					key={`prev-${prev}`}
-					src={IMAGES[prev]}
+					src={IMAGES[prev]!}
 					alt=""
 					aria-hidden="true"
-					className="absolute inset-0 h-full w-full object-cover object-top animate-fade-out"
+					className="object-cover object-top animate-fade-out"
+					fill
+					sizes="100vw"
 				/>
 			)}
 			{/* Current image fades in */}
-			<img
+			<Image
 				key={`cur-${current}`}
-				src={IMAGES[current]}
+				src={IMAGES[current]!}
 				alt=""
 				aria-hidden="true"
-				className="absolute inset-0 h-full w-full object-cover object-top animate-fade-in"
+				className="object-cover object-top animate-fade-in"
+				fill
+				sizes="100vw"
 			/>
 		</>
 	);
