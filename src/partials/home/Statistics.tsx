@@ -16,7 +16,7 @@ export default function Statistics() {
 	const [selectedFolderIndex, setSelectedFolderIndex] = useState(FOLDERS.length);
 
 	return (
-		<section id="statistics" className="px-4 py-12 md:px-8">
+		<section id="statistics" className="px-4 py-12 pt-32 md:px-8 md:pt-48">
 			<div className="mb-12 max-w-4xl mx-auto text-center flex flex-col items-center">
 				<p className="text-muted text-xl tracking-widest mb-1">История</p>
 				<h2 className="font-title text-4xl md:text-5xl text-white mb-4">
