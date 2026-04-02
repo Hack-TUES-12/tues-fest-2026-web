@@ -32,20 +32,24 @@ export const OrganizersSection = () => {
 	const cardY = (1 - progress) * 100;
 
 	return (
-		<div
-			ref={containerRef}
-			className="relative"
-			style={{
-				height: '200vh',
-				width: '100vw',
-				marginLeft: 'calc(50% - 50vw)',
-			}}
-		>
-			{/* Sticky stage — stays in viewport while container scrolls */}
-			<div className="sticky top-0 h-screen">
+		<div ref={containerRef} className="relative" style={{ height: '200vh' }}>
+			{/* Sticky stage — full-bleed by escaping the max-w-screen-2xl main container */}
+			<div
+				className="sticky top-0 h-screen overflow-hidden"
+				style={{
+					width: '100vw',
+					marginLeft: 'calc(50% - 50vw)',
+				}}
+			>
 				{/* Background */}
 				<TeamBackground />
+				{/* Static gradient at the bottom so the card blends in */}
 				<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+				{/* Progressive dark overlay — grows with scroll progress */}
+				<div
+					className="absolute inset-0 bg-black pointer-events-none"
+					style={{ opacity: progress * 0.60 }}
+				/>
 
 				{/* Card — animates up from below */}
 				<div
