@@ -61,11 +61,13 @@ const Quote = ({
 
 			{/* Right: quote content */}
 			<div className="flex flex-1 flex-col gap-4">
-				{/* Decorative opening quotes */}
-				<span className="font-serif text-7xl leading-none text-white/10 select-none">&ldquo;</span>
 
 				{/* Quote text */}
-				<p className="-mt-4 text-base leading-relaxed text-white/70 sm:text-lg">{text}</p>
+				<div className='relative'>
+					{/* Decorative opening quotes */}
+					<span className="absolute top-0 left-0 -translate-y-[30%] -translate-x-[25%] font-serif text-[300px] leading-none text-white/10 select-none">&ldquo;</span>
+					<p className="-mt-4 text-base leading-relaxed text-white/70 sm:text-lg">{text}</p>
+				</div>
 
 				{/* Name + description */}
 				<div className="mt-2 flex flex-col gap-1">
