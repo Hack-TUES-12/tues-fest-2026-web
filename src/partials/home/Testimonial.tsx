@@ -92,10 +92,10 @@ const Testimonial = () => {
 						className="sticky min-h-[100vh]"
 						style={{ top: `${STICKY_TOP}px`, transformOrigin: 'center top' }}
 					>
-						<button
-							onClick={() => setSelectedIndex(i)}
-							className="w-full cursor-pointer rounded-2xl border border-white/10 bg-card p-8 shadow-2xl text-left transition-colors hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-						>
+					<button
+						onClick={() => setSelectedIndex(i)}
+						className="w-full cursor-pointer rounded-2xl border border-white/10 bg-card p-8 shadow-2xl text-left transition-colors hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 max-h-[calc(100vh-6rem)] overflow-y-auto"
+					>
 							<Quote
 								img={item.img}
 								name={item.testimonyName}
