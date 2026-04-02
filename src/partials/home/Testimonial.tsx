@@ -86,10 +86,10 @@ const Testimonial = () => {
 						ref={(el) => {
 							cardRefs.current[i] = el;
 						}}
-						className="sticky mb-6"
+						className="sticky min-h-[100vh]"
 						style={{ top: `${STICKY_TOP}px`, transformOrigin: 'center top' }}
 					>
-						<div className="rounded-2xl border border-white/10 bg-card/80 p-8 shadow-2xl backdrop-blur-sm">
+						<div className="rounded-2xl border border-white/10 bg-card p-8 shadow-2xl">
 							<Quote
 								img={item.img}
 								name={item.testimonyName}
