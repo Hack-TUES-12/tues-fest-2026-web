@@ -100,22 +100,34 @@ const About = () => (
 
 
 		{/* Organizers section */}
-		<div className="relative z-10 mx-auto mt-24 flex max-w-5xl flex-col items-center gap-6 text-center lg:px-8">
-			<div className='space-y-1'>
-				<p className="text-primary tracking-widest">Организатори</p>
+		<div className="relative z-10 flex min-h-svh w-full items-end justify-center overflow-hidden">
+			{/* Background image */}
+			<img
+				src="/team/team1.jpg"
+				alt=""
+				aria-hidden="true"
+				className="absolute inset-0 h-full w-full object-cover object-top"
+			/>
+			{/* Dark gradient overlay — fades from transparent at top to dark at bottom */}
+			<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-				<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
+			{/* Content */}
+			<div className="relative z-10 mb-16 flex max-w-2xl flex-col items-center gap-6 px-4 text-center lg:px-8">
+				<div className="space-y-1">
+					<p className="text-primary tracking-widest">Организатори</p>
+					<h2 className="font-title text-4xl lg:text-5xl">Кой стои зад TUES Fest?</h2>
+				</div>
+
+				<p>
+					TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
+				</p>
+
+				<Button asChild variant="default" size="lg" className="font-bold">
+					<Link href="/about">
+						Повече за ТУЕС
+					</Link>
+				</Button>
 			</div>
-
-			<p>
-				TUES Fest {TF_YEAR} &quot;<span className="text-primary">{TF_SLOGAN}</span>&quot; се организира от ученици за ученици, под менторството на АЗТУЕС! Организационният екип вярва, че за поредна година ще покаже на света какво е да си ученик в ТУЕС към ТУ - София.
-			</p>
-
-			<Button asChild variant="default" size="lg" className="font-bold">
-				<Link href="/about">
-					Повече за ТУЕС
-				</Link>
-			</Button>
 		</div>
 	</section>
 );
