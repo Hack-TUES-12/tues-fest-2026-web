@@ -102,7 +102,7 @@ const About = () => (
 			{/* Background image */}
 			<div className="relative min-h-[100vh] w-full overflow-hidden">
 				<img
-					src="/team/team1.jpg"
+					src="/team/team6.jpg"
 					alt=""
 					aria-hidden="true"
 					className="absolute inset-0 h-full w-full object-cover object-top"
