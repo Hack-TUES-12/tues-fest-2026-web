@@ -112,6 +112,26 @@
 	.animate-fade-out { animation: fade-out 1s ease-in-out forwards; }
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: oklch(1 0 0 / 15%);
+	border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: oklch(1 0 0 / 30%);
+}
+* {
+	scrollbar-width: thin;
+	scrollbar-color: oklch(1 0 0 / 15%) transparent;
+}
+
 @layer base {
 	* {
 		@apply border-border outline-ring/50;

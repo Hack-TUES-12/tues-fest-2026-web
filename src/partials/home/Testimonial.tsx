@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { TESTIMONIALS, TESTIMONIALS_TITLE } from '@/constants/home/testimonials';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import Quote from './testimonial/Quote';
 
 const STICKY_TOP = 80; // px from viewport top where cards stick
@@ -11,6 +12,8 @@ const MARGIN_Y = 10; // vertical offset (px) added per stacked card
 const Testimonial = () => {
 	const containerRef = useRef<HTMLUListElement>(null);
 	const cardRefs = useRef<(HTMLLIElement | null)[]>([]);
+	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+	const selected = selectedIndex !== null ? TESTIMONIALS[selectedIndex] : null;
 
 	useEffect(() => {
 		const container = containerRef.current;
@@ -89,7 +92,10 @@ const Testimonial = () => {
 						className="sticky min-h-[100vh]"
 						style={{ top: `${STICKY_TOP}px`, transformOrigin: 'center top' }}
 					>
-						<div className="rounded-2xl border border-white/10 bg-card p-8 shadow-2xl">
+						<button
+							onClick={() => setSelectedIndex(i)}
+							className="w-full cursor-pointer rounded-2xl border border-white/10 bg-card p-8 shadow-2xl text-left transition-colors hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+						>
 							<Quote
 								img={item.img}
 								name={item.testimonyName}
@@ -97,10 +103,26 @@ const Testimonial = () => {
 								desc={item.testimonyDesc}
 								colorIndex={i}
 							/>
-						</div>
+						</button>
 					</li>
 				))}
 			</ul>
+
+			{/* Detail dialog */}
+			<Dialog open={selectedIndex !== null} onOpenChange={(open) => !open && setSelectedIndex(null)}>
+				<DialogContent className="max-w-[calc(100%-2rem)] sm:max-w-3xl border-white/10 bg-card p-8 max-h-[90vh] overflow-y-auto">
+					{selected && (
+						<Quote
+							img={selected.img}
+							name={selected.testimonyName}
+							text={selected.testimonyBody}
+							desc={selected.testimonyDesc}
+							colorIndex={selectedIndex!}
+							vertical
+						/>
+					)}
+				</DialogContent>
+			</Dialog>
 		</section>
 	);
 };
