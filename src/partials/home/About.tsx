@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { TeamBackground } from './TeamBackground';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ABOUT_IMAGE_1, ABOUT_IMAGE_2, ABOUT_TEXT } from '@/constants/home/about';
@@ -99,14 +101,9 @@ const About = () => (
 		</div>
 		{/* Organizers section */}
 		<div className="relative z-10">
-			{/* Background image */}
+			{/* Background image — cycles through team1–team6 */}
 			<div className="relative min-h-[100vh] w-full overflow-hidden">
-				<img
-					src="/team/team6.jpg"
-					alt=""
-					aria-hidden="true"
-					className="absolute inset-0 h-full w-full object-cover object-top"
-				/>
+				<TeamBackground />
 				{/* Gradient — stronger at bottom so card blends in */}
 				<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 			</div>
