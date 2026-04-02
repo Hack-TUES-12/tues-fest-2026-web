@@ -24,7 +24,7 @@ const Testimonial = () => {
 		<section className="relative px-4 py-12 md:px-8">
 			{/* Section header */}
 			<div className="mb-12 flex flex-col items-center gap-2 text-center">
-				<p className="text-primary tracking-widest">Казват за нас</p>
+				<p className="text-primary tracking-widest">Какво казват за нас</p>
 				<h2 className="font-title text-4xl text-white md:text-5xl">{TESTIMONIALS_TITLE}</h2>
 			</div>
 
