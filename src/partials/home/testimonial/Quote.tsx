@@ -1,41 +1,29 @@
 import Image, { StaticImageData } from 'next/image';
-import { TbQuote } from 'react-icons/tb';
 
 type Color = 'primary' | 'secondary' | 'accent' | 'muted';
 
 const COLORS: Color[] = ['primary', 'secondary', 'accent', 'muted'];
 
-const colorClasses: Record<
-	Color,
-	{ quote: string; name: string; ring: string; border: string; bg: string }
-> = {
+const colorClasses: Record<Color, { name: string; ring: string; circleBg: string }> = {
 	primary: {
-		quote: 'text-primary/20',
 		name: 'text-primary',
-		ring: 'ring-primary/40',
-		border: 'hover:border-primary/30',
-		bg: 'bg-primary/5',
+		ring: 'ring-primary/50',
+		circleBg: 'bg-primary',
 	},
 	secondary: {
-		quote: 'text-secondary/20',
 		name: 'text-secondary',
-		ring: 'ring-secondary/40',
-		border: 'hover:border-secondary/30',
-		bg: 'bg-secondary/5',
+		ring: 'ring-secondary/50',
+		circleBg: 'bg-secondary',
 	},
 	accent: {
-		quote: 'text-accent/20',
 		name: 'text-accent',
-		ring: 'ring-accent/40',
-		border: 'hover:border-accent/30',
-		bg: 'bg-accent/5',
+		ring: 'ring-accent/50',
+		circleBg: 'bg-accent',
 	},
 	muted: {
-		quote: 'text-muted/20',
-		name: 'text-muted',
-		ring: 'ring-muted/40',
-		border: 'hover:border-muted/30',
-		bg: 'bg-muted/5',
+		name: 'text-muted-foreground',
+		ring: 'ring-muted-foreground/50',
+		circleBg: 'bg-muted-foreground',
 	},
 };
 
@@ -45,40 +33,48 @@ const Quote = ({
 	text,
 	desc,
 	colorIndex = 0,
+	vertical = false,
 }: {
 	img: StaticImageData;
 	name: string;
 	text: string;
 	desc: string;
 	colorIndex?: number;
+	vertical?: boolean;
 }) => {
 	const color = COLORS[(colorIndex ?? 0) % 4] ?? 'primary';
 	const cls = colorClasses[color];
 
 	return (
-		<div
-			className={`relative flex w-full flex-col gap-5 rounded-2xl border border-white/10 backdrop-blur-sm transition-all duration-300 ${cls.bg} ${cls.border} p-6 sm:p-8`}
-		>
-			{/* Large decorative quote mark */}
-			<TbQuote className={`absolute top-5 right-5 size-14 rotate-180 ${cls.quote}`} />
+		<div className={`flex flex-col items-center gap-8 py-12 ${vertical ? '' : 'md:flex-row md:gap-12'}`}>
+			{/* Left: portrait with colored circle background */}
+			<div className="relative flex-shrink-0 md:pt-2">
+				<div className="relative h-56 w-56 md:h-64 md:w-64">
+					{/* Offset colored circle */}
+					<div
+						className={`absolute inset-0 translate-x-3 translate-y-3 rounded-full ${cls.circleBg} opacity-90`}
+					/>
+					{/* Photo */}
+					<div className={`absolute inset-0 overflow-hidden rounded-full ring-4 ${cls.ring}`}>
+						<Image src={img} alt={name} fill className="object-cover object-top" />
+					</div>
+				</div>
+			</div>
 
-			{/* Quote text */}
-			<p className="relative z-10 text-base leading-relaxed text-white/70 sm:text-lg">
-				{text}
-			</p>
+			{/* Right: quote content */}
+			<div className="flex flex-1 flex-col gap-4">
 
-			{/* Author row */}
-			<div className={`flex items-center gap-4 border-t border-white/10 pt-5`}>
-				<Image
-					src={img}
-					alt={name}
-					width={48}
-					height={48}
-					className={`size-12 shrink-0 rounded-full object-cover ring-2 ${cls.ring}`}
-				/>
-				<div className="flex flex-col gap-0.5">
-					<span className={`font-semibold leading-tight ${cls.name}`}>{name}</span>
-					<span className="text-xs leading-snug text-white/40">{desc}</span>
+				{/* Quote text */}
+				<div className='relative'>
+					{/* Decorative opening quotes */}
+					<span className="absolute top-0 left-0 -translate-y-[30%] -translate-x-[25%] font-serif text-[300px] leading-none text-white/10 select-none">&ldquo;</span>
+					<p className="-mt-4 text-base leading-relaxed text-white/70 sm:text-lg">{text}</p>
+				</div>
+
+				{/* Name + description */}
+				<div className="mt-2 flex flex-col gap-1">
+					<span className={`font-title text-2xl font-bold italic ${cls.name}`}>{name}</span>
+					<span className="text-sm text-white/40">{desc}</span>
 				</div>
 			</div>
 		</div>
