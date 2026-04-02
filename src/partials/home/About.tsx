@@ -10,7 +10,7 @@ import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 const About = () => (
 	<section id="about" className="relative">
-		<div className="relative px-4 py-12 lg:px-8 z-10 overflow-hidden pb-48 mx-auto max-w-6xl">
+		<div className="relative px-4 pt-12 lg:px-8 z-10 overflow-hidden pb-32 mx-auto max-w-6xl">
 
 			{/* Unified layout: flex-col on mobile, side-by-side grid on desktop */}
 			<div className="relative flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">

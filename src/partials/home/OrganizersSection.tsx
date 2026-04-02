@@ -32,7 +32,7 @@ export const OrganizersSection = () => {
 	const cardY = (1 - progress) * 100;
 
 	return (
-		<div ref={containerRef} className="relative mt-24" style={{ height: '200vh' }}>
+		<div ref={containerRef} className="relative" style={{ height: '200vh' }}>
 			{/* Sticky stage — stays in viewport while container scrolls */}
 			<div className="sticky top-0 h-screen">
 				{/* Background */}
