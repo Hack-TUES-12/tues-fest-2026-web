@@ -44,9 +44,9 @@ const Quote = ({
 	const cls = colorClasses[color];
 
 	return (
-		<div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-12">
+		<div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:gap-12">
 			{/* Left: portrait with colored circle background */}
-			<div className="relative flex-shrink-0">
+			<div className="relative flex-shrink-0 md:pt-2">
 				<div className="relative h-56 w-56 md:h-64 md:w-64">
 					{/* Offset colored circle */}
 					<div
