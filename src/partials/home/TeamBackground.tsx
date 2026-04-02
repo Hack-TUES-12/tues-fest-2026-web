@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 
 const IMAGES = [
-	'/team/team1.jpg',
-	'/team/team2.jpg',
-	'/team/team3.jpg',
-	'/team/team4.jpg',
-	'/team/team5.jpg',
+	'/team/team1.webp',
+	'/team/team2.webp',
+	'/team/team3.webp',
+	'/team/team4.webp',
+	'/team/team5.webp',
 ];
 
 export const TeamBackground = () => {
