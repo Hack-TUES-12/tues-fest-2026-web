@@ -6,6 +6,7 @@ const a1Logo = '/sponsors/alpha/a1.png';
 const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.svg';
 const dxcLogo = '/sponsors/alpha/dxc.svg';
 const sapLogo = '/sponsors/alpha/sap.svg';
+const sirmaLogo = '/sponsors/alpha/sirma.png'
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
 const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
@@ -84,6 +85,13 @@ const ALPHA_SPONSORS = [
 		url: 'https://www.sap.com/bulgaria/',
 		description:
 			`Признат като сърце на технологичния хъб на SAP за югоизточна Европа, развойният център SAP Labs България успява да привлече ангажирани професионалисти със силна технологична експертиза и 10 пъти получава отличието „Най-добър работодател“ в България. Разработвайки най-новите иновации в сферата, местните екипи допринасят за визията на SAP да бъде световен лидер в областта на корпоративните приложения и бизнес изкуствения интелект.`,
+	},
+	{
+		name: 'Sirma',
+		logo: sirmaLogo,
+		url: 'https://sirma.com/',
+		description:
+			`Сирма Груп Холдинг (Сирма) е най-големият български IT холдинг с глобално присъствие, който разрабова софтуерни решения и AI технологии за бизнеси по целия свят. С над 33 години опит и екип от над 800 експерти, Сирма съчетава дълбоки секторни познания с най-съвременните AI технологии, за да подпомага индустриите, от които светът зависи.`,
 	},
 	// {
 	// 	name: 'Eleven Ventures',
