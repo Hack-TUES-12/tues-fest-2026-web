@@ -4,7 +4,7 @@ const zettaLogo = "/sponsors/omega/zetta.svg"
 // Alpha sponsors
 const a1Logo = '/sponsors/alpha/a1.png';
 const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.svg';
-const dxcLogo = '/sponsors/alpha/dxc.png';
+const dxcLogo = '/sponsors/alpha/dxc.svg';
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
 const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
@@ -71,13 +71,13 @@ const ALPHA_SPONSORS = [
 
 Научете повече на www.bosch.bg/ecs`,
 	},
-	// {
-	// 	name: 'DXC Technology Bulgaria',
-	// 	logo: dxcLogo,
-	// 	url: 'https://dxc.com/bg/en',
-	// 	description:
-	// 		'DXC Technology е глобален лидер в предоставянето на цялостни IT решения. Мисията ни е да използваме силата на технологиите, за да изградим по-добро бъдеще за нашите клиенти, колеги, общности и околна среда. 🌍 Имаме повече от 130 000 служители в над 70 страни, а в България сме сред най-големите работодатели с хиляди колеги, работещи от различни части на страната. 🤯 Тук е представено цялото IT портфолио на компанията 💻 - техническа поддръжка, анализ на големи масиви от данни 📊, облачни технологии, разработване на системи за автономни автомобили, мрежи, киберсигурност, разработване на приложения и софтуери с Java, .Net, C++ и много други. Това, в което сме сред най-добрите 🥇, е да помагаме на бизнеси и правителства по целия свят да трансформират дейността си и да извлекат максимална добавена стойност от новите технологии.',
-	// },
+	{
+		name: 'DXC',
+		logo: dxcLogo,
+		url: 'https://dxc.com',
+		description:
+			`DXC е технологичен и иновационен партньор за глобални компании и организации от публичния сектор. Помагаме им да модернизират своите IT системи, да повишат ефективността си и да прилагат изкуствен интелект на практика, като превръщаме сложността на бързо променящия се свят в работещи и надеждни решения.`,
+	},
 	// {
 	// 	name: 'Eleven Ventures',
 	// 	logo: elevenVenturesLogo,
