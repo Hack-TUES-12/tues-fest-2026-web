@@ -223,6 +223,17 @@ export default function AboutPage() {
 						);
 					})}
 				</div>
+				<IfTFFeatureOn feature="tf-show-apply">
+					<div className='mt-6 w-full flex items-center justify-center'>
+						<Link
+							href="/apply"
+							className="inline-flex items-center gap-1.5 text-xl text-primary underline-offset-4 hover:underline"
+						>
+							Научете повече за специалностите и кандидатстването
+							<TbArrowRight size={14} />
+						</Link>
+					</div>
+				</IfTFFeatureOn>
 			</div>
 
 			{/* ── Education ─────────────────────────────────────────────── */}
