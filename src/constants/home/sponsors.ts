@@ -5,13 +5,13 @@ const zettaLogo = "/sponsors/omega/zetta.svg"
 const a1Logo = '/sponsors/alpha/a1.png';
 const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.svg';
 const dxcLogo = '/sponsors/alpha/dxc.svg';
+const sapLogo = '/sponsors/alpha/sap.svg';
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
 const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
 const gttLogo = '/sponsors/alpha/gttLogo.png';
 const itGixLogo = '/sponsors/alpha/itGix.png';
 const m2m = '/sponsors/alpha/m2m.png';
-const sapLogo = '/sponsors/alpha/sap.png';
 const tbsLogo = '/sponsors/alpha/tbs.png';
 const trading212Logo = '/sponsors/alpha/trading212.png';
 
@@ -78,6 +78,13 @@ const ALPHA_SPONSORS = [
 		description:
 			`DXC е технологичен и иновационен партньор за глобални компании и организации от публичния сектор. Помагаме им да модернизират своите IT системи, да повишат ефективността си и да прилагат изкуствен интелект на практика, като превръщаме сложността на бързо променящия се свят в работещи и надеждни решения.`,
 	},
+	{
+		name: 'SAP Labs България',
+		logo: sapLogo,
+		url: 'https://www.sap.com/bulgaria/',
+		description:
+			`Признат като сърце на технологичния хъб на SAP за югоизточна Европа, развойният център SAP Labs България успява да привлече ангажирани професионалисти със силна технологична експертиза и 10 пъти получава отличието „Най-добър работодател“ в България. Разработвайки най-новите иновации в сферата, местните екипи допринасят за визията на SAP да бъде световен лидер в областта на корпоративните приложения и бизнес изкуствения интелект.`,
+	},
 	// {
 	// 	name: 'Eleven Ventures',
 	// 	logo: elevenVenturesLogo,
@@ -119,13 +126,6 @@ const ALPHA_SPONSORS = [
 	// 	url: 'https://m2mservices.com/',
 	// 	description:
 	// 		'Интересуваш се от технологии, IoT и smart security решения? Тогава M2M Services е точното място за теб! Ние сме българска компания с глобален отпечатък, която разработва хардуер и софтуер за сигурност и телекомуникации. Работим с най-новите технологии, имаме силен екип от инженери и предлагаме страхотни възможности за кариерно развитие. Освен това в портфолиото ни влизат и две американски компании - Alula и Uplink.\nАко искаш да научиш повече, заповядай на нашия щанд на TUES Fest 2025, където ще ти разкажем за работата ни и ще отговорим на всички твои въпроси!',
-	// },
-	// {
-	// 	name: 'SAP Labs България',
-	// 	logo: sapLogo,
-	// 	url: 'https://www.sap.com/bulgaria/',
-	// 	description:
-	// 		'Признат като водеща локация и сърце на технологичния хъб на SAP за югоизточна Европа, развойният център SAP Labs България успява да привлече ангажирани професионалисти със силна технологична експертиза и 9 пъти получава отличието „Най-добър работодател“ в България. Синергията между екипи, фокусирани както върху технологичната основа, така и върху бизнес приложенията разработени на нея, допринася за визията на SAP да бъде световен лидер в областта на корпоративните приложения и бизнес изкуствения интелект.',
 	// },
 	// {
 	// 	name: 'Telelink Business Services',
