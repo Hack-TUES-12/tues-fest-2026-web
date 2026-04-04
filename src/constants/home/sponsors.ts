@@ -1,3 +1,6 @@
+// Omega sponsor
+const zettaLogo = "/sponsors/omega/zetta.svg"
+
 // Alpha sponsors
 const a1Logo = '/sponsors/alpha/a1.png';
 const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.png';
@@ -416,11 +419,11 @@ const MEDIA_PARTNERS = [
 
 // Temporary placeholder – replace with the real omega sponsor when confirmed
 export const OMEGA_SPONSOR = {
-	name: 'Trading 212',
-	logo: trading212Logo,
-	url: 'https://www.trading212.com/',
+	name: 'Зета Хостинг Солюшънс ООД',
+	logo: zettaLogo,
+	url: 'https://zettaonline.com/',
 	description:
-		'Trading 212 is a fintech company that democratises the financial markets with free, smart and easy to use apps, enabling anyone to trade Stocks, ETFs, Forex, Commodities, and more.\nOur mission is to enable everyone to build wealth.\nWe reinvent how trading and investing work by creating exceptional products people love.\nFostering a culture of excellence and high velocity is the key to our success.\nWe operate across five office locations, bringing together top talent from diverse backgrounds to drive innovation in fintech.',
+		'Zetta е част от Zetta Group Limited (UK) и е стратегически финтех и IT партньор на регулирани институции в Обединеното кралство, САЩ и Европа, с присъствие и в Турция и Южна Африка. Компанията е надежден доставчик на IT решения, предлагащ софтуерна разработка, DevOps, IT governance, информационна сигурност и управлявани IT услуги, които подпомагат бизнеса в дигиталната трансформация.',
 };
 
 export { ALPHA_SPONSORS, BETA_SPONSORS, GAMMA_SPONSORS, PARTNERS, MEDIA_PARTNERS };
