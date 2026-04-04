@@ -7,6 +7,7 @@ const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.svg';
 const dxcLogo = '/sponsors/alpha/dxc.svg';
 const sapLogo = '/sponsors/alpha/sap.svg';
 const sirmaLogo = '/sponsors/alpha/sirma.png'
+const sumupLogo = '/sponsors/alpha/sumup.svg'
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
 const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
@@ -92,6 +93,13 @@ const ALPHA_SPONSORS = [
 		url: 'https://sirma.com/',
 		description:
 			`Сирма Груп Холдинг (Сирма) е най-големият български IT холдинг с глобално присъствие, който разрабова софтуерни решения и AI технологии за бизнеси по целия свят. С над 33 години опит и екип от над 800 експерти, Сирма съчетава дълбоки секторни познания с най-съвременните AI технологии, за да подпомага индустриите, от които светът зависи.`,
+	},
+	{
+		name: 'SumUp',
+		logo: sumupLogo,
+		url: 'https://www.sumup.com/bg-bg/',
+		description:
+			`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
 	},
 	// {
 	// 	name: 'Eleven Ventures',
