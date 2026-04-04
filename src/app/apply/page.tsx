@@ -173,7 +173,7 @@ const ApplyPage = () => (
 								Как да кандидатствам?
 							</h2>
 							<p className="text-foreground/70 text-sm">
-								За учебната {TF_YEAR}/{TF_YEAR + 1} г. ТУЕС приема ученици по следните специалности:
+								За учебната {TF_YEAR}/{TF_YEAR + 1} г. ТУЕС приема ученици по следните професии:
 							</p>
 						</div>
 						<div className="flex flex-col gap-3">

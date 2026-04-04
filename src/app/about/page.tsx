@@ -156,8 +156,8 @@ export default function AboutPage() {
 						която им позволява да се позиционират възможно най-бързо в технологичния сектор.
 					</p>
 					<p>
-						За {TF_YEAR - 1} г. ТУЕС се нареди на{' '}
-						<span className="font-semibold text-white">трето място</span> по минимален бал на
+						За {TF_YEAR - 1} г. ТУЕС за пореден път се нареди на{' '}
+						<span className="font-semibold text-white">второ място</span> по минимален бал на
 						първо класиране в 7. клас в България.
 					</p>
 					<IfTFFeatureOn feature="tf-show-apply">
@@ -182,7 +182,7 @@ export default function AboutPage() {
 			{/* ── Specialties ───────────────────────────────────────────── */}
 			<div className="mx-auto w-full max-w-5xl">
 				<div className="mb-6 text-center">
-					<p className="text-primary mb-1 tracking-widest">Специалности</p>
+					<p className="text-primary mb-1 tracking-widest">Професии</p>
 					<h2 className="font-title text-4xl text-white">Какво можеш да учиш?</h2>
 				</div>
 				<div className="grid gap-4 md:grid-cols-3">
