@@ -6,6 +6,7 @@ import {
 	TbBriefcase,
 	TbCheck,
 	TbCode,
+	TbCpu,
 	TbExternalLink,
 	TbHistory,
 	TbNetwork,
@@ -65,6 +66,13 @@ const SPECIALTIES = [
 		href: 'https://elsys-bg.org/priem/specialnost-programirane-na-izkustven-intelekt',
 	},
 	{
+		icon: TbCpu,
+		title: 'Роботика',
+		description:
+			'Специалността за тези, които искат да свържат физическия и дигиталния свят — ще се научите да програмирате вградени системи, микроконтролери и всякакъв вид хардуер.',
+		href: null,
+	},
+	{
 		icon: TbCode,
 		title: 'Разработка на софтуер',
 		description:
@@ -77,7 +85,7 @@ const SPECIALTIES = [
 		description:
 			'Първата крачка към вълнуващата инженерна професия. Ще учите за проектиране на електроника, комуникации, мрежи, роботика и IoT.',
 		href: 'https://elsys-bg.org/priem/specialnost-komputyrni-mreji',
-	}
+	},
 ];
 
 const EDUCATION_ITEMS = [
@@ -186,26 +194,34 @@ export default function AboutPage() {
 					<h2 className="font-title text-4xl text-white">Какво можеш да учиш?</h2>
 				</div>
 				<div className="grid gap-4 md:grid-cols-3">
-					{SPECIALTIES.map(({ icon: Icon, title, description, href }) => (
-						<Link
-							key={title}
-							href={href}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm transition-colors duration-200 hover:border-white/20 hover:bg-card/80"
-						>
-							<div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-								<Icon size={22} />
+					{SPECIALTIES.map(({ icon: Icon, title, description, href }) => {
+						const cardClass = "group flex flex-col gap-4 rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm transition-colors duration-200 hover:border-white/20 hover:bg-card/80";
+						const inner = (
+							<>
+								<div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+									<Icon size={22} />
+								</div>
+								<div className="flex flex-col gap-2">
+									<h3 className="font-semibold text-white">{title}</h3>
+									<p className="text-sm leading-relaxed text-white/60">{description}</p>
+								</div>
+								{href && (
+									<span className="mt-auto inline-flex items-center gap-1 text-xs text-primary opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+										Научи повече <TbArrowRight size={13} />
+									</span>
+								)}
+							</>
+						);
+						return href ? (
+							<Link key={title} href={href} target="_blank" rel="noopener noreferrer" className={cardClass}>
+								{inner}
+							</Link>
+						) : (
+							<div key={title} className={cardClass}>
+								{inner}
 							</div>
-							<div className="flex flex-col gap-2">
-								<h3 className="font-semibold text-white">{title}</h3>
-								<p className="text-sm leading-relaxed text-white/60">{description}</p>
-							</div>
-							<span className="mt-auto inline-flex items-center gap-1 text-xs text-primary opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-								Научи повече <TbArrowRight size={13} />
-							</span>
-						</Link>
-					))}
+						);
+					})}
 				</div>
 			</div>
 
