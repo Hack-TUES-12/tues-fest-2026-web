@@ -8,14 +8,14 @@ const dxcLogo = '/sponsors/alpha/dxc.svg';
 const sapLogo = '/sponsors/alpha/sap.svg';
 const sirmaLogo = '/sponsors/alpha/sirma.png'
 const sumupLogo = '/sponsors/alpha/sumup.svg'
+const tbsLogo = '/sponsors/alpha/tbs.webp';
+const trading212Logo = '/sponsors/alpha/trading212.png';
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
 const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
 const gttLogo = '/sponsors/alpha/gttLogo.png';
 const itGixLogo = '/sponsors/alpha/itGix.png';
 const m2m = '/sponsors/alpha/m2m.png';
-const tbsLogo = '/sponsors/alpha/tbs.png';
-const trading212Logo = '/sponsors/alpha/trading212.png';
 
 // Beta sponsors
 const chaosLogo = '/sponsors/beta/chaos.png';
@@ -101,6 +101,23 @@ const ALPHA_SPONSORS = [
 		description:
 			`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
 	},
+	{
+		name: 'Telelink Business Services',
+		logo: tbsLogo,
+		url: 'https://www.tbs.tech/',
+		description:
+			`Telelink Business Services е една от най-големите български технологични компании и лидер в областта на адаптивните решения за комплексни технологични нужди. С над 20 години опит и доказана експертиза, компанията прилага иновативен и висококачествен подход към клиентите си. TBS е доставчик на ИТ решения в областта на мрежите, центровете за данни, офис производителността и информационната сигурност с над 200 клиенти в България и Западните Балкани и над 50 партньори като Cisco, Broadcom, Microsoft, DELL и др.`,
+	},
+	{
+		name: 'Trading 212',
+		logo: trading212Logo,
+		url: 'https://www.trading212.com/',
+		description:
+			`Trading 212 is a fintech company that democratises the financial markets with free, smart and easy to use apps, enabling anyone to trade Stocks, ETFs, Forex, Commodities, and more.
+They disrupted the stock brokerage industry by offering the first zero-commission stock trading service in the UK and Europe, unlocking the stock market for millions of people.
+Their mobile app has more than 15.000.000 downloads, which makes it one of the most popular trading apps in the world.
+Since 2016, Trading 212’s app has been the UK's #1 trading app, and in 2017 it reached the #1 spot in Germany.`,
+	},
 	// {
 	// 	name: 'Eleven Ventures',
 	// 	logo: elevenVenturesLogo,
@@ -142,20 +159,6 @@ const ALPHA_SPONSORS = [
 	// 	url: 'https://m2mservices.com/',
 	// 	description:
 	// 		'Интересуваш се от технологии, IoT и smart security решения? Тогава M2M Services е точното място за теб! Ние сме българска компания с глобален отпечатък, която разработва хардуер и софтуер за сигурност и телекомуникации. Работим с най-новите технологии, имаме силен екип от инженери и предлагаме страхотни възможности за кариерно развитие. Освен това в портфолиото ни влизат и две американски компании - Alula и Uplink.\nАко искаш да научиш повече, заповядай на нашия щанд на TUES Fest 2025, където ще ти разкажем за работата ни и ще отговорим на всички твои въпроси!',
-	// },
-	// {
-	// 	name: 'Telelink Business Services',
-	// 	logo: tbsLogo,
-	// 	url: 'https://www.tbs.tech/',
-	// 	description:
-	// 		'Telelink Business Services е една от най-големите български технологични компании и лидер в областта на адаптивните и адекватни решения на комплексни технологични нужди. С над 20 години опит и доказана експертиза, компанията съумява да прилага иновативен и висококачествен подход към клиентите си. Telelink Business Services е доставчик на ИТ решения в областта на мрежи и центрове за данни, офис производителност и информационна сигурност с 200+ клиента в България, Западните Балкани и мултинационални компании и 50+ партньори като Cisco, Broadcom, Microsoft, DELL и др.',
-	// },
-	// {
-	// 	name: 'Trading 212',
-	// 	logo: trading212Logo,
-	// 	url: 'https://www.trading212.com/',
-	// 	description:
-	// 		'Trading 212 is a fintech company that democratises the financial markets with free, smart and easy to use apps, enabling anyone to trade Stocks, ETFs, Forex, Commodities, and more.\nOur mission is to enable everyone to build wealth.\nWe reinvent how trading and investing work by creating exceptional products people love.\nFostering a culture of excellence and high velocity is the key to our success.\nWe operate across five office locations, bringing together top talent from diverse backgrounds to drive innovation in fintech.',
 	// },
 ];
 
