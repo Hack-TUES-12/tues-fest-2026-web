@@ -58,26 +58,26 @@ const STATS = [
 
 const SPECIALTIES = [
 	{
+		icon: TbBrain,
+		title: 'Интелигентни системи',
+		description:
+			'Специалността, която ще ви подготви за работа в една от най-бързо развиващите се области на ИТ — ще се научите да създавате софтуер, който мисли.',
+		href: 'https://elsys-bg.org/priem/specialnost-programirane-na-izkustven-intelekt',
+	},
+	{
 		icon: TbCode,
-		title: 'Системно програмиране',
+		title: 'Разработка на софтуер',
 		description:
 			'Най-задълбочената училищна програма по програмиране в България — незаменим трамплин за всеки с амбиции за кариера в ИТ сектора.',
 		href: 'https://elsys-bg.org/priem/specialnost-sistemno-programirane',
 	},
 	{
 		icon: TbNetwork,
-		title: 'Компютърни мрежи',
+		title: 'Комуникационни и компютърни мрежи',
 		description:
 			'Първата крачка към вълнуващата инженерна професия. Ще учите за проектиране на електроника, комуникации, мрежи, роботика и IoT.',
 		href: 'https://elsys-bg.org/priem/specialnost-komputyrni-mreji',
-	},
-	{
-		icon: TbBrain,
-		title: 'Програмиране на изкуствен интелект',
-		description:
-			'Специалността, която ще ви подготви за работа в една от най-бързо развиващите се области на ИТ — ще се научите да създавате софтуер, който мисли.',
-		href: 'https://elsys-bg.org/priem/specialnost-programirane-na-izkustven-intelekt',
-	},
+	}
 ];
 
 const EDUCATION_ITEMS = [
