@@ -3,7 +3,7 @@ const zettaLogo = "/sponsors/omega/zetta.svg"
 
 // Alpha sponsors
 const a1Logo = '/sponsors/alpha/a1.png';
-const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.png';
+const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.svg';
 const dxcLogo = '/sponsors/alpha/dxc.png';
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
@@ -60,78 +60,87 @@ const ALPHA_SPONSORS = [
 		logo: boschECSLogo,
 		url: 'https://www.bosch.bg/ecs',
 		description:
-			'Bosch Engineering Center Sofia (@Bosch ECS Careers) отново подкрепя TUES Fest като Алфа спонсор.\nВ #BoschECS се разработват някои от най-съвременните софтуерни и хардуерни решения за мобилността в области като:\n-системи за помощ на водача;\n-системи за автоматизирано шофиране;\n-мониторинг и оценка на поведението на водача в превозното средство;\n-изкуствен интелект (AI);\n-електромобилност.\nЦентърът се позиционира като ключов партньор със значим принос в световната инженерна мрежа на Bosch. Научете повече на www.bosch.bg/ecs',
+			`Bosch Engineering Center Sofia отново подкрепя TuesFest като Алфа спонсор.
+ 
+В #BoschECS се разработват някои от най-съвременните софтуерни решения за мобилността в области като: 
+• системи за помощ на водача;
+• системи за автоматизирано шофиране;
+• мониторинг и оценка на поведението на водача в превозното средство;
+• изкуствен интелект (AI);
+• електромобилност.
+
+Научете повече на www.bosch.bg/ecs`,
 	},
-	{
-		name: 'DXC Technology Bulgaria',
-		logo: dxcLogo,
-		url: 'https://dxc.com/bg/en',
-		description:
-			'DXC Technology е глобален лидер в предоставянето на цялостни IT решения. Мисията ни е да използваме силата на технологиите, за да изградим по-добро бъдеще за нашите клиенти, колеги, общности и околна среда. 🌍 Имаме повече от 130 000 служители в над 70 страни, а в България сме сред най-големите работодатели с хиляди колеги, работещи от различни части на страната. 🤯 Тук е представено цялото IT портфолио на компанията 💻 - техническа поддръжка, анализ на големи масиви от данни 📊, облачни технологии, разработване на системи за автономни автомобили, мрежи, киберсигурност, разработване на приложения и софтуери с Java, .Net, C++ и много други. Това, в което сме сред най-добрите 🥇, е да помагаме на бизнеси и правителства по целия свят да трансформират дейността си и да извлекат максимална добавена стойност от новите технологии.',
-	},
-	{
-		name: 'Eleven Ventures',
-		logo: elevenVenturesLogo,
-		url: 'https://www.11.vc/',
-		description:
-			"Eleven is a venture capital fund focused on early-stage founders in Central Eastern Europe. Since 2012, we've invested in 170+ companies that solve real problems in financial technology, healthcare, the future of work, and sustainability. When we invest, we bring our whole toolkit - hands-on support, operational experience, market knowledge, lessons from our past ventures, and people worth knowing. Take Payhawk, Dronamics, SMSBump, Native Teams - they're showing what CEE founders can build when given the right support. But don't take our word for it - talk to our founders, and they'll tell you – we're in it together, through the tough calls and the breakthroughs.",
-	},
-	{
-		name: "Festo Bulgaria",
-		logo: festoLogo,
-		url: "https://www.festo.com/bg/bg/",
-		description:
-		"В България Festo присъства от 1986 г., а от 1990 г. започва своята производствена и развойна дейност.\nДнес тя развива дейността си в София, Смолян и Габрово в направленията продажби и дидактика,  производство и развой. Компанията притежава високотехнологичен инженерен център и произвежда Hi-Tech продукти за всички индустриални направления с фокус електроника и електрически задвижвания.",
-	},
-	{
-		name: 'GlobalFoundries Bulgaria',
-		logo: globalFoundriesLogo,
-		url: 'https://gf.com/',
-		description:
-			'GlobalFoundries е един от най-големите производители на интегрални схеми в света.\nОт 2019 година насам, когато компанията придобива част от екипа на местния ИТ лидер „Смартком“, специалисти от България и чужбина разработват в София технологии с приложение в мобилната комуникация, автомобилната, медицинската и други индустрии. Днес екипът ни вече надхвърля 300 души. Над 50% от българските специалисти в GlobalFoundries започват кариерата си тук още от студентската скамейка и се развиват пълноценно в компанията.\nОсновната дейност в офиса ни в София е свързана с разработката на технологията, използвана за проектиране на интегрални схеми. Производствената ни дейност се извършва във фабрики в Америка, Германия и Сингапур.\nGlobalFoundries предоставя широка гама от услуги за дизайн, разработка и производство и гъвкаво се справя с динамичните нужди на клиенти от цял свят.\nНие променяме индустрията, която променя света. ',
-	},
-	{
-		name: "GTT",
-		logo: gttLogo,
-		url: "https://www.gtt.net/us-en/",
-		description:
-		"В GTT вярваме, че щастливите служители са първата стъпка към създаването на щастлива клиентска база. Имайки това предвид, се ангажираме да инвестираме в програми, които позволяват на хората в GTT да постигат целите си.\nЗа компанията са важни теми като баланс между работа и личен живот, обучение и развитие, корпоративна социална и екологична отговорност и цялостната удовлетвореност на служителите.\nВ ход са различни инициативи, които подкрепят тези теми и дават възможност на всички нас в GTT да работим в една гъвкава, вдъхновяваща и развиваща среда.",
-	},
-	{
-		name: 'ITGix',
-		logo: itGixLogo,
-		url: 'https://itgix.com/',
-		description:
-			'Ако мечтаеш за работа, която освен просперитет, да ти носи и удовлетворение, то твоето място е ITGix.\nНие предоставяме DevOps услуги с фокус върху автоматизацията, облачната миграция, консултантските дейности, управляваните услуги и поддръжката.\nРаботим по предизвикателни проекти, които изискват от нас да сме винаги в крак с нововъведенията и да поддържаме високо ниво на експертност. В ITGix ще бъдеш част от екип, който вярва в непрестанното самоусъвършенстване и насърчава кариерното развитие.',
-	},
-	{
-		name: 'M2M Services',
-		logo: m2m,
-		url: 'https://m2mservices.com/',
-		description:
-			'Интересуваш се от технологии, IoT и smart security решения? Тогава M2M Services е точното място за теб! Ние сме българска компания с глобален отпечатък, която разработва хардуер и софтуер за сигурност и телекомуникации. Работим с най-новите технологии, имаме силен екип от инженери и предлагаме страхотни възможности за кариерно развитие. Освен това в портфолиото ни влизат и две американски компании - Alula и Uplink.\nАко искаш да научиш повече, заповядай на нашия щанд на TUES Fest 2025, където ще ти разкажем за работата ни и ще отговорим на всички твои въпроси!',
-	},
-	{
-		name: 'SAP Labs България',
-		logo: sapLogo,
-		url: 'https://www.sap.com/bulgaria/',
-		description:
-			'Признат като водеща локация и сърце на технологичния хъб на SAP за югоизточна Европа, развойният център SAP Labs България успява да привлече ангажирани професионалисти със силна технологична експертиза и 9 пъти получава отличието „Най-добър работодател“ в България. Синергията между екипи, фокусирани както върху технологичната основа, така и върху бизнес приложенията разработени на нея, допринася за визията на SAP да бъде световен лидер в областта на корпоративните приложения и бизнес изкуствения интелект.',
-	},
-	{
-		name: 'Telelink Business Services',
-		logo: tbsLogo,
-		url: 'https://www.tbs.tech/',
-		description:
-			'Telelink Business Services е една от най-големите български технологични компании и лидер в областта на адаптивните и адекватни решения на комплексни технологични нужди. С над 20 години опит и доказана експертиза, компанията съумява да прилага иновативен и висококачествен подход към клиентите си. Telelink Business Services е доставчик на ИТ решения в областта на мрежи и центрове за данни, офис производителност и информационна сигурност с 200+ клиента в България, Западните Балкани и мултинационални компании и 50+ партньори като Cisco, Broadcom, Microsoft, DELL и др.',
-	},
-	{
-		name: 'Trading 212',
-		logo: trading212Logo,
-		url: 'https://www.trading212.com/',
-		description:
-			'Trading 212 is a fintech company that democratises the financial markets with free, smart and easy to use apps, enabling anyone to trade Stocks, ETFs, Forex, Commodities, and more.\nOur mission is to enable everyone to build wealth.\nWe reinvent how trading and investing work by creating exceptional products people love.\nFostering a culture of excellence and high velocity is the key to our success.\nWe operate across five office locations, bringing together top talent from diverse backgrounds to drive innovation in fintech.',
-	},
+	// {
+	// 	name: 'DXC Technology Bulgaria',
+	// 	logo: dxcLogo,
+	// 	url: 'https://dxc.com/bg/en',
+	// 	description:
+	// 		'DXC Technology е глобален лидер в предоставянето на цялостни IT решения. Мисията ни е да използваме силата на технологиите, за да изградим по-добро бъдеще за нашите клиенти, колеги, общности и околна среда. 🌍 Имаме повече от 130 000 служители в над 70 страни, а в България сме сред най-големите работодатели с хиляди колеги, работещи от различни части на страната. 🤯 Тук е представено цялото IT портфолио на компанията 💻 - техническа поддръжка, анализ на големи масиви от данни 📊, облачни технологии, разработване на системи за автономни автомобили, мрежи, киберсигурност, разработване на приложения и софтуери с Java, .Net, C++ и много други. Това, в което сме сред най-добрите 🥇, е да помагаме на бизнеси и правителства по целия свят да трансформират дейността си и да извлекат максимална добавена стойност от новите технологии.',
+	// },
+	// {
+	// 	name: 'Eleven Ventures',
+	// 	logo: elevenVenturesLogo,
+	// 	url: 'https://www.11.vc/',
+	// 	description:
+	// 		"Eleven is a venture capital fund focused on early-stage founders in Central Eastern Europe. Since 2012, we've invested in 170+ companies that solve real problems in financial technology, healthcare, the future of work, and sustainability. When we invest, we bring our whole toolkit - hands-on support, operational experience, market knowledge, lessons from our past ventures, and people worth knowing. Take Payhawk, Dronamics, SMSBump, Native Teams - they're showing what CEE founders can build when given the right support. But don't take our word for it - talk to our founders, and they'll tell you – we're in it together, through the tough calls and the breakthroughs.",
+	// },
+	// {
+	// 	name: "Festo Bulgaria",
+	// 	logo: festoLogo,
+	// 	url: "https://www.festo.com/bg/bg/",
+	// 	description:
+	// 	"В България Festo присъства от 1986 г., а от 1990 г. започва своята производствена и развойна дейност.\nДнес тя развива дейността си в София, Смолян и Габрово в направленията продажби и дидактика,  производство и развой. Компанията притежава високотехнологичен инженерен център и произвежда Hi-Tech продукти за всички индустриални направления с фокус електроника и електрически задвижвания.",
+	// },
+	// {
+	// 	name: 'GlobalFoundries Bulgaria',
+	// 	logo: globalFoundriesLogo,
+	// 	url: 'https://gf.com/',
+	// 	description:
+	// 		'GlobalFoundries е един от най-големите производители на интегрални схеми в света.\nОт 2019 година насам, когато компанията придобива част от екипа на местния ИТ лидер „Смартком“, специалисти от България и чужбина разработват в София технологии с приложение в мобилната комуникация, автомобилната, медицинската и други индустрии. Днес екипът ни вече надхвърля 300 души. Над 50% от българските специалисти в GlobalFoundries започват кариерата си тук още от студентската скамейка и се развиват пълноценно в компанията.\nОсновната дейност в офиса ни в София е свързана с разработката на технологията, използвана за проектиране на интегрални схеми. Производствената ни дейност се извършва във фабрики в Америка, Германия и Сингапур.\nGlobalFoundries предоставя широка гама от услуги за дизайн, разработка и производство и гъвкаво се справя с динамичните нужди на клиенти от цял свят.\nНие променяме индустрията, която променя света. ',
+	// },
+	// {
+	// 	name: "GTT",
+	// 	logo: gttLogo,
+	// 	url: "https://www.gtt.net/us-en/",
+	// 	description:
+	// 	"В GTT вярваме, че щастливите служители са първата стъпка към създаването на щастлива клиентска база. Имайки това предвид, се ангажираме да инвестираме в програми, които позволяват на хората в GTT да постигат целите си.\nЗа компанията са важни теми като баланс между работа и личен живот, обучение и развитие, корпоративна социална и екологична отговорност и цялостната удовлетвореност на служителите.\nВ ход са различни инициативи, които подкрепят тези теми и дават възможност на всички нас в GTT да работим в една гъвкава, вдъхновяваща и развиваща среда.",
+	// },
+	// {
+	// 	name: 'ITGix',
+	// 	logo: itGixLogo,
+	// 	url: 'https://itgix.com/',
+	// 	description:
+	// 		'Ако мечтаеш за работа, която освен просперитет, да ти носи и удовлетворение, то твоето място е ITGix.\nНие предоставяме DevOps услуги с фокус върху автоматизацията, облачната миграция, консултантските дейности, управляваните услуги и поддръжката.\nРаботим по предизвикателни проекти, които изискват от нас да сме винаги в крак с нововъведенията и да поддържаме високо ниво на експертност. В ITGix ще бъдеш част от екип, който вярва в непрестанното самоусъвършенстване и насърчава кариерното развитие.',
+	// },
+	// {
+	// 	name: 'M2M Services',
+	// 	logo: m2m,
+	// 	url: 'https://m2mservices.com/',
+	// 	description:
+	// 		'Интересуваш се от технологии, IoT и smart security решения? Тогава M2M Services е точното място за теб! Ние сме българска компания с глобален отпечатък, която разработва хардуер и софтуер за сигурност и телекомуникации. Работим с най-новите технологии, имаме силен екип от инженери и предлагаме страхотни възможности за кариерно развитие. Освен това в портфолиото ни влизат и две американски компании - Alula и Uplink.\nАко искаш да научиш повече, заповядай на нашия щанд на TUES Fest 2025, където ще ти разкажем за работата ни и ще отговорим на всички твои въпроси!',
+	// },
+	// {
+	// 	name: 'SAP Labs България',
+	// 	logo: sapLogo,
+	// 	url: 'https://www.sap.com/bulgaria/',
+	// 	description:
+	// 		'Признат като водеща локация и сърце на технологичния хъб на SAP за югоизточна Европа, развойният център SAP Labs България успява да привлече ангажирани професионалисти със силна технологична експертиза и 9 пъти получава отличието „Най-добър работодател“ в България. Синергията между екипи, фокусирани както върху технологичната основа, така и върху бизнес приложенията разработени на нея, допринася за визията на SAP да бъде световен лидер в областта на корпоративните приложения и бизнес изкуствения интелект.',
+	// },
+	// {
+	// 	name: 'Telelink Business Services',
+	// 	logo: tbsLogo,
+	// 	url: 'https://www.tbs.tech/',
+	// 	description:
+	// 		'Telelink Business Services е една от най-големите български технологични компании и лидер в областта на адаптивните и адекватни решения на комплексни технологични нужди. С над 20 години опит и доказана експертиза, компанията съумява да прилага иновативен и висококачествен подход към клиентите си. Telelink Business Services е доставчик на ИТ решения в областта на мрежи и центрове за данни, офис производителност и информационна сигурност с 200+ клиента в България, Западните Балкани и мултинационални компании и 50+ партньори като Cisco, Broadcom, Microsoft, DELL и др.',
+	// },
+	// {
+	// 	name: 'Trading 212',
+	// 	logo: trading212Logo,
+	// 	url: 'https://www.trading212.com/',
+	// 	description:
+	// 		'Trading 212 is a fintech company that democratises the financial markets with free, smart and easy to use apps, enabling anyone to trade Stocks, ETFs, Forex, Commodities, and more.\nOur mission is to enable everyone to build wealth.\nWe reinvent how trading and investing work by creating exceptional products people love.\nFostering a culture of excellence and high velocity is the key to our success.\nWe operate across five office locations, bringing together top talent from diverse backgrounds to drive innovation in fintech.',
+	// },
 ];
 
 const BETA_SPONSORS = [
