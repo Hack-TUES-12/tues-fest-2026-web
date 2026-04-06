@@ -38,6 +38,19 @@ export default function EventLanding() {
 
 	return (
 		<div className="relative flex min-h-0 w-full flex-1 flex-col">
+			{/* Dobri */}
+			<div className='absolute aspect-29/25 bottom-0 right-0'
+				style={{
+					width: "clamp(12rem, 20vw, 20rem)"
+				}}
+			>
+				<Image
+					src="/assets/home/hero-dobri.svg"
+					fill
+					alt='Dobri bobri'
+				/>
+			</div>
+
 			{/* Background photo */}
 			<div className="pointer-events-none absolute inset-0 -z-20">
 				<Image
