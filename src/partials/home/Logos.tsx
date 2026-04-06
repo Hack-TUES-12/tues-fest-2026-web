@@ -110,11 +110,11 @@ export default function EventLanding() {
 					<div className="relative flex flex-col items-center gap-8 lg:items-end">
 						<HeroCountdown />
 
-						<div className="w-full max-w-md space-y-2 text-center lg:text-right">
-							<p className="font-mighty text-3xl text-white drop-shadow-md sm:text-4xl md:text-5xl">
+						<div className="w-full max-w-md text-center lg:text-end">
+							<p className="font-mighty text-2xl text-white drop-shadow-md sm:text-3xl md:text-4xl">
 								{TF_DATE_COMPACT}
 							</p>
-							<p className="text-sm leading-relaxed text-white/75 sm:text-base">{TF_LOCATION}</p>
+							<p className="text-sm text-white/75 leading-relaxed sm:text-xl">{TF_LOCATION}</p>
 						</div>
 
 						{/* <div className="relative mt-4 w-full max-w-[220px] sm:max-w-[260px] lg:absolute lg:bottom-[-2rem] lg:right-0 lg:mt-0 lg:max-w-[200px] xl:max-w-[240px]">

@@ -54,7 +54,7 @@ export function HeroCountdown() {
 	const values = [time.days, time.hours, time.minutes, time.seconds];
 
 	return (
-		<div className="flex flex-wrap justify-end gap-3 sm:gap-4">
+		<div className="flex flex-wrap justify-center md:justify-end gap-3 sm:gap-4">
 			{BOXES.map((box, i) => {
 				const v = values[i] ?? 0;
 				const unitLabel = v === 1 ? box.labelOne : box.label;
