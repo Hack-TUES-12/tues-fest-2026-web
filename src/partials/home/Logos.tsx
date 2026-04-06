@@ -66,18 +66,24 @@ export default function EventLanding() {
 				<div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
 					{/* Left: branding + CTAs */}
 					<div className="flex flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-						<div className="flex flex-col gap-3">
-							<h1 className="font-mighty leading-[0.9] tracking-wide">
-								<span className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1 lg:justify-start">
-									<span className="text-[clamp(2.75rem,10vw,5.5rem)] text-white drop-shadow-lg">
-										TUES FEST
+						<div className="flex w-full flex-col items-center gap-3 lg:items-start">
+							{/* Title width = first row (TUES + year); FEST is right-aligned so it ends with the year */}
+							<div className="flex w-full justify-center lg:justify-start">
+								<h1 className="inline-flex flex-col items-stretch font-mighty leading-[0.85] tracking-wide">
+									<span className="flex items-end justify-start gap-2 sm:gap-3">
+										<span className="text-[clamp(5.75rem,14vw,9.5rem)] text-white drop-shadow-lg">
+											TUES
+										</span>
+										<span className="pb-[0.08em] text-[clamp(1rem,5.4vw,3.75rem)] leading-none text-muted drop-shadow-lg">
+											{TF_YEAR}
+										</span>
 									</span>
-									<span className="text-[clamp(2.25rem,8vw,4.5rem)] text-muted drop-shadow-lg">
-										{TF_YEAR}
+									<span className="text-right text-[clamp(5.75rem,14vw,9.5rem)] text-white drop-shadow-lg">
+										Fest
 									</span>
-								</span>
-							</h1>
-							<p className="font-title text-[clamp(1rem,2.5vw,1.35rem)] tracking-[0.2em] text-primary/90 uppercase">
+								</h1>
+							</div>
+							<p className="w-full text-center font-title text-[clamp(1rem,2.5vw,1.35rem)] tracking-[0.2em] text-primary/90 uppercase lg:w-fit lg:self-end lg:text-right">
 								{TF_SLOGAN}
 							</p>
 						</div>
