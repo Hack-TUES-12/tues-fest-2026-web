@@ -78,7 +78,7 @@ export default function EventLanding() {
 											{TF_YEAR}
 										</span>
 									</span>
-									<span className="text-right text-[clamp(5.75rem,14vw,14rem)] pr-3 text-white drop-shadow-lg">
+									<span className="sm:-mt-2 md:-mt-3 text-right text-[clamp(5.75rem,14vw,14rem)] pr-3 text-white drop-shadow-lg">
 										Fest
 									</span>
 								</h1>
