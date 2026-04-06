@@ -117,7 +117,7 @@ export default function EventLanding() {
 							<p className="text-sm leading-relaxed text-white/75 sm:text-base">{TF_LOCATION}</p>
 						</div>
 
-						<div className="relative mt-4 w-full max-w-[220px] sm:max-w-[260px] lg:absolute lg:bottom-[-2rem] lg:right-0 lg:mt-0 lg:max-w-[200px] xl:max-w-[240px]">
+						{/* <div className="relative mt-4 w-full max-w-[220px] sm:max-w-[260px] lg:absolute lg:bottom-[-2rem] lg:right-0 lg:mt-0 lg:max-w-[200px] xl:max-w-[240px]">
 							<Image
 								src="/assets/mascot.png"
 								alt=""
@@ -126,7 +126,7 @@ export default function EventLanding() {
 								className="h-auto w-full object-contain object-bottom drop-shadow-2xl"
 								aria-hidden
 							/>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>

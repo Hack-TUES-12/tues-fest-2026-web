@@ -14,6 +14,7 @@ function getTimeLeft() {
 		days: Math.max(0, Math.floor(gap / day)),
 		hours: Math.max(0, Math.floor((gap % day) / hour)),
 		minutes: Math.max(0, Math.floor((gap % hour) / minute)),
+		seconds: Math.max(0, Math.floor((gap % minute) / second)),
 	};
 }
 
@@ -23,17 +24,22 @@ const BOXES = [
 	{
 		label: 'дни',
 		labelOne: 'ден',
-		className: 'border-white/15 bg-accent/35 backdrop-blur-md',
+		className: 'bg-accent/50 backdrop-blur-md',
 	},
 	{
 		label: 'часа',
 		labelOne: 'час',
-		className: 'border-white/15 bg-secondary/40 backdrop-blur-md',
+		className: 'bg-secondary/50 backdrop-blur-md',
 	},
 	{
 		label: 'минути',
 		labelOne: 'минута',
-		className: 'border-white/15 bg-muted/35 backdrop-blur-md',
+		className: 'bg-muted/50 backdrop-blur-md',
+	},
+	{
+		label: 'секунди',
+		labelOne: 'секунда',
+		className: 'bg-primary/50 backdrop-blur-md',
 	},
 ] as const;
 
@@ -45,7 +51,7 @@ export function HeroCountdown() {
 		return () => clearInterval(id);
 	}, []);
 
-	const values = [time.days, time.hours, time.minutes];
+	const values = [time.days, time.hours, time.minutes, time.seconds];
 
 	return (
 		<div className="flex flex-wrap justify-end gap-3 sm:gap-4">
