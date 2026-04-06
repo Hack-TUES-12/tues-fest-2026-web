@@ -34,7 +34,7 @@ export default function EventLanding() {
 					priority
 					sizes="100vw"
 				/>
-				<div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85" />
+				<div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/85" />
 				<div className="absolute inset-0 bg-primary/10 mix-blend-soft-light" />
 			</div>
 
