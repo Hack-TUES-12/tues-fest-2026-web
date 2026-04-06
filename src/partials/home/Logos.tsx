@@ -66,26 +66,28 @@ export default function EventLanding() {
 				<div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
 					{/* Left: branding + CTAs */}
 					<div className="flex flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-						<div className="flex w-full flex-col items-center gap-3 lg:items-start">
-							{/* Title width = first row (TUES + year); FEST is right-aligned so it ends with the year */}
+						<div className="flex w-full flex-col items-center lg:items-start">
+							{/* Shared width = first row (TUES + year); Fest + slogan right-aligned to that edge */}
 							<div className="flex w-full justify-center lg:justify-start">
-								<h1 className="inline-flex flex-col items-stretch font-mighty leading-[0.85]">
-									<span className="flex items-end justify-start gap-2">
-										<span className="text-[clamp(5.75rem,14vw,14rem)] text-white drop-shadow-lg">
-											TUES
+								<div className="inline-flex min-w-0 max-w-full flex-col items-stretch">
+									<h1 className="inline-flex flex-col items-stretch font-mighty leading-[0.85]">
+										<span className="flex items-end justify-start gap-2">
+											<span className="text-[clamp(5.75rem,14vw,14rem)] text-white drop-shadow-lg">
+												TUES
+											</span>
+											<span className="text-[clamp(2.4rem,4.8vw,4rem)] leading-none text-muted drop-shadow-lg">
+												{TF_YEAR}
+											</span>
 										</span>
-										<span className="text-[clamp(2.4rem,4.8vw,4rem)] leading-none text-muted drop-shadow-lg">
-											{TF_YEAR}
+										<span className="sm:-mt-2 md:-mt-3 text-right text-[clamp(5.75rem,14vw,14rem)] pr-3 text-white drop-shadow-lg">
+											Fest
 										</span>
-									</span>
-									<span className="sm:-mt-2 md:-mt-3 text-right text-[clamp(5.75rem,14vw,14rem)] pr-3 text-white drop-shadow-lg">
-										Fest
-									</span>
-								</h1>
+									</h1>
+									<p className="sm:-mt-2 md:-mt-3 min-w-0 break-words text-right pr-3 font-mighty text-[clamp(1.6rem,3.2vw,3rem)] uppercase leading-tight text-primary">
+										{TF_SLOGAN}
+									</p>
+								</div>
 							</div>
-							<p className="font-mighty w-full text-center text-[clamp(1.6rem,3.2vw,3rem)] text-primary/90 uppercase lg:w-fit lg:self-end lg:text-right">
-								{TF_SLOGAN}
-							</p>
 						</div>
 
 						<div className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center lg:max-w-none lg:justify-start">
