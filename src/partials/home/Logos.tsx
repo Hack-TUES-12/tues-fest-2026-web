@@ -69,16 +69,16 @@ export default function EventLanding() {
 						<div className="flex w-full flex-col items-center gap-3 lg:items-start">
 							{/* Title width = first row (TUES + year); FEST is right-aligned so it ends with the year */}
 							<div className="flex w-full justify-center lg:justify-start">
-								<h1 className="inline-flex flex-col items-stretch font-mighty leading-[0.85] tracking-wide">
-									<span className="flex items-end justify-start gap-2 sm:gap-3">
-										<span className="text-[clamp(5.75rem,14vw,9.5rem)] text-white drop-shadow-lg">
+								<h1 className="inline-flex flex-col items-stretch font-mighty leading-[0.85]">
+									<span className="flex items-end justify-start gap-2">
+										<span className="text-[clamp(5.75rem,14vw,14rem)] text-white drop-shadow-lg">
 											TUES
 										</span>
-										<span className="pb-[0.08em] text-[clamp(1rem,5.4vw,3.75rem)] leading-none text-muted drop-shadow-lg">
+										<span className="text-[clamp(2.4rem,4.8vw,4rem)] leading-none text-muted drop-shadow-lg">
 											{TF_YEAR}
 										</span>
 									</span>
-									<span className="text-right text-[clamp(5.75rem,14vw,9.5rem)] text-white drop-shadow-lg">
+									<span className="text-right text-[clamp(5.75rem,14vw,14rem)] pr-3 text-white drop-shadow-lg">
 										Fest
 									</span>
 								</h1>
