@@ -1,0 +1,71 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
+import { TF_DATE } from '@/constants/event';
+
+function getTimeLeft() {
+	const gap = TF_DATE.getTime() - Date.now();
+	const second = 1000;
+	const minute = second * 60;
+	const hour = minute * 60;
+	const day = hour * 24;
+	return {
+		days: Math.max(0, Math.floor(gap / day)),
+		hours: Math.max(0, Math.floor((gap % day) / hour)),
+		minutes: Math.max(0, Math.floor((gap % hour) / minute)),
+	};
+}
+
+const fmt = (n: number) => String(n).padStart(2, '0');
+
+const BOXES = [
+	{
+		label: 'дни',
+		labelOne: 'ден',
+		className: 'border-white/15 bg-accent/35 backdrop-blur-md',
+	},
+	{
+		label: 'часа',
+		labelOne: 'час',
+		className: 'border-white/15 bg-secondary/40 backdrop-blur-md',
+	},
+	{
+		label: 'минути',
+		labelOne: 'минута',
+		className: 'border-white/15 bg-muted/35 backdrop-blur-md',
+	},
+] as const;
+
+export function HeroCountdown() {
+	const [time, setTime] = useState(getTimeLeft);
+
+	useEffect(() => {
+		const id = setInterval(() => setTime(getTimeLeft()), 1000);
+		return () => clearInterval(id);
+	}, []);
+
+	const values = [time.days, time.hours, time.minutes];
+
+	return (
+		<div className="flex flex-wrap justify-end gap-3 sm:gap-4">
+			{BOXES.map((box, i) => {
+				const v = values[i] ?? 0;
+				const unitLabel = v === 1 ? box.labelOne : box.label;
+				return (
+					<div
+						key={box.label}
+						className={`flex min-w-[4.5rem] flex-col items-center justify-center gap-1 rounded-2xl border px-4 py-4 sm:min-w-[5.5rem] sm:px-5 sm:py-5 ${box.className}`}
+					>
+						<span className="font-mighty text-3xl leading-none text-white sm:text-4xl md:text-5xl">
+							{fmt(v)}
+						</span>
+						<span className="text-[0.65rem] font-medium uppercase tracking-widest text-white/70">
+							{unitLabel}
+						</span>
+					</div>
+				);
+			})}
+		</div>
+	);
+}
