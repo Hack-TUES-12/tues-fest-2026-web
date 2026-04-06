@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
 
 import { HeroCountdown } from '@/components/hero-countdown';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -14,6 +15,15 @@ const HERO_BG = '/assets/about/about1.png';
 /** Typography shared by all hero “+” decorations (matches pink plus) */
 const HERO_PLUS_TEXT = 'select-none font-black leading-none text-primary opacity-60';
 const HERO_PLUS_FONT_SIZE = 'clamp(1.75rem, 4.5vw, 3.75rem)';
+
+function scrollToAboutSection() {
+	const about = document.getElementById('about');
+	if (!about) return;
+	const nav = document.querySelector('header');
+	const headerOffset = nav instanceof HTMLElement ? nav.offsetHeight : 80;
+	const y = about.getBoundingClientRect().top + window.scrollY - headerOffset;
+	window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
 
 /** Light topo-style line overlay */
 const TOPO_PATTERN =
@@ -109,12 +119,14 @@ export default function EventLanding() {
 
 						<div className="flex w-full justify-center lg:justify-start">
 							<div className="relative flex w-full max-w-md flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
-								<Link
-									href="#about"
-									className={cn(buttonVariants({ variant: 'primary-outline', size: 'lg' }), 'w-full sm:w-auto')}
+								<Button
+									variant={"primary-outline"}
+									size={"lg"}
+									className="w-full sm:w-auto"
+									onClick={scrollToAboutSection}
 								>
 									Виж повече
-								</Link>
+								</Button>
 								<Button size="lg" className="w-full font-bold sm:w-auto" asChild>
 									<Link href={cta.link}>{cta.label}</Link>
 								</Button>
@@ -145,6 +157,17 @@ export default function EventLanding() {
 						</div> */}
 					</div>
 				</div>
+			</div>
+
+			<div className="relative z-10 mt-auto flex justify-center pb-6 pt-2">
+				<button
+					type="button"
+					onClick={scrollToAboutSection}
+					aria-label="Превърти към секцията за събитието"
+					className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+				>
+					<ChevronDown className="size-5 stroke-[2.5]" aria-hidden />
+				</button>
 			</div>
 		</div>
 	);
