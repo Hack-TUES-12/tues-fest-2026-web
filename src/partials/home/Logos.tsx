@@ -83,7 +83,7 @@ export default function EventLanding() {
 									</span>
 								</h1>
 							</div>
-							<p className="w-full text-center font-title text-[clamp(1rem,2.5vw,1.35rem)] tracking-[0.2em] text-primary/90 uppercase lg:w-fit lg:self-end lg:text-right">
+							<p className="font-mighty w-full text-center text-[clamp(1.6rem,3.2vw,3rem)] text-primary/90 uppercase lg:w-fit lg:self-end lg:text-right">
 								{TF_SLOGAN}
 							</p>
 						</div>
