@@ -107,7 +107,7 @@ export default function EventLanding() {
 					</div>
 
 					{/* Right: countdown + meta + mascot */}
-					<div className="relative flex flex-col items-center gap-8 lg:items-end">
+					<div className="relative flex flex-col items-center gap-4 lg:items-end">
 						<HeroCountdown />
 
 						<div className="w-full max-w-md text-center lg:text-end">

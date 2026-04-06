@@ -54,19 +54,19 @@ export function HeroCountdown() {
 	const values = [time.days, time.hours, time.minutes, time.seconds];
 
 	return (
-		<div className="flex flex-wrap justify-center md:justify-end gap-3 sm:gap-4">
+		<div className="flex w-full min-w-0 flex-nowrap items-center justify-center gap-[clamp(0.15rem,1.5vw,1rem)] lg:justify-end">
 			{BOXES.map((box, i) => {
 				const v = values[i] ?? 0;
 				const unitLabel = v === 1 ? box.labelOne : box.label;
 				return (
 					<div
 						key={box.label}
-						className={`flex aspect-square w-[4.75rem] shrink-0 flex-col items-center justify-center gap-1 rounded-2xl border border-white/15 p-2 sm:w-24 sm:p-3 md:w-28 ${box.className}`}
+						className={`flex aspect-square w-[clamp(2.65rem,15.5vw,7rem)] shrink-0 flex-col items-center justify-center gap-[clamp(0.1rem,0.6vw,0.35rem)] rounded-2xl border border-white/15 p-[clamp(0.2rem,1.2vw,0.75rem)] ${box.className}`}
 					>
-						<span className="font-mighty text-3xl leading-none text-white sm:text-4xl md:text-5xl">
+						<span className="font-mighty text-[clamp(1rem,6.2vw,3rem)] leading-none text-white tabular-nums">
 							{fmt(v)}
 						</span>
-						<span className="text-[0.65rem] font-medium uppercase tracking-widest text-white/70">
+						<span className="text-center text-[clamp(0.4rem,2.6vw,0.65rem)] font-medium uppercase leading-tight tracking-[clamp(0.02em,0.35vw,0.2em)] text-white/70">
 							{unitLabel}
 						</span>
 					</div>
