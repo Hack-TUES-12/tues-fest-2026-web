@@ -61,7 +61,7 @@ export function HeroCountdown() {
 				return (
 					<div
 						key={box.label}
-						className={`flex min-w-[4.5rem] flex-col items-center justify-center gap-1 rounded-2xl border px-4 py-4 sm:min-w-[5.5rem] sm:px-5 sm:py-5 ${box.className}`}
+						className={`flex aspect-square w-[4.75rem] shrink-0 flex-col items-center justify-center gap-1 rounded-2xl border border-white/15 p-2 sm:w-24 sm:p-3 md:w-28 ${box.className}`}
 					>
 						<span className="font-mighty text-3xl leading-none text-white sm:text-4xl md:text-5xl">
 							{fmt(v)}
