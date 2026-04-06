@@ -93,10 +93,7 @@ export default function EventLanding() {
 						<div className="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center lg:max-w-none lg:justify-start">
 							<Link
 								href="#about"
-								className={cn(
-									buttonVariants({ variant: 'outline', size: 'lg' }),
-									'w-full border-primary/60 bg-transparent text-white hover:bg-white/10 hover:text-white sm:w-auto'
-								)}
+								className={cn(buttonVariants({ variant: 'primary-outline', size: 'lg' }))}
 							>
 								Виж повече
 							</Link>
