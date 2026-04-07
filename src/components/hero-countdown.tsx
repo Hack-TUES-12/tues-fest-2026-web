@@ -61,12 +61,12 @@ export function HeroCountdown() {
 				return (
 					<div
 						key={box.label}
-						className={`flex aspect-square w-[clamp(2.65rem,15.5vw,7rem)] shrink-0 flex-col items-center justify-center gap-[clamp(0.1rem,0.6vw,0.35rem)] rounded-2xl border border-white/15 p-[clamp(0.2rem,1.2vw,0.75rem)] ${box.className}`}
+						className={`flex aspect-square w-[clamp(4rem,15.5vw,7rem)] shrink-0 flex-col items-center justify-center gap-[clamp(0.1rem,0.6vw,0.35rem)] rounded-2xl border border-white/15 p-[clamp(0.2rem,1.2vw,0.75rem)] ${box.className}`}
 					>
-						<span className="font-mighty text-[clamp(1rem,6.2vw,3rem)] leading-none text-white tabular-nums">
+						<span className="font-mighty text-[clamp(2rem,6.2vw,3rem)] leading-none text-white tabular-nums">
 							{fmt(v)}
 						</span>
-						<span className="text-center text-[clamp(0.4rem,2.6vw,0.65rem)] font-medium uppercase leading-tight tracking-[clamp(0.02em,0.35vw,0.2em)] text-white/70">
+						<span className="text-center text-[clamp(0.6rem,2.6vw,0.65rem)] font-medium uppercase leading-tight tracking-[clamp(0.02em,0.35vw,0.2em)] text-white/70">
 							{unitLabel}
 						</span>
 					</div>

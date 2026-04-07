@@ -39,7 +39,7 @@ export default function EventLanding() {
 	return (
 		<div className="relative flex min-h-0 w-full flex-1 flex-col">
 			{/* Dobri */}
-			<div className='absolute aspect-29/25 bottom-0 right-0'
+			<div className='hidden sm:block absolute aspect-29/25 bottom-0 right-0'
 				style={{
 					width: "clamp(12rem, 20vw, 20rem)"
 				}}
@@ -76,9 +76,9 @@ export default function EventLanding() {
 			/>
 
 			<div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-16 md:px-8 md:py-20 lg:py-24">
-				<div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-					{/* Left: branding + CTAs */}
-					<div className="relative flex flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+				<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:gap-16 xl:gap-20">
+					{/* Branding: col 1 row 1 on lg; first in flow on sm+; first on xs */}
+					<div className="relative order-1 flex flex-col items-center text-center lg:col-start-1 lg:row-start-1 lg:items-start lg:text-left">
 						<div className="flex w-full flex-col items-center lg:items-start">
 							{/* Shared width = first row (TUES + year); Fest + slogan right-aligned to that edge */}
 							<div className="flex w-full justify-center lg:justify-start">
@@ -129,26 +129,10 @@ export default function EventLanding() {
 								</span>
 							</div>
 						</div>
-
-						<div className="flex w-full justify-center lg:justify-start">
-							<div className="relative flex w-full max-w-md flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
-								<Button
-									variant={"primary-outline"}
-									size={"lg"}
-									className="w-full sm:w-auto"
-									onClick={scrollToAboutSection}
-								>
-									Виж повече
-								</Button>
-								<Button size="lg" className="w-full font-bold sm:w-auto" asChild>
-									<Link href={cta.link}>{cta.label}</Link>
-								</Button>
-							</div>
-						</div>
 					</div>
 
-					{/* Right: countdown + meta + mascot */}
-					<div className="relative flex flex-col items-center gap-4 lg:items-end">
+					{/* Right: countdown + meta + mascot — under sm: between title and CTAs; sm–lg: after CTAs; lg: col 2 */}
+					<div className="relative order-2 flex flex-col-reverse items-center gap-4 sm:order-3 lg:flex-col lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:items-end">
 						<HeroCountdown />
 
 						<div className="w-full max-w-md text-center lg:text-end">
@@ -168,6 +152,22 @@ export default function EventLanding() {
 								aria-hidden
 							/>
 						</div> */}
+					</div>
+
+					<div className="order-3 flex w-full justify-center lg:order-2 lg:col-start-1 lg:row-start-2 lg:justify-start">
+						<div className="relative flex w-full max-w-md flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
+							<Button
+								variant={"primary-outline"}
+								size={"lg"}
+								className="w-full sm:w-auto"
+								onClick={scrollToAboutSection}
+							>
+								Виж повече
+							</Button>
+							<Button size="lg" className="w-full font-bold sm:w-auto" asChild>
+								<Link href={cta.link}>{cta.label}</Link>
+							</Button>
+						</div>
 					</div>
 				</div>
 			</div>
