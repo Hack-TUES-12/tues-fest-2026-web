@@ -12,7 +12,7 @@ export const revalidate = 0;
 export default function Home() {
 	return (
 		<div className='w-full'>
-			<section className="relative isolate flex min-h-[calc(100vh-var(--header-height))] w-full flex-col overflow-hidden">
+			<section className="relative isolate mx-[calc(50%-50vw)] flex min-h-[calc(100vh-var(--header-height))] w-screen max-w-[100vw] flex-col overflow-hidden">
 				<EventLanding />
 			</section>
 			<About />
