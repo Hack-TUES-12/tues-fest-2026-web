@@ -117,7 +117,7 @@ export default function EventLanding() {
 			/>
 
 			<div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-16 md:px-8 md:py-20 lg:py-24">
-				<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:gap-16 xl:gap-20">
+				<div className="grid grid-cols-1 items-center gap-x-12 gap-y-6 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:gap-x-16 lg:gap-y-7 xl:gap-x-20 xl:gap-y-8">
 					{/* Branding: col 1 row 1 on lg; first in flow on sm+; first on xs */}
 					<div className="relative order-1 flex flex-col items-center text-center lg:col-start-1 lg:row-start-1 lg:items-start lg:text-left">
 						<div className="flex w-full flex-col items-center lg:items-start">
