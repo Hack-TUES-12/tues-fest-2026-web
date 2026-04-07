@@ -153,19 +153,31 @@ function FolderNavigation({
 			{/* ── Timeline ─────────────────────────────────────────────────── */}
 			<div className="relative" style={{ height: '102px' }}>
 
-				{/* Line: mobile — always split at 50 % */}
+				{/* Line: mobile — centered on dots (pt-[30px] + half of w-9 h-9) */}
 				<div
 					className="md:hidden absolute flex pointer-events-none"
-					style={{ top: '43px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+					style={{
+						top: '48px',
+						height: '2px',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						width: '100vw',
+					}}
 				>
 					<div className="w-1/2 bg-muted" />
 					<div className="flex-1 bg-dark-muted" />
 				</div>
 
-				{/* Line: desktop — split animates with the selected dot */}
+				{/* Line: desktop — centered on dot row (track has no top padding; largest dot is 36px) */}
 				<div
 					className="hidden md:flex absolute pointer-events-none"
-					style={{ top: '43px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+					style={{
+						top: '18px',
+						height: '2px',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						width: '100vw',
+					}}
 				>
 					<div
 						className="bg-muted"
