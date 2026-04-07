@@ -22,7 +22,12 @@ const About = () => (
 						className="absolute -left-4 -top-4 z-30 select-none text-8xl font-black leading-none text-muted"
 						aria-hidden="true"
 					>
-						+
+						<span
+							className="inline-block animate-tf-plus-float"
+							style={{ animationDelay: '-0.55s' }}
+						>
+							+
+						</span>
 					</span>
 
 					{/* Image 1 — large rectangle, top-left */}
@@ -51,7 +56,12 @@ const About = () => (
 						className="absolute bottom-[1%] right-[1%] z-30 select-none text-7xl font-black leading-none text-secondary translate-x-1/2 translate-y-1/2"
 						aria-hidden="true"
 					>
-						+
+						<span
+							className="inline-block animate-tf-plus-float"
+							style={{ animationDelay: '-1.75s' }}
+						>
+							+
+						</span>
 					</span>
 				</div>
 

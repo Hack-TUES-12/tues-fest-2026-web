@@ -107,9 +107,29 @@
 	to   { opacity: 0; }
 }
 
+/** Decorative “+” glyphs — very subtle vertical drift; delay via inline style for phase variety */
+@keyframes tf-plus-float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-0.06em);
+	}
+}
+
 @layer utilities {
 	.animate-fade-in  { animation: fade-in  1s ease-in-out forwards; }
 	.animate-fade-out { animation: fade-out 1s ease-in-out forwards; }
+
+	.animate-tf-plus-float {
+		animation: tf-plus-float 6.5s ease-in-out infinite;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.animate-tf-plus-float {
+			animation: none;
+		}
+	}
 }
 
 /* Custom scrollbar */

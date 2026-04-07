@@ -137,7 +137,12 @@ export default function EventLanding() {
 													style={{ fontSize: 'clamp(3rem, 10vw, 8rem)' }}
 													aria-hidden
 												>
-													+
+													<span
+														className="inline-block animate-tf-plus-float"
+														style={{ animationDelay: '-0.35s' }}
+													>
+														+
+													</span>
 												</span>
 												TUES
 												{/* Orange: above the gap between TUES and the year (centered on flex gap) */}
@@ -148,7 +153,12 @@ export default function EventLanding() {
 													}}
 													aria-hidden
 												>
-													+
+													<span
+														className="inline-block animate-tf-plus-float"
+														style={{ animationDelay: '-1.15s' }}
+													>
+														+
+													</span>
 												</span>
 											</span>
 											<span className="relative z-0 text-[clamp(2.4rem,4.8vw,4rem)] leading-none text-muted drop-shadow-lg">
@@ -176,7 +186,12 @@ export default function EventLanding() {
 									aria-hidden
 									{...fadeUp(0.16)}
 								>
-									+
+									<span
+										className="inline-block animate-tf-plus-float"
+										style={{ animationDelay: '-2.05s' }}
+									>
+										+
+									</span>
 								</motion.span>
 							</div>
 						</div>
