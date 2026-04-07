@@ -17,6 +17,9 @@ const buttonVariants = cva(
 					'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
 				outline:
 					'border border-input bg-card text-foreground shadow-xs hover:bg-card/90 hover:text-foreground dark:bg-card dark:hover:bg-card/90',
+				/** 3px primary border; same gradient as default at 30% opacity; primary label */
+				'primary-outline':
+					'border-[2px] border-primary bg-gradient-to-br from-primary/40 to-primary-end/40 text-primary font-bold shadow-xs hover:opacity-90',
 				ghost: 'hover:bg-foreground/30 hover:text-foreground',
 				link: 'text-primary underline-offset-4 hover:underline',
 				'default-secondary': 'bg-gradient-to-br from-primary/30 to-primary-end/30 border border-primary text-primary shadow-xs hover:opacity-90',

@@ -29,6 +29,9 @@ export const TF_DATE_STRING_SHORT = TF_DATE.toLocaleDateString('bg-BG', {
 	month: 'long',
 });
 
+/** e.g. 26.04.2026 for hero / compact UI */
+export const TF_DATE_COMPACT = `${String(TF_DATE.getDate()).padStart(2, '0')}.${String(TF_DATE.getMonth() + 1).padStart(2, '0')}.${TF_DATE.getFullYear()}`;
+
 export const TF_TIME_STRING = TF_DATE.toLocaleTimeString('bg-BG', {
 	hour: '2-digit',
 	minute: '2-digit',
