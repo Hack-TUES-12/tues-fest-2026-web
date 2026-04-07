@@ -136,10 +136,10 @@ export default function EventLanding() {
 						<HeroCountdown />
 
 						<div className="w-full max-w-md text-center lg:text-end">
-							<p className="font-mighty text-2xl text-white drop-shadow-md sm:text-3xl md:text-4xl">
+							<p className="font-mighty text-white drop-shadow-md text-4xl">
 								{TF_DATE_COMPACT}
 							</p>
-							<p className="text-sm text-white/75 leading-relaxed sm:text-xl">{TF_LOCATION}</p>
+							<p className="text-lg text-white/75 leading-relaxed sm:text-xl">{TF_LOCATION}</p>
 						</div>
 
 						{/* <div className="relative mt-4 w-full max-w-[220px] sm:max-w-[260px] lg:absolute lg:bottom-[-2rem] lg:right-0 lg:mt-0 lg:max-w-[200px] xl:max-w-[240px]">
@@ -154,7 +154,7 @@ export default function EventLanding() {
 						</div> */}
 					</div>
 
-					<div className="order-3 flex w-full justify-center lg:order-2 lg:col-start-1 lg:row-start-2 lg:justify-start">
+					<div className="mx-auto lg:mx-0 order-3 flex max-w-64 lg:max-w-auto w-full justify-center lg:order-2 lg:col-start-1 lg:row-start-2 lg:justify-start">
 						<div className="relative flex w-full max-w-md flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
 							<Button
 								variant={"primary-outline"}
