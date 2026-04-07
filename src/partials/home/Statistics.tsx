@@ -10,7 +10,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GradientHeading } from '@/components/ui/gradient-heading';
 import { FOLDERS } from '@/info/folders';
 import { STATISTICS } from '@/info/statistics';
-import { statistics } from 'effect/FastCheck';
 
 export default function Statistics() {
 	const [selectedFolderIndex, setSelectedFolderIndex] = useState(FOLDERS.length);
@@ -38,7 +37,10 @@ export default function Statistics() {
 			<div className="block mx-auto w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
 				{/* Desktop Statistics */}
 				<div className="hidden w-full xl:block">
-					<StatisticsCards selectedFolderIndex={selectedFolderIndex} />
+					<StatisticsCards
+						selectedFolderIndex={selectedFolderIndex}
+						onSelectFest={setSelectedFolderIndex}
+					/>
 				</div>
 
 				{/* Fest Card */}
@@ -49,14 +51,23 @@ export default function Statistics() {
 
 				{/* Mobile/Tablet Statistics */}
 				<div className="block w-full xl:hidden">
-					<StatisticsCards selectedFolderIndex={selectedFolderIndex} />
+					<StatisticsCards
+						selectedFolderIndex={selectedFolderIndex}
+						onSelectFest={setSelectedFolderIndex}
+					/>
 				</div>
 			</div>
 		</section>
 	);
 }
 
-function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number }) {
+function StatisticsCards({
+	selectedFolderIndex,
+	onSelectFest,
+}: {
+	selectedFolderIndex: number;
+	onSelectFest: (folderId: number) => void;
+}) {
 	const selectedYear = FOLDERS.find((f) => f.id === selectedFolderIndex)?.name;
 
 	return (
@@ -67,7 +78,11 @@ function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number 
 					<Card variant='muted' key={statistic.title} className="bg-card/80 border-border backdrop-blur-sm">
 						<CardTitle className='text-lg px-8'>{statistic.title} {yearTotal ? `- ${yearTotal}` : ""}</CardTitle>
 						<CardContent className='pl-0'>
-							<BarStatistic selectedFolderIndex={selectedFolderIndex} data={statistic.data} />
+							<BarStatistic
+								selectedFolderIndex={selectedFolderIndex}
+								data={statistic.data}
+								onSelectFest={onSelectFest}
+							/>
 						</CardContent>
 					</Card>
 				);
@@ -79,14 +94,23 @@ function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number 
 function BarStatistic({
 	selectedFolderIndex,
 	data,
+	onSelectFest,
 }: {
 	selectedFolderIndex: number;
 	data: {
 		name: string;
 		total: number;
 	}[];
+	onSelectFest: (folderId: number) => void;
 }) {
 	const folder = FOLDERS.find((folder) => folder.id === selectedFolderIndex);
+
+	const handleBarClick = (barData: { payload?: { name?: string } }) => {
+		const year = barData?.payload?.name;
+		if (!year) return;
+		const target = FOLDERS.find((f) => f.name === year);
+		if (target) onSelectFest(target.id);
+	};
 
 	return (
 		<ResponsiveContainer width="100%" height={200}>
@@ -99,7 +123,12 @@ function BarStatistic({
 					axisLine={false}
 					tickFormatter={(value) => `${value}`}
 				/>
-				<Bar dataKey="total" radius={[4, 4, 0, 0]}>
+				<Bar
+					dataKey="total"
+					radius={[4, 4, 0, 0]}
+					cursor="pointer"
+					onClick={handleBarClick}
+				>
 					{data.map((entry, index) => (
 						<Cell
 							key={`cell-${index}`}
