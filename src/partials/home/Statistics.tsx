@@ -15,46 +15,66 @@ export default function Statistics() {
 	const [selectedFolderIndex, setSelectedFolderIndex] = useState(FOLDERS.length);
 
 	return (
-		<section id="statistics" className="px-4 py-12 pt-32 md:px-8 md:pt-48">
-			<div className="mb-12 max-w-4xl mx-auto text-center flex flex-col items-center">
-				<p className="text-muted text-xl tracking-widest mb-1">История</p>
-				<h2 className="font-title text-4xl md:text-5xl text-white mb-4">
-					Пътят ни досега
-				</h2>
-				<p className="text-foreground max-w-3xl text-lg">
-					TUES Fest през годините. Разгледайте историята на емблематичния ден на отворените врати на ТУЕС. Вижте откъде започна всичко и как събитието достигна успеха, който има днес.
-				</p>
-			</div>
+		<section id="statistics" className="relative px-4 py-12 pt-32 md:px-8 md:pt-48">
+			<Image
+				src="/decorations/green-circle.svg"
+				alt=""
+				width={600}
+				height={600}
+				aria-hidden
+				unoptimized
+				className="pointer-events-none absolute bottom-0 left-0 z-0 h-auto w-[min(100%,36rem)] max-w-none translate-y-1/4 select-none md:-translate-x-1/4"
+			/>
+			<Image
+				src="/decorations/green-circle.svg"
+				alt=""
+				width={600}
+				height={600}
+				aria-hidden
+				unoptimized
+				className="pointer-events-none absolute right-0 top-1/2 z-0 h-auto w-[min(100%,36rem)] max-w-none -translate-y-1/2 select-none md:translate-x-1/4"
+			/>
+			<div className="relative z-10">
+				<div className="mb-12 max-w-4xl mx-auto text-center flex flex-col items-center">
+					<p className="text-muted text-xl tracking-widest mb-1">История</p>
+					<h2 className="font-title text-4xl md:text-5xl text-white mb-4">
+						Пътят ни досега
+					</h2>
+					<p className="text-foreground max-w-3xl text-lg">
+						TUES Fest през годините. Разгледайте историята на емблематичния ден на отворените врати на ТУЕС. Вижте откъде започна всичко и как събитието достигна успеха, който има днес.
+					</p>
+				</div>
 
-			{/* Timeline Navigation — breaks out of section's horizontal padding so line spans full width */}
-			<div className="mb-16 -mx-4 md:-mx-8">
-				<FolderNavigation
-					selectedFolderIndex={selectedFolderIndex}
-					setSelectedFolderIndex={setSelectedFolderIndex}
-				/>
-			</div>
-
-			<div className="block mx-auto w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
-				{/* Desktop Statistics */}
-				<div className="hidden w-full xl:block">
-					<StatisticsCards
+				{/* Timeline Navigation — breaks out of section's horizontal padding so line spans full width */}
+				<div className="mb-16 -mx-4 md:-mx-8">
+					<FolderNavigation
 						selectedFolderIndex={selectedFolderIndex}
-						onSelectFest={setSelectedFolderIndex}
+						setSelectedFolderIndex={setSelectedFolderIndex}
 					/>
 				</div>
 
-				{/* Fest Card */}
-				<div className="py-8 xl:hidden">
-					<FestCard selectedFolderIndex={selectedFolderIndex} />
-				</div>
-				<FestCard className="hidden xl:flex" selectedFolderIndex={selectedFolderIndex} />
+				<div className="block mx-auto w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
+					{/* Desktop Statistics */}
+					<div className="hidden w-full xl:block">
+						<StatisticsCards
+							selectedFolderIndex={selectedFolderIndex}
+							onSelectFest={setSelectedFolderIndex}
+						/>
+					</div>
 
-				{/* Mobile/Tablet Statistics */}
-				<div className="block w-full xl:hidden">
-					<StatisticsCards
-						selectedFolderIndex={selectedFolderIndex}
-						onSelectFest={setSelectedFolderIndex}
-					/>
+					{/* Fest Card */}
+					<div className="py-8 xl:hidden">
+						<FestCard selectedFolderIndex={selectedFolderIndex} />
+					</div>
+					<FestCard className="hidden xl:flex" selectedFolderIndex={selectedFolderIndex} />
+
+					{/* Mobile/Tablet Statistics */}
+					<div className="block w-full xl:hidden">
+						<StatisticsCards
+							selectedFolderIndex={selectedFolderIndex}
+							onSelectFest={setSelectedFolderIndex}
+						/>
+					</div>
 				</div>
 			</div>
 		</section>
