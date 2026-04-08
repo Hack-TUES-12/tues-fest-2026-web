@@ -84,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html
 			lang="bg"
-			className="scroll-pt-(--header-height) dark [--footer-height:calc(theme(spacing.24))] [--header-height:calc(theme(spacing.20))]"
+			className="scroll-pt-(--header-height) dark overflow-x-clip [--footer-height:calc(theme(spacing.24))] [--header-height:calc(theme(spacing.20))]"
 		>
 			<head>
 				<Script src="https://www.googletagmanager.com/gtag/js?id=G-1H1H1CR559" strategy="afterInteractive" />
@@ -97,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					mighty.variable,
 					// origin.variable,
 					'font-sans',
-					'dark w-screen overflow-x-hidden'
+					'dark min-h-0 w-full min-w-0 overflow-x-clip'
 				)}
 			>
 				<GrowthBookServerProvider>

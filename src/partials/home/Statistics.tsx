@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { motion, useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
@@ -10,53 +11,142 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GradientHeading } from '@/components/ui/gradient-heading';
 import { FOLDERS } from '@/info/folders';
 import { STATISTICS } from '@/info/statistics';
-import { statistics } from 'effect/FastCheck';
+
+/** Matches hero (`Logos.tsx`) easing */
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
+
+const STATS_IN_VIEW = {
+	once: true,
+	amount: 0.15,
+	margin: '0px 0px -10% 0px',
+} as const;
+
+function statsFadeUp(reducedMotion: boolean | null, delaySec: number) {
+	return {
+		initial: reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+		whileInView: { opacity: 1, y: 0 },
+		viewport: STATS_IN_VIEW,
+		transition: {
+			duration: reducedMotion ? 0 : 0.55,
+			delay: reducedMotion ? 0 : delaySec,
+			ease: EASE_OUT,
+		},
+	};
+}
+
+function statsFadeIn(reducedMotion: boolean | null, delaySec: number) {
+	return {
+		initial: reducedMotion ? { opacity: 1 } : { opacity: 0 },
+		whileInView: { opacity: 1 },
+		viewport: STATS_IN_VIEW,
+		transition: {
+			duration: reducedMotion ? 0 : 0.7,
+			delay: reducedMotion ? 0 : delaySec,
+			ease: EASE_OUT,
+		},
+	};
+}
 
 export default function Statistics() {
 	const [selectedFolderIndex, setSelectedFolderIndex] = useState(FOLDERS.length);
+	const reducedMotion = useReducedMotion();
 
 	return (
-		<section id="statistics" className="px-4 py-12 pt-32 md:px-8 md:pt-48">
-			<div className="mb-12 max-w-4xl mx-auto text-center flex flex-col items-center">
-				<p className="text-muted text-xl tracking-widest mb-1">История</p>
-				<h2 className="font-title text-4xl md:text-5xl text-white mb-4">
-					Пътят ни досега
-				</h2>
-				<p className="text-foreground max-w-3xl text-lg">
-					TUES Fest през годините. Разгледайте историята на емблематичния ден на отворените врати на ТУЕС. Вижте откъде започна всичко и как събитието достигна успеха, който има днес.
-				</p>
-			</div>
-
-			{/* Timeline Navigation — breaks out of section's horizontal padding so line spans full width */}
-			<div className="mb-16 -mx-4 md:-mx-8">
-				<FolderNavigation
-					selectedFolderIndex={selectedFolderIndex}
-					setSelectedFolderIndex={setSelectedFolderIndex}
+		<section id="statistics" className="relative px-4 py-12 pt-32 md:px-8 md:pt-48">
+			<motion.div
+				aria-hidden
+				className="pointer-events-none absolute bottom-0 left-0 z-0 h-auto w-[min(100%,36rem)] max-w-none translate-y-1/4 select-none md:-translate-x-1/4"
+				{...statsFadeIn(reducedMotion, 0.08)}
+			>
+				<Image
+					src="/decorations/green-circle.svg"
+					alt=""
+					width={600}
+					height={600}
+					aria-hidden
+					unoptimized
+					className="h-auto w-full max-w-none"
 				/>
-			</div>
-
-			<div className="block mx-auto w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
-				{/* Desktop Statistics */}
-				<div className="hidden w-full xl:block">
-					<StatisticsCards selectedFolderIndex={selectedFolderIndex} />
+			</motion.div>
+			<motion.div
+				aria-hidden
+				className="pointer-events-none absolute right-0 top-1/2 z-0 h-auto w-[min(100%,36rem)] max-w-none -translate-y-1/2 select-none md:translate-x-1/4"
+				{...statsFadeIn(reducedMotion, 0.14)}
+			>
+				<Image
+					src="/decorations/green-circle.svg"
+					alt=""
+					width={600}
+					height={600}
+					aria-hidden
+					unoptimized
+					className="h-auto w-full max-w-none"
+				/>
+			</motion.div>
+			<div className="relative z-10">
+				<div className="mb-12 mx-auto flex max-w-4xl flex-col items-center text-center">
+					<motion.p
+						className="text-muted mb-1 text-xl tracking-widest"
+						{...statsFadeUp(reducedMotion, 0)}
+					>
+						История
+					</motion.p>
+					<motion.h2
+						className="font-title mb-4 text-4xl text-white md:text-5xl"
+						{...statsFadeUp(reducedMotion, 0.07)}
+					>
+						Пътят ни досега
+					</motion.h2>
+					<motion.p
+						className="text-foreground max-w-3xl text-lg"
+						{...statsFadeUp(reducedMotion, 0.14)}
+					>
+						TUES Fest през годините. Разгледайте историята на емблематичния ден на отворените врати на ТУЕС. Вижте откъде започна всичко и как събитието достигна успеха, който има днес.
+					</motion.p>
 				</div>
 
-				{/* Fest Card */}
-				<div className="py-8 xl:hidden">
-					<FestCard selectedFolderIndex={selectedFolderIndex} />
-				</div>
-				<FestCard className="hidden xl:flex" selectedFolderIndex={selectedFolderIndex} />
+				{/* Timeline Navigation — breaks out of section's horizontal padding so line spans full width */}
+				<motion.div className="mb-16 -mx-4 md:-mx-8" {...statsFadeUp(reducedMotion, 0.2)}>
+					<FolderNavigation
+						selectedFolderIndex={selectedFolderIndex}
+						setSelectedFolderIndex={setSelectedFolderIndex}
+					/>
+				</motion.div>
 
-				{/* Mobile/Tablet Statistics */}
-				<div className="block w-full xl:hidden">
-					<StatisticsCards selectedFolderIndex={selectedFolderIndex} />
+				<div className="mx-auto block w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
+					{/* Desktop Statistics */}
+					<motion.div className="hidden w-full xl:block" {...statsFadeUp(reducedMotion, 0.24)}>
+						<StatisticsCards
+							selectedFolderIndex={selectedFolderIndex}
+							onSelectFest={setSelectedFolderIndex}
+						/>
+					</motion.div>
+
+					{/* Fest card — single instance */}
+					<motion.div className="w-full py-8 xl:py-0" {...statsFadeUp(reducedMotion, 0.28)}>
+						<FestCard selectedFolderIndex={selectedFolderIndex} />
+					</motion.div>
+
+					{/* Mobile/Tablet Statistics */}
+					<motion.div className="block w-full xl:hidden" {...statsFadeUp(reducedMotion, 0.32)}>
+						<StatisticsCards
+							selectedFolderIndex={selectedFolderIndex}
+							onSelectFest={setSelectedFolderIndex}
+						/>
+					</motion.div>
 				</div>
 			</div>
 		</section>
 	);
 }
 
-function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number }) {
+function StatisticsCards({
+	selectedFolderIndex,
+	onSelectFest,
+}: {
+	selectedFolderIndex: number;
+	onSelectFest: (folderId: number) => void;
+}) {
 	const selectedYear = FOLDERS.find((f) => f.id === selectedFolderIndex)?.name;
 
 	return (
@@ -67,7 +157,11 @@ function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number 
 					<Card variant='muted' key={statistic.title} className="bg-card/80 border-border backdrop-blur-sm">
 						<CardTitle className='text-lg px-8'>{statistic.title} {yearTotal ? `- ${yearTotal}` : ""}</CardTitle>
 						<CardContent className='pl-0'>
-							<BarStatistic selectedFolderIndex={selectedFolderIndex} data={statistic.data} />
+							<BarStatistic
+								selectedFolderIndex={selectedFolderIndex}
+								data={statistic.data}
+								onSelectFest={onSelectFest}
+							/>
 						</CardContent>
 					</Card>
 				);
@@ -79,14 +173,23 @@ function StatisticsCards({ selectedFolderIndex }: { selectedFolderIndex: number 
 function BarStatistic({
 	selectedFolderIndex,
 	data,
+	onSelectFest,
 }: {
 	selectedFolderIndex: number;
 	data: {
 		name: string;
 		total: number;
 	}[];
+	onSelectFest: (folderId: number) => void;
 }) {
 	const folder = FOLDERS.find((folder) => folder.id === selectedFolderIndex);
+
+	const handleBarClick = (barData: { payload?: { name?: string } }) => {
+		const year = barData?.payload?.name;
+		if (!year) return;
+		const target = FOLDERS.find((f) => f.name === year);
+		if (target) onSelectFest(target.id);
+	};
 
 	return (
 		<ResponsiveContainer width="100%" height={200}>
@@ -99,7 +202,12 @@ function BarStatistic({
 					axisLine={false}
 					tickFormatter={(value) => `${value}`}
 				/>
-				<Bar dataKey="total" radius={[4, 4, 0, 0]}>
+				<Bar
+					dataKey="total"
+					radius={[4, 4, 0, 0]}
+					cursor="pointer"
+					onClick={handleBarClick}
+				>
 					{data.map((entry, index) => (
 						<Cell
 							key={`cell-${index}`}
@@ -153,19 +261,31 @@ function FolderNavigation({
 			{/* ── Timeline ─────────────────────────────────────────────────── */}
 			<div className="relative" style={{ height: '102px' }}>
 
-				{/* Line: mobile — always split at 50 % */}
+				{/* Line: mobile — centered on dots (pt-[30px] + half of w-9 h-9) */}
 				<div
 					className="md:hidden absolute flex pointer-events-none"
-					style={{ top: '43px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+					style={{
+						top: '48px',
+						height: '2px',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						width: '100vw',
+					}}
 				>
 					<div className="w-1/2 bg-muted" />
 					<div className="flex-1 bg-dark-muted" />
 				</div>
 
-				{/* Line: desktop — split animates with the selected dot */}
+				{/* Line: desktop — centered on dot row (track has no top padding; largest dot is 36px) */}
 				<div
 					className="hidden md:flex absolute pointer-events-none"
-					style={{ top: '43px', height: '2px', left: '50%', transform: 'translateX(-50%)', width: '100vw' }}
+					style={{
+						top: '18px',
+						height: '2px',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						width: '100vw',
+					}}
 				>
 					<div
 						className="bg-muted"
