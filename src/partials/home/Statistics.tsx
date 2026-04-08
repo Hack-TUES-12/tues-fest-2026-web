@@ -9,43 +9,9 @@ import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GradientHeading } from '@/components/ui/gradient-heading';
+import { sectionFadeIn, sectionFadeUp } from '@/lib/motion/section-in-view';
 import { FOLDERS } from '@/info/folders';
 import { STATISTICS } from '@/info/statistics';
-
-/** Matches hero (`Logos.tsx`) easing */
-const EASE_OUT = [0.22, 1, 0.36, 1] as const;
-
-const STATS_IN_VIEW = {
-	once: true,
-	amount: 0.15,
-	margin: '0px 0px -10% 0px',
-} as const;
-
-function statsFadeUp(reducedMotion: boolean | null, delaySec: number) {
-	return {
-		initial: reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
-		whileInView: { opacity: 1, y: 0 },
-		viewport: STATS_IN_VIEW,
-		transition: {
-			duration: reducedMotion ? 0 : 0.55,
-			delay: reducedMotion ? 0 : delaySec,
-			ease: EASE_OUT,
-		},
-	};
-}
-
-function statsFadeIn(reducedMotion: boolean | null, delaySec: number) {
-	return {
-		initial: reducedMotion ? { opacity: 1 } : { opacity: 0 },
-		whileInView: { opacity: 1 },
-		viewport: STATS_IN_VIEW,
-		transition: {
-			duration: reducedMotion ? 0 : 0.7,
-			delay: reducedMotion ? 0 : delaySec,
-			ease: EASE_OUT,
-		},
-	};
-}
 
 export default function Statistics() {
 	const [selectedFolderIndex, setSelectedFolderIndex] = useState(FOLDERS.length);
@@ -56,7 +22,7 @@ export default function Statistics() {
 			<motion.div
 				aria-hidden
 				className="pointer-events-none absolute bottom-0 left-0 z-0 h-auto w-[min(100%,36rem)] max-w-none translate-y-1/4 select-none md:-translate-x-1/4"
-				{...statsFadeIn(reducedMotion, 0.08)}
+				{...sectionFadeIn(reducedMotion, 0.08)}
 			>
 				<Image
 					src="/decorations/green-circle.svg"
@@ -71,7 +37,7 @@ export default function Statistics() {
 			<motion.div
 				aria-hidden
 				className="pointer-events-none absolute right-0 top-1/2 z-0 h-auto w-[min(100%,36rem)] max-w-none -translate-y-1/2 select-none md:translate-x-1/4"
-				{...statsFadeIn(reducedMotion, 0.14)}
+				{...sectionFadeIn(reducedMotion, 0.14)}
 			>
 				<Image
 					src="/decorations/green-circle.svg"
@@ -87,26 +53,26 @@ export default function Statistics() {
 				<div className="mb-12 mx-auto flex max-w-4xl flex-col items-center text-center">
 					<motion.p
 						className="text-muted mb-1 text-xl tracking-widest"
-						{...statsFadeUp(reducedMotion, 0)}
+						{...sectionFadeUp(reducedMotion, 0)}
 					>
 						История
 					</motion.p>
 					<motion.h2
 						className="font-title mb-4 text-4xl text-white md:text-5xl"
-						{...statsFadeUp(reducedMotion, 0.07)}
+						{...sectionFadeUp(reducedMotion, 0.07)}
 					>
 						Пътят ни досега
 					</motion.h2>
 					<motion.p
 						className="text-foreground max-w-3xl text-lg"
-						{...statsFadeUp(reducedMotion, 0.14)}
+						{...sectionFadeUp(reducedMotion, 0.14)}
 					>
 						TUES Fest през годините. Разгледайте историята на емблематичния ден на отворените врати на ТУЕС. Вижте откъде започна всичко и как събитието достигна успеха, който има днес.
 					</motion.p>
 				</div>
 
 				{/* Timeline Navigation — breaks out of section's horizontal padding so line spans full width */}
-				<motion.div className="mb-16 -mx-4 md:-mx-8" {...statsFadeUp(reducedMotion, 0.2)}>
+				<motion.div className="mb-16 -mx-4 md:-mx-8" {...sectionFadeUp(reducedMotion, 0.2)}>
 					<FolderNavigation
 						selectedFolderIndex={selectedFolderIndex}
 						setSelectedFolderIndex={setSelectedFolderIndex}
@@ -115,7 +81,7 @@ export default function Statistics() {
 
 				<div className="mx-auto block w-full max-w-4xl xl:grid xl:grid-cols-2 xl:gap-8">
 					{/* Desktop Statistics */}
-					<motion.div className="hidden w-full xl:block" {...statsFadeUp(reducedMotion, 0.24)}>
+					<motion.div className="hidden w-full xl:block" {...sectionFadeUp(reducedMotion, 0.24)}>
 						<StatisticsCards
 							selectedFolderIndex={selectedFolderIndex}
 							onSelectFest={setSelectedFolderIndex}
@@ -123,12 +89,12 @@ export default function Statistics() {
 					</motion.div>
 
 					{/* Fest card — single instance */}
-					<motion.div className="w-full py-8 xl:py-0" {...statsFadeUp(reducedMotion, 0.28)}>
+					<motion.div className="w-full py-8 xl:py-0" {...sectionFadeUp(reducedMotion, 0.28)}>
 						<FestCard selectedFolderIndex={selectedFolderIndex} />
 					</motion.div>
 
 					{/* Mobile/Tablet Statistics */}
-					<motion.div className="block w-full xl:hidden" {...statsFadeUp(reducedMotion, 0.32)}>
+					<motion.div className="block w-full xl:hidden" {...sectionFadeUp(reducedMotion, 0.32)}>
 						<StatisticsCards
 							selectedFolderIndex={selectedFolderIndex}
 							onSelectFest={setSelectedFolderIndex}
