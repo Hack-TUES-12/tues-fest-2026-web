@@ -39,7 +39,7 @@ export const STATISTICS = [
 			},
 			{
 				name: '2024',
-				total: 345,
+				total: 282,
 			},
 			{
 				name: '2025',
