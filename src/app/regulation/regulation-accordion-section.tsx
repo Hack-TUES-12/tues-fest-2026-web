@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import {
 	RegulationAccentProvider,
 	regulationAccentOpenTriggerClass,
+	regulationAccentTriggerHoverClass,
 	type RegulationAccent,
 } from './regulation-accent';
 
@@ -37,21 +38,25 @@ export function RegulationAccordionSection({
 	triggerClassName?: string;
 }) {
 	return (
-		<Card className="border-white/10 bg-card/80 gap-0 shadow-sm backdrop-blur-sm">
+		<Card className="border-white/10 bg-card/80 gap-0 shadow-sm backdrop-blur-sm sm:px-4">
 			<CardContent>
 				<Accordion type="single" collapsible defaultValue="open">
 					<AccordionItem value="open" id={sectionId} className="scroll-mt-28 border-0">
 						<AccordionTrigger
 							className={cn(
 								triggerBase,
+								regulationAccentTriggerHoverClass(accent),
 								regulationAccentOpenTriggerClass(accent),
 								triggerClassName,
-								"cursor-pointer"
+								"cursor-pointer font-bold"
 							)}
 						>
 							{title}
 						</AccordionTrigger>
-						<AccordionContent className={bodyTypography}>
+						<AccordionContent className={cn(
+							bodyTypography,
+							"px-3 sm:px-6"
+						)}>
 							<RegulationAccentProvider accent={accent}>{children}</RegulationAccentProvider>
 						</AccordionContent>
 					</AccordionItem>

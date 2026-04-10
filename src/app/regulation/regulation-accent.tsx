@@ -20,6 +20,20 @@ export function useRegulationAccent(): RegulationAccent {
 	return useContext(RegulationAccentContext);
 }
 
+/** Accordion trigger label on hover (Tailwind needs full class strings — no dynamic `hover:text-${x}`). */
+export function regulationAccentTriggerHoverClass(accent: RegulationAccent): string {
+	switch (accent) {
+		case 'primary':
+			return 'hover:text-primary';
+		case 'secondary':
+			return 'hover:text-secondary';
+		case 'accent':
+			return 'hover:text-accent';
+		case 'muted':
+			return 'hover:text-muted';
+	}
+}
+
 /** Open accordion trigger label color. */
 export function regulationAccentOpenTriggerClass(accent: RegulationAccent): string {
 	switch (accent) {
