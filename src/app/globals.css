@@ -23,6 +23,11 @@
 	--accent: oklch(0.7233 0.1001 231);
 	--accent-foreground: oklch(0 0 0);
 	--dark-muted: #323F07;
+	/** Regulation timeline / inactive rail: darkened tints of section hues (see regulation-accent). */
+	--regulation-inactive-primary: color-mix(in srgb, #8d1c5c 40%, #000000);
+	--regulation-inactive-secondary: color-mix(in srgb, #8e5115 40%, #000000);
+	--regulation-inactive-accent: color-mix(in srgb, #36667d 40%, #000000);
+	--regulation-inactive-muted: color-mix(in srgb, #84a614 38%, #000000);
 	--gray-dark: #2E3337;
 	--destructive: oklch(0.58 0.22 27);
 	--destructive-foreground: oklch(0.6797 0 0);
@@ -67,6 +72,10 @@
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
 	--color-dark-muted: var(--dark-muted);
+	--color-regulation-inactive-primary: var(--regulation-inactive-primary);
+	--color-regulation-inactive-secondary: var(--regulation-inactive-secondary);
+	--color-regulation-inactive-accent: var(--regulation-inactive-accent);
+	--color-regulation-inactive-muted: var(--regulation-inactive-muted);
 	--color-gray-dark: var(--gray-dark);
 	--color-destructive: var(--destructive);
 	--color-border: var(--border);

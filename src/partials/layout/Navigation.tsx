@@ -29,6 +29,7 @@ const LINKS = [
 	{ href: '/projects', title: 'Проекти' },
 	{ href: '/#schedule', title: 'Програма' },
 	{ href: '/partners', title: 'Спонсори && Партньори' },
+	{ href: '/regulation', title: 'Регламент' },
 	// { href: '/projects', title: 'Гласуване' },
 ];
 
