@@ -61,3 +61,31 @@ export function regulationAccentClauseNumberClass(accent: RegulationAccent): str
 			return 'text-muted';
 	}
 }
+
+/** Filled backgrounds (timeline dot / line when section is in view). */
+export function regulationAccentBgClass(accent: RegulationAccent): string {
+	switch (accent) {
+		case 'primary':
+			return 'bg-primary';
+		case 'secondary':
+			return 'bg-secondary';
+		case 'accent':
+			return 'bg-accent';
+		case 'muted':
+			return 'bg-muted';
+	}
+}
+
+/** Theme token for glow (Statistics-style dot shadow). */
+export function regulationAccentGlowVar(accent: RegulationAccent): string {
+	switch (accent) {
+		case 'primary':
+			return 'var(--color-primary)';
+		case 'secondary':
+			return 'var(--color-secondary)';
+		case 'accent':
+			return 'var(--color-accent)';
+		case 'muted':
+			return 'var(--color-muted)';
+	}
+}
