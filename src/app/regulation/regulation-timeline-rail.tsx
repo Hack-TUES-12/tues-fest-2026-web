@@ -5,14 +5,13 @@ import { cn } from '@/lib/utils';
 import {
 	regulationAccentBgClass,
 	regulationAccentGlowVar,
+	regulationAccentInactiveBgClass,
 	type RegulationAccent,
 } from './regulation-accent';
 
-const lineInactive = 'bg-dark-muted';
-
 /**
  * Vertical timeline rail (Statistics FolderNavigation dot + 2px line language).
- * Lines and dot use the section accent only while `isActive`; otherwise `dark-muted`.
+ * Lines and dot use the section accent while `isActive`; otherwise that hue’s dark inactive token.
  */
 export function RegulationTimelineRail({
 	accent,
@@ -26,6 +25,7 @@ export function RegulationTimelineRail({
 	isLast?: boolean;
 }) {
 	const lineActive = regulationAccentBgClass(accent);
+	const lineInactive = regulationAccentInactiveBgClass(accent);
 	const glow = regulationAccentGlowVar(accent);
 
 	return (
@@ -53,7 +53,10 @@ export function RegulationTimelineRail({
 					</div>
 				) : (
 					<div
-						className="h-4 w-4 rounded-full bg-dark-muted transition-colors duration-300"
+						className={cn(
+							'h-4 w-4 rounded-full transition-colors duration-300',
+							lineInactive,
+						)}
 						style={{ boxShadow: '0 0 0 2px var(--background)' }}
 					/>
 				)}

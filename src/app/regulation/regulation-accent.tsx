@@ -76,6 +76,20 @@ export function regulationAccentBgClass(accent: RegulationAccent): string {
 	}
 }
 
+/** Dimmed rail / inactive dot — dark variant per section hue. */
+export function regulationAccentInactiveBgClass(accent: RegulationAccent): string {
+	switch (accent) {
+		case 'primary':
+			return 'bg-regulation-inactive-primary';
+		case 'secondary':
+			return 'bg-regulation-inactive-secondary';
+		case 'accent':
+			return 'bg-regulation-inactive-accent';
+		case 'muted':
+			return 'bg-regulation-inactive-muted';
+	}
+}
+
 /** Theme token for glow (Statistics-style dot shadow). */
 export function regulationAccentGlowVar(accent: RegulationAccent): string {
 	switch (accent) {
