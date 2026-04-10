@@ -11,10 +11,14 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { TF_LOCATION, TF_SLOGAN } from '@/constants/event';
+import { TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { cn } from '@/lib/utils';
 
 const LAST_UPDATED = '10 април 2026 г.';
+
+/** Place the exported PDF at `public/documents/<this filename>`. */
+const REGULATION_PDF_PATH = `/documents/tues-fest-${TF_YEAR}-reglament.pdf`;
+const REGULATION_PDF_FILENAME = `TUES-Fest-${TF_YEAR}-Reglament.pdf`;
 
 const EVENT_META = {
 	date: '26 април 2026 г.',
@@ -95,15 +99,15 @@ export function RegulationPageClient() {
 						<time dateTime="2026-04-10">{LAST_UPDATED}</time>
 					</p>
 					<Button
-						type="button"
+						asChild
 						variant="outline"
 						size="sm"
-						disabled
-						className="shrink-0 gap-2 border-white/20 font-title text-xs tracking-widest text-white/50"
-						title="Функцията ще бъде достъпна скоро"
+						className="shrink-0 border-white/20 font-title text-xs tracking-widest"
 					>
-						<TbFileTypePdf className="size-4" aria-hidden />
-						Изтегли като PDF
+						<a href={REGULATION_PDF_PATH} download={REGULATION_PDF_FILENAME}>
+							<TbFileTypePdf className="size-4" aria-hidden />
+							Изтегли като PDF
+						</a>
 					</Button>
 				</div>
 
