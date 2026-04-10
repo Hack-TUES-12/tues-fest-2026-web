@@ -10,6 +10,7 @@ import { TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { sectionFadeIn, sectionFadeUp } from '@/lib/motion/section-in-view';
 
 import { RegulationAccordionSection } from './regulation-accordion-section';
+import { RegulationBackToTop } from './regulation-back-to-top';
 import { RegulationClause } from './regulation-clause';
 import type { RegulationAccent } from './regulation-accent';
 import { RegulationToc } from './regulation-toc';
@@ -466,6 +467,8 @@ export function RegulationPageClient() {
 					TUES Fest 2026 · 26 април 2026
 				</motion.p>
 			</div>
+
+			<RegulationBackToTop />
 		</section>
 	);
 }
