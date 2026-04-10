@@ -33,6 +33,7 @@ export function RegulationTimelineRail({
 			className="flex w-9 shrink-0 flex-col items-center self-stretch py-1"
 			aria-hidden
 		>
+			{/* Long stroke above; dot sits at its lower end, then a short tail below. */}
 			<div
 				className={cn(
 					'w-[2px] flex-1 rounded-full transition-colors duration-300 ease-out',
@@ -40,7 +41,7 @@ export function RegulationTimelineRail({
 					isFirst && 'min-h-3',
 				)}
 			/>
-			<div className="my-1 flex shrink-0 items-center justify-center">
+			<div className="flex shrink-0 items-center justify-center">
 				{isActive ? (
 					<div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-black transition-all duration-300">
 						<div
@@ -52,18 +53,11 @@ export function RegulationTimelineRail({
 					</div>
 				) : (
 					<div
-						className="h-5 w-5 translate-y-[4px] rounded-full bg-dark-muted transition-colors duration-300"
+						className="h-5 w-5 rounded-full bg-dark-muted transition-colors duration-300"
 						style={{ boxShadow: '0 0 0 2px var(--background)' }}
 					/>
 				)}
 			</div>
-			<div
-				className={cn(
-					'w-[2px] flex-1 rounded-full transition-colors duration-300 ease-out',
-					isActive ? lineActive : lineInactive,
-					isLast && 'min-h-3',
-				)}
-			/>
 		</div>
 	);
 }
