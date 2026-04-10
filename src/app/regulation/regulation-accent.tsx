@@ -103,3 +103,17 @@ export function regulationAccentGlowVar(accent: RegulationAccent): string {
 			return 'var(--color-muted)';
 	}
 }
+
+/** Solid end stop for timeline line gradient (inactive rail). */
+export function regulationAccentInactiveEndVar(accent: RegulationAccent): string {
+	switch (accent) {
+		case 'primary':
+			return 'var(--color-regulation-inactive-primary)';
+		case 'secondary':
+			return 'var(--color-regulation-inactive-secondary)';
+		case 'accent':
+			return 'var(--color-regulation-inactive-accent)';
+		case 'muted':
+			return 'var(--color-regulation-inactive-muted)';
+	}
+}

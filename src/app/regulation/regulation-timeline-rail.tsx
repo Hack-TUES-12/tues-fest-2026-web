@@ -6,6 +6,7 @@ import {
 	regulationAccentBgClass,
 	regulationAccentGlowVar,
 	regulationAccentInactiveBgClass,
+	regulationAccentInactiveEndVar,
 	type RegulationAccent,
 } from './regulation-accent';
 
@@ -27,6 +28,7 @@ export function RegulationTimelineRail({
 	const lineActive = regulationAccentBgClass(accent);
 	const lineInactive = regulationAccentInactiveBgClass(accent);
 	const glow = regulationAccentGlowVar(accent);
+	const lineEndVar = isActive ? glow : regulationAccentInactiveEndVar(accent);
 
 	return (
 		<div
@@ -35,11 +37,10 @@ export function RegulationTimelineRail({
 		>
 			{/* Long stroke above; dot sits at its lower end, then a short tail below. */}
 			<div
-				className={cn(
-					'w-[2px] flex-1 rounded-full transition-colors duration-300 ease-out mb-0.5',
-					isActive ? lineActive : lineInactive,
-					isFirst && 'min-h-3',
-				)}
+				className={cn('w-[2px] flex-1 rounded-full mb-0.5', isFirst && 'min-h-3')}
+				style={{
+					background: `linear-gradient(to bottom, transparent 0%, ${lineEndVar} 35%, ${lineEndVar} 100%)`,
+				}}
 			/>
 			<div className="flex shrink-0 items-center justify-center">
 				{isActive ? (
