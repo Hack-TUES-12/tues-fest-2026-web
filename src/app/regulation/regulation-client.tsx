@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { TbFileTypePdf } from 'react-icons/tb';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 
 import { RegulationAccordionSection } from './regulation-accordion-section';
 import { RegulationClause } from './regulation-clause';
 import type { RegulationAccent } from './regulation-accent';
+import { RegulationToc } from './regulation-toc';
 import { useRegulationActiveSection } from './use-regulation-active-section';
 
 /** Per-section accent for accordion title (open) and clause numbers — cycles through the four theme colors. */
@@ -66,7 +66,7 @@ const TOC = [
 
 export function RegulationPageClient() {
 	const sectionIds = useMemo(() => TOC.map((item) => item.id), []);
-	const { isSectionActive } = useRegulationActiveSection(sectionIds);
+	const { isSectionActive, currentSectionId } = useRegulationActiveSection(sectionIds);
 
 	function scrollToSection(sectionId: string) {
 		const section = document.getElementById(sectionId);
@@ -148,27 +148,13 @@ export function RegulationPageClient() {
 					</div>
 				</header>
 
-				<Card className="border-white/10 bg-card backdrop-blur-sm">
-					<CardContent className="p-6 sm:p-8">
-						<h2 className="font-title text-xl tracking-wide text-white">Съдържание</h2>
-						<nav aria-label="Съдържание на регламента" className="mt-4">
-							<ol className="flex list-decimal flex-col gap-2 pl-5 text-[0.95rem] leading-relaxed text-foreground/80 marker:text-primary">
-								{TOC.map((item) => (
-									<li key={item.id} className="pl-1">
-										<Button className='h-auto p-0 m-0 bg-none' onClick={() => scrollToSection(item.id)}>
-											<Link
-												href=""
-												className="text-foreground/85 underline-offset-4 transition-colors hover:text-primary hover:underline"
-											>
-												{item.label}
-											</Link>
-										</Button>
-									</li>
-								))}
-							</ol>
-						</nav>
-					</CardContent>
-				</Card>
+				<RegulationToc
+					items={TOC}
+					sectionAccents={SECTION_ACCENTS}
+					isSectionActive={isSectionActive}
+					currentSectionId={currentSectionId}
+					onNavigate={scrollToSection}
+				/>
 
 				<div className="flex flex-col gap-4">
 					<RegulationAccordionSection

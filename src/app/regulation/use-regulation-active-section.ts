@@ -16,13 +16,18 @@ function setsEqual(a: Set<string>, b: Set<string>): boolean {
  */
 export function useRegulationActiveSection(sectionIds: readonly string[]): {
 	isSectionActive: (id: string) => boolean;
+	/** Section whose box contains the reading line (closest by vertical center) — for `aria-current` in TOC. */
+	currentSectionId: string | null;
 } {
 	const [activeIds, setActiveIds] = useState<Set<string>>(() => new Set());
+	const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
 
 	useEffect(() => {
 		const compute = () => {
 			const focalY = window.innerHeight * 0.38;
 			const next = new Set<string>();
+			let bestId: string | null = null;
+			let bestDist = Infinity;
 
 			for (const id of sectionIds) {
 				const el = document.getElementById(id);
@@ -31,9 +36,18 @@ export function useRegulationActiveSection(sectionIds: readonly string[]): {
 				const isCurrent = focalY >= r.top && focalY <= r.bottom;
 				const isScrolledPastDown = r.bottom < focalY;
 				if (isCurrent || isScrolledPastDown) next.add(id);
+				if (isCurrent) {
+					const center = r.top + r.height / 2;
+					const d = Math.abs(center - focalY);
+					if (d < bestDist) {
+						bestDist = d;
+						bestId = id;
+					}
+				}
 			}
 
 			setActiveIds((prev) => (setsEqual(prev, next) ? prev : next));
+			setCurrentSectionId((prev) => (prev === bestId ? prev : bestId));
 		};
 
 		compute();
@@ -51,5 +65,5 @@ export function useRegulationActiveSection(sectionIds: readonly string[]): {
 		[activeIds],
 	);
 
-	return { isSectionActive };
+	return { isSectionActive, currentSectionId };
 }
