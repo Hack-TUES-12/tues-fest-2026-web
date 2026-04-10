@@ -28,6 +28,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			changeFrequency: 'weekly',
 			priority: 0.7,
 		},
+		{
+			url: `${BASE_URL}/regulation`,
+			changeFrequency: 'monthly',
+			priority: 0.65,
+		},
 	];
 
 	if (gb.isOn('tf-show-apply')) {
