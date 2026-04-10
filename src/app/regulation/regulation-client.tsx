@@ -9,6 +9,32 @@ import { TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 
 import { RegulationAccordionSection } from './regulation-accordion-section';
 import { RegulationClause } from './regulation-clause';
+import type { RegulationAccent } from './regulation-accent';
+
+/** Per-section accent for accordion title (open) and clause numbers — cycles through the four theme colors. */
+const SECTION_ACCENTS: [
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+	RegulationAccent,
+] = [
+	'primary',
+	'secondary',
+	'accent',
+	'muted',
+	'primary',
+	'secondary',
+	'accent',
+	'muted',
+	'primary',
+	'secondary',
+];
 
 const LAST_UPDATED = '10 април 2026 г.';
 
@@ -140,7 +166,7 @@ export function RegulationPageClient() {
 				</Card>
 
 				<div className="flex flex-col gap-4">
-					<RegulationAccordionSection sectionId="section-1" title="1. Общи положения">
+					<RegulationAccordionSection sectionId="section-1" title="1. Общи положения" accent={SECTION_ACCENTS[0]}>
 						<RegulationClause id="clause-1-1" n="1.1.">
 							TUES Fest 2026 е публично изложение на ученически проекти, организирано от ученици за ученици под
 							менторството на АЗТУЕС и ръководството на ТУЕС към ТУ – София.
@@ -158,7 +184,7 @@ export function RegulationPageClient() {
 							уведомени своевременно по официален канал.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-2" title="2. Участници">
+					<RegulationAccordionSection sectionId="section-2" title="2. Участници" accent={SECTION_ACCENTS[1]}>
 						<RegulationClause id="clause-2-1" n="2.1.">
 							Право на участие с проект имат всички текущи ученици на ТУЕС към ТУ – София от 8-ми до 12-ти клас.
 						</RegulationClause>
@@ -174,7 +200,7 @@ export function RegulationPageClient() {
 							участие в TUES Fest се допускат единствено проектите, одобрени в този подбор.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-3" title="3. Проекти и категории">
+					<RegulationAccordionSection sectionId="section-3" title="3. Проекти и категории" accent={SECTION_ACCENTS[2]}>
 						<RegulationClause id="clause-3-1" n="3.1.">
 							Проектите се представят в три категории:
 						</RegulationClause>
@@ -210,6 +236,7 @@ export function RegulationPageClient() {
 					<RegulationAccordionSection
 						sectionId="section-4"
 						title="4. Изисквания към съдържанието на проектите"
+						accent={SECTION_ACCENTS[3]}
 						triggerClassName="text-left"
 					>
 						<RegulationClause id="clause-4-1" n="4.1.">
@@ -238,7 +265,7 @@ export function RegulationPageClient() {
 							горепосочените изисквания, дори и след първоначално одобрение.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-5" title="5. Регистрация">
+					<RegulationAccordionSection sectionId="section-5" title="5. Регистрация" accent={SECTION_ACCENTS[4]}>
 						<RegulationClause id="clause-5-1" n="5.1.">
 							Регистрацията се извършва чрез официалната форма на сайта на TUES Fest или по друг обявен от организаторите
 							начин.
@@ -259,7 +286,7 @@ export function RegulationPageClient() {
 							Участниците, чиито проекти са одобрени, получават допълнителни инструкции за подготовка и присъствие.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-6" title="6. Провеждане на събитието">
+					<RegulationAccordionSection sectionId="section-6" title="6. Провеждане на събитието" accent={SECTION_ACCENTS[5]}>
 						<RegulationClause id="clause-6-1" n="6.1.">
 							Всеки одобрен отбор получава определено място (щанд) в изложбеното пространство на форум „Джон Атанасов“,
 							за да представи своя проект.
@@ -280,7 +307,7 @@ export function RegulationPageClient() {
 							Забранено е поведение, което нарушава реда или пречи на другите участници и посетители.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-7" title="7. Гласуване и награждаване">
+					<RegulationAccordionSection sectionId="section-7" title="7. Гласуване и награждаване" accent={SECTION_ACCENTS[6]}>
 						<RegulationClause id="clause-7-1" n="7.1.">
 							Посетителите на събитието могат да гласуват за своя проект-фаворит в три категории: Софтуер, Компютърни
 							мрежи и Вградени системи и роботика.
@@ -302,7 +329,7 @@ export function RegulationPageClient() {
 							основното класиране по категории.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-8" title="8. Дисквалификация">
+					<RegulationAccordionSection sectionId="section-8" title="8. Дисквалификация" accent={SECTION_ACCENTS[7]}>
 						<RegulationClause id="clause-8-1" n="8.1.">
 							Организаторите имат право да дисквалифицират участник, чието поведение е непристойно, агресивно или пречи
 							на провеждането на събитието.
@@ -319,7 +346,7 @@ export function RegulationPageClient() {
 							Решението за дисквалификация се взима от организаторския екип и е окончателно.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-9" title="9. Авторски права и публичност">
+					<RegulationAccordionSection sectionId="section-9" title="9. Авторски права и публичност" accent={SECTION_ACCENTS[8]}>
 						<RegulationClause id="clause-9-1" n="9.1.">
 							Всички интелектуални права върху представените проекти остават собственост на техните автори.
 						</RegulationClause>
@@ -332,7 +359,7 @@ export function RegulationPageClient() {
 							представят в невярна светлина.
 						</RegulationClause>
 					</RegulationAccordionSection>
-					<RegulationAccordionSection sectionId="section-10" title="10. Посетители">
+					<RegulationAccordionSection sectionId="section-10" title="10. Посетители" accent={SECTION_ACCENTS[9]}>
 						<RegulationClause id="clause-10-1" n="10.1.">
 							Входът за посетители е свободен. Не се изисква предварителна регистрация за посещение.
 						</RegulationClause>

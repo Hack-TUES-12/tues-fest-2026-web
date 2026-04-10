@@ -1,6 +1,10 @@
+'use client';
+
 import type { ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
+
+import { regulationAccentClauseNumberClass, useRegulationAccent } from './regulation-accent';
 
 export function RegulationClause({
 	id,
@@ -13,6 +17,8 @@ export function RegulationClause({
 	children: ReactNode;
 	className?: string;
 }) {
+	const accent = useRegulationAccent();
+
 	return (
 		<h3
 			id={id}
@@ -21,7 +27,8 @@ export function RegulationClause({
 				className,
 			)}
 		>
-			<span className="text-primary">{n}</span> <span className="font-normal text-foreground/85">{children}</span>
+			<span className={regulationAccentClauseNumberClass(accent)}>{n}</span>{' '}
+			<span className="font-normal text-foreground/85">{children}</span>
 		</h3>
 	);
 }
