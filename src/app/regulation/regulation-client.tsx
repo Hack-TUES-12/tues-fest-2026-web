@@ -115,33 +115,36 @@ export function RegulationPageClient() {
 					<p className="mb-2 text-primary tracking-widest">Документ</p>
 					<h1 className="font-title text-4xl text-white md:text-5xl">Регламент на TUES Fest 2026</h1>
 					<p className="mt-4 text-lg italic leading-relaxed text-foreground/75">
-						Ден на отворените врати на Технологично училище „Електронни системи“ към ТУ – София
+						Ден на отворените врати на{' '}
+						<Link
+							href="/about"
+							className="font-medium not-italic text-primary underline decoration-primary/70 underline-offset-[3px] transition-colors hover:decoration-primary hover:opacity-90 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+						>
+							Технологично училище „Електронни системи“ към ТУ – София
+						</Link>
 					</p>
+					<div className="mt-3 space-y-2 text-base leading-relaxed text-foreground/80">
+						<p>
+							<span className="font-semibold text-white">Дата:</span> {EVENT_META.date}
+						</p>
+						<p>
+							<span className="font-semibold text-white">Час:</span> {EVENT_META.time}
+						</p>
+						<p>
+							<span className="font-semibold text-white">Локация:</span>{' '}
+							<Link
+								href="/location"
+								className="font-medium text-primary underline decoration-primary/70 underline-offset-[3px] transition-colors hover:decoration-primary hover:opacity-90 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+							>
+								{EVENT_META.location}
+							</Link>
+						</p>
+						<p>
+							<span className="font-semibold text-white">Тема:</span>{' '}
+							<span className="text-white/90">{EVENT_META.theme}</span>
+						</p>
+					</div>
 				</header>
-
-				<Card className="border-white/10 bg-card/40 backdrop-blur-sm">
-					<CardContent className="space-y-3 p-6 sm:p-8">
-						<p className="text-xs font-medium uppercase tracking-widest text-primary">Събитие</p>
-						<dl className="grid gap-3 text-sm leading-relaxed text-foreground/80 sm:grid-cols-2">
-							<div>
-								<dt className="font-semibold text-white">Дата</dt>
-								<dd>{EVENT_META.date}</dd>
-							</div>
-							<div>
-								<dt className="font-semibold text-white">Час</dt>
-								<dd>{EVENT_META.time}</dd>
-							</div>
-							<div className="sm:col-span-2">
-								<dt className="font-semibold text-white">Локация</dt>
-								<dd>{EVENT_META.location}</dd>
-							</div>
-							<div className="sm:col-span-2">
-								<dt className="font-semibold text-white">Тема</dt>
-								<dd className="text-white/90">{EVENT_META.theme}</dd>
-							</div>
-						</dl>
-					</CardContent>
-				</Card>
 
 				<Card className="border-white/10 bg-card/40 backdrop-blur-sm">
 					<CardContent className="p-6 sm:p-8">
