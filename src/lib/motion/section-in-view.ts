@@ -3,7 +3,17 @@ export const HERO_LIKE_EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
 export const SECTION_IN_VIEW = {
 	once: true,
-	amount: 0.15,
+	amount: 0.05,
+	margin: '0px 0px -5% 0px',
+} as const;
+
+/**
+ * For blocks taller than the viewport: default `amount` (15% of element height) is often never
+ * reached, so `whileInView` never fires and `initial` opacity stays 0.
+ */
+export const SECTION_IN_VIEW_TALL = {
+	once: true,
+	amount: 0.01,
 	margin: '0px 0px -10% 0px',
 } as const;
 

@@ -2,10 +2,12 @@
 
 import { useMemo } from 'react';
 import Link from 'next/link';
+import { motion, useReducedMotion } from 'motion/react';
 import { TbFileTypePdf } from 'react-icons/tb';
 
 import { Button } from '@/components/ui/button';
 import { TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
+import { sectionFadeIn, sectionFadeUp } from '@/lib/motion/section-in-view';
 
 import { RegulationAccordionSection } from './regulation-accordion-section';
 import { RegulationClause } from './regulation-clause';
@@ -65,6 +67,7 @@ const TOC = [
 ] as const;
 
 export function RegulationPageClient() {
+	const reducedMotion = useReducedMotion();
 	const sectionIds = useMemo(() => TOC.map((item) => item.id), []);
 	const { isSectionActive, currentSectionId } = useRegulationActiveSection(sectionIds);
 
@@ -79,23 +82,28 @@ export function RegulationPageClient() {
 
 	return (
 		<section className="relative overflow-x-hidden px-4 pb-16 pt-10 md:px-8 md:pt-14">
-			<img
+			<motion.img
 				src="/decorations/purple-circle.svg"
 				alt=""
 				aria-hidden="true"
 				className="pointer-events-none absolute left-0 top-0 w-[50vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 select-none"
 				style={{ zIndex: -1 }}
+				{...sectionFadeIn(reducedMotion, 0)}
 			/>
-			<img
+			<motion.img
 				src="/decorations/blue-circle.svg"
 				alt=""
 				aria-hidden="true"
 				className="pointer-events-none absolute bottom-1/4 right-0 w-[40vw] max-w-xl translate-x-1/3 select-none"
 				style={{ zIndex: -1 }}
+				{...sectionFadeIn(reducedMotion, 0.08)}
 			/>
 
 			<div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
-				<div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+				<motion.div
+					className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
+					{...sectionFadeUp(reducedMotion, 0)}
+				>
 					<p className="text-sm text-foreground/60">
 						<span className="font-medium text-foreground/80">Последна актуализация:</span>{' '}
 						<time dateTime="2026-04-10">{LAST_UPDATED}</time>
@@ -111,12 +119,25 @@ export function RegulationPageClient() {
 							Изтегли като PDF
 						</a>
 					</Button>
-				</div>
+				</motion.div>
 
 				<header className="text-center sm:text-left">
-					<p className="mb-2 text-primary tracking-widest">Документ</p>
-					<h1 className="font-title text-4xl text-white md:text-5xl">Регламент на TUES Fest 2026</h1>
-					<p className="mt-4 text-lg italic leading-relaxed text-foreground/75">
+					<motion.p
+						className="mb-2 text-primary tracking-widest"
+						{...sectionFadeUp(reducedMotion, 0.07)}
+					>
+						Документ
+					</motion.p>
+					<motion.h1
+						className="font-title text-4xl text-white md:text-5xl"
+						{...sectionFadeUp(reducedMotion, 0.14)}
+					>
+						Регламент на TUES Fest 2026
+					</motion.h1>
+					<motion.p
+						className="mt-4 text-lg italic leading-relaxed text-foreground/75"
+						{...sectionFadeUp(reducedMotion, 0.21)}
+					>
 						Ден на отворените врати на{' '}
 						<Link
 							href="/about"
@@ -124,8 +145,11 @@ export function RegulationPageClient() {
 						>
 							Технологично училище „Електронни системи“ към ТУ – София
 						</Link>
-					</p>
-					<div className="mt-3 space-y-2 text-base leading-relaxed text-foreground/80">
+					</motion.p>
+					<motion.div
+						className="mt-3 space-y-2 text-base leading-relaxed text-foreground/80"
+						{...sectionFadeUp(reducedMotion, 0.28)}
+					>
 						<p>
 							<span className="font-semibold text-white">Дата:</span> {EVENT_META.date}
 						</p>
@@ -145,18 +169,21 @@ export function RegulationPageClient() {
 							<span className="font-semibold text-white">Тема:</span>{' '}
 							<span className="text-white/90">{EVENT_META.theme}</span>
 						</p>
-					</div>
+					</motion.div>
 				</header>
 
-				<RegulationToc
-					items={TOC}
-					sectionAccents={SECTION_ACCENTS}
-					isSectionActive={isSectionActive}
-					currentSectionId={currentSectionId}
-					onNavigate={scrollToSection}
-				/>
+				<motion.div {...sectionFadeUp(reducedMotion, 0.32)}>
+					<RegulationToc
+						items={TOC}
+						sectionAccents={SECTION_ACCENTS}
+						isSectionActive={isSectionActive}
+						currentSectionId={currentSectionId}
+						onNavigate={scrollToSection}
+					/>
+				</motion.div>
 
 				<div className="flex flex-col gap-4">
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-1"
 						title="1. Общи положения"
@@ -181,6 +208,8 @@ export function RegulationPageClient() {
 							уведомени своевременно по официален канал.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-2"
 						title="2. Участници"
@@ -202,6 +231,8 @@ export function RegulationPageClient() {
 							участие в TUES Fest се допускат единствено проектите, одобрени в този подбор.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-3"
 						title="3. Проекти и категории"
@@ -240,6 +271,8 @@ export function RegulationPageClient() {
 							по време на събитието.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-4"
 						title="4. Изисквания към съдържанието на проектите"
@@ -273,6 +306,8 @@ export function RegulationPageClient() {
 							горепосочените изисквания, дори и след първоначално одобрение.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-5"
 						title="5. Регистрация"
@@ -299,6 +334,8 @@ export function RegulationPageClient() {
 							Участниците, чиито проекти са одобрени, получават допълнителни инструкции за подготовка и присъствие.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-6"
 						title="6. Провеждане на събитието"
@@ -325,6 +362,8 @@ export function RegulationPageClient() {
 							Забранено е поведение, което нарушава реда или пречи на другите участници и посетители.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-7"
 						title="7. Гласуване и награждаване"
@@ -352,6 +391,8 @@ export function RegulationPageClient() {
 							основното класиране по категории.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-8"
 						title="8. Дисквалификация"
@@ -374,6 +415,8 @@ export function RegulationPageClient() {
 							Решението за дисквалификация се взима от организаторския екип и е окончателно.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-9"
 						title="9. Авторски права и публичност"
@@ -392,6 +435,8 @@ export function RegulationPageClient() {
 							представят в невярна светлина.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
+					<motion.div {...sectionFadeUp(reducedMotion, 0)}>
 					<RegulationAccordionSection
 						sectionId="section-10"
 						title="10. Посетители"
@@ -411,11 +456,15 @@ export function RegulationPageClient() {
 							поведение.
 						</RegulationClause>
 					</RegulationAccordionSection>
+					</motion.div>
 				</div>
 
-				<p className="border-t border-white/10 pt-8 text-center text-sm italic text-foreground/55">
+				<motion.p
+					className="border-t border-white/10 pt-8 text-center text-sm italic text-foreground/55"
+					{...sectionFadeUp(reducedMotion, 0.44)}
+				>
 					TUES Fest 2026 · 26 април 2026
-				</p>
+				</motion.p>
 			</div>
 		</section>
 	);
