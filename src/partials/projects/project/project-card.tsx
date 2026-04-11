@@ -24,8 +24,8 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 		: project.description;
 
 	return (
-		<Card className="group z-20 max-w-[500px] transition-all duration-300 hover:shadow-lg">
-			<CardContent className="relative mx-auto mt-4 w-[90%]" style={{ paddingTop: '56.25%' }}>
+		<Card className="group z-20 h-full w-full max-w-[500px] transition-all duration-300 hover:shadow-lg">
+			<CardContent className="relative mx-auto mt-4 w-[90%] shrink-0" style={{ paddingTop: '56.25%' }}>
 				<Link href={href}>
 					<Image
 						key={project.id}
@@ -37,7 +37,7 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 					/>
 				</Link>
 			</CardContent>
-		<CardHeader className="flex h-full flex-col items-start gap-4">
+		<CardHeader className="flex min-h-0 flex-1 flex-col items-start gap-4">
 				<CategoryTag category={project.category} />
 			<div className='flex flex-col gap-2'>
 				<CardTitle className="font-title font-normal text-2xl text-white">
