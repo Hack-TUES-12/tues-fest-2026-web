@@ -66,7 +66,24 @@ function Schedule() {
 	});
 
 	return (
-		<section id="schedule" className="relative px-4 py-12 md:px-8">
+		<section
+			id="schedule"
+			className="relative isolate overflow-x-hidden px-4 py-12 md:px-8"
+		>
+			<img
+				src="/decorations/blue-circle.svg"
+				alt=""
+				aria-hidden
+				className="pointer-events-none absolute left-0 top-0 z-0 w-[50vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 select-none"
+			/>
+			<img
+				src="/decorations/orange-circle.svg"
+				alt=""
+				aria-hidden
+				className="pointer-events-none absolute bottom-1/4 right-0 z-0 w-[40vw] max-w-xl translate-x-1/3 select-none"
+			/>
+
+			<div className="relative z-10">
 			{/* Section header */}
 			<div className="mb-12 flex flex-col items-center gap-2 text-center">
 				<p className="text-accent tracking-widest">Какво предстои</p>
@@ -144,6 +161,7 @@ function Schedule() {
 						);
 					})}
 				</div>
+			</div>
 			</div>
 		</section>
 	);
