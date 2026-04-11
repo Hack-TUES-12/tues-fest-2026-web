@@ -33,6 +33,22 @@ export const PROJECT_CATEGORY_LINK_LABEL_HOVER_CLASS: Record<ProjectCategory, st
 	battlebot: 'group-hover:text-accent',
 };
 
+/** For `style={{ color: \`var(${…})\` }}` — same tokens as Statistics folder nav buttons. */
+export const PROJECT_CATEGORY_THEME_COLOR_VAR: Record<ProjectCategory, string> = {
+	software: '--color-muted',
+	embedded: '--color-primary',
+	networks: '--color-accent',
+	battlebot: '--color-accent',
+};
+
+/** Matches `Statistics.tsx` timeline arrows: `hover:bg-muted/10`, etc. */
+export const PROJECT_CATEGORY_NAV_HOVER_BG_CLASS: Record<ProjectCategory, string> = {
+	software: 'hover:bg-muted/10',
+	embedded: 'hover:bg-primary/10',
+	networks: 'hover:bg-accent/10',
+	battlebot: 'hover:bg-accent/10',
+};
+
 export function isProjectCategory(value: string): value is ProjectCategory {
 	return Object.hasOwn(PROJECT_CATEGORIES, value);
 }

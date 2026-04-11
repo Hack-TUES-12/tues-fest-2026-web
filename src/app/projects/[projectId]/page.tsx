@@ -238,6 +238,7 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 						<div className="w-full">
 							<Gallery
 								name={project.title}
+								category={project.category}
 								images={project.images.length > 0 ? project.images : [project.thumbnail!]}
 							/>
 						</div>
