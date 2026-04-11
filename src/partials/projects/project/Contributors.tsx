@@ -1,8 +1,12 @@
+'use client';
+
+import { motion, useReducedMotion } from 'motion/react';
 import { TbPlus } from 'react-icons/tb';
 
 import { Contributor } from '@/app/projects/[projectId]/page';
 import { Card } from '@/components/ui/card';
 import { isProjectCategory, PROJECT_CATEGORY_TEXT_CLASS } from '@/constants/projects';
+import { listItemEntrance } from '@/lib/motion/section-in-view';
 import { cn } from '@/lib/utils';
 
 /** "11 В" → "11в" style line suffix next to the name */
@@ -17,6 +21,7 @@ const Contributors = ({
 	contributors: readonly Contributor[];
 	category: string;
 }) => {
+	const reducedMotion = useReducedMotion();
 	const accentTextClass = isProjectCategory(category)
 		? PROJECT_CATEGORY_TEXT_CLASS[category]
 		: PROJECT_CATEGORY_TEXT_CLASS.software;
@@ -33,8 +38,12 @@ const Contributors = ({
 					{contributors.length > 1 ? 'Участници' : 'Автор'}
 				</p>
 				<ul className="flex flex-col gap-3 px-2">
-					{contributors.map((creator) => (
-						<li key={creator?.name} className="flex items-center gap-2">
+					{contributors.map((creator, index) => (
+						<motion.li
+							key={creator?.name}
+							className="flex items-center gap-2"
+							{...listItemEntrance(reducedMotion, index)}
+						>
 							<TbPlus
 								className={cn('size-7 shrink-0 stroke-[3.5]', accentTextClass)}
 								aria-hidden
@@ -42,7 +51,7 @@ const Contributors = ({
 							<span className="font-mono text-sm tracking-wide text-white md:text-base">
 								{creator.name} {compactClassLabel(creator.class)}
 							</span>
-						</li>
+						</motion.li>
 					))}
 				</ul>
 			</div>

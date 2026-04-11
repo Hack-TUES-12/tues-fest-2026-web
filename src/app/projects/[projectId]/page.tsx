@@ -1,22 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import invariant from 'tiny-invariant';
 
 import { OG_METADATA, TF_TITLE, TWITTER_METADATA } from '@/constants/seo';
 import { PROJECT_CATEGORIES, PROJECT_TYPES, type ProjectCategory } from '@/constants/projects';
-import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
-import { cn } from '@/lib/utils';
-import ProjectsPath from '@/partials/layout/ProjectsPath';
 import { ProjectContainer } from '@/partials/projects/project-container';
-import Contributors from '@/partials/projects/project/Contributors';
-import { ProjectDescription } from '@/partials/projects/project/Description';
-import Gallery from '@/partials/projects/project/Gallery';
-import LinksContainer from '@/partials/projects/project/Links';
-import Video from '@/partials/projects/project/Video';
-import { VoteSelectProjectButton } from '@/partials/projects/project/VoteButton';
 import { getProjectById, getProjects } from '../actions';
-import { Card } from '@/components/ui/card';
+
+import { ProjectPageClient } from './project-page-client';
 
 export type Links = {
 	repoUrls: readonly string[];
@@ -125,8 +115,10 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 	invariant(thumbnail, `Project with ID ${project.id} (${project.title}) has no thumbnail or images`);
 
 	const categoryLabel = PROJECT_CATEGORIES[project.category as keyof typeof PROJECT_CATEGORIES] ?? project.category;
-	const categoryStyle = CATEGORY_STYLES[project.category] ?? CATEGORY_STYLES.software;
-	const voteVariant = CATEGORY_VOTE_VARIANTS[project.category] ?? 'default';
+	const categoryStyle =
+		CATEGORY_STYLES[project.category] ?? CATEGORY_STYLES.software ?? 'border border-muted text-muted';
+	const voteVariant =
+		CATEGORY_VOTE_VARIANTS[project.category] ?? CATEGORY_VOTE_VARIANTS.software ?? 'default';
 	const hasLinks = project.links.repoUrls.length > 0 || project.links.demoUrl != null;
 	const hasContributors = project.contributors.length > 0;
 	// @ts-expect-error TODO: fix
@@ -134,117 +126,17 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 
 	return (
 		<ProjectContainer category={project.category as ProjectCategory}>
-			{/* Breadcrumb */}
-			<ProjectsPath color={project.category ?? "software"} path={path} />
-
-			<div className='w-full max-w-4xl mx-auto'>
-				<Card className="w-full bg-card/50 px-6 gap-8">
-					{/* Hero — video/thumbnail */}
-					<div className="overflow-hidden rounded-2xl border border-white/10 bg-card/50 shadow-2xl backdrop-blur-sm">
-						{project.youtubeId ? (
-							<Video name={project.title} id={project.youtubeId} />
-						) : (
-							<div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-								<Image
-									key={project.id}
-									src={thumbnail}
-									alt={project.title}
-									className="absolute left-0 top-0 object-cover"
-									fill
-								/>
-							</div>
-						)}
-					</div>
-
-					<div className="flex flex-col gap-6">
-						<div className="space-y-1">
-							{/* Title + meta */}
-							<div className="w-full space-y-3">
-								<div className="flex flex-wrap items-center gap-3">
-									<span
-										className={cn(
-											'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
-											categoryStyle,
-										)}
-									>
-										{categoryLabel}
-									</span>
-									{typeLabel && (
-										<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
-											{typeLabel}
-										</span>
-									)}
-								</div>
-								<h1
-									className={cn(
-										'font-mono font-bold text-3xl md:text-4xl',
-										`text-${CATEGORY_VOTE_VARIANTS[project.category]}`,
-									)}
-								>
-									{project.title}
-								</h1>
-							</div>
-
-							{/* Description */}
-							<div className="prose prose-md prose-invert max-w-none leading-relaxed text-foreground/80">
-								<ProjectDescription description={project.description} />
-							</div>
-						</div>
-
-						{/* Voting — same card as hero + description */}
-						<IfTFFeatureOn feature="project-voting">
-							<div>
-								<h3 className="mb-2 text-lg font-semibold text-white">
-									Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
-								</h3>
-								<p className="mb-4 text-sm text-white/60">
-									Ако смяташ, че проектът{' '}
-									{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
-									публиката — гласувай сега!
-								</p>
-								<VoteSelectProjectButton
-									project={{
-										id: project.id,
-										title: project.title,
-										thumbnail,
-										category: project.category,
-									}}
-									variant={voteVariant}
-									size="sm"
-								/>
-							</div>
-						</IfTFFeatureOn>
-					</div>
-				</Card>
-
-				<div className="mt-6 flex w-full flex-col gap-6">
-					{/* Authors + links */}
-					{(hasContributors || hasLinks) && (
-						<div
-							className={cn(
-								'grid w-full gap-6',
-								hasContributors && hasLinks && 'md:grid-cols-2',
-							)}
-						>
-							{hasContributors && (
-								<Contributors contributors={project.contributors} category={project.category} />
-							)}
-							{hasLinks && <LinksContainer links={project.links} category={project.category} />}
-						</div>
-					)}
-
-					{/* Gallery */}
-					{project.images.length > 0 && (
-						<div className="w-full">
-							<Gallery
-								name={project.title}
-								category={project.category}
-								images={project.images.length > 0 ? project.images : [project.thumbnail!]}
-							/>
-						</div>
-					)}
-				</div>
-			</div>
+			<ProjectPageClient
+				project={project}
+				path={path}
+				thumbnail={thumbnail}
+				categoryLabel={categoryLabel}
+				categoryStyle={categoryStyle}
+				typeLabel={typeLabel}
+				voteVariant={voteVariant}
+				hasLinks={hasLinks}
+				hasContributors={hasContributors}
+			/>
 		</ProjectContainer>
 	);
 };

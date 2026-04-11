@@ -42,3 +42,21 @@ export function sectionFadeIn(reducedMotion: boolean | null, delaySec: number) {
 		},
 	};
 }
+
+/** Staggered list rows (contributors, links): small delay per `index`. */
+export function listItemEntrance(
+	reducedMotion: boolean | null,
+	index: number,
+	staggerSec = 0.1,
+) {
+	return {
+		initial: reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 },
+		whileInView: { opacity: 1, y: 0 },
+		viewport: SECTION_IN_VIEW,
+		transition: {
+			duration: reducedMotion ? 0 : 0.35,
+			delay: reducedMotion ? 0 : index * staggerSec,
+			ease: HERO_LIKE_EASE_OUT,
+		},
+	};
+}
