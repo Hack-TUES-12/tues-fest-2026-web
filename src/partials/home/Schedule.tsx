@@ -1,22 +1,6 @@
-'use client';
-
-import { useEffect } from 'react';
-
 import { SCHEDULE } from '@/constants/home/schedule';
 
 function Schedule() {
-	useEffect(() => {
-		const hash = window.location.hash;
-		if (hash === '#schedule') {
-			setTimeout(() => {
-				const el = document.getElementById('schedule');
-				if (el) {
-					el.scrollIntoView({ behavior: 'smooth' });
-				}
-			}, 0);
-		}
-	}, []);
-
 	return (
 		<section id="schedule" className="relative px-4 py-12 md:px-8">
 			{/* Section header */}

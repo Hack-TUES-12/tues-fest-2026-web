@@ -27,7 +27,7 @@ import { TFLogo } from '../home/TFLogo';
 const LINKS = [
 	// { href: '/', title: 'Начало' },
 	{ href: '/projects', title: 'Проекти' },
-	{ href: '/#schedule', title: 'Програма' },
+	{ href: '/schedule', title: 'Програма' },
 	{ href: '/regulation', title: 'Регламент' },
 	{ href: '/partners', title: 'Спонсори && Партньори' },
 	// { href: '/projects', title: 'Гласуване' },
@@ -104,10 +104,7 @@ export function Navigation() {
 
 	const visibleLinks = LINKS.filter(
 		(link) =>
-			(isScheduleEnabled ||
-				(link.href !== '/#schedule' &&
-					link.href !== '/schedule' &&
-					link.href !== '#schedule')) &&
+			(isScheduleEnabled || link.href !== '/schedule') &&
 			(isProjectsEnabled || link.href !== '/projects') &&
 			(isPartnersEnabled || link.href !== '/partners'),
 	);
