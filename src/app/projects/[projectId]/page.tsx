@@ -16,6 +16,7 @@ import LinksContainer from '@/partials/projects/project/Links';
 import Video from '@/partials/projects/project/Video';
 import { VoteSelectProjectButton } from '@/partials/projects/project/VoteButton';
 import { getProjectById, getProjects } from '../actions';
+import { Card } from '@/components/ui/card';
 
 export type Links = {
 	repoUrls: readonly string[];
@@ -135,8 +136,8 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 			<ProjectsPath color={project.category ?? "software"} path={path} />
 
 			<div className='w-full max-w-4xl mx-auto'>
-				{/* Hero — video/thumbnail */}
-				<div className="w-full">
+				<Card className="w-full bg-card/50 px-6 gap-8">
+					{/* Hero — video/thumbnail */}
 					<div className="overflow-hidden rounded-2xl border border-white/10 bg-card/50 shadow-2xl backdrop-blur-sm">
 						{project.youtubeId ? (
 							<Video name={project.title} id={project.youtubeId} />
@@ -152,38 +153,40 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 							</div>
 						)}
 					</div>
-				</div>
 
-				{/* Title + meta */}
-				<div className="w-full space-y-3">
-					<div className="flex flex-wrap items-center gap-3">
-						<span
-							className={cn(
-								'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
-								categoryStyle,
-							)}
-						>
-							{categoryLabel}
-						</span>
-						{typeLabel && (
-							<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
-								{typeLabel}
-							</span>
-						)}
-					</div>
-					<h1 className="font-title text-4xl text-white md:text-5xl">{project.title}</h1>
-				</div>
+					<div className='space-y-1'>
+						{/* Title + meta */}
+						<div className="w-full space-y-3">
+							<div className="flex flex-wrap items-center gap-3">
+								<span
+									className={cn(
+										'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
+										categoryStyle,
+									)}
+								>
+									{categoryLabel}
+								</span>
+								{typeLabel && (
+									<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
+										{typeLabel}
+									</span>
+								)}
+							</div>
+							<h1 className={cn(
+								"font-mono font-bold text-3xl md:text-4xl",
+								`text-${CATEGORY_VOTE_VARIANTS[project.category]}`
+							)}>{project.title}</h1>
+						</div>
 
-				{/* Main content grid */}
-				<div className="grid w-full gap-6 md:grid-cols-[2fr,1fr]">
-					{/* Description */}
-					<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
-						<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">Описание</p>
-						<div className="prose prose-sm prose-invert max-w-none leading-relaxed text-foreground/80">
+						{/* Description */}
+						<div className="prose prose-md prose-invert max-w-none leading-relaxed text-foreground/80">
 							<ProjectDescription description={project.description} />
 						</div>
 					</div>
+				</Card>
 
+				{/* Main content grid */}
+				<div className="grid w-full gap-6 md:grid-cols-[2fr,1fr]">
 					{/* Sidebar */}
 					<div className="flex flex-col gap-4">
 						{/* Vote card */}
