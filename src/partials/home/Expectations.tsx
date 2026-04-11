@@ -1,4 +1,8 @@
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
 import { EXPECTATIONS } from '@/constants/home/expectations';
+import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 import { ExpectationIllustration } from './expectation-illustration';
 
@@ -77,6 +81,14 @@ const Expectations = () => (
 					/>
 				))}
 			</div>
+
+			<IfTFFeatureOn feature="tf-schedule">
+				<div className="mt-16 flex justify-center md:mt-20">
+					<Button asChild variant="default" size="lg" className="w-fit font-bold">
+						<Link href="/schedule">Виж програмата</Link>
+					</Button>
+				</div>
+			</IfTFFeatureOn>
 		</div>
 	</section>
 );
