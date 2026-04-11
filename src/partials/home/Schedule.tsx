@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/card';
 import { SCHEDULE } from '@/constants/home/schedule';
 import { cn } from '@/lib/utils';
 
@@ -8,6 +9,7 @@ const SCHEDULE_PART_STYLES = [
 		dot: 'bg-accent',
 		dotShadow: 'shadow-[0_0_8px_theme(colors.accent/50)]',
 		badge: 'border-accent/25 bg-accent/10 text-accent',
+		title: 'text-accent',
 		card: 'border-accent/20 hover:border-accent/45',
 	},
 	{
@@ -15,6 +17,7 @@ const SCHEDULE_PART_STYLES = [
 		dot: 'bg-primary',
 		dotShadow: 'shadow-[0_0_8px_theme(colors.primary/50)]',
 		badge: 'border-primary/25 bg-primary/10 text-primary',
+		title: 'text-primary',
 		card: 'border-primary/20 hover:border-primary/45',
 	},
 	{
@@ -22,6 +25,7 @@ const SCHEDULE_PART_STYLES = [
 		dot: 'bg-secondary',
 		dotShadow: 'shadow-[0_0_8px_theme(colors.secondary/50)]',
 		badge: 'border-secondary/25 bg-secondary/10 text-secondary',
+		title: 'text-secondary',
 		card: 'border-secondary/20 hover:border-secondary/45',
 	},
 	{
@@ -29,6 +33,7 @@ const SCHEDULE_PART_STYLES = [
 		dot: 'bg-muted',
 		dotShadow: 'shadow-[0_0_8px_theme(colors.muted/50)]',
 		badge: 'border-muted/25 bg-muted/10 text-muted',
+		title: 'text-muted',
 		card: 'border-muted/20 hover:border-muted/45',
 	},
 ] as const;
@@ -73,14 +78,14 @@ function Schedule() {
 								</div>
 
 								{/* Content card */}
-								<div
+								<Card
 									className={cn(
-										'group w-full rounded-2xl border bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-card/80',
+										'group w-full rounded-2xl bg-card/70 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-card/90 gap-1',
 										s.card,
 									)}
 								>
 									{/* Time badge */}
-									<div className="mb-3 flex items-center gap-2">
+									<div className="mb-4 flex items-center gap-2">
 										<span
 											className={cn(
 												'font-title rounded-full border px-3 py-0.5 text-xs font-semibold tracking-widest',
@@ -92,13 +97,15 @@ function Schedule() {
 									</div>
 
 									{/* Title */}
-									<h3 className="mb-3 text-xl font-bold text-white">{item.title}</h3>
+									<h3 className={cn('font-mono text-2xl font-bold', s.title)}>
+										{item.title}
+									</h3>
 
 									{/* Description */}
 									<div className="text-sm leading-relaxed text-white/60">
 										{item.description}
 									</div>
-								</div>
+								</Card>
 							</div>
 						);
 					})}

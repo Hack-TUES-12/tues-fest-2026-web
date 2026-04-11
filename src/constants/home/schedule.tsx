@@ -1,4 +1,11 @@
-import { TF_PROJECT_COUNT, TF_YEAR } from "../event";
+import { TbPlus } from 'react-icons/tb';
+
+import { cn } from '@/lib/utils';
+
+import { TF_PROJECT_COUNT, TF_YEAR } from '../event';
+
+/** Matches project page authors list (`Contributors`) — plus icon uses this schedule block’s hue. */
+const EXHIBITION_PLUS_CLASS = 'text-primary';
 
 export const SCHEDULE = [
 	{
@@ -14,27 +21,61 @@ export const SCHEDULE = [
 		end: '15:00',
 		title: 'Изложение на ученически проекти',
 		description: (
-			<>
-				<p>Всеки посетител ще има възможността:</p>
-				<ul className="flex flex-col gap-2 pt-2">
-					<li className="bg-background rounded-xl border px-4 py-2">Да разгледа <b>{TF_PROJECT_COUNT} ученически проекта</b> и да поговори с техните създатели</li>
-					<li className="bg-background rounded-xl border px-4 py-2">
-						Да се запознае с <b>преподавателския екип</b> от ТУЕС
+			<div className="font-mono text-sm md:text-base">
+				<p className="text-white/70">Всеки посетител ще има възможността:</p>
+				<ul className="mt-2 flex flex-col gap-3 px-2">
+					<li className="flex items-start gap-2">
+						<TbPlus
+							className={cn('size-7 shrink-0 stroke-[3.5]', EXHIBITION_PLUS_CLASS)}
+							aria-hidden
+						/>
+						<span>
+							Да разгледа <b className="font-semibold text-white">{TF_PROJECT_COUNT} ученически проекта</b> и да поговори с техните създатели
+						</span>
 					</li>
-					<li className="bg-background rounded-xl border px-4 py-2">
-						Да гласува за любимия си ученически проект
+					<li className="flex items-start gap-2">
+						<TbPlus
+							className={cn('size-7 shrink-0 stroke-[3.5]', EXHIBITION_PLUS_CLASS)}
+							aria-hidden
+						/>
+						<span>
+							Да се запознае с <b className="font-semibold text-white">преподавателския екип</b> от ТУЕС
+						</span>
 					</li>
-					<li className="bg-background rounded-xl border px-4 py-2">
-						Да тръгне по пътеката на ТУЕС-ара и да разбере през какво минава един ученик на ТУЕС
+					<li className="flex items-start gap-2">
+						<TbPlus
+							className={cn('size-7 shrink-0 stroke-[3.5]', EXHIBITION_PLUS_CLASS)}
+							aria-hidden
+						/>
+						<span>Да гласува за любимия си ученически проект</span>
 					</li>
-					<li className="bg-background rounded-xl border px-4 py-2">
-						Да говори с членове на извънкласни клубове в ТУЕС и с други ученици от училището
+					<li className="flex items-start gap-2">
+						<TbPlus
+							className={cn('size-7 shrink-0 stroke-[3.5]', EXHIBITION_PLUS_CLASS)}
+							aria-hidden
+						/>
+						<span>
+							Да тръгне по <b className="font-semibold text-white">пътеката на ТУЕС-ара</b> и да разбере през какво минава един ученик на ТУЕС
+						</span>
 					</li>
-					<li className="bg-background rounded-xl border px-4 py-2">
-						Да се запознае със спонсорите на събитието
+					<li className="flex items-start gap-2">
+						<TbPlus
+							className={cn('size-7 shrink-0 stroke-[3.5]', EXHIBITION_PLUS_CLASS)}
+							aria-hidden
+						/>
+						<span>
+							Да говори с членове на извънкласни клубове в ТУЕС и с други ученици от училището
+						</span>
+					</li>
+					<li className="flex items-start gap-2">
+						<TbPlus
+							className={cn('size-7 shrink-0 stroke-[3.5]', EXHIBITION_PLUS_CLASS)}
+							aria-hidden
+						/>
+						<span>Да се запознае със спонсорите на събитието</span>
 					</li>
 				</ul>
-			</>
+			</div>
 		),
 		icon: '',
 		pos: 'right',
