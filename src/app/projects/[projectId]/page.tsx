@@ -134,106 +134,108 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 			{/* Breadcrumb */}
 			<ProjectsPath path={path} />
 
-			{/* Hero — video/thumbnail */}
-			<div className="mx-auto w-full max-w-5xl">
-				<div className="overflow-hidden rounded-2xl border border-white/10 bg-card/50 shadow-2xl backdrop-blur-sm">
-					{project.youtubeId ? (
-						<Video name={project.title} id={project.youtubeId} />
-					) : (
-						<div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-							<Image
-								key={project.id}
-								src={thumbnail}
-								alt={project.title}
-								className="absolute left-0 top-0 object-cover"
-								fill
-							/>
-						</div>
-					)}
-				</div>
-			</div>
-
-			{/* Title + meta */}
-			<div className="mx-auto w-full max-w-5xl space-y-3">
-				<div className="flex flex-wrap items-center gap-3">
-					<span
-						className={cn(
-							'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
-							categoryStyle,
+			<div className='w-full max-w-4xl mx-auto'>
+				{/* Hero — video/thumbnail */}
+				<div className="w-full">
+					<div className="overflow-hidden rounded-2xl border border-white/10 bg-card/50 shadow-2xl backdrop-blur-sm">
+						{project.youtubeId ? (
+							<Video name={project.title} id={project.youtubeId} />
+						) : (
+							<div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+								<Image
+									key={project.id}
+									src={thumbnail}
+									alt={project.title}
+									className="absolute left-0 top-0 object-cover"
+									fill
+								/>
+							</div>
 						)}
-					>
-						{categoryLabel}
-					</span>
-					{typeLabel && (
-						<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
-							{typeLabel}
-						</span>
-					)}
-				</div>
-				<h1 className="font-title text-4xl text-white md:text-5xl">{project.title}</h1>
-			</div>
-
-			{/* Main content grid */}
-			<div className="mx-auto grid w-full max-w-5xl gap-6 md:grid-cols-[2fr,1fr]">
-				{/* Description */}
-				<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
-					<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">Описание</p>
-					<div className="prose prose-sm prose-invert max-w-none leading-relaxed text-foreground/80">
-						<ProjectDescription description={project.description} />
 					</div>
 				</div>
 
-				{/* Sidebar */}
-				<div className="flex flex-col gap-4">
-					{/* Vote card */}
-					<IfTFFeatureOn feature="project-voting">
-						<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
-							<p className="mb-1 text-xs font-medium uppercase tracking-widest text-white/40">
-								Гласуване
-							</p>
-							<h3 className="mb-2 text-lg font-semibold text-white">
-								Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
-							</h3>
-							<p className="mb-4 text-sm text-white/60">
-								Ако смяташ, че проектът{' '}
-								{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
-								публиката — гласувай сега!
-							</p>
-							<VoteSelectProjectButton
-								project={{
-									id: project.id,
-									title: project.title,
-									thumbnail,
-									category: project.category,
-								}}
-								variant={voteVariant}
-								className="w-full"
-								size="lg"
-							/>
+				{/* Title + meta */}
+				<div className="w-full space-y-3">
+					<div className="flex flex-wrap items-center gap-3">
+						<span
+							className={cn(
+								'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
+								categoryStyle,
+							)}
+						>
+							{categoryLabel}
+						</span>
+						{typeLabel && (
+							<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
+								{typeLabel}
+							</span>
+						)}
+					</div>
+					<h1 className="font-title text-4xl text-white md:text-5xl">{project.title}</h1>
+				</div>
+
+				{/* Main content grid */}
+				<div className="grid w-full gap-6 md:grid-cols-[2fr,1fr]">
+					{/* Description */}
+					<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
+						<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">Описание</p>
+						<div className="prose prose-sm prose-invert max-w-none leading-relaxed text-foreground/80">
+							<ProjectDescription description={project.description} />
 						</div>
-					</IfTFFeatureOn>
+					</div>
 
-					{/* Links */}
-					<LinksContainer links={project.links} />
+					{/* Sidebar */}
+					<div className="flex flex-col gap-4">
+						{/* Vote card */}
+						<IfTFFeatureOn feature="project-voting">
+							<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
+								<p className="mb-1 text-xs font-medium uppercase tracking-widest text-white/40">
+									Гласуване
+								</p>
+								<h3 className="mb-2 text-lg font-semibold text-white">
+									Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
+								</h3>
+								<p className="mb-4 text-sm text-white/60">
+									Ако смяташ, че проектът{' '}
+									{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
+									публиката — гласувай сега!
+								</p>
+								<VoteSelectProjectButton
+									project={{
+										id: project.id,
+										title: project.title,
+										thumbnail,
+										category: project.category,
+									}}
+									variant={voteVariant}
+									className="w-full"
+									size="lg"
+								/>
+							</div>
+						</IfTFFeatureOn>
+
+						{/* Links */}
+						<LinksContainer links={project.links} />
+					</div>
 				</div>
+
+				{/* Contributors */}
+				{project.contributors.length > 0 && (
+					<div className="w-full">
+						<Contributors contributors={project.contributors} />
+					</div>
+				)}
+
+				{/* Gallery */}
+				{project.images.length > 0 && (
+					<div className="w-full">
+						<Gallery
+							name={project.title}
+							images={project.images.length > 0 ? project.images : [project.thumbnail!]}
+						/>
+					</div>
+				)}
 			</div>
-
-			{/* Contributors */}
-			{project.contributors.length > 0 && (
-				<div className="mx-auto w-full max-w-5xl">
-					<Contributors contributors={project.contributors} />
-				</div>
-			)}
-
-			{/* Gallery */}
-			{project.images.length > 0 && (
-				<div className="mx-auto w-full max-w-5xl">
-					<Gallery
-						name={project.title}
-						images={project.images.length > 0 ? project.images : [project.thumbnail!]}
-					/>
-				</div>
-			)}
 		</ProjectContainer>
 	);
 };

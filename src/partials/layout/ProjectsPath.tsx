@@ -13,7 +13,7 @@ const ProjectsPath = ({ path }: { path?: PathItem[] | null | undefined }) => {
 	if (!path) return null;
 
 	return (
-		<nav aria-label="breadcrumb">
+		<nav aria-label="breadcrumb" className='mx-auto max-w-4xl'>
 			<div className="rounded-2xl border border-white/10 bg-card/50 px-6 py-3 backdrop-blur-xl">
 				<ol className="flex flex-wrap items-center gap-1.5 text-sm">
 					{path.map((item, index) => {
