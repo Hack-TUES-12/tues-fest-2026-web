@@ -1,6 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo } from 'react';
+import { SiFacebook, SiInstagram, SiLinkedin } from 'react-icons/si';
 import { TbBrandYoutube } from 'react-icons/tb';
 
 import { RegulationTimelineRail } from '@/app/regulation/regulation-timeline-rail';
@@ -8,6 +10,7 @@ import type { RegulationAccent } from '@/app/regulation/regulation-accent';
 import { useRegulationActiveSection } from '@/app/regulation/use-regulation-active-section';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { TF_YEAR } from '@/constants/event';
 import { SCHEDULE } from '@/constants/home/schedule';
 import { cn } from '@/lib/utils';
 
@@ -59,6 +62,9 @@ function scheduleSectionIds(): string[] {
 /** Lower reading line than regulation (0.38) so timeline rails activate earlier on `/schedule`. */
 const SCHEDULE_FOCAL_Y_RATIO = 0.52;
 
+const SCHEDULE_SOCIAL_ICON_BUTTON =
+	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-accent/40 hover:bg-card/50 hover:text-accent';
+
 function Schedule() {
 	const sectionIds = useMemo(() => scheduleSectionIds(), []);
 	const { isSectionActive } = useRegulationActiveSection(sectionIds, {
@@ -85,9 +91,60 @@ function Schedule() {
 
 			<div className="relative z-10">
 			{/* Section header */}
-			<div className="mb-12 flex flex-col items-center gap-2 text-center">
+			<div className="mb-12 flex flex-col items-center gap-4 text-center">
 				<p className="text-accent tracking-widest">Какво предстои</p>
 				<h2 className="font-title text-4xl text-white md:text-5xl">Програма</h2>
+				<p className="max-w-2xl text-pretty text-sm leading-relaxed text-white/70 md:text-base">
+					Разгледайте пълната програма на TUES Fest {TF_YEAR}. Ако имате въпрос, винаги може да се
+					свържете с нас на мейл или в социалните ни мрежи:
+				</p>
+				<div className="flex flex-wrap items-center justify-center gap-3">
+					<Button
+						variant="outline"
+						size="icon"
+						className={SCHEDULE_SOCIAL_ICON_BUTTON}
+						asChild
+					>
+						<Link
+							href="https://facebook.com/HackTUES"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Facebook"
+						>
+							<SiFacebook className="size-5" aria-hidden />
+						</Link>
+					</Button>
+					<Button
+						variant="outline"
+						size="icon"
+						className={SCHEDULE_SOCIAL_ICON_BUTTON}
+						asChild
+					>
+						<Link
+							href="https://www.instagram.com/hacktuesfest/"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Instagram"
+						>
+							<SiInstagram className="size-5" aria-hidden />
+						</Link>
+					</Button>
+					<Button
+						variant="outline"
+						size="icon"
+						className={SCHEDULE_SOCIAL_ICON_BUTTON}
+						asChild
+					>
+						<Link
+							href="https://www.linkedin.com/company/hacktues-tuesfest/"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="LinkedIn"
+						>
+							<SiLinkedin className="size-5" aria-hidden />
+						</Link>
+					</Button>
+				</div>
 			</div>
 
 			{/* Timeline — rail matches /regulation (2px stroke + gradient + dot language) */}
