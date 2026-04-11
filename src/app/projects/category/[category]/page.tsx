@@ -81,7 +81,7 @@ export default async function ProjectsPage(props: PageProps) {
 
 	return (
 		<ProjectContainer category={category}>
-			<ProjectsPath path={[...PATH, { name: PROJECT_CATEGORIES[category], url: '' }]} />
+			<ProjectsPath path={[...PATH, { name: PROJECT_CATEGORIES[category], url: '' }]} color={category} />
 
 			{/* HACK: weird inconsistency in the names, this is a code smell... */}
 			<InteractiveProjectFilter current={category === 'networks' ? 'Мрежи' : PROJECT_CATEGORIES[category]} />

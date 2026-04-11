@@ -127,6 +127,8 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 	const categoryLabel = PROJECT_CATEGORIES[project.category as keyof typeof PROJECT_CATEGORIES] ?? project.category;
 	const categoryStyle = CATEGORY_STYLES[project.category] ?? CATEGORY_STYLES.software;
 	const voteVariant = CATEGORY_VOTE_VARIANTS[project.category] ?? 'default';
+	const hasLinks = project.links.repoUrls.length > 0 || project.links.demoUrl != null;
+	const hasContributors = project.contributors.length > 0;
 	// @ts-expect-error TODO: fix
 	const typeLabel = PROJECT_TYPES[project.type] as string | undefined;
 
@@ -185,59 +187,60 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 					</div>
 				</Card>
 
-				{/* Main content grid */}
-				<div className="grid w-full gap-6 md:grid-cols-[2fr,1fr]">
-					{/* Sidebar */}
-					<div className="flex flex-col gap-4">
-						{/* Vote card */}
-						<IfTFFeatureOn feature="project-voting">
-							<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
-								<p className="mb-1 text-xs font-medium uppercase tracking-widest text-white/40">
-									Гласуване
-								</p>
-								<h3 className="mb-2 text-lg font-semibold text-white">
-									Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
-								</h3>
-								<p className="mb-4 text-sm text-white/60">
-									Ако смяташ, че проектът{' '}
-									{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
-									публиката — гласувай сега!
-								</p>
-								<VoteSelectProjectButton
-									project={{
-										id: project.id,
-										title: project.title,
-										thumbnail,
-										category: project.category,
-									}}
-									variant={voteVariant}
-									className="w-full"
-									size="lg"
-								/>
-							</div>
-						</IfTFFeatureOn>
+				<div className="mt-6 flex w-full flex-col gap-6">
+					{/* Vote card */}
+					<IfTFFeatureOn feature="project-voting">
+						<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
+							<p className="mb-1 text-xs font-medium uppercase tracking-widest text-white/40">
+								Гласуване
+							</p>
+							<h3 className="mb-2 text-lg font-semibold text-white">
+								Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
+							</h3>
+							<p className="mb-4 text-sm text-white/60">
+								Ако смяташ, че проектът{' '}
+								{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
+								публиката — гласувай сега!
+							</p>
+							<VoteSelectProjectButton
+								project={{
+									id: project.id,
+									title: project.title,
+									thumbnail,
+									category: project.category,
+								}}
+								variant={voteVariant}
+								className="w-full"
+								size="lg"
+							/>
+						</div>
+					</IfTFFeatureOn>
 
-						{/* Links */}
-						<LinksContainer links={project.links} />
-					</div>
+					{/* Authors + links */}
+					{(hasContributors || hasLinks) && (
+						<div
+							className={cn(
+								'grid w-full gap-6',
+								hasContributors && hasLinks && 'md:grid-cols-2',
+							)}
+						>
+							{hasContributors && (
+								<Contributors contributors={project.contributors} category={project.category} />
+							)}
+							{hasLinks && <LinksContainer links={project.links} />}
+						</div>
+					)}
+
+					{/* Gallery */}
+					{project.images.length > 0 && (
+						<div className="w-full">
+							<Gallery
+								name={project.title}
+								images={project.images.length > 0 ? project.images : [project.thumbnail!]}
+							/>
+						</div>
+					)}
 				</div>
-
-				{/* Contributors */}
-				{project.contributors.length > 0 && (
-					<div className="w-full">
-						<Contributors contributors={project.contributors} />
-					</div>
-				)}
-
-				{/* Gallery */}
-				{project.images.length > 0 && (
-					<div className="w-full">
-						<Gallery
-							name={project.title}
-							images={project.images.length > 0 ? project.images : [project.thumbnail!]}
-						/>
-					</div>
-				)}
 			</div>
 		</ProjectContainer>
 	);

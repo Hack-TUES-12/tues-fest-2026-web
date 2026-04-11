@@ -17,6 +17,14 @@ export const PROJECT_CATEGORIES = {
 
 export type ProjectCategory = keyof typeof PROJECT_CATEGORIES;
 
+/** Tailwind `text-*` token per category (matches badge / vote accents). */
+export const PROJECT_CATEGORY_TEXT_CLASS: Record<ProjectCategory, string> = {
+	software: 'text-muted',
+	embedded: 'text-primary',
+	networks: 'text-accent',
+	battlebot: 'text-accent',
+};
+
 export function isProjectCategory(value: string): value is ProjectCategory {
 	return Object.hasOwn(PROJECT_CATEGORIES, value);
 }
