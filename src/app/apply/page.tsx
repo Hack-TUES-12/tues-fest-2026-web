@@ -120,12 +120,12 @@ const ApplyPage = () => (
 				За {TF_YEAR} г., ТУЕС се нареди на <span className="text-white">второ място</span> по
 				минимален бал на първо класиране в 7. клас!
 			</p>
-			<Button asChild variant="muted" size="lg" className="font-bold mt-2">
+			{/* <Button asChild variant="muted" size="lg" className="font-bold mt-2">
 				<Link href="https://elsys-bg.org/priem/red-i-uslovija-za-priem" target="_blank" rel="noopener noreferrer">
 					<TbExternalLink size={18} />
 					Научете повече за приема
 				</Link>
-			</Button>
+			</Button> */}
 		</div>
 
 		{/* Why TUES — features + image */}
@@ -197,7 +197,7 @@ const ApplyPage = () => (
 								</div>
 							))}
 						</div>
-						<Link
+						{/* <Link
 							href="https://elsys-bg.org/priem/red-i-uslovija-za-priem"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -205,7 +205,7 @@ const ApplyPage = () => (
 						>
 							<TbArrowRight size={15} />
 							Научете повече за приема в ТУЕС
-						</Link>
+						</Link> */}
 					</CardContent>
 				</Card>
 
