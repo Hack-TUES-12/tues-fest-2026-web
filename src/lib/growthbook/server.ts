@@ -7,23 +7,22 @@ import { Duration } from 'effect';
 import { env } from '@/../env.mjs';
 import type { TFFeatures } from './features';
 
-// Tag fetch requests so they can be revalidated on demand
+// Tag fetch requests for on-demand revalidation (GrowthBook webhook → revalidateTag('growthbook')).
+// React `cache()` still dedupes GrowthBook fetches within a single request.
 setPolyfills({
 	fetch: cache((url: string, init: RequestInit) =>
 		fetch(url, {
 			...init,
 			next: {
-				// Cache feature definitions for a short time in dev
-				// In prod, we use a higher value and use WebHooks to revalidate on-demand
 				revalidate:
-					env.NODE_ENV === 'development' ? Duration.toSeconds('10 seconds') : Duration.toSeconds('1 hour'),
+					env.NODE_ENV === 'development' ? Duration.toSeconds('3 seconds') : Duration.toSeconds('1 hour'),
 				tags: ['growthbook'],
 			},
 		})
 	),
 });
 
-// Disable the built-in cache since we're using Next.js's fetch cache instead
+// Disable the built-in cache since we're using Next.js's fetch Data Cache instead
 configureCache({
 	disableCache: true,
 });
