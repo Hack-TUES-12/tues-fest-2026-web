@@ -25,7 +25,7 @@ function ExpectationRow({
 
 	const card = (
 		<div
-			className={`flex flex-col justify-center gap-3 rounded-[1.5rem] bg-[#1a1a1a] px-8 py-8 lg:min-h-[200px] lg:px-10 lg:py-10 ${reverse ? 'text-right' : 'text-left'}`}
+			className={`flex flex-col justify-center gap-3 rounded-[1.5rem] bg-[#1a1a1a] px-8 py-8 text-center lg:min-h-[200px] lg:px-10 lg:py-10 ${reverse ? 'lg:text-right' : 'lg:text-left'}`}
 		>
 			<h3 className={`font-title text-2xl font-semibold md:text-3xl ${tone}`}>{title}</h3>
 			<p className="text-sm leading-relaxed text-white/60 md:text-base">{text}</p>
@@ -36,8 +36,8 @@ function ExpectationRow({
 		<div
 			className={
 				reverse
-					? 'flex w-[75%] shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-start'
-					: 'flex w-[75%] shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-end'
+					? 'flex w-full shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-start'
+					: 'flex w-full shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-end'
 			}
 		>
 			<ExpectationIllustration
@@ -58,8 +58,8 @@ function ExpectationRow({
 		>
 			{reverse ? (
 				<>
-					<div className="min-w-0 lg:order-1">{card}</div>
-					<div className="min-h-0 min-w-0 lg:order-2">{illus}</div>
+					<div className="min-w-0 max-lg:order-2 lg:order-1">{card}</div>
+					<div className="min-h-0 min-w-0 max-lg:order-1 lg:order-2">{illus}</div>
 				</>
 			) : (
 				<>

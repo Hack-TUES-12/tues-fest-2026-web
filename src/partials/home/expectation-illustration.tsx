@@ -20,7 +20,7 @@ export function ExpectationIllustration({
 
 	return (
 		<figure
-			className="relative mx-auto w-full max-w-[min(100%,320px)] lg:h-full lg:w-auto lg:shrink-0 lg:max-w-none lg:mx-0"
+			className="relative mx-auto max-lg:max-h-[16rem] max-lg:w-[50%] max-lg:min-w-[20rem] max-lg:max-w-none lg:h-full lg:w-auto lg:min-w-0 lg:shrink-0 lg:max-w-none lg:mx-0"
 			style={{ aspectRatio: `${aw} / ${ah}` }}
 		>
 			{!failed ? (
@@ -29,7 +29,7 @@ export function ExpectationIllustration({
 					alt=""
 					fill
 					className="z-[1] object-contain object-center p-4"
-					sizes="(max-width: 1024px) min(320px, 100vw), (max-width: 1280px) 40vw, 480px"
+					sizes="(max-width: 1023px) min(75vw, 100vw), (max-width: 1280px) 40vw, 480px"
 					onError={() => setFailed(true)}
 					priority={index === 0}
 				/>
