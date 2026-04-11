@@ -75,7 +75,7 @@ function ExpectationRow({
 const Expectations = () => (
 	<section
 		id="expectations"
-		className="relative isolate mx-[calc(50%-50vw)] w-screen max-w-[100vw] bg-black px-4 py-16 md:px-8 md:py-24"
+		className="relative isolate z-[11] mx-[calc(50%-50vw)] w-screen max-w-[100vw] px-4 pb-16 pt-4 md:px-8 md:pb-16 md:pt-0"
 	>
 		<div
 			className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
@@ -85,7 +85,7 @@ const Expectations = () => (
 		</div>
 		<div className="relative z-10 mx-auto max-w-6xl">
 			<div className="mb-14 flex flex-col items-center gap-2 text-center md:mb-20">
-				<p className="text-accent tracking-widest">На живо</p>
+				<p className="text-primary tracking-widest">На живо</p>
 				<h2 className="font-title text-4xl text-white md:text-5xl">На ТУЕС Фест очаквайте</h2>
 			</div>
 

@@ -1,7 +1,7 @@
-import { Card, CardContent } from '@/components/ui/card';
 import About from '@/partials/home/About';
 import Expectations from '@/partials/home/Expectations';
 import EventLanding from '@/partials/home/Logos';
+import { OrganizersSection } from '@/partials/home/OrganizersSection';
 import Schedule from '@/partials/home/Schedule';
 import Statistics from '@/partials/home/Statistics';
 import Testimonial from '@/partials/home/Testimonial';
@@ -16,11 +16,12 @@ export default function Home() {
 				<EventLanding />
 			</section>
 			<About />
+			<IfTFFeatureOn feature="tf-expectations-section">
+				<Expectations />
+			</IfTFFeatureOn>
+			<OrganizersSection />
 			<Statistics />
 			<div className="mx-auto w-full max-w-screen-2xl">
-				<IfTFFeatureOn feature="tf-expectations-section">
-					<Expectations />
-				</IfTFFeatureOn>
 				<IfTFFeatureOn feature="tf-schedule">
 					<Schedule />
 				</IfTFFeatureOn>

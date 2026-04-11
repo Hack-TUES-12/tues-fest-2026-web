@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 
-import { OrganizersSection } from './OrganizersSection';
-
 import { Button } from '@/components/ui/button';
 import { ABOUT_IMAGE_1, ABOUT_IMAGE_2, ABOUT_TEXT } from '@/constants/home/about';
 import { TF_DATE_STRING, TF_LOCATION, TF_TIME_STRING, TF_YEAR } from '@/constants/event';
@@ -16,7 +14,7 @@ const About = () => {
 
 	return (
 		<section id="about" className="relative">
-			<div className="relative z-10 mx-auto max-w-6xl overflow-hidden px-4 pb-32 pt-12 lg:px-8">
+			<div className="relative z-10 mx-auto max-w-6xl overflow-x-clip overflow-y-visible px-4 pb-32 pt-12 lg:px-8">
 				{/* Unified layout: flex-col on mobile, side-by-side grid on desktop */}
 				<div className="relative flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12">
 					{/* Left: overlapping images */}
@@ -114,7 +112,6 @@ const About = () => {
 					/>
 				</div>
 			</div>
-			<OrganizersSection />
 		</section>
 	);
 };
