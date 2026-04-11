@@ -10,6 +10,25 @@ import {
 	type RegulationAccent,
 } from './regulation-accent';
 
+const railDotSizes = {
+	default: {
+		column: 'w-9',
+		dotWrap: 'h-7 w-7',
+		inactive: 'h-4 w-4',
+		activeOuter: 'h-7 w-7',
+		activeInner: 'h-5 w-5',
+		glowSpread: '24px 6px',
+	},
+	sm: {
+		column: 'w-7',
+		dotWrap: 'h-5 w-5',
+		inactive: 'h-3 w-3',
+		activeOuter: 'h-5 w-5',
+		activeInner: 'h-3 w-3',
+		glowSpread: '16px 4px',
+	},
+} as const;
+
 /**
  * Vertical timeline rail (Statistics FolderNavigation dot + 2px line language).
  * Lines and dot use the section accent while `isActive`; otherwise that hue’s dark inactive token.
@@ -19,12 +38,16 @@ export function RegulationTimelineRail({
 	isActive,
 	isFirst,
 	isLast,
+	size = 'default',
 }: {
 	accent: RegulationAccent;
 	isActive: boolean;
 	isFirst?: boolean;
 	isLast?: boolean;
+	/** Smaller dot stack — e.g. schedule page. */
+	size?: keyof typeof railDotSizes;
 }) {
+	const dim = railDotSizes[size];
 	const lineActive = regulationAccentBgClass(accent);
 	const lineInactive = regulationAccentInactiveBgClass(accent);
 	const glow = regulationAccentGlowVar(accent);
@@ -36,7 +59,7 @@ export function RegulationTimelineRail({
 
 	return (
 		<div
-			className="flex w-9 shrink-0 flex-col items-center self-stretch py-1"
+			className={cn('flex shrink-0 flex-col items-center self-stretch py-1', dim.column)}
 			aria-hidden
 		>
 			{/* Long stroke: crossfade inactive vs active gradients (CSS cannot interpolate gradient strings). */}
@@ -64,7 +87,12 @@ export function RegulationTimelineRail({
 					}}
 				/>
 			</div>
-			<div className="relative flex h-7 w-7 shrink-0 items-center justify-center">
+			<div
+				className={cn(
+					'relative flex shrink-0 items-center justify-center',
+					dim.dotWrap,
+				)}
+			>
 				<div
 					className={cn(
 						'absolute inset-0 flex items-center justify-center',
@@ -73,7 +101,7 @@ export function RegulationTimelineRail({
 					style={{ opacity: isActive ? 0 : 1 }}
 				>
 					<div
-						className={cn('h-4 w-4 rounded-full', lineInactive)}
+						className={cn('rounded-full', dim.inactive, lineInactive)}
 						style={{ boxShadow: '0 0 0 2px var(--background)' }}
 					/>
 				</div>
@@ -84,11 +112,16 @@ export function RegulationTimelineRail({
 					)}
 					style={{ opacity: isActive ? 1 : 0 }}
 				>
-					<div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-black">
+					<div
+						className={cn(
+							'flex items-center justify-center rounded-full border-2 border-black',
+							dim.activeOuter,
+						)}
+					>
 						<div
-							className={cn('h-5 w-5 rounded-full', lineActive)}
+							className={cn('rounded-full', dim.activeInner, lineActive)}
 							style={{
-								boxShadow: `0 0 0 2px white, 0 0 24px 6px ${glow}`,
+								boxShadow: `0 0 0 2px white, 0 0 ${dim.glowSpread} ${glow}`,
 							}}
 						/>
 					</div>

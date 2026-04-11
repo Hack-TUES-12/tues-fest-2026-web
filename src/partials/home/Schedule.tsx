@@ -1,5 +1,11 @@
+'use client';
+
+import { useMemo } from 'react';
 import { TbBrandYoutube } from 'react-icons/tb';
 
+import { RegulationTimelineRail } from '@/app/regulation/regulation-timeline-rail';
+import type { RegulationAccent } from '@/app/regulation/regulation-accent';
+import { useRegulationActiveSection } from '@/app/regulation/use-regulation-active-section';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SCHEDULE } from '@/constants/home/schedule';
@@ -16,40 +22,49 @@ const SCHEDULE_LIVE_BUTTON_VARIANTS = [
 /** Accent → primary → secondary → muted, then repeat. */
 const SCHEDULE_PART_STYLES = [
 	{
-		ring: 'border-accent/40 bg-accent/10',
-		dot: 'bg-accent',
-		dotShadow: 'shadow-[0_0_8px_theme(colors.accent/50)]',
 		badge: 'border-accent/25 bg-accent/10 text-accent',
 		title: 'text-accent',
 		card: 'border-accent/20 hover:border-accent/45',
 	},
 	{
-		ring: 'border-primary/40 bg-primary/10',
-		dot: 'bg-primary',
-		dotShadow: 'shadow-[0_0_8px_theme(colors.primary/50)]',
 		badge: 'border-primary/25 bg-primary/10 text-primary',
 		title: 'text-primary',
 		card: 'border-primary/20 hover:border-primary/45',
 	},
 	{
-		ring: 'border-secondary/40 bg-secondary/10',
-		dot: 'bg-secondary',
-		dotShadow: 'shadow-[0_0_8px_theme(colors.secondary/50)]',
 		badge: 'border-secondary/25 bg-secondary/10 text-secondary',
 		title: 'text-secondary',
 		card: 'border-secondary/20 hover:border-secondary/45',
 	},
 	{
-		ring: 'border-muted/40 bg-muted/10',
-		dot: 'bg-muted',
-		dotShadow: 'shadow-[0_0_8px_theme(colors.muted/50)]',
 		badge: 'border-muted/25 bg-muted/10 text-muted',
 		title: 'text-muted',
 		card: 'border-muted/20 hover:border-muted/45',
 	},
 ] as const;
 
+/** Same hue order as `SCHEDULE_PART_STYLES` — pairs with regulation rail tokens. */
+const SCHEDULE_RAIL_ACCENTS: readonly RegulationAccent[] = [
+	'accent',
+	'primary',
+	'secondary',
+	'muted',
+];
+
+/** DOM ids for scroll-based rail active state — same focal-line logic as `/regulation`. */
+function scheduleSectionIds(): string[] {
+	return SCHEDULE.map((_, i) => `schedule-section-${i}`);
+}
+
+/** Lower reading line than regulation (0.38) so timeline rails activate earlier on `/schedule`. */
+const SCHEDULE_FOCAL_Y_RATIO = 0.52;
+
 function Schedule() {
+	const sectionIds = useMemo(() => scheduleSectionIds(), []);
+	const { isSectionActive } = useRegulationActiveSection(sectionIds, {
+		focalYRatio: SCHEDULE_FOCAL_Y_RATIO,
+	});
+
 	return (
 		<section id="schedule" className="relative px-4 py-12 md:px-8">
 			{/* Section header */}
@@ -58,43 +73,33 @@ function Schedule() {
 				<h2 className="font-title text-4xl text-white md:text-5xl">Програма</h2>
 			</div>
 
-			{/* Timeline */}
+			{/* Timeline — rail matches /regulation (2px stroke + gradient + dot language) */}
 			<div className="relative mx-auto max-w-3xl">
-				{/* Vertical spine — multi-stop gradient through the four theme hues */}
-				<div
-					className="pointer-events-none absolute top-4 bottom-4 left-4 w-px sm:left-5"
-					style={{
-						background:
-							'linear-gradient(to bottom, color-mix(in oklch, var(--color-accent) 45%, transparent) 0%, color-mix(in oklch, var(--color-primary) 40%, transparent) 33%, color-mix(in oklch, var(--color-secondary) 40%, transparent) 66%, color-mix(in oklch, var(--color-muted) 40%, transparent) 100%)',
-					}}
-				/>
-
 				<div className="flex flex-col gap-6">
 					{SCHEDULE.map((item, i) => {
 						const s = SCHEDULE_PART_STYLES[i % SCHEDULE_PART_STYLES.length]!;
+						const railAccent = SCHEDULE_RAIL_ACCENTS[i % SCHEDULE_RAIL_ACCENTS.length]!;
 						return (
-							<div key={item.title} className="flex gap-6 sm:gap-8">
-								{/* Timeline dot */}
-								<div className="relative z-10 mt-5 flex shrink-0 flex-col items-center">
-									<div
+							<div
+								key={item.title}
+								id={sectionIds[i]}
+								className="scroll-mt-28 flex gap-2 sm:gap-4"
+							>
+								<RegulationTimelineRail
+									accent={railAccent}
+									isActive={isSectionActive(sectionIds[i]!)}
+									isFirst={i === 0}
+									isLast={i === SCHEDULE.length - 1}
+									size="sm"
+								/>
+
+								<div className="min-w-0 flex-1">
+									<Card
 										className={cn(
-											'flex size-9 items-center justify-center rounded-full border backdrop-blur-sm',
-											s.ring,
+											'group w-full rounded-2xl bg-card/70 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-card/90 gap-1',
+											s.card,
 										)}
 									>
-										<div
-											className={cn('size-2.5 rounded-full', s.dot, s.dotShadow)}
-										/>
-									</div>
-								</div>
-
-								{/* Content card */}
-								<Card
-									className={cn(
-										'group w-full rounded-2xl bg-card/70 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-card/90 gap-1',
-										s.card,
-									)}
-								>
 									{/* Time badge */}
 									<div className="mb-4 flex items-center gap-2">
 										<span
@@ -133,7 +138,8 @@ function Schedule() {
 											</a>
 										</Button>
 									)}
-								</Card>
+									</Card>
+								</div>
 							</div>
 						);
 					})}
