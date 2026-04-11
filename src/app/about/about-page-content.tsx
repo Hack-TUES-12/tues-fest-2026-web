@@ -14,13 +14,20 @@ import {
 	TbSchool,
 	TbTrophy,
 } from 'react-icons/tb';
+import { SiFacebook, SiInstagram, SiLinkedin, SiYoutube } from 'react-icons/si';
 import { motion, useReducedMotion } from 'motion/react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { TF_YEAR, TUES_AGE } from '@/constants/event';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
-import { listItemEntrance, sectionFadeIn, sectionFadeUp } from '@/lib/motion/section-in-view';
+import {
+	listItemEntrance,
+	listItemIconEntrance,
+	SECTION_FADE_IN_DURATION_SEC,
+	sectionFadeIn,
+	sectionFadeUp,
+} from '@/lib/motion/section-in-view';
 import { cn } from '@/lib/utils';
 
 const STATS = [
@@ -123,6 +130,16 @@ function SectionHeading({
 const cardSurface =
 	'rounded-2xl bg-card/70 shadow-lg backdrop-blur-sm transition-colors duration-300 hover:bg-card/85';
 
+/** Same URLs and styling as schedule / footer — TUES community channels. */
+const ABOUT_HERO_SOCIAL_LINKS = [
+	{ href: 'https://www.facebook.com/tues.bg', label: 'Facebook', Icon: SiFacebook },
+	{ href: 'https://www.instagram.com/tues.bg/', label: 'Instagram', Icon: SiInstagram },
+	{ href: 'https://www.youtube.com/@TUES', label: 'YouTube', Icon: SiYoutube },
+] as const;
+
+const ABOUT_HERO_SOCIAL_ICON_BUTTON =
+	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-primary/40 hover:bg-card/50 hover:text-primary';
+
 export function AboutPageContent() {
 	const reducedMotion = useReducedMotion();
 
@@ -144,7 +161,7 @@ export function AboutPageContent() {
 
 			{/* Hero */}
 			<motion.section
-				className="relative isolate mx-auto flex w-full max-w-3xl flex-col items-center gap-5 text-center"
+				className="relative isolate mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center"
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
 				<motion.p
@@ -169,13 +186,35 @@ export function AboutPageContent() {
 					на ИТ сектора в България и отвъд.
 				</motion.p>
 				<motion.div {...sectionFadeUp(reducedMotion, 0.26)}>
-					<Button asChild variant="default" size="lg" className="font-bold shadow-lg shadow-primary/20">
+					<Button asChild variant="default" size="lg" className="font-bold">
 						<Link href="https://elsys-bg.org" target="_blank" rel="noopener noreferrer">
 							<TbExternalLink size={18} />
 							Официален сайт на ТУЕС
 						</Link>
 					</Button>
 				</motion.div>
+				<div className="flex flex-col items-center gap-3">
+					<p className="text-xs font-medium tracking-widest text-white/45">Социални мрежи</p>
+					<div className="flex flex-wrap items-center justify-center gap-3">
+						{ABOUT_HERO_SOCIAL_LINKS.map(({ href, label, Icon }, index) => (
+							<motion.div
+								key={href}
+								{...listItemIconEntrance(
+									reducedMotion,
+									index,
+									0.12,
+									SECTION_FADE_IN_DURATION_SEC,
+								)}
+							>
+								<Button variant="outline" size="icon" className={ABOUT_HERO_SOCIAL_ICON_BUTTON} asChild>
+									<Link href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+										<Icon className="size-5" aria-hidden />
+									</Link>
+								</Button>
+							</motion.div>
+						))}
+					</div>
+				</div>
 			</motion.section>
 
 			{/* Stats */}
