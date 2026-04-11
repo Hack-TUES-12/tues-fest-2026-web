@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { EXPECTATIONS } from '@/constants/home/expectations';
+import { type ExpectationIllustrationAspect, EXPECTATIONS } from '@/constants/home/expectations';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 
 import { ExpectationIllustration } from './expectation-illustration';
@@ -13,11 +13,13 @@ function ExpectationRow({
 	text,
 	index,
 	reverse,
+	illustrationAspect,
 }: {
 	title: string;
 	text: string;
 	index: number;
 	reverse: boolean;
+	illustrationAspect: ExpectationIllustrationAspect;
 }) {
 	const tone = HEADING_TONE[index % HEADING_TONE.length];
 
@@ -31,8 +33,18 @@ function ExpectationRow({
 	);
 
 	const illus = (
-		<div className="flex shrink-0 items-center justify-center lg:w-[min(100%,32%)]">
-			<ExpectationIllustration index={index} title={title} />
+		<div
+			className={
+				reverse
+					? 'flex w-[75%] shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-start'
+					: 'flex w-[75%] shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-end'
+			}
+		>
+			<ExpectationIllustration
+				index={index}
+				title={title}
+				illustrationAspect={illustrationAspect}
+			/>
 		</div>
 	);
 
@@ -40,18 +52,18 @@ function ExpectationRow({
 		<div
 			className={
 				reverse
-					? 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(180px,32%)] lg:items-center lg:gap-12'
-					: 'grid gap-8 lg:grid-cols-[minmax(180px,32%)_minmax(0,1fr)] lg:items-center lg:gap-12'
+					? 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-stretch lg:gap-12'
+					: 'grid gap-8 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-stretch lg:gap-12'
 			}
 		>
 			{reverse ? (
 				<>
 					<div className="min-w-0 lg:order-1">{card}</div>
-					<div className="min-w-0 lg:order-2">{illus}</div>
+					<div className="min-h-0 min-w-0 lg:order-2">{illus}</div>
 				</>
 			) : (
 				<>
-					<div className="min-w-0">{illus}</div>
+					<div className="min-h-0 min-w-0">{illus}</div>
 					<div className="min-w-0">{card}</div>
 				</>
 			)}
@@ -70,7 +82,7 @@ const Expectations = () => (
 				<h2 className="font-title text-4xl text-white md:text-5xl">На ТУЕС Фест очаквайте</h2>
 			</div>
 
-			<div className="flex flex-col gap-16 md:gap-20 lg:gap-24">
+			<div className="flex flex-col max-w-5xl mx-auto gap-16 md:gap-20 lg:gap-24">
 				{EXPECTATIONS.map((expectation, i) => (
 					<ExpectationRow
 						key={expectation.title}
@@ -78,6 +90,7 @@ const Expectations = () => (
 						text={expectation.text}
 						index={i}
 						reverse={i % 2 === 1}
+						illustrationAspect={expectation.illustrationAspect}
 					/>
 				))}
 			</div>

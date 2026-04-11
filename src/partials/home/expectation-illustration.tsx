@@ -3,23 +3,33 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-export function ExpectationIllustration({ index, title }: { index: number; title: string }) {
+import type { ExpectationIllustrationAspect } from '@/constants/home/expectations';
+
+export function ExpectationIllustration({
+	index,
+	title,
+	illustrationAspect,
+}: {
+	index: number;
+	title: string;
+	illustrationAspect: ExpectationIllustrationAspect;
+}) {
 	const [failed, setFailed] = useState(false);
-	const src = `/assets/home/expectations/${index + 1}.webp`;
+	const src = `/assets/home/expectations/${index + 1}.png`;
+	const [aw, ah] = illustrationAspect;
 
 	return (
-		<figure className="relative mx-auto aspect-[5/4] w-full max-w-[min(100%,320px)] lg:mx-0 lg:max-w-none">
-			<div
-				className="absolute inset-0 rounded-3xl bg-white/[0.04] ring-1 ring-white/[0.06]"
-				aria-hidden
-			/>
+		<figure
+			className="relative mx-auto w-full max-w-[min(100%,320px)] lg:h-full lg:w-auto lg:shrink-0 lg:max-w-none lg:mx-0"
+			style={{ aspectRatio: `${aw} / ${ah}` }}
+		>
 			{!failed ? (
 				<Image
 					src={src}
 					alt=""
 					fill
 					className="z-[1] object-contain object-center p-4"
-					sizes="(max-width: 1024px) min(320px, 100vw), 28vw"
+					sizes="(max-width: 1024px) min(320px, 100vw), (max-width: 1280px) 40vw, 480px"
 					onError={() => setFailed(true)}
 					priority={index === 0}
 				/>
