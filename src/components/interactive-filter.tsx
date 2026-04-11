@@ -65,7 +65,7 @@ export function InteractiveFilteredProjects({
 
 	if (filteredChildren.length === 0) {
 		return (
-			<Card className="p-10 text-center md:col-span-2 lg:col-span-3">
+			<Card className="p-10 h-full text-center md:col-span-2 lg:col-span-3">
 				<h3 className="text-2xl font-bold">Няма намерени проекти</h3>
 				<p className="text-muted-foreground text-lg">
 					Не успяхме да намерим проекти, съответстващи на вашето търсене.
