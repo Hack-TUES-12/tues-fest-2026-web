@@ -24,7 +24,6 @@ export function ExpectationIllustration({
 	return (
 		<figure
 			className="relative mx-auto min-w-0 max-w-full max-lg:max-h-[16rem] max-lg:w-[50%] max-lg:min-w-[20rem] max-lg:max-w-none lg:mx-0 lg:w-full lg:self-center aspect-16/9"
-			// style={{ aspectRatio: `${aw} / ${ah}` }}
 		>
 			{!failed ? (
 				<Image
@@ -32,8 +31,8 @@ export function ExpectationIllustration({
 					alt=""
 					fill
 					className={cn(
-						"z-[1] object-contain p-4",
-						reverse ? "object-left" : "object-right"
+						"z-[1] object-contain p-4 object-center",
+						reverse ? "lg:object-left" : "lg:object-right"
 					)}
 					sizes="(max-width: 1023px) min(75vw, 100vw), (max-width: 1280px) 40vw, 480px"
 					onError={() => setFailed(true)}
