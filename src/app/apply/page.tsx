@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TbArrowRight, TbBook, TbBrain, TbCheck, TbExternalLink, TbNetwork, TbStar } from 'react-icons/tb';
+import { TbArrowRight, TbBook, TbBrain, TbCheck, TbCode, TbCpu, TbExternalLink, TbNetwork, TbStar } from 'react-icons/tb';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -60,18 +60,23 @@ const WHY_TUES = [
 
 const SPECIALTIES = [
 	{
-		icon: TbBook,
-		title: 'Системно програмиране',
+		icon: TbBrain,
+		title: 'Интелигентни системи',
 		detail: '2 паралелки × 26 ученици',
 	},
 	{
-		icon: TbNetwork,
-		title: 'Компютърни мрежи',
+		icon: TbCpu,
+		title: "Роботика",
+		detail: "2 паралелки × 26 ученици"
+	},
+	{
+		icon: TbCode,
+		title: 'Разработка на софтуер',
 		detail: '1 паралелка × 26 ученици',
 	},
 	{
-		icon: TbBrain,
-		title: 'Програмиране на изкуствен интелект',
+		icon: TbNetwork,
+		title: 'Комуникационни и омпютърни мрежи',
 		detail: '1 паралелка × 26 ученици',
 	},
 ];
@@ -115,12 +120,12 @@ const ApplyPage = () => (
 				За {TF_YEAR} г., ТУЕС се нареди на <span className="text-white">второ място</span> по
 				минимален бал на първо класиране в 7. клас!
 			</p>
-			<Button asChild variant="muted" size="lg" className="font-bold mt-2">
+			{/* <Button asChild variant="muted" size="lg" className="font-bold mt-2">
 				<Link href="https://elsys-bg.org/priem/red-i-uslovija-za-priem" target="_blank" rel="noopener noreferrer">
 					<TbExternalLink size={18} />
 					Научете повече за приема
 				</Link>
-			</Button>
+			</Button> */}
 		</div>
 
 		{/* Why TUES — features + image */}
@@ -168,7 +173,7 @@ const ApplyPage = () => (
 				<Card className="px-8 py-7">
 					<CardContent className="p-0 flex flex-col gap-5">
 						<div className="space-y-1">
-							<p className="text-muted tracking-widest text-xs font-medium uppercase">Специалности</p>
+							<p className="text-muted tracking-widest text-xs font-medium uppercase">Професии</p>
 							<h2 className="text-2xl font-bold text-white">
 								Как да кандидатствам?
 							</h2>
@@ -192,7 +197,7 @@ const ApplyPage = () => (
 								</div>
 							))}
 						</div>
-						<Link
+						{/* <Link
 							href="https://elsys-bg.org/priem/red-i-uslovija-za-priem"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -200,7 +205,7 @@ const ApplyPage = () => (
 						>
 							<TbArrowRight size={15} />
 							Научете повече за приема в ТУЕС
-						</Link>
+						</Link> */}
 					</CardContent>
 				</Card>
 
