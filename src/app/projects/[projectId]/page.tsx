@@ -132,7 +132,7 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 	return (
 		<ProjectContainer category={project.category as ProjectCategory}>
 			{/* Breadcrumb */}
-			<ProjectsPath path={path} />
+			<ProjectsPath color={project.category ?? "software"} path={path} />
 
 			<div className='w-full max-w-4xl mx-auto'>
 				{/* Hero — video/thumbnail */}
