@@ -20,7 +20,7 @@ const PATH: {
 const ProjectsLoading = () => {
 	return (
 		<ProjectContainer>
-			<ProjectsPath path={PATH} color="software" />
+			<ProjectsPath path={PATH} color="networks" maxWidth="6xl" />
 
 			<ProjectFilter current={null} />
 		</ProjectContainer>

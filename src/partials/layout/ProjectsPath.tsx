@@ -17,11 +17,23 @@ const CATEGORY_STYLES: Record<string, string> = {
 	battlebot: 'bg-gradient-to-br from-accent/20 to-accent/20 border border-accent text-accent',
 };
 
-const ProjectsPath = ({ path, color }: { path?: PathItem[] | null | undefined, color: 'software' | 'embedded' | 'networks' | 'battlebot' }) => {
+const ProjectsPath = ({
+	path,
+	color,
+	maxWidth = '4xl',
+}: {
+	path?: PathItem[] | null | undefined;
+	color: 'software' | 'embedded' | 'networks' | 'battlebot';
+	/** Listing pages use `6xl`; project detail uses `4xl` (default). */
+	maxWidth?: '4xl' | '6xl';
+}) => {
 	if (!path) return null;
 
 	return (
-		<nav aria-label="breadcrumb" className='mx-auto max-w-4xl'>
+		<nav
+			aria-label="breadcrumb"
+			className={cn('mx-auto', maxWidth === '6xl' ? 'max-w-6xl' : 'max-w-4xl')}
+		>
 			<div className="rounded-2xl bg-card/50 px-6 py-4 backdrop-blur-xl">
 				<ol className={cn(
 					"w-fit rounded-4xl px-3 py-2 flex flex-wrap items-center gap-1.5 text-sm",

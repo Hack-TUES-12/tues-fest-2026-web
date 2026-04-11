@@ -18,7 +18,7 @@ export function ProjectContainer({
 	const circle = CATEGORY_CIRCLE[category];
 
 	return (
-		<div className="container mx-auto max-w-4xl space-y-5 px-3 pb-5 pt-10">
+		<div className="container mx-auto max-w-6xl space-y-5 px-3 pb-5 pt-10">
 			<img
 				src={circle}
 				alt=""

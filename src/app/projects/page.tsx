@@ -35,7 +35,7 @@ const ProjectsPage = async () => {
 
 	return (
 		<ProjectContainer>
-			<ProjectsPath path={PATH} color="software" />
+			<ProjectsPath path={PATH} color="networks" maxWidth="6xl" />
 
 			<InteractiveProjectFilter current="Всички" />
 
