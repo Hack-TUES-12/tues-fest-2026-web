@@ -227,7 +227,7 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 							{hasContributors && (
 								<Contributors contributors={project.contributors} category={project.category} />
 							)}
-							{hasLinks && <LinksContainer links={project.links} />}
+							{hasLinks && <LinksContainer links={project.links} category={project.category} />}
 						</div>
 					)}
 

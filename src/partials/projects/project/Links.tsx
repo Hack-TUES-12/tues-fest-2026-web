@@ -3,32 +3,85 @@ import Link from 'next/link';
 import { TbBrandGit, TbBrandGithub, TbBrandGoogleDrive, TbGlobe } from 'react-icons/tb';
 import invariant from 'tiny-invariant';
 
-import { Button } from '@/components/ui/button';
 import { type Links } from '@/app/projects/[projectId]/page';
+import { Card } from '@/components/ui/card';
+import {
+	isProjectCategory,
+	PROJECT_CATEGORY_LINK_LABEL_HOVER_CLASS,
+	PROJECT_CATEGORY_TEXT_CLASS,
+} from '@/constants/projects';
+import { cn } from '@/lib/utils';
 
-const Linky = ({ text, url, icon }: { text: string; url: string; icon: ReactNode }) => (
-	<Button asChild variant="outline" size="lg" className="w-full justify-start gap-3">
-		<Link href={url} target="_blank" rel="noreferrer">
-			{icon}
-			<span className="text-sm font-semibold">{text}</span>
+const LINK_ICON_SIZE = 28;
+
+const Linky = ({
+	text,
+	url,
+	icon,
+	accentTextClass,
+	linkLabelHoverClass,
+}: {
+	text: string;
+	url: string;
+	icon: ReactNode;
+	accentTextClass: string;
+	linkLabelHoverClass: string;
+}) => (
+	<div className="w-full justify-start">
+		<Link
+			href={url}
+			target="_blank"
+			rel="noreferrer"
+			className="group flex items-center gap-3 rounded-md outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+		>
+			<span className={cn('inline-flex shrink-0 items-center', accentTextClass)}>
+				{icon}
+			</span>
+			<span
+				className={cn(
+					'text-sm font-semibold text-white transition-colors',
+					linkLabelHoverClass,
+				)}
+			>
+				{text}
+			</span>
 		</Link>
-	</Button>
+	</div>
 );
 
-const LinksContainer = ({ links }: { links: Readonly<Links> }) => {
+const LinksContainer = ({ links, category }: { links: Readonly<Links>; category: string }) => {
 	const hasLinks = links.repoUrls.length > 0 || links.demoUrl;
 	if (!hasLinks) return null;
 
+	const accentTextClass = isProjectCategory(category)
+		? PROJECT_CATEGORY_TEXT_CLASS[category]
+		: PROJECT_CATEGORY_TEXT_CLASS.software;
+	const linkLabelHoverClass = isProjectCategory(category)
+		? PROJECT_CATEGORY_LINK_LABEL_HOVER_CLASS[category]
+		: PROJECT_CATEGORY_LINK_LABEL_HOVER_CLASS.software;
+
 	return (
-		<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
-			<p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">Линкове</p>
-			<div className="flex flex-col gap-3">
-				<GithubLink repoUrls={links.repoUrls} />
-				{links.demoUrl && (
-					<Linky text="Уебсайт" url={links.demoUrl} icon={<TbGlobe size={20} />} />
-				)}
+		<Card className="rounded-2xl bg-card/50 px-6 py-4 backdrop-blur-sm">
+			<div className="flex flex-col gap-4">
+				<p className={cn('text-2xl font-mono font-bold', accentTextClass)}>Линкове</p>
+				<div className="flex flex-col gap-3 px-3">
+					<GithubLink
+						repoUrls={links.repoUrls}
+						accentTextClass={accentTextClass}
+						linkLabelHoverClass={linkLabelHoverClass}
+					/>
+					{links.demoUrl && (
+						<Linky
+							text="Уебсайт"
+							url={links.demoUrl}
+							accentTextClass={accentTextClass}
+							linkLabelHoverClass={linkLabelHoverClass}
+							icon={<TbGlobe size={LINK_ICON_SIZE} />}
+						/>
+					)}
+				</div>
 			</div>
-		</div>
+		</Card>
 	);
 };
 
@@ -42,7 +95,15 @@ const GithubIcon = ({ repoUrl, size }: { repoUrl: string; size: number }) => {
 	return <TbBrandGit size={size} />;
 };
 
-const GithubLink = ({ repoUrls }: { repoUrls: readonly string[] }) => {
+const GithubLink = ({
+	repoUrls,
+	accentTextClass,
+	linkLabelHoverClass,
+}: {
+	repoUrls: readonly string[];
+	accentTextClass: string;
+	linkLabelHoverClass: string;
+}) => {
 	if (repoUrls.length !== 1) {
 		return (
 			<>
@@ -51,7 +112,9 @@ const GithubLink = ({ repoUrls }: { repoUrls: readonly string[] }) => {
 						key={i}
 						text={new URL(url).pathname}
 						url={url}
-						icon={<GithubIcon repoUrl={url} size={20} />}
+						accentTextClass={accentTextClass}
+						linkLabelHoverClass={linkLabelHoverClass}
+						icon={<GithubIcon repoUrl={url} size={LINK_ICON_SIZE} />}
 					/>
 				))}
 			</>
@@ -63,7 +126,9 @@ const GithubLink = ({ repoUrls }: { repoUrls: readonly string[] }) => {
 		<Linky
 			text="Код на проекта"
 			url={firstRepoUrl}
-			icon={<GithubIcon repoUrl={firstRepoUrl} size={20} />}
+			accentTextClass={accentTextClass}
+			linkLabelHoverClass={linkLabelHoverClass}
+			icon={<GithubIcon repoUrl={firstRepoUrl} size={LINK_ICON_SIZE} />}
 		/>
 	);
 };

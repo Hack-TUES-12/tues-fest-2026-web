@@ -25,6 +25,14 @@ export const PROJECT_CATEGORY_TEXT_CLASS: Record<ProjectCategory, string> = {
 	battlebot: 'text-accent',
 };
 
+/** `group-hover:text-*` for link labels (hover anywhere on the row). */
+export const PROJECT_CATEGORY_LINK_LABEL_HOVER_CLASS: Record<ProjectCategory, string> = {
+	software: 'group-hover:text-muted',
+	embedded: 'group-hover:text-primary',
+	networks: 'group-hover:text-accent',
+	battlebot: 'group-hover:text-accent',
+};
+
 export function isProjectCategory(value: string): value is ProjectCategory {
 	return Object.hasOwn(PROJECT_CATEGORIES, value);
 }
