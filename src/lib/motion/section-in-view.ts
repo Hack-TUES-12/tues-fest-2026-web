@@ -80,3 +80,44 @@ export function listItemIconEntrance(
 		},
 	};
 }
+
+const EXPECTATION_ROW_SLIDE_PX = 56;
+
+/** Expectations row: on `lg+`, slide in from left (normal) or right (reverse); below `lg`, fade only. */
+export function expectationRowMotion(
+	reducedMotion: boolean | null,
+	isLg: boolean,
+	reverse: boolean,
+	delaySec: number,
+) {
+	if (reducedMotion) {
+		return {
+			initial: { opacity: 1, x: 0 },
+			whileInView: { opacity: 1, x: 0 },
+			viewport: SECTION_IN_VIEW,
+			transition: { duration: 0 },
+		};
+	}
+	if (!isLg) {
+		return {
+			initial: { opacity: 0, x: 0 },
+			whileInView: { opacity: 1, x: 0 },
+			viewport: SECTION_IN_VIEW,
+			transition: {
+				duration: 0.55,
+				delay: delaySec,
+				ease: HERO_LIKE_EASE_OUT,
+			},
+		};
+	}
+	return {
+		initial: { opacity: 0, x: reverse ? EXPECTATION_ROW_SLIDE_PX : -EXPECTATION_ROW_SLIDE_PX },
+		whileInView: { opacity: 1, x: 0 },
+		viewport: SECTION_IN_VIEW,
+		transition: {
+			duration: 0.55,
+			delay: delaySec,
+			ease: HERO_LIKE_EASE_OUT,
+		},
+	};
+}

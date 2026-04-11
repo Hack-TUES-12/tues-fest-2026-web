@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
+import { motion, useReducedMotion } from 'motion/react';
 
 import { Button } from '@/components/ui/button';
 import { type ExpectationIllustrationAspect, EXPECTATIONS } from '@/constants/home/expectations';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
+import { expectationRowMotion, sectionFadeUp } from '@/lib/motion/section-in-view';
+import { useLgUp } from '@/lib/motion/use-lg-up';
 
 import { ExpectationIllustration } from './expectation-illustration';
 import { ExpectationsSectionDecorations } from './expectations-section-decorations';
@@ -72,45 +77,61 @@ function ExpectationRow({
 	);
 }
 
-const Expectations = () => (
-	<section
-		id="expectations"
-		className="relative isolate z-[11] mx-[calc(50%-50vw)] w-screen max-w-[100vw] px-4 pb-16 pt-4 md:px-8 md:pb-16 md:pt-0"
-	>
-		<div
-			className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-			aria-hidden
+const Expectations = () => {
+	const reducedMotion = useReducedMotion();
+	const isLg = useLgUp();
+
+	return (
+		<section
+			id="expectations"
+			className="relative isolate z-[11] mx-[calc(50%-50vw)] w-screen max-w-[100vw] px-4 pb-16 pt-4 md:px-8 md:pb-16 md:pt-0"
 		>
-			<ExpectationsSectionDecorations />
-		</div>
-		<div className="relative z-10 mx-auto max-w-6xl">
-			<div className="mb-14 flex flex-col items-center gap-2 text-center md:mb-20">
-				<p className="text-primary tracking-widest">На живо</p>
-				<h2 className="font-title text-4xl text-white md:text-5xl">На ТУЕС Фест очаквайте</h2>
+			<div
+				className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+				aria-hidden
+			>
+				<ExpectationsSectionDecorations />
 			</div>
+			<div className="relative z-10 mx-auto max-w-6xl">
+				<motion.div
+					className="mb-14 flex flex-col items-center gap-2 text-center md:mb-20"
+					{...sectionFadeUp(reducedMotion, 0)}
+				>
+					<p className="text-primary tracking-widest">На живо</p>
+					<h2 className="font-title text-4xl text-white md:text-5xl">На ТУЕС Фест очаквайте</h2>
+				</motion.div>
 
-			<div className="flex flex-col max-w-5xl mx-auto gap-16 md:gap-20 lg:gap-24">
-				{EXPECTATIONS.map((expectation, i) => (
-					<ExpectationRow
-						key={expectation.title}
-						title={expectation.title}
-						text={expectation.text}
-						index={i}
-						reverse={i % 2 === 1}
-						illustrationAspect={expectation.illustrationAspect}
-					/>
-				))}
-			</div>
-
-			<IfTFFeatureOn feature="tf-schedule">
-				<div className="mt-16 flex justify-center md:mt-20">
-					<Button asChild variant="default" size="lg" className="w-fit font-bold">
-						<Link href="/schedule">Виж програмата</Link>
-					</Button>
+				<div className="mx-auto flex max-w-5xl flex-col gap-16 md:gap-20 lg:gap-24">
+					{EXPECTATIONS.map((expectation, i) => {
+						const reverse = i % 2 === 1;
+						return (
+							<motion.div
+								key={expectation.title}
+								className="will-change-transform"
+								{...expectationRowMotion(reducedMotion, isLg, reverse, i * 0.07)}
+							>
+								<ExpectationRow
+									title={expectation.title}
+									text={expectation.text}
+									index={i}
+									reverse={reverse}
+									illustrationAspect={expectation.illustrationAspect}
+								/>
+							</motion.div>
+						);
+					})}
 				</div>
-			</IfTFFeatureOn>
-		</div>
-	</section>
-);
+
+				<IfTFFeatureOn feature="tf-schedule">
+					<motion.div className="mt-16 flex justify-center md:mt-20" {...sectionFadeUp(reducedMotion, 0.06)}>
+						<Button asChild variant="secondary" size="lg" className="w-fit font-bold">
+							<Link href="/schedule">Виж програмата</Link>
+						</Button>
+					</motion.div>
+				</IfTFFeatureOn>
+			</div>
+		</section>
+	);
+};
 
 export default Expectations;

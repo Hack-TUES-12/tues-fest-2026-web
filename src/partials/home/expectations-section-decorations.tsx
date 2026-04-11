@@ -16,7 +16,7 @@ export function ExpectationsSectionDecorations() {
 				{...sectionFadeIn(reducedMotion, 0.08)}
 			>
 				<Image
-					src="/decorations/blue-circle.svg"
+					src="/decorations/orange-circle.svg"
 					alt=""
 					width={600}
 					height={600}
@@ -31,7 +31,7 @@ export function ExpectationsSectionDecorations() {
 				{...sectionFadeIn(reducedMotion, 0.16)}
 			>
 				<Image
-					src="/decorations/green-circle.svg"
+					src="/decorations/blue-circle.svg"
 					alt=""
 					width={600}
 					height={600}
