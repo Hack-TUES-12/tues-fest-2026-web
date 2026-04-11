@@ -1,13 +1,31 @@
+import type { ReactNode } from 'react';
 import { TbPlus } from 'react-icons/tb';
 
 import { cn } from '@/lib/utils';
 
 import { TF_PROJECT_COUNT, TF_YEAR } from '../event';
 
+/** Shared live stream CTA — attach per schedule entry via `liveStream`. */
+export const SCHEDULE_LIVE_STREAM = {
+	label: 'Гледай на живо',
+	href: 'https://www.youtube.com/@TUES/live',
+} as const;
+
+export type ScheduleItem = {
+	start: string;
+	end: string;
+	title: string;
+	description: ReactNode;
+	icon: string;
+	pos: string;
+	/** YouTube live — omit for segments without a stream (e.g. TUES E&A Pitch). */
+	liveStream?: typeof SCHEDULE_LIVE_STREAM;
+};
+
 /** Matches project page authors list (`Contributors`) — plus icon uses this schedule block’s hue. */
 const EXHIBITION_PLUS_CLASS = 'text-primary';
 
-export const SCHEDULE = [
+export const SCHEDULE: ScheduleItem[] = [
 	{
 		start: '09:00',
 		end: '10:00',
@@ -15,6 +33,7 @@ export const SCHEDULE = [
 		description: 'Започваме с вдъхновяващо откриване, в което ще участват специални гости от технологичния и образователния сектор. Ще чуете мотивиращи думи, които ще ви потопят в атмосферата на денят на постиженията в ТУЕС и ще дадат старт на ден, изпълнен с иновации и креативност.',
 		icon: '',
 		pos: 'left',
+		liveStream: SCHEDULE_LIVE_STREAM,
 	},
 	{
 		start: '10:00',
@@ -78,7 +97,7 @@ export const SCHEDULE = [
 			</div>
 		),
 		icon: '',
-		pos: 'right',
+		pos: 'right'
 	},
 	{
 		start: '11:00',
@@ -95,6 +114,7 @@ export const SCHEDULE = [
 		description: `Моментът от TUES Fest когато всеки зарязва това, което прави и излиза да наблюдава арената. Всеки от вас ще има възможност да гледа ожесточените битки между роботите на участниците, а от арената ще излезе само един победител.`,
 		icon: '',
 		pos: 'left',
+		liveStream: SCHEDULE_LIVE_STREAM,
 	},
 	{
 		start: '17:30',
@@ -103,6 +123,7 @@ export const SCHEDULE = [
 		description: `Време е за награждаване на победителите в различните категории на TUES Fest ${TF_YEAR}. Започва се с наградите на нашите спонсори и партньори и след това с почетните първи три места във всяка категория.`,
 		icon: '',
 		pos: 'left',
+		liveStream: SCHEDULE_LIVE_STREAM,
 	},
 ];
 

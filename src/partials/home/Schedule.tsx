@@ -1,6 +1,17 @@
+import { TbBrandYoutube } from 'react-icons/tb';
+
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { SCHEDULE } from '@/constants/home/schedule';
 import { cn } from '@/lib/utils';
+
+/** Matches `SCHEDULE_PART_STYLES` order — border/label in each card’s hue. */
+const SCHEDULE_LIVE_BUTTON_VARIANTS = [
+	'accent-secondary',
+	'default-secondary',
+	'secondary-secondary',
+	'muted-secondary',
+] as const;
 
 /** Accent → primary → secondary → muted, then repeat. */
 const SCHEDULE_PART_STYLES = [
@@ -105,6 +116,23 @@ function Schedule() {
 									<div className="text-sm leading-relaxed text-white/60">
 										{item.description}
 									</div>
+
+									{item.liveStream && (
+										<Button
+											variant={SCHEDULE_LIVE_BUTTON_VARIANTS[i % 4]}
+											className="mt-6 font-title text-xs tracking-widest w-fit"
+											asChild
+										>
+											<a
+												href={item.liveStream.href}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												<TbBrandYoutube className="size-4 shrink-0" aria-hidden />
+												{item.liveStream.label}
+											</a>
+										</Button>
+									)}
 								</Card>
 							</div>
 						);
