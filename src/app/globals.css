@@ -167,9 +167,25 @@
 	}
 	html {
 		scroll-behavior: smooth;
+		min-height: 100%;
+		background-color: var(--background);
 	}
 	body {
-		@apply bg-background text-foreground text-lg;
+		@apply text-foreground text-lg;
+		position: relative;
+		isolation: isolate;
+	}
+	/* Repeating pattern on ::before so `background-image` is never cleared by Tailwind `bg-*` on `body`. */
+	body::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background-image: url('/assets/background.png');
+		background-repeat: repeat;
+		background-size: 80rem 80rem;
+		filter: brightness(1.35);
 	}
 	h1, h2, h3, h4, h5, h6 {
 		color: oklch(1 0 0);
