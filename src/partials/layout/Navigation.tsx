@@ -19,7 +19,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui/sheet';
-import { TF_LOCATION } from '@/constants/event';
+import { TF_LOCATION, TF_LOCATION_SHORT } from '@/constants/event';
 import { useTFFeatureIsOn } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 import { TFLogo } from '../home/TFLogo';
@@ -28,8 +28,8 @@ const LINKS = [
 	// { href: '/', title: 'Начало' },
 	{ href: '/projects', title: 'Проекти' },
 	{ href: '/#schedule', title: 'Програма' },
-	{ href: '/partners', title: 'Спонсори && Партньори' },
 	{ href: '/regulation', title: 'Регламент' },
+	{ href: '/partners', title: 'Спонсори && Партньори' },
 	// { href: '/projects', title: 'Гласуване' },
 ];
 
@@ -138,7 +138,7 @@ export function Navigation() {
 						<TFLogo />
 					</Link>
 
-					<nav className="hidden items-center gap-1 md:flex">
+					<nav className="hidden items-center gap-1 lg:flex">
 						{visibleLinks.map((link) => (
 							<NavLink key={link.href} href={link.href}>
 								{link.title}
@@ -148,7 +148,19 @@ export function Navigation() {
 				</div>
 
 				{/* Desktop actions */}
-				<div className="hidden items-center gap-3 md:flex">
+				<div className="hidden items-center gap-3 lg:flex">
+					<Button
+						variant="ghost"
+						size="sm"
+						className="gap-2 font-title text-xs tracking-widest text-white/60 hover:text-primary"
+						asChild
+					>
+						<Link href="/location">
+							<TbMapPin className="h-4 w-4" />
+							{TF_LOCATION_SHORT}
+						</Link>
+					</Button>
+
 					<DropdownMenu modal={false}>
 						<DropdownMenuTrigger asChild>
 							<Button variant="default-secondary" size="sm" className="gap-2 font-title tracking-widest text-xs">
@@ -177,18 +189,6 @@ export function Navigation() {
 							))}
 						</DropdownMenuContent>
 					</DropdownMenu>
-
-					<Button
-						variant="ghost"
-						size="sm"
-						className="gap-2 font-title text-xs tracking-widest text-white/60 hover:text-primary"
-						asChild
-					>
-						<Link href="/location">
-							<TbMapPin className="h-4 w-4" />
-							{TF_LOCATION}
-						</Link>
-					</Button>
 				</div>
 
 				{/* Mobile hamburger */}
@@ -197,7 +197,7 @@ export function Navigation() {
 						<Button
 							variant="ghost"
 							size="icon"
-							className="inline-flex md:hidden text-white/60 hover:text-primary"
+							className="inline-flex lg:hidden text-white/60 hover:text-primary"
 							aria-label="Отвори меню"
 						>
 							<TbMenu2 className="h-5 w-5" />
