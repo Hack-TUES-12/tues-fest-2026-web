@@ -30,13 +30,16 @@ export function sectionFadeUp(reducedMotion: boolean | null, delaySec: number) {
 	};
 }
 
+/** Duration of `sectionFadeIn` — use as base delay when sequencing children after the section entrance. */
+export const SECTION_FADE_IN_DURATION_SEC = 0.7;
+
 export function sectionFadeIn(reducedMotion: boolean | null, delaySec: number) {
 	return {
 		initial: reducedMotion ? { opacity: 1 } : { opacity: 0 },
 		whileInView: { opacity: 1 },
 		viewport: SECTION_IN_VIEW,
 		transition: {
-			duration: reducedMotion ? 0 : 0.7,
+			duration: reducedMotion ? 0 : SECTION_FADE_IN_DURATION_SEC,
 			delay: reducedMotion ? 0 : delaySec,
 			ease: HERO_LIKE_EASE_OUT,
 		},
@@ -66,6 +69,8 @@ export function listItemIconEntrance(
 	reducedMotion: boolean | null,
 	index: number,
 	staggerSec = 0.1,
+	/** Extra delay (e.g. `SECTION_FADE_IN_DURATION_SEC` so icons start after section fade). */
+	baseDelaySec = -0.7,
 ) {
 	return {
 		initial: reducedMotion
@@ -75,7 +80,7 @@ export function listItemIconEntrance(
 		viewport: SECTION_IN_VIEW,
 		transition: {
 			duration: reducedMotion ? 0 : 1,
-			delay: reducedMotion ? 0 : index * staggerSec,
+			delay: reducedMotion ? 0 : baseDelaySec + index * staggerSec,
 			ease: HERO_LIKE_EASE_OUT,
 		},
 	};

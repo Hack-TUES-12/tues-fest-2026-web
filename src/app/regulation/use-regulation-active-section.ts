@@ -8,23 +8,38 @@ function setsEqual(a: Set<string>, b: Set<string>): boolean {
 	return true;
 }
 
+const DEFAULT_FOCAL_Y_RATIO = 0.38;
+
+export type UseRegulationActiveSectionOptions = {
+	/**
+	 * Reading line as a fraction of viewport height (0–1). Higher = line lower on the screen —
+	 * sections tend to activate earlier while scrolling down. Default matches regulation (`0.38`).
+	 */
+	focalYRatio?: number;
+};
+
 /**
  * Timeline “active” state per section (recomputed on scroll/resize):
  * - **Current**: reading line (focal Y) intersects the section.
  * - **Passed (down)**: section lies entirely above that line (`bottom < focalY`).
  *   When the user scrolls back up, this clears as soon as the section is no longer fully above the line.
  */
-export function useRegulationActiveSection(sectionIds: readonly string[]): {
+export function useRegulationActiveSection(
+	sectionIds: readonly string[],
+	options?: UseRegulationActiveSectionOptions,
+): {
 	isSectionActive: (id: string) => boolean;
 	/** Section whose box contains the reading line (closest by vertical center) — for `aria-current` in TOC. */
 	currentSectionId: string | null;
 } {
+	const focalYRatio = options?.focalYRatio ?? DEFAULT_FOCAL_Y_RATIO;
+
 	const [activeIds, setActiveIds] = useState<Set<string>>(() => new Set());
 	const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
 
 	useEffect(() => {
 		const compute = () => {
-			const focalY = window.innerHeight * 0.38;
+			const focalY = window.innerHeight * focalYRatio;
 			const next = new Set<string>();
 			let bestId: string | null = null;
 			let bestDist = Infinity;
@@ -58,7 +73,7 @@ export function useRegulationActiveSection(sectionIds: readonly string[]): {
 			window.removeEventListener('scroll', compute);
 			window.removeEventListener('resize', compute);
 		};
-	}, [sectionIds.join('\0')]);
+	}, [sectionIds.join('\0'), focalYRatio]);
 
 	const isSectionActive = useCallback(
 		(id: string) => activeIds.has(id),

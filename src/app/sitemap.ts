@@ -35,6 +35,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		},
 	];
 
+	if (gb.isOn('tf-schedule')) {
+		entries.push({
+			url: `${BASE_URL}/schedule`,
+			changeFrequency: 'weekly',
+			priority: 0.75,
+		});
+	}
+
 	if (gb.isOn('tf-show-apply')) {
 		entries.push({
 			url: `${BASE_URL}/apply`,
