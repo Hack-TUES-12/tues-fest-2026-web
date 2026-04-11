@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { SiFacebook, SiInstagram, SiLinkedin } from 'react-icons/si';
 import { TbBrandYoutube } from 'react-icons/tb';
 
@@ -12,6 +13,13 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { TF_YEAR } from '@/constants/event';
 import { SCHEDULE } from '@/constants/home/schedule';
+import {
+	listItemEntrance,
+	listItemIconEntrance,
+	SECTION_FADE_IN_DURATION_SEC,
+	sectionFadeIn,
+	sectionFadeUp,
+} from '@/lib/motion/section-in-view';
 import { cn } from '@/lib/utils';
 
 /** Matches `SCHEDULE_PART_STYLES` order — border/label in each card’s hue. */
@@ -65,16 +73,36 @@ const SCHEDULE_FOCAL_Y_RATIO = 0.52;
 const SCHEDULE_SOCIAL_ICON_BUTTON =
 	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-accent/40 hover:bg-card/50 hover:text-accent';
 
+const SOCIAL_LINKS = [
+	{
+		href: 'https://facebook.com/HackTUES',
+		label: 'Facebook',
+		Icon: SiFacebook,
+	},
+	{
+		href: 'https://www.instagram.com/hacktuesfest/',
+		label: 'Instagram',
+		Icon: SiInstagram,
+	},
+	{
+		href: 'https://www.linkedin.com/company/hacktues-tuesfest/',
+		label: 'LinkedIn',
+		Icon: SiLinkedin,
+	},
+] as const;
+
 function Schedule() {
+	const reducedMotion = useReducedMotion();
 	const sectionIds = useMemo(() => scheduleSectionIds(), []);
 	const { isSectionActive } = useRegulationActiveSection(sectionIds, {
 		focalYRatio: SCHEDULE_FOCAL_Y_RATIO,
 	});
 
 	return (
-		<section
+		<motion.section
 			id="schedule"
 			className="relative isolate overflow-x-hidden px-4 py-12 md:px-8"
+			{...sectionFadeIn(reducedMotion, 0)}
 		>
 			<img
 				src="/decorations/blue-circle.svg"
@@ -92,58 +120,37 @@ function Schedule() {
 			<div className="relative z-10">
 			{/* Section header */}
 			<div className="mb-12 flex flex-col items-center gap-4 text-center">
-				<p className="text-accent tracking-widest">Какво предстои</p>
-				<h2 className="font-title text-4xl text-white md:text-5xl">Програма</h2>
-				<p className="max-w-2xl text-pretty text-sm leading-relaxed text-white/70 md:text-base">
-					Разгледайте пълната програма на TUES Fest {TF_YEAR}. Ако имате въпрос, винаги може да се
-					свържете с нас на мейл или в социалните ни мрежи:
-				</p>
+				<motion.div className="flex flex-col items-center gap-4" {...sectionFadeUp(reducedMotion, 0.1)}>
+					<p className="text-accent tracking-widest">Какво предстои</p>
+					<h2 className="font-title text-4xl text-white md:text-5xl">Програма</h2>
+					<p className="max-w-2xl text-pretty text-sm leading-relaxed text-white/70 md:text-base">
+						Разгледайте пълната програма на TUES Fest {TF_YEAR}. Ако имате въпрос, винаги може да се
+						свържете с нас на мейл или в социалните ни мрежи:
+					</p>
+				</motion.div>
 				<div className="flex flex-wrap items-center justify-center gap-3">
-					<Button
-						variant="outline"
-						size="icon"
-						className={SCHEDULE_SOCIAL_ICON_BUTTON}
-						asChild
-					>
-						<Link
-							href="https://facebook.com/HackTUES"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Facebook"
+					{SOCIAL_LINKS.map(({ href, label, Icon }, index) => (
+						<motion.div
+							key={href}
+							{...listItemIconEntrance(
+								reducedMotion,
+								index,
+								0.12,
+								SECTION_FADE_IN_DURATION_SEC,
+							)}
 						>
-							<SiFacebook className="size-5" aria-hidden />
-						</Link>
-					</Button>
-					<Button
-						variant="outline"
-						size="icon"
-						className={SCHEDULE_SOCIAL_ICON_BUTTON}
-						asChild
-					>
-						<Link
-							href="https://www.instagram.com/hacktuesfest/"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Instagram"
-						>
-							<SiInstagram className="size-5" aria-hidden />
-						</Link>
-					</Button>
-					<Button
-						variant="outline"
-						size="icon"
-						className={SCHEDULE_SOCIAL_ICON_BUTTON}
-						asChild
-					>
-						<Link
-							href="https://www.linkedin.com/company/hacktues-tuesfest/"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="LinkedIn"
-						>
-							<SiLinkedin className="size-5" aria-hidden />
-						</Link>
-					</Button>
+							<Button variant="outline" size="icon" className={SCHEDULE_SOCIAL_ICON_BUTTON} asChild>
+								<Link
+									href={href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={label}
+								>
+									<Icon className="size-5" aria-hidden />
+								</Link>
+							</Button>
+						</motion.div>
+					))}
 				</div>
 			</div>
 
@@ -154,10 +161,11 @@ function Schedule() {
 						const s = SCHEDULE_PART_STYLES[i % SCHEDULE_PART_STYLES.length]!;
 						const railAccent = SCHEDULE_RAIL_ACCENTS[i % SCHEDULE_RAIL_ACCENTS.length]!;
 						return (
-							<div
+							<motion.div
 								key={item.title}
 								id={sectionIds[i]}
 								className="scroll-mt-28 flex gap-2 sm:gap-4"
+								{...listItemEntrance(reducedMotion, i, 0.08)}
 							>
 								<RegulationTimelineRail
 									accent={railAccent}
@@ -214,13 +222,13 @@ function Schedule() {
 									)}
 									</Card>
 								</div>
-							</div>
+							</motion.div>
 						);
 					})}
 				</div>
 			</div>
 			</div>
-		</section>
+		</motion.section>
 	);
 }
 
