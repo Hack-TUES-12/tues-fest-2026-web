@@ -1,13 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 
 import { sectionFadeIn } from '@/lib/motion/section-in-view';
 
-export function ExpectationsSectionDecorations() {
-	const reducedMotion = useReducedMotion();
-
+export function ExpectationsSectionDecorations({
+	reducedMotion,
+}: {
+	reducedMotion: boolean | null;
+}) {
 	return (
 		<>
 			<motion.div

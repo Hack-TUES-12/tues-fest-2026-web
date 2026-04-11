@@ -4,15 +4,18 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import type { ExpectationIllustrationAspect } from '@/constants/home/expectations';
+import { cn } from '@/lib/utils';
 
 export function ExpectationIllustration({
 	index,
 	title,
 	illustrationAspect,
+	reverse
 }: {
 	index: number;
 	title: string;
 	illustrationAspect: ExpectationIllustrationAspect;
+	reverse: boolean
 }) {
 	const [failed, setFailed] = useState(false);
 	const src = `/assets/home/expectations/${index + 1}.png`;
@@ -20,15 +23,18 @@ export function ExpectationIllustration({
 
 	return (
 		<figure
-			className="relative mx-auto max-lg:max-h-[16rem] max-lg:w-[50%] max-lg:min-w-[20rem] max-lg:max-w-none lg:h-full lg:w-auto lg:min-w-0 lg:shrink-0 lg:max-w-none lg:mx-0"
-			style={{ aspectRatio: `${aw} / ${ah}` }}
+			className="relative mx-auto min-w-0 max-w-full max-lg:max-h-[16rem] max-lg:w-[50%] max-lg:min-w-[20rem] max-lg:max-w-none lg:mx-0 lg:w-full lg:self-center aspect-16/9"
+			// style={{ aspectRatio: `${aw} / ${ah}` }}
 		>
 			{!failed ? (
 				<Image
 					src={src}
 					alt=""
 					fill
-					className="z-[1] object-contain object-center p-4"
+					className={cn(
+						"z-[1] object-contain p-4",
+						reverse ? "object-left" : "object-right"
+					)}
 					sizes="(max-width: 1023px) min(75vw, 100vw), (max-width: 1280px) 40vw, 480px"
 					onError={() => setFailed(true)}
 					priority={index === 0}

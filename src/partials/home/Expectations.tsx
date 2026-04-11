@@ -11,6 +11,7 @@ import { useLgUp } from '@/lib/motion/use-lg-up';
 
 import { ExpectationIllustration } from './expectation-illustration';
 import { ExpectationsSectionDecorations } from './expectations-section-decorations';
+import { cn } from '@/lib/utils';
 
 const HEADING_TONE = ['text-primary', 'text-secondary', 'text-accent'] as const;
 
@@ -42,25 +43,26 @@ function ExpectationRow({
 		<div
 			className={
 				reverse
-					? 'flex w-full shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-start'
-					: 'flex w-full shrink-0 justify-center max-lg:mx-auto lg:h-full lg:min-h-0 lg:w-full lg:justify-end'
+					? 'flex w-full shrink-0 justify-center max-lg:mx-auto lg:min-h-0 lg:w-full lg:justify-start'
+					: 'flex w-full shrink-0 justify-center max-lg:mx-auto lg:min-h-0 lg:w-full lg:justify-end'
 			}
 		>
 			<ExpectationIllustration
 				index={index}
 				title={title}
 				illustrationAspect={illustrationAspect}
+				reverse={reverse}
 			/>
 		</div>
 	);
 
 	return (
 		<div
-			className={
+			className={cn(
 				reverse
-					? 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-stretch lg:gap-12'
-					: 'grid gap-8 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-stretch lg:gap-12'
-			}
+					? 'grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:gap-12'
+					: 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center lg:gap-12'
+			)}
 		>
 			{reverse ? (
 				<>
@@ -90,7 +92,7 @@ const Expectations = () => {
 				className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
 				aria-hidden
 			>
-				<ExpectationsSectionDecorations />
+				<ExpectationsSectionDecorations reducedMotion={reducedMotion} />
 			</div>
 			<div className="relative z-10 mx-auto max-w-6xl">
 				<motion.div
@@ -107,7 +109,6 @@ const Expectations = () => {
 						return (
 							<motion.div
 								key={expectation.title}
-								className="will-change-transform"
 								{...expectationRowMotion(reducedMotion, isLg, reverse, i * 0.07)}
 							>
 								<ExpectationRow

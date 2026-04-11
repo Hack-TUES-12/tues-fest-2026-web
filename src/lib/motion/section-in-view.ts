@@ -90,33 +90,16 @@ export function expectationRowMotion(
 	reverse: boolean,
 	delaySec: number,
 ) {
-	if (reducedMotion) {
-		return {
-			initial: { opacity: 1, x: 0 },
-			whileInView: { opacity: 1, x: 0 },
-			viewport: SECTION_IN_VIEW,
-			transition: { duration: 0 },
-		};
-	}
-	if (!isLg) {
-		return {
-			initial: { opacity: 0, x: 0 },
-			whileInView: { opacity: 1, x: 0 },
-			viewport: SECTION_IN_VIEW,
-			transition: {
-				duration: 0.55,
-				delay: delaySec,
-				ease: HERO_LIKE_EASE_OUT,
-			},
-		};
-	}
+	const instant = !!reducedMotion;
+	const slideX =
+		instant || !isLg ? 0 : reverse ? EXPECTATION_ROW_SLIDE_PX : -EXPECTATION_ROW_SLIDE_PX;
 	return {
-		initial: { opacity: 0, x: reverse ? EXPECTATION_ROW_SLIDE_PX : -EXPECTATION_ROW_SLIDE_PX },
+		initial: { opacity: instant ? 1 : 0, x: slideX },
 		whileInView: { opacity: 1, x: 0 },
 		viewport: SECTION_IN_VIEW,
 		transition: {
-			duration: 0.55,
-			delay: delaySec,
+			duration: instant ? 0 : 0.55,
+			delay: instant ? 0 : delaySec,
 			ease: HERO_LIKE_EASE_OUT,
 		},
 	};
