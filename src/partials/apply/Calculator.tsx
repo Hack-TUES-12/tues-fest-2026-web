@@ -156,7 +156,7 @@ const Calculator = ({ className }: { className?: string }) => {
 				</form>
 
 				{/* Result */}
-				<div className="mt-2 rounded-2xl border border-white/10 bg-white/5 p-5">
+				<div className="mt-2 rounded-2xl bg-white/[0.06] p-5 backdrop-blur-sm">
 					<p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">Твоят бал</p>
 					<div className="flex items-end justify-between gap-2 mb-3">
 						<span className="text-5xl font-black text-white leading-none">
