@@ -60,3 +60,23 @@ export function listItemEntrance(
 		},
 	};
 }
+
+/** Icon inside each row: scale up + rotate into place (same stagger as row). */
+export function listItemIconEntrance(
+	reducedMotion: boolean | null,
+	index: number,
+	staggerSec = 0.1,
+) {
+	return {
+		initial: reducedMotion
+			? { scale: 1, rotate: 0, opacity: 1 }
+			: { scale: 0.55, rotate: -22, opacity: 0 },
+		whileInView: { scale: 1, rotate: 0, opacity: 1 },
+		viewport: SECTION_IN_VIEW,
+		transition: {
+			duration: reducedMotion ? 0 : 1,
+			delay: reducedMotion ? 0 : index * staggerSec,
+			ease: HERO_LIKE_EASE_OUT,
+		},
+	};
+}

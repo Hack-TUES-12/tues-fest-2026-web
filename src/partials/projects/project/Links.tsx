@@ -13,7 +13,7 @@ import {
 	PROJECT_CATEGORY_LINK_LABEL_HOVER_CLASS,
 	PROJECT_CATEGORY_TEXT_CLASS,
 } from '@/constants/projects';
-import { listItemEntrance } from '@/lib/motion/section-in-view';
+import { listItemEntrance, listItemIconEntrance } from '@/lib/motion/section-in-view';
 import { cn } from '@/lib/utils';
 
 const LINK_ICON_SIZE = 28;
@@ -25,18 +25,22 @@ type LinkEntry = {
 	icon: ReactNode;
 };
 
+type IconMotion = ReturnType<typeof listItemIconEntrance>;
+
 const Linky = ({
 	text,
 	url,
 	icon,
 	accentTextClass,
 	linkLabelHoverClass,
+	iconMotionProps,
 }: {
 	text: string;
 	url: string;
 	icon: ReactNode;
 	accentTextClass: string;
 	linkLabelHoverClass: string;
+	iconMotionProps: IconMotion;
 }) => (
 	<div className="w-full justify-start">
 		<Link
@@ -45,7 +49,12 @@ const Linky = ({
 			rel="noreferrer"
 			className="group flex items-center gap-3 rounded-md outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
 		>
-			<span className={cn('inline-flex shrink-0 items-center', accentTextClass)}>{icon}</span>
+			<motion.span
+				className={cn('inline-flex shrink-0 items-center origin-center', accentTextClass)}
+				{...iconMotionProps}
+			>
+				{icon}
+			</motion.span>
 			<span
 				className={cn(
 					'text-sm font-semibold text-white transition-colors',
@@ -129,6 +138,7 @@ const LinksContainer = ({ links, category }: { links: Readonly<Links>; category:
 								url={entry.url}
 								accentTextClass={accentTextClass}
 								linkLabelHoverClass={linkLabelHoverClass}
+								iconMotionProps={listItemIconEntrance(reducedMotion, index)}
 								icon={entry.icon}
 							/>
 						</motion.div>

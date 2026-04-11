@@ -6,7 +6,7 @@ import { TbPlus } from 'react-icons/tb';
 import { Contributor } from '@/app/projects/[projectId]/page';
 import { Card } from '@/components/ui/card';
 import { isProjectCategory, PROJECT_CATEGORY_TEXT_CLASS } from '@/constants/projects';
-import { listItemEntrance } from '@/lib/motion/section-in-view';
+import { listItemEntrance, listItemIconEntrance } from '@/lib/motion/section-in-view';
 import { cn } from '@/lib/utils';
 
 /** "11 В" → "11в" style line suffix next to the name */
@@ -44,10 +44,15 @@ const Contributors = ({
 							className="flex items-center gap-2"
 							{...listItemEntrance(reducedMotion, index)}
 						>
-							<TbPlus
-								className={cn('size-7 shrink-0 stroke-[3.5]', accentTextClass)}
-								aria-hidden
-							/>
+							<motion.span
+								className="inline-flex shrink-0 origin-center"
+								{...listItemIconEntrance(reducedMotion, index)}
+							>
+								<TbPlus
+									className={cn('size-7 stroke-[3.5]', accentTextClass)}
+									aria-hidden
+								/>
+							</motion.span>
 							<span className="font-mono text-sm tracking-wide text-white md:text-base">
 								{creator.name} {compactClassLabel(creator.class)}
 							</span>
