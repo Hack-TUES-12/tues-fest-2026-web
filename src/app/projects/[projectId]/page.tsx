@@ -156,66 +156,68 @@ const ProjectPage = async (props: { params: Promise<{ projectId: string }> }) =>
 						)}
 					</div>
 
-					<div className='space-y-1'>
-						{/* Title + meta */}
-						<div className="w-full space-y-3">
-							<div className="flex flex-wrap items-center gap-3">
-								<span
+					<div className="flex flex-col gap-6">
+						<div className="space-y-1">
+							{/* Title + meta */}
+							<div className="w-full space-y-3">
+								<div className="flex flex-wrap items-center gap-3">
+									<span
+										className={cn(
+											'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
+											categoryStyle,
+										)}
+									>
+										{categoryLabel}
+									</span>
+									{typeLabel && (
+										<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
+											{typeLabel}
+										</span>
+									)}
+								</div>
+								<h1
 									className={cn(
-										'inline-block rounded-full px-4 py-1 text-xs font-medium tracking-widest',
-										categoryStyle,
+										'font-mono font-bold text-3xl md:text-4xl',
+										`text-${CATEGORY_VOTE_VARIANTS[project.category]}`,
 									)}
 								>
-									{categoryLabel}
-								</span>
-								{typeLabel && (
-									<span className="inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-medium tracking-widest text-white/60">
-										{typeLabel}
-									</span>
-								)}
+									{project.title}
+								</h1>
 							</div>
-							<h1 className={cn(
-								"font-mono font-bold text-3xl md:text-4xl",
-								`text-${CATEGORY_VOTE_VARIANTS[project.category]}`
-							)}>{project.title}</h1>
+
+							{/* Description */}
+							<div className="prose prose-md prose-invert max-w-none leading-relaxed text-foreground/80">
+								<ProjectDescription description={project.description} />
+							</div>
 						</div>
 
-						{/* Description */}
-						<div className="prose prose-md prose-invert max-w-none leading-relaxed text-foreground/80">
-							<ProjectDescription description={project.description} />
-						</div>
+						{/* Voting — same card as hero + description */}
+						<IfTFFeatureOn feature="project-voting">
+							<div>
+								<h3 className="mb-2 text-lg font-semibold text-white">
+									Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
+								</h3>
+								<p className="mb-4 text-sm text-white/60">
+									Ако смяташ, че проектът{' '}
+									{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
+									публиката — гласувай сега!
+								</p>
+								<VoteSelectProjectButton
+									project={{
+										id: project.id,
+										title: project.title,
+										thumbnail,
+										category: project.category,
+									}}
+									variant={voteVariant}
+									size="sm"
+								/>
+							</div>
+						</IfTFFeatureOn>
 					</div>
 				</Card>
 
 				<div className="mt-6 flex w-full flex-col gap-6">
-					{/* Vote card */}
-					<IfTFFeatureOn feature="project-voting">
-						<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm">
-							<p className="mb-1 text-xs font-medium uppercase tracking-widest text-white/40">
-								Гласуване
-							</p>
-							<h3 className="mb-2 text-lg font-semibold text-white">
-								Гласувай за {project.contributors.length > 1 ? 'нас' : 'мен'}!
-							</h3>
-							<p className="mb-4 text-sm text-white/60">
-								Ако смяташ, че проектът{' '}
-								{project.contributors.length > 1 ? 'ни' : 'ми'} заслужава наградата за избор на
-								публиката — гласувай сега!
-							</p>
-							<VoteSelectProjectButton
-								project={{
-									id: project.id,
-									title: project.title,
-									thumbnail,
-									category: project.category,
-								}}
-								variant={voteVariant}
-								className="w-full"
-								size="lg"
-							/>
-						</div>
-					</IfTFFeatureOn>
-
 					{/* Authors + links */}
 					{(hasContributors || hasLinks) && (
 						<div
