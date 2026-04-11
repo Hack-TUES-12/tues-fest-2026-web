@@ -1,22 +1,67 @@
-import { Contributor } from '@/app/projects/[projectId]/page';
+'use client';
 
-const Contributors = ({ contributors }: { contributors: readonly Contributor[] }) => (
-	<div className="rounded-2xl border border-white/10 bg-card/50 p-6 backdrop-blur-sm md:p-8">
-		<p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/40">
-			{contributors.length > 1 ? 'Автори' : 'Автор'}
-		</p>
-		<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-			{contributors.map((creator) => (
-				<div
-					key={creator?.name}
-					className="flex flex-col gap-0.5 rounded-xl border border-white/10 bg-white/5 px-5 py-4 transition-colors duration-200 hover:bg-white/10"
+import { motion, useReducedMotion } from 'motion/react';
+import { TbPlus } from 'react-icons/tb';
+
+import { Contributor } from '@/app/projects/[projectId]/page';
+import { Card } from '@/components/ui/card';
+import { isProjectCategory, PROJECT_CATEGORY_TEXT_CLASS } from '@/constants/projects';
+import { listItemEntrance, listItemIconEntrance } from '@/lib/motion/section-in-view';
+import { cn } from '@/lib/utils';
+
+/** "11 В" → "11в" style line suffix next to the name */
+function compactClassLabel(classStr: string) {
+	return classStr.replace(/\s+/g, '').toLowerCase();
+}
+
+const Contributors = ({
+	contributors,
+	category,
+}: {
+	contributors: readonly Contributor[];
+	category: string;
+}) => {
+	const reducedMotion = useReducedMotion();
+	const accentTextClass = isProjectCategory(category)
+		? PROJECT_CATEGORY_TEXT_CLASS[category]
+		: PROJECT_CATEGORY_TEXT_CLASS.software;
+
+	return (
+		<Card className="rounded-2xl bg-card/50 backdrop-blur-sm px-6 py-4">
+			<div className="flex flex-col gap-2">
+				<p
+					className={cn(
+						'text-2xl font-mono font-bold',
+						accentTextClass,
+					)}
 				>
-					<span className="font-semibold text-white">{creator?.name}</span>
-					<span className="text-sm text-white/50">от {creator?.class} клас</span>
-				</div>
-			))}
-		</div>
-	</div>
-);
+					{contributors.length > 1 ? 'Участници' : 'Автор'}
+				</p>
+				<ul className="flex flex-col gap-3 px-2">
+					{contributors.map((creator, index) => (
+						<motion.li
+							key={creator?.name}
+							className="flex items-center gap-2"
+							{...listItemEntrance(reducedMotion, index)}
+						>
+							<motion.span
+								className="inline-flex shrink-0 origin-center"
+								{...listItemIconEntrance(reducedMotion, index)}
+							>
+								<TbPlus
+									className={cn('size-7 stroke-[3.5]', accentTextClass)}
+									aria-hidden
+								/>
+							</motion.span>
+							<span className="font-mono text-sm tracking-wide text-white md:text-base">
+								{creator.name} {compactClassLabel(creator.class)}
+							</span>
+						</motion.li>
+					))}
+				</ul>
+			</div>
+		</Card>
+	);
+};
 
 export default Contributors;
