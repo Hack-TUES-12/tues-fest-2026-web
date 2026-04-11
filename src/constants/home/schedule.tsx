@@ -2,43 +2,62 @@ import { TF_PROJECT_COUNT, TF_YEAR } from "../event";
 
 export const SCHEDULE = [
 	{
-		start: '10:00',
-		end: '10:30',
+		start: '09:00',
+		end: '10:00',
 		title: 'Откриваща церемония',
 		description: 'Започваме с вдъхновяващо откриване, в което ще участват специални гости от технологичния и образователния сектор. Ще чуете мотивиращи думи, които ще ви потопят в атмосферата на денят на постиженията в ТУЕС и ще дадат старт на ден, изпълнен с иновации и креативност.',
 		icon: '',
 		pos: 'left',
 	},
 	{
-		start: '10:30',
-		end: '17:00',
+		start: '10:00',
+		end: '15:00',
 		title: 'Изложение на ученически проекти',
 		description: (
-			<ul className="flex flex-col gap-2 pt-2">
-				<li className="bg-background rounded-xl border px-4 py-2">
-					Всеки посетител ще има възможността:
-				</li>
-				<li className="bg-background rounded-xl border px-4 py-2">Да разгледа <b>{TF_PROJECT_COUNT} ученически проекта</b> и да поговори с техните създатели</li>
-				<li className="bg-background rounded-xl border px-4 py-2">
-					Да се запознае с <b>преподавателския екип</b> от ТУЕС
-				</li>
-				<li className="bg-background rounded-xl border px-4 py-2">
-					Да гласува за любимия си ученически проект
-				</li>
-				<li className="bg-background rounded-xl border px-4 py-2">
-					Да се запознае със спонсорите на събитието
-				</li>
-				<li className="bg-background rounded-xl border px-4 py-2">
-					Да говори с членове на извънкласни клубове в ТУЕС и с други ученици от училището
-				</li>
-			</ul>
+			<>
+				<p>Всеки посетител ще има възможността:</p>
+				<ul className="flex flex-col gap-2 pt-2">
+					<li className="bg-background rounded-xl border px-4 py-2">Да разгледа <b>{TF_PROJECT_COUNT} ученически проекта</b> и да поговори с техните създатели</li>
+					<li className="bg-background rounded-xl border px-4 py-2">
+						Да се запознае с <b>преподавателския екип</b> от ТУЕС
+					</li>
+					<li className="bg-background rounded-xl border px-4 py-2">
+						Да гласува за любимия си ученически проект
+					</li>
+					<li className="bg-background rounded-xl border px-4 py-2">
+						Да тръгне по пътеката на ТУЕС-ара и да разбере през какво минава един ученик на ТУЕС
+					</li>
+					<li className="bg-background rounded-xl border px-4 py-2">
+						Да говори с членове на извънкласни клубове в ТУЕС и с други ученици от училището
+					</li>
+					<li className="bg-background rounded-xl border px-4 py-2">
+						Да се запознае със спонсорите на събитието
+					</li>
+				</ul>
+			</>
 		),
 		icon: '',
 		pos: 'right',
 	},
 	{
+		start: '11:00',
+		end: '12:00',
+		title: 'TUES E&A Pitch',
+		description: `10 избрани отбора ще представят идеята си пред бизнес ориентарино жури, а проектът с най-добра бизнес идея и потенциал за превръщане в реален продукт ще получи специална награда. Посетителите могат да гледат презентациите на място в София Тех Парк.`,
+		icon: '',
+		pos: 'left',
+	},
+	{
+		start: '15:30',
+		end: '17:00',
+		title: 'TUES Battle Bots',
+		description: `Моментът от TUES Fest когато всеки зарязва това, което прави и излиза да наблюдава арената. Всеки от вас ще има възможност да гледа ожесточените битки между роботите на участниците, а от арената ще излезе само един победител.`,
+		icon: '',
+		pos: 'left',
+	},
+	{
 		start: '17:30',
-		end: '20:30',
+		end: '19:30',
 		title: 'Закриваща церемония',
 		description: `Време е за награждаване на победителите в различните категории на TUES Fest ${TF_YEAR}. Започва се с наградите на нашите спонсори и партньори и след това с почетните първи три места във всяка категория.`,
 		icon: '',
