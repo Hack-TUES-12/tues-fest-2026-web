@@ -109,6 +109,7 @@ const Expectations = () => {
 						return (
 							<motion.div
 								key={expectation.title}
+								className='will-change-transform'
 								{...expectationRowMotion(reducedMotion, isLg, reverse, i * 0.07)}
 							>
 								<ExpectationRow
