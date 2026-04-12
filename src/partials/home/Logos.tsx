@@ -9,7 +9,6 @@ import { HeroCountdown } from '@/components/hero-countdown';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { TF_DATE_COMPACT, TF_LOCATION, TF_SLOGAN, TF_YEAR } from '@/constants/event';
 import { useTFFeature } from '@/lib/growthbook/react/hooks';
-import { cn } from '@/lib/utils';
 
 const HERO_BG = '/assets/about/about1.png';
 
@@ -25,10 +24,6 @@ function scrollToAboutSection() {
 	const y = about.getBoundingClientRect().top + window.scrollY - headerOffset;
 	window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
 }
-
-/** Light topo-style line overlay */
-const TOPO_PATTERN =
-	"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='0.6' d='M0 80c26-18 52-18 80 0s54 18 80 0M0 40c28-12 56-12 80 0s52 12 80 0M0 120c24 14 48 14 80 0s56-14 80 0'/%3E%3C/svg%3E\")";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -47,16 +42,6 @@ export default function EventLanding() {
 		animate: { opacity: 1, y: 0 },
 		transition: {
 			duration: reducedMotion ? 0 : 0.55,
-			delay: reducedMotion ? 0 : delaySec,
-			ease: EASE_OUT,
-		},
-	});
-
-	const fadeIn = (delaySec: number) => ({
-		initial: reducedMotion ? { opacity: 1 } : { opacity: 0 },
-		animate: { opacity: 1 },
-		transition: {
-			duration: reducedMotion ? 0 : 0.7,
 			delay: reducedMotion ? 0 : delaySec,
 			ease: EASE_OUT,
 		},
@@ -91,8 +76,8 @@ export default function EventLanding() {
 				/>
 			</motion.div>
 
-			{/* Background photo */}
-			<div className="pointer-events-none absolute inset-0 -z-20">
+			{/* Background photo + vignette */}
+			<div className="pointer-events-none absolute inset-0 isolate -z-20">
 				<Image
 					src={HERO_BG}
 					alt=""
@@ -102,19 +87,7 @@ export default function EventLanding() {
 					sizes="100vw"
 				/>
 				<div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/85" />
-				<div className="absolute inset-0 bg-primary/10 mix-blend-soft-light" />
 			</div>
-
-			{/* Topographic overlay */}
-			<motion.div
-				className="pointer-events-none absolute inset-0 -z-10"
-				style={{
-					backgroundImage: TOPO_PATTERN,
-					backgroundSize: '200px 200px',
-				}}
-				aria-hidden
-				{...fadeIn(0.12)}
-			/>
 
 			<div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-16 md:px-8 md:py-20 lg:py-24">
 				<div className="grid grid-cols-1 items-center gap-x-12 gap-y-6 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:gap-x-16 lg:gap-y-7 xl:gap-x-20 xl:gap-y-8">
