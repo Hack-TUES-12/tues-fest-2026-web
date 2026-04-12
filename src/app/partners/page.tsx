@@ -1,6 +1,8 @@
 import { TF_YEAR } from '@/constants/event';
 import OmegaSponsor from '@/partials/home/sponsors/OmegaSponsor';
+import { SponsorSectionFade } from '@/partials/home/sponsors/SponsorSectionFade';
 import Sponsors from '@/partials/home/Sponsors';
+import { PartnersPageShell } from '@/partials/partners/PartnersPageShell';
 
 export const metadata = {
 	title: 'Спонсори и Партньори',
@@ -11,17 +13,15 @@ export const revalidate = 0;
 
 export default function PartnersPage() {
 	return (
-		<section className="overflow-x-hidden relative flex flex-col items-center gap-14 px-8 pb-14 pt-14">
-            <div className='max-w-3xl gap-4 flex flex-col text-center'>
-			    <h1 className="font-title text-5xl">Нашите спонсори и партньори</h1>
-                <p className='text-lg'>Благодарим безкрайно на всички компании, които ни подкрепиха. Без вас събитията нямаше да бъдат възможни!</p>
-            </div>
+		<PartnersPageShell>
 			<div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 place-items-center">
-				<OmegaSponsor />
+				<SponsorSectionFade className="mb-72 w-full max-w-3xl place-self-center" index={0}>
+					<OmegaSponsor />
+				</SponsorSectionFade>
 				<div className="relative z-20 w-full">
-					<Sponsors />
+					<Sponsors fadeIndexOffset={1} />
 				</div>
 			</div>
-		</section>
+		</PartnersPageShell>
 	);
 }

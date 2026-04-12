@@ -302,7 +302,7 @@ export default function PodkrepqAutoDisplay({
 			</div>
 
 		{/* ── Partner info card ── */}
-		<div className="relative mt-4 flex w-full items-start justify-center min-h-[1000px] sm:min-h-[600px] md:w-[500px] md:min-h-[500px] lg:w-[600px] lg:min-h-[650px] 2xl:min-h-[750px]">
+		<div className="relative mt-4 flex w-full items-start justify-center md:w-[500px] lg:w-[600px]">
 			{showGreenCircles && (
 				<>
 					{/* Left green circle decoration */}

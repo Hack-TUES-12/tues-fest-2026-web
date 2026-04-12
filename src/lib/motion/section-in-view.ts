@@ -63,6 +63,20 @@ export function sectionFadeIn(reducedMotion: boolean | null, delaySec: number) {
 	};
 }
 
+/** Opacity fade-in with a viewport tuned for tall blocks (e.g. sponsor carousels). */
+export function sectionFadeInTall(reducedMotion: boolean | null, delaySec: number) {
+	return {
+		initial: reducedMotion ? { opacity: 1 } : { opacity: 0 },
+		whileInView: { opacity: 1 },
+		viewport: SECTION_IN_VIEW_TALL,
+		transition: {
+			duration: reducedMotion ? 0 : SECTION_FADE_IN_DURATION_SEC,
+			delay: reducedMotion ? 0 : delaySec,
+			ease: HERO_LIKE_EASE_OUT,
+		},
+	};
+}
+
 /** Staggered list rows (contributors, links): small delay per `index`. */
 export function listItemEntrance(
 	reducedMotion: boolean | null,

@@ -7,6 +7,7 @@ import {
 	Podkrepqsht,
 } from '@/constants/home/sponsors';
 import PodkrepqAutoDisplay from './sponsors/PodkrepqAutoDisplay';
+import { SponsorSectionFade } from './sponsors/SponsorSectionFade';
 
 async function randomStartIndex(podkrepqshti: Podkrepqsht[]) {
 	return Math.floor(Math.random() * podkrepqshti.length);
@@ -20,7 +21,12 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 	);
 }
 
-export default async function Sponsors() {
+type SponsorsProps = {
+	/** Added to each tier fade index when another block (e.g. Omega) uses lower indices above */
+	fadeIndexOffset?: number;
+};
+
+export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = {}) {
 	const [alphaStartIndex, betaStartIndex, gammaStartIndex, partnersStartIndex, mediaPartnersStartIndex] =
 		await Promise.all([
 			randomStartIndex(ALPHA_SPONSORS),
@@ -30,39 +36,41 @@ export default async function Sponsors() {
 			randomStartIndex(MEDIA_PARTNERS),
 		]);
 
+	const i = (n: number) => fadeIndexOffset + n;
+
 	return (
 		<div className="grid grid-cols-1 place-items-center">
-		<div className="mb-52 relative w-full">
-			<SectionTitle>Alfa Sponsors</SectionTitle>
-			<PodkrepqAutoDisplay
-				podkrepqshti={ALPHA_SPONSORS}
-				imagePriority
-				startIndex={alphaStartIndex}
-				cardVariant="secondary"
-			/>
-		</div>
+			<SponsorSectionFade className="relative mb-24 sm:mb-48 w-full" index={i(0)}>
+				<SectionTitle>Alfa Sponsors</SectionTitle>
+				<PodkrepqAutoDisplay
+					podkrepqshti={ALPHA_SPONSORS}
+					imagePriority
+					startIndex={alphaStartIndex}
+					cardVariant="secondary"
+				/>
+			</SponsorSectionFade>
 
-		<div className="mb-52 relative w-full">
-			<SectionTitle>Beta Sponsors</SectionTitle>
-			<PodkrepqAutoDisplay
-				podkrepqshti={BETA_SPONSORS}
-				startIndex={betaStartIndex}
-				showGreenCircles
-				cardVariant="muted"
-			/>
-		</div>
+			<SponsorSectionFade className="relative mb-24 sm:mb-48 w-full" index={i(1)}>
+				<SectionTitle>Beta Sponsors</SectionTitle>
+				<PodkrepqAutoDisplay
+					podkrepqshti={BETA_SPONSORS}
+					startIndex={betaStartIndex}
+					showGreenCircles
+					cardVariant="muted"
+				/>
+			</SponsorSectionFade>
 
-		<div className="mb-52 relative w-full">
-			<SectionTitle>Gamma Sponsors</SectionTitle>
-			<PodkrepqAutoDisplay
-				podkrepqshti={GAMMA_SPONSORS}
-				startIndex={gammaStartIndex}
-				showPurpleCircle
-				cardVariant="primary"
-			/>
-		</div>
+			<SponsorSectionFade className="relative mb-24 sm:mb-48 w-full" index={i(2)}>
+				<SectionTitle>Gamma Sponsors</SectionTitle>
+				<PodkrepqAutoDisplay
+					podkrepqshti={GAMMA_SPONSORS}
+					startIndex={gammaStartIndex}
+					showPurpleCircle
+					cardVariant="primary"
+				/>
+			</SponsorSectionFade>
 
-			<div className="mb-52 relative w-full">
+			<SponsorSectionFade className="relative mb-24 sm:mb-48 w-full" index={i(3)}>
 				<SectionTitle>Partners</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={PARTNERS}
@@ -70,9 +78,9 @@ export default async function Sponsors() {
 					showGreenCircles
 					cardVariant="muted"
 				/>
-			</div>
+			</SponsorSectionFade>
 
-			<div className="mb-20 place-self-center w-full">
+			<SponsorSectionFade className="relative mb-20 w-full place-self-center" index={i(4)}>
 				<SectionTitle>Media Partners</SectionTitle>
 				<PodkrepqAutoDisplay
 					podkrepqshti={MEDIA_PARTNERS}
@@ -80,7 +88,7 @@ export default async function Sponsors() {
 					showPurpleCircle
 					cardVariant="primary"
 				/>
-			</div>
+			</SponsorSectionFade>
 		</div>
 	);
 }
