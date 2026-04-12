@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { TbBrain, TbCheck, TbCode, TbCpu, TbExternalLink, TbNetwork } from 'react-icons/tb';
-import { SiFacebook, SiInstagram, SiYoutube } from 'react-icons/si';
+import { SiFacebook, SiInstagram, SiLinkedin, SiYoutube } from 'react-icons/si';
 import { motion, useReducedMotion } from 'motion/react';
 
 import { Button } from '@/components/ui/button';
@@ -72,6 +72,7 @@ const SECTION_EYEBROW = [
 const APPLY_HERO_SOCIAL_LINKS = [
 	{ href: 'https://www.facebook.com/tues.bg', label: 'Facebook', Icon: SiFacebook },
 	{ href: 'https://www.instagram.com/tues.bg/', label: 'Instagram', Icon: SiInstagram },
+	{ href: 'https://www.linkedin.com/school/tues', label: 'LinkedIn', Icon: SiLinkedin },
 	{ href: 'https://www.youtube.com/@TUES', label: 'YouTube', Icon: SiYoutube },
 ] as const;
 
@@ -156,7 +157,7 @@ export function ApplyPageContent() {
 					className="max-w-2xl text-pretty text-base leading-relaxed text-foreground/65"
 					{...sectionFadeUp(reducedMotion, 0.22)}
 				>
-					За {TF_YEAR} г., ТУЕС се нареди на <span className="font-semibold text-white">второ място</span> по
+					За {TF_YEAR - 1} г., ТУЕС се нареди на <span className="font-semibold text-white">второ място</span> по
 					минимален бал на първо класиране в 7. клас!
 				</motion.p>
 				<motion.div

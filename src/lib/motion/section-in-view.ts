@@ -51,6 +51,8 @@ export function listItemEntrance(
 	reducedMotion: boolean | null,
 	index: number,
 	staggerSec = 0.1,
+	/** Align with `listItemIconEntrance` (e.g. `SECTION_FADE_IN_DURATION_SEC` after section fade). */
+	baseDelaySec = 0,
 ) {
 	return {
 		initial: reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 },
@@ -58,7 +60,7 @@ export function listItemEntrance(
 		viewport: SECTION_IN_VIEW,
 		transition: {
 			duration: reducedMotion ? 0 : 0.35,
-			delay: reducedMotion ? 0 : index * staggerSec,
+			delay: reducedMotion ? 0 : baseDelaySec + index * staggerSec,
 			ease: HERO_LIKE_EASE_OUT,
 		},
 	};
@@ -70,7 +72,7 @@ export function listItemIconEntrance(
 	index: number,
 	staggerSec = 0.1,
 	/** Extra delay (e.g. `SECTION_FADE_IN_DURATION_SEC` so icons start after section fade). */
-	baseDelaySec = -0.7,
+	baseDelaySec = 0,
 ) {
 	return {
 		initial: reducedMotion
