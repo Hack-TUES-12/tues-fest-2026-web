@@ -82,18 +82,22 @@ const SPECIALTY_CARD_TONES = [
 	{ icon: 'bg-muted/10 text-muted', text: "text-muted" },
 ] as const;
 
-const EDUCATION_ITEMS = [
+const EDUCATION_ITEMS_IN_SCHOOL = [
+	'Разширено изучаване на английски и немски език',
+	'Стаж в реални ИТ компании',
+	'Cisco академия за актуалните мрежови технологии',
+	'Workshop-и и лекции от ИТ професионалисти',
+	'Клубове по изкуствен интелект и роботика, в които по-големи ученици преподават на по-малките'
+] as const
+
+const EDUCATION_ITEMS_OUTSIDE_SCHOOL = [
 	'Участие в национални и международни състезания',
 	'Hack TUES — хакатон, организиран от ученици за ученици',
 	'TUES Talks - първият ученически подкаст в България',
-	'Workshop-и и лекции от ИТ професионалисти',
-	'Cisco академия за актуалните мрежови технологии',
-	'Стаж в реални ИТ компании',
-	'Разнообразни извънкласни дейности',
-	'Разширено изучаване на английски и немски език',
-	'Уникална общност от преподаватели, завършили и настоящи ученици'
+	'Уникална общност от преподаватели, завършили и настоящи ученици',
+	'Извънкласни дейности и клубове в разнообразни сфери'
 	// 'Участие в мобилности по проекти Еразъм+',
-] as const;
+] as const
 
 const SUCCESS_FACTORS = [
 	'Тясна интеграция с Технически университет — София',
@@ -366,51 +370,93 @@ export function AboutPageContent() {
 				className="mx-auto grid w-full max-w-5xl gap-6 md:grid-cols-[3fr,2fr] md:gap-8"
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
-				<Card
-					variant="accent"
-					className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
-				>
-					<CardContent className="flex flex-col gap-2 p-0">
-						<div className="space-y-2">
-							<p className="text-sm font-medium tracking-widest text-accent">Обучение</p>
-							<h2 className="font-title text-2xl text-white md:text-3xl">Освен специализирания план</h2>
-							<p className="text-sm">ТУЕС предлага:</p>
-						</div>
-						{/* Same row pattern as project participants (`Contributors`) + schedule exhibition lists */}
-						<ul className="flex flex-col gap-2 px-2">
-							{EDUCATION_ITEMS.map((item, i) => (
-								<motion.li
-									key={item}
-									className="flex items-center gap-2"
-									{...listItemEntrance(
-										reducedMotion,
-										i,
-										EDUCATION_LIST_STAGGER_SEC,
-										EDUCATION_LIST_MOTION_BASE_SEC,
-									)}
-								>
-									<motion.span
-										className="inline-flex shrink-0 origin-center pt-0.5"
-										{...listItemIconEntrance(
+				<div className="flex min-w-0 flex-col gap-6">
+					<Card
+						variant="accent"
+						className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+					>
+						<CardContent className="flex flex-col gap-2 p-0">
+							<div className="space-y-2">
+								<p className="text-sm font-medium tracking-widest text-accent">Обучение</p>
+								<h2 className="font-title text-2xl text-white md:text-3xl">Освен специализирания план</h2>
+								<p className="text-sm text-foreground/65">ТУЕС предлага:</p>
+							</div>
+							<ul className="flex flex-col gap-2 px-2">
+								{EDUCATION_ITEMS_IN_SCHOOL.map((item, i) => (
+									<motion.li
+										key={item}
+										className="flex items-center gap-2"
+										{...listItemEntrance(
 											reducedMotion,
 											i,
 											EDUCATION_LIST_STAGGER_SEC,
 											EDUCATION_LIST_MOTION_BASE_SEC,
 										)}
 									>
-										<TbPlus
-											className={cn('size-6 shrink-0 stroke-[3.5]', 'text-accent')}
-											aria-hidden
-										/>
-									</motion.span>
-									<span className="text-sm">
-										{item}
-									</span>
-								</motion.li>
-							))}
-						</ul>
-					</CardContent>
-				</Card>
+										<motion.span
+											className="inline-flex shrink-0 origin-center pt-0.5"
+											{...listItemIconEntrance(
+												reducedMotion,
+												i,
+												EDUCATION_LIST_STAGGER_SEC,
+												EDUCATION_LIST_MOTION_BASE_SEC,
+											)}
+										>
+											<TbPlus
+												className={cn('size-6 shrink-0 stroke-[3.5]', 'text-accent')}
+												aria-hidden
+											/>
+										</motion.span>
+										<span className="text-sm">{item}</span>
+									</motion.li>
+								))}
+							</ul>
+						</CardContent>
+					</Card>
+
+					<Card
+						variant="muted"
+						className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+					>
+						<CardContent className="flex flex-col gap-2 p-0">
+							<div className="space-y-2">
+								<p className="text-sm font-medium tracking-widest text-muted">Извън обучението</p>
+								<h2 className="font-title text-2xl text-white md:text-3xl">Извън училищното обучение</h2>
+								<p className="text-sm text-foreground/65">ТУЕС предлага</p>
+							</div>
+							<ul className="flex flex-col gap-2 px-2">
+								{EDUCATION_ITEMS_OUTSIDE_SCHOOL.map((item, i) => (
+									<motion.li
+										key={item}
+										className="flex items-center gap-2"
+										{...listItemEntrance(
+											reducedMotion,
+											i,
+											EDUCATION_LIST_STAGGER_SEC,
+											EDUCATION_LIST_MOTION_BASE_SEC,
+										)}
+									>
+										<motion.span
+											className="inline-flex shrink-0 origin-center pt-0.5"
+											{...listItemIconEntrance(
+												reducedMotion,
+												i,
+												EDUCATION_LIST_STAGGER_SEC,
+												EDUCATION_LIST_MOTION_BASE_SEC,
+											)}
+										>
+											<TbPlus
+												className={cn('size-6 shrink-0 stroke-[3.5]', 'text-muted')}
+												aria-hidden
+											/>
+										</motion.span>
+										<span className="text-sm">{item}</span>
+									</motion.li>
+								))}
+							</ul>
+						</CardContent>
+					</Card>
+				</div>
 
 				<Card
 					variant="primary"
