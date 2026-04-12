@@ -213,12 +213,16 @@ export function AboutPageContent() {
 	const reducedMotion = useReducedMotion();
 
 	return (
-		<div className="relative overflow-x-hidden px-4 pt-10 pb-24 md:px-8 md:pt-14">
+		<div className="relative px-4 pt-10 pb-24 md:px-8 md:pt-14">
 			{/*
-			  Layer above globals.css `body::before` (z-[-1]). Negative z-index here painted
-			  below that texture, so blobs looked invisible on the dark page.
+			  No overflow-x on this root — it would clip the full-bleed layer.
+			  Use 100dvw (not 100vw) so width matches the layout viewport with a vertical scrollbar
+			  and avoids a horizontal scrollbar at the bottom. Layer above body::before (z-[-1]).
 			*/}
-			<div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+			<div
+				className="pointer-events-none absolute top-0 bottom-0 left-1/2 z-0 w-[100dvw] max-w-none -translate-x-1/2"
+				aria-hidden
+			>
 				<Image
 					src="/decorations/purple-circle.svg"
 					alt=""
@@ -226,7 +230,7 @@ export function AboutPageContent() {
 					height={448}
 					unoptimized
 					aria-hidden
-					className="pointer-events-none absolute top-0 left-0 h-auto w-[min(50vw,40rem)] max-w-4xl -translate-x-1/3 -translate-y-1/4 opacity-90 select-none"
+					className="pointer-events-none absolute top-0 left-0 h-auto w-[min(50vw,40rem)] max-w-4xl -translate-x-1/4 -translate-y-1/4 opacity-90 select-none"
 				/>
 				<Image
 					src="/decorations/green-circle.svg"
@@ -235,7 +239,7 @@ export function AboutPageContent() {
 					height={384}
 					unoptimized
 					aria-hidden
-					className="pointer-events-none absolute right-0 bottom-0 h-auto w-[min(42vw,32rem)] translate-y-1/3 translate-x-1/4 opacity-80 select-none"
+					className="pointer-events-none absolute right-0 bottom-0 h-auto w-[min(42vw,32rem)] translate-x-1/4 opacity-80 select-none"
 				/>
 				<Image
 					src="/decorations/orange-circle.svg"
@@ -244,7 +248,7 @@ export function AboutPageContent() {
 					height={400}
 					unoptimized
 					aria-hidden
-					className="pointer-events-none absolute top-[16%] right-0 h-auto w-[min(42vw,32rem)] max-w-xl translate-x-1/2 opacity-75 select-none"
+					className="pointer-events-none absolute top-[16%] right-0 h-auto w-[min(42vw,32rem)] max-w-xl translate-x-1/4 opacity-75 select-none"
 				/>
 				<Image
 					src="/decorations/blue-circle.svg"
@@ -253,7 +257,7 @@ export function AboutPageContent() {
 					height={384}
 					unoptimized
 					aria-hidden
-					className="pointer-events-none absolute top-[40%] left-0 h-auto w-[min(48vw,40rem)] max-w-lg -translate-x-1/2 opacity-80 select-none"
+					className="pointer-events-none absolute top-[40%] left-0 h-auto w-[min(48vw,40rem)] max-w-lg -translate-x-1/4 opacity-80 select-none"
 				/>
 			</div>
 
