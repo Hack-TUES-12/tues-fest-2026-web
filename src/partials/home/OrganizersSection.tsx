@@ -11,13 +11,15 @@ import { TeamBackground } from './TeamBackground';
 
 export const OrganizersSection = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const stickyRef = useRef<HTMLDivElement>(null);
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (!containerRef.current) return;
+			if (!containerRef.current || !stickyRef.current) return;
 			const rect = containerRef.current.getBoundingClientRect();
-			const stickyDistance = containerRef.current.offsetHeight - window.innerHeight;
+			const stickyDistance =
+				containerRef.current.offsetHeight - stickyRef.current.offsetHeight;
 			if (stickyDistance <= 0) return;
 			const p = Math.max(0, Math.min(1, -rect.top / stickyDistance));
 			setProgress(p);
@@ -28,33 +30,36 @@ export const OrganizersSection = () => {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
-	// Card starts 100vh below its final resting spot and rises to translateY(0)
+	// Card starts one viewport height below its final resting spot and rises to translateY(0)
 	const cardY = (1 - progress) * 100;
 
 	return (
-		<div ref={containerRef} className="relative" style={{ height: '200vh' }}>
+		<div ref={containerRef} className="relative h-[200lvh]">
 			{/* Sticky stage — full-bleed by escaping the max-w-screen-2xl main container */}
 			<div
-				className="sticky top-0 h-screen overflow-hidden"
+				ref={stickyRef}
+				className="sticky top-0 h-[100lvh] overflow-hidden"
 				style={{
 					width: '100vw',
 					marginLeft: 'calc(50% - 50vw)',
 				}}
 			>
-				{/* Background */}
+				{/* Background — z-0 so gradient + black overlay stay above the image stack */}
 				<TeamBackground />
 				{/* Static gradient at the bottom so the card blends in */}
-				<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+				<div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 				{/* Progressive dark overlay — grows with scroll progress */}
 				<div
-					className="absolute inset-0 bg-black pointer-events-none"
+					className="absolute inset-0 z-[2] bg-black pointer-events-none"
 					style={{ opacity: progress * 0.60 }}
 				/>
 
 				{/* Card — animates up from below */}
 				<div
 					className="absolute inset-x-0 top-[50%] -translate-y-1/2 z-10 flex justify-center px-4 pb-0"
-					style={{ transform: `translateY(${cardY}vh)` }}
+					style={{
+						transform: `translateY(${cardY}lvh)`,
+					}}
 				>
 					<Card className="w-full max-w-4xl px-8 py-10 text-center">
 						<CardContent className="flex flex-col items-center gap-6 p-0">

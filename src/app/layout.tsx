@@ -53,11 +53,6 @@ export const metadata: Metadata = {
 	openGraph: OG_METADATA,
 };
 
-// const warzone = localFont({
-// 	src: '../assets/fonts/warzone97.ttf',
-// 	variable: '--font-warzone',
-// });
-
 const ptSans = PT_Sans({
 	subsets: ['latin', 'cyrillic'],
 	weight: ['400', '700'],
@@ -69,11 +64,6 @@ const ptMono = PT_Mono({
 	weight: '400',
 	variable: '--font-pt-mono',
 });
-
-// const origin = localFont({
-// 	src: '../assets/fonts/origintech.woff',
-// 	variable: '--font-origin',
-// });
 
 const mighty = localFont({
 	src: '../assets/fonts/mightySouly.ttf',
