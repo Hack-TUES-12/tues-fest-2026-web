@@ -296,42 +296,47 @@ export function AboutPageContent() {
 
 			{/* Intro + image */}
 			<motion.section
-				className="mx-auto grid w-full max-w-5xl gap-10 md:grid-cols-2 md:items-center md:gap-12"
+				className="mx-auto flex w-full max-w-5xl flex-col gap-8 md:gap-10"
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
-				<motion.div
-					className="text-foreground/80 flex flex-col gap-5 leading-relaxed text-pretty"
-					{...sectionFadeUp(reducedMotion, 0.06)}
-				>
-					<p>
-						Възпитаниците на ТУЕС преминават през задълбочена и специализирана 5-годишна програма, която им
-						позволява да се позиционират възможно най-бързо в технологичния сектор.
-					</p>
-					<p>
-						За {TF_YEAR - 1} г. ТУЕС за пореден път се нареди на{' '}
-						<span className="font-semibold text-white">второ място</span> по минимален бал на първо
-						класиране в 7. клас в България.
-					</p>
-					<IfTFFeatureOn feature="tf-show-apply">
-						<Link
-							href="/apply"
-							className="text-primary hover:text-primary/90 inline-flex w-fit items-center gap-1.5 text-sm font-medium underline-offset-4 transition-colors hover:underline"
-						>
-							<TbArrowRight size={16} />
-							Информация за кандидатстване
-						</Link>
-					</IfTFFeatureOn>
-				</motion.div>
-				<motion.div
-					className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40"
-					{...sectionFadeUp(reducedMotion, 0.12)}
-				>
-					<img
-						src="/assets/about/about.png"
-						alt="Ученици на ТУЕС"
-						className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-					/>
-				</motion.div>
+				<div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
+					<motion.div
+						className="text-foreground/80 flex flex-col gap-5 leading-relaxed text-pretty"
+						{...sectionFadeUp(reducedMotion, 0.06)}
+					>
+						<motion.h2 className="font-title text-3xl text-white md:text-4xl" {...sectionFadeUp(reducedMotion, 0)}>
+							Кандидатстване
+						</motion.h2>
+						<p>
+							Възпитаниците на ТУЕС преминават през задълбочена и специализирана 5-годишна програма, която
+							им позволява да се позиционират възможно най-бързо в технологичния сектор.
+						</p>
+						<p>
+							За {TF_YEAR - 1} г. ТУЕС за пореден път се нареди на{' '}
+							<span className="font-semibold text-white">второ място</span> по минимален бал на първо
+							класиране в 7. клас в България.
+						</p>
+						<IfTFFeatureOn feature="tf-show-apply">
+							<Link
+								href="/apply"
+								className="text-primary hover:text-primary/90 inline-flex w-fit items-center gap-1.5 text-sm font-medium underline-offset-4 transition-colors hover:underline"
+							>
+								<TbArrowRight size={16} />
+								Информация за кандидатстване
+							</Link>
+						</IfTFFeatureOn>
+					</motion.div>
+					<motion.div
+						className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40"
+						{...sectionFadeUp(reducedMotion, 0.12)}
+					>
+						<img
+							src="/assets/about/about.png"
+							alt="Ученици на ТУЕС"
+							className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+						/>
+					</motion.div>
+				</div>
 			</motion.section>
 
 			{/* Specialties */}
@@ -403,7 +408,7 @@ export function AboutPageContent() {
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
 				<div className="flex min-w-0 flex-col gap-8">
-					<div className="flex flex-col text-center gap-2 px-6 sm:px-8">
+					<div className="flex flex-col gap-2 px-6 text-center sm:px-8">
 						<motion.p
 							className="text-primary text-sm font-medium tracking-widest"
 							{...sectionFadeUp(reducedMotion, 0)}
