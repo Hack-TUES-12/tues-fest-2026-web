@@ -41,13 +41,13 @@ export const OrganizersSection = () => {
 					marginLeft: 'calc(50% - 50vw)',
 				}}
 			>
-				{/* Background */}
+				{/* Background — z-0 so gradient + black overlay stay above the image stack */}
 				<TeamBackground />
 				{/* Static gradient at the bottom so the card blends in */}
-				<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+				<div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 				{/* Progressive dark overlay — grows with scroll progress */}
 				<div
-					className="absolute inset-0 bg-black pointer-events-none"
+					className="absolute inset-0 z-[2] bg-black pointer-events-none"
 					style={{ opacity: progress * 0.60 }}
 				/>
 
