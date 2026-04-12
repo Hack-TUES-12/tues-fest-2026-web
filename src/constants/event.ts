@@ -38,7 +38,8 @@ export const TF_TIME_STRING = TF_DATE.toLocaleTimeString('bg-BG', {
 	minute: '2-digit',
 });
 
-export const TF_PROJECT_COUNT = PROJECTS.length
+// export const TF_PROJECT_COUNT = PROJECTS.length
+export const TF_PROJECT_COUNT = 156
 export const TF_ROUNDED_PROJECT_COUNT = TF_PROJECT_COUNT - (TF_PROJECT_COUNT % 10)
 
 export const TUES_FOUNDED_YEAR = 1988;
