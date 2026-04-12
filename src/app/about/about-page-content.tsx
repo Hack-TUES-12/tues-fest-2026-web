@@ -153,6 +153,7 @@ const EDUCATION_ITEMS_OUTSIDE_SCHOOL: readonly EducationItem[] = [
 const SUCCESS_FACTORS = [
 	'Тясна интеграция с Технически университет — София',
 	'Гъвкав специализиран учебен план',
+	'Обучение в крак с най-новите технологии',
 	'Преподаватели от ИТ бизнеса и университета',
 	'Активната роля на завършилите в живота на училището',
 	'Тясна връзка с реалния бизнес — стажове, дипломни проекти и практики',
@@ -527,17 +528,33 @@ export function AboutPageContent() {
 							<p className="text-sm font-medium tracking-widest text-primary">Успех</p>
 							<h2 className="font-title text-2xl text-white md:text-3xl">ТУЕС успява благодарение на</h2>
 						</div>
-						<ul className="flex flex-col gap-2">
+						<ul className="flex flex-col gap-2 px-2">
 							{SUCCESS_FACTORS.map((item, i) => (
 								<motion.li
-									key={item}
-									className="flex items-start gap-3 rounded-xl bg-white/[0.04] px-4 py-3"
-									{...listItemEntrance(reducedMotion, i, 0.06)}
+									key={`success-${i}`}
+									className="flex items-start gap-2"
+									{...listItemEntrance(
+										reducedMotion,
+										i,
+										EDUCATION_LIST_STAGGER_SEC,
+										EDUCATION_LIST_MOTION_BASE_SEC,
+									)}
 								>
-									<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
-										{i + 1}
-									</span>
-									<span className="text-sm leading-relaxed text-foreground/85">{item}</span>
+									<motion.span
+										className="inline-flex shrink-0 origin-center pt-0.5"
+										{...listItemIconEntrance(
+											reducedMotion,
+											i,
+											EDUCATION_LIST_STAGGER_SEC,
+											EDUCATION_LIST_MOTION_BASE_SEC,
+										)}
+									>
+										<TbPlus
+											className={cn('size-6 shrink-0 stroke-[3.5]', 'text-primary')}
+											aria-hidden
+										/>
+									</motion.span>
+									<span className="text-sm leading-relaxed text-foreground/85 pt-1">{item}</span>
 								</motion.li>
 							))}
 						</ul>
