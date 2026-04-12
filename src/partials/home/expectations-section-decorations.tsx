@@ -18,7 +18,7 @@ export function ExpectationsSectionDecorations({
 				{...sectionFadeIn(reducedMotion, 0.08)}
 			>
 				<Image
-					src="/decorations/blue-circle.svg"
+					src="/decorations/purple-circle.svg"
 					alt=""
 					width={600}
 					height={600}
