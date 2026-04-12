@@ -30,6 +30,23 @@ export function sectionFadeUp(reducedMotion: boolean | null, delaySec: number) {
 	};
 }
 
+/**
+ * Same motion as `sectionFadeUp` but runs on mount (`animate`) instead of `whileInView`.
+ * Use for dense grids: the first cell often sits in an IO edge case after SPA navigations and
+ * stays at `opacity: 0` until the user scrolls.
+ */
+export function sectionFadeUpOnMount(reducedMotion: boolean | null, delaySec: number) {
+	return {
+		initial: reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+		animate: { opacity: 1, y: 0 },
+		transition: {
+			duration: reducedMotion ? 0 : 0.55,
+			delay: reducedMotion ? 0 : delaySec,
+			ease: HERO_LIKE_EASE_OUT,
+		},
+	};
+}
+
 /** Duration of `sectionFadeIn` — use as base delay when sequencing children after the section entrance. */
 export const SECTION_FADE_IN_DURATION_SEC = 0.7;
 
