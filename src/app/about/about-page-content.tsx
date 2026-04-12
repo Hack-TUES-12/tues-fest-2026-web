@@ -186,7 +186,7 @@ export function AboutPageContent() {
 					на ИТ сектора в България и отвъд.
 				</motion.p>
 				<motion.div {...sectionFadeUp(reducedMotion, 0.26)}>
-					<Button asChild variant="default" size="lg" className="font-bold">
+					<Button asChild variant="default" size="lg" className="font-bold shadow-lg shadow-primary/20">
 						<Link href="https://elsys-bg.org" target="_blank" rel="noopener noreferrer">
 							<TbExternalLink size={18} />
 							Официален сайт на ТУЕС
@@ -411,16 +411,16 @@ export function AboutPageContent() {
 
 			{/* Hack TUES */}
 			<motion.section className="mx-auto w-full max-w-5xl" {...sectionFadeIn(reducedMotion, 0)}>
-				<SectionHeading eyebrow="Хакатон" title="Hack TUES" toneIndex={2} />
+				<SectionHeading eyebrow="Хакатон" title="Hack TUES" toneIndex={3} />
 
 				<motion.div
 					className="overflow-hidden rounded-2xl shadow-2xl shadow-black/50"
 					{...sectionFadeUp(reducedMotion, 0.08)}
 				>
 					<img
-						src="/assets/about/ht11_image.jpg"
-						alt="Hack TUES 11 организатори"
-						className="aspect-[21/9] w-full object-cover md:aspect-[2.4/1]"
+						src="/team/team1.webp"
+						alt="Организационният екип на Hack TUES 12"
+						className="aspect-[37/20] w-full object-cover"
 					/>
 				</motion.div>
 
@@ -442,7 +442,7 @@ export function AboutPageContent() {
 							className={cn('p-6 sm:p-7', cardSurface)}
 							{...listItemEntrance(reducedMotion, i, 0.08)}
 						>
-							<p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary/90">
+							<p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted/90">
 								{block.label}
 							</p>
 							<p className="text-sm leading-relaxed text-foreground/80">{block.body}</p>
@@ -465,7 +465,7 @@ export function AboutPageContent() {
 				</div>
 
 				<div className="mt-8 flex justify-center">
-					<Button asChild variant="default" size="lg" className="font-bold shadow-lg shadow-primary/20">
+					<Button asChild variant="muted" size="lg" className="font-bold shadow-lg shadow-muted/20">
 						<Link href="https://hack-tues.com" target="_blank" rel="noopener noreferrer">
 							<TbExternalLink size={18} />
 							Виж повече за Hack TUES
