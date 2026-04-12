@@ -12,10 +12,15 @@ export function ProjectList({ projects }: { projects: readonly ProjectType[] }) 
 		</ProjectCardMotion>
 	));
 
+	const titlesByProjectId = Object.fromEntries(projects.map((p) => [String(p.id), p.title]));
+
 	return (
 		<div className="inline-grid w-full grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
 			<Suspense fallback={projectCards}>
-				<InteractiveFilteredProjects ordererdProjectIds={projects.map((project) => project.id)}>
+				<InteractiveFilteredProjects
+					ordererdProjectIds={projects.map((project) => project.id)}
+					titlesByProjectId={titlesByProjectId}
+				>
 					{projectCards}
 				</InteractiveFilteredProjects>
 			</Suspense>

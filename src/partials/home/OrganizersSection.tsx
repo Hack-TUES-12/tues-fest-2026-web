@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -9,29 +9,67 @@ import { TF_SLOGAN, TF_YEAR } from '@/constants/event';
 
 import { TeamBackground } from './TeamBackground';
 
+/** Ignore sub-pixel noise in p; still snap at scroll range ends. */
+const PROGRESS_EPS = 0.002;
+
 export const OrganizersSection = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const stickyRef = useRef<HTMLDivElement>(null);
-	const [progress, setProgress] = useState(0);
+	const overlayRef = useRef<HTMLDivElement>(null);
+	const cardLiftRef = useRef<HTMLDivElement>(null);
+	const lastPRef = useRef(-1);
 
 	useEffect(() => {
-		const handleScroll = () => {
-			if (!containerRef.current || !stickyRef.current) return;
-			const rect = containerRef.current.getBoundingClientRect();
-			const stickyDistance =
-				containerRef.current.offsetHeight - stickyRef.current.offsetHeight;
-			if (stickyDistance <= 0) return;
-			const p = Math.max(0, Math.min(1, -rect.top / stickyDistance));
-			setProgress(p);
+		let rafId: number | null = null;
+
+		const applyProgress = (p: number) => {
+			const overlay = overlayRef.current;
+			const cardLift = cardLiftRef.current;
+			if (!overlay || !cardLift) return;
+			overlay.style.opacity = String(p * 0.6);
+			cardLift.style.transform = `translateY(${(1 - p) * 100}lvh)`;
 		};
 
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		handleScroll();
-		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
+		const measureAndMaybeApply = () => {
+			const container = containerRef.current;
+			const sticky = stickyRef.current;
+			if (!container || !sticky) return;
 
-	// Card starts one viewport height below its final resting spot and rises to translateY(0)
-	const cardY = (1 - progress) * 100;
+			const rect = container.getBoundingClientRect();
+			const stickyDistance = container.offsetHeight - sticky.offsetHeight;
+			if (stickyDistance <= 0) return;
+
+			const p = Math.max(0, Math.min(1, -rect.top / stickyDistance));
+			const prev = lastPRef.current;
+			const atStart = p <= PROGRESS_EPS;
+			const atEnd = p >= 1 - PROGRESS_EPS;
+			if (
+				prev >= 0 &&
+				!atStart &&
+				!atEnd &&
+				Math.abs(p - prev) < PROGRESS_EPS
+			) {
+				return;
+			}
+			lastPRef.current = p;
+			applyProgress(p);
+		};
+
+		const scheduleMeasure = () => {
+			if (rafId !== null) return;
+			rafId = requestAnimationFrame(() => {
+				rafId = null;
+				measureAndMaybeApply();
+			});
+		};
+
+		measureAndMaybeApply();
+		window.addEventListener('scroll', scheduleMeasure, { passive: true });
+		return () => {
+			window.removeEventListener('scroll', scheduleMeasure);
+			if (rafId !== null) cancelAnimationFrame(rafId);
+		};
+	}, []);
 
 	return (
 		<div ref={containerRef} className="relative h-[200lvh]">
@@ -50,16 +88,16 @@ export const OrganizersSection = () => {
 				<div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 				{/* Progressive dark overlay — grows with scroll progress */}
 				<div
+					ref={overlayRef}
 					className="absolute inset-0 z-[2] bg-black pointer-events-none"
-					style={{ opacity: progress * 0.60 }}
+					style={{ opacity: 0 }}
 				/>
 
 				{/* Card — animates up from below */}
 				<div
+					ref={cardLiftRef}
 					className="absolute inset-x-0 top-[50%] -translate-y-1/2 z-10 flex justify-center px-4 pb-0"
-					style={{
-						transform: `translateY(${cardY}lvh)`,
-					}}
+					style={{ transform: 'translateY(100lvh)' }}
 				>
 					<Card className="w-full max-w-4xl px-8 py-10 text-center">
 						<CardContent className="flex flex-col items-center gap-6 p-0">

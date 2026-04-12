@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use } from 'react';
+import React from 'react';
 import { useQueryState } from 'nuqs';
 import invariant from 'tiny-invariant';
 
@@ -27,19 +27,16 @@ export function InteractiveSearchInput() {
 	);
 }
 
-// HACK: If the site uses a DB, we cannot import this module on the client
-const projectsPromise = import('@/app/projects/adapter').then(
-	(module) => new Map(module.PROJECTS.map((project) => [project.id as number, project]))
-);
-
+/** Plain object so RSC → client serialization works; avoids importing the multi‑MB `adapter` chunk for search. */
 export function InteractiveFilteredProjects({
 	children,
 	ordererdProjectIds,
+	titlesByProjectId,
 }: {
 	children: React.ReactNode;
 	ordererdProjectIds: number[];
+	titlesByProjectId: Readonly<Record<string, string>>;
 }) {
-	const projects = use(projectsPromise);
 	const [search, setSearch] = useQueryState('search');
 
 	if (!search) return children;
@@ -50,17 +47,17 @@ export function InteractiveFilteredProjects({
 		`[InteractiveProjectList] Number of children must match number of ordered project ids passed. Expected ${childrenCount}, got ${ordererdProjectIds.length}`
 	);
 
+	const q = search.toLowerCase();
+
 	const filteredChildren = React.Children.toArray(children)
 		.map((child, index) => {
-			const project = projects.get(ordererdProjectIds[index]!);
-			invariant(project, `[InteractiveProjectList] Project with id ${ordererdProjectIds[index]} not found`);
-			return {
-				child,
-				project,
-			};
+			const id = ordererdProjectIds[index]!;
+			const title = titlesByProjectId[String(id)];
+			invariant(title !== undefined, `[InteractiveProjectList] Project with id ${id} has no title in titlesByProjectId`);
+			return { child, id, title };
 		})
-		.sort((a, b) => a.project.id - b.project.id)
-		.filter(({ project }) => project.title.toLowerCase().includes(search?.toLowerCase() ?? ''))
+		.sort((a, b) => a.id - b.id)
+		.filter(({ title }) => title.toLowerCase().includes(q))
 		.map(({ child }) => child);
 
 	if (filteredChildren.length === 0) {

@@ -1,6 +1,7 @@
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { notFound } from 'next/navigation';
 
+import { ProjectsRouteScrollReset } from '@/app/projects/projects-route-scroll';
 import { FloatingVoteOverlay } from '@/components/ui/floating-vote-overlay';
 import { TF_DATE_STRING, TF_LOCATION, TF_ROUNDED_PROJECT_COUNT, TF_YEAR } from '@/constants/event';
 import { OG_METADATA, TF_TITLE, TWITTER_METADATA } from '@/constants/seo';
@@ -59,6 +60,7 @@ export default async function ProjectsLayout({ children }: { children: React.Rea
 
 	return (
 		<NuqsAdapter>
+			<ProjectsRouteScrollReset />
 			{children}
 			<IfTFFeatureOn feature="project-voting">
 				<FloatingVoteOverlay />

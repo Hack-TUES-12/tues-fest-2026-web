@@ -76,7 +76,7 @@ type CategoryLinkListProps = {
 
 export function FilterLinkList({ current, search }: CategoryLinkListProps) {
 	return (
-		<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+		<div className="flex mx-auto sm:mx-0 flex-wrap justify-center gap-3 lg:justify-start">
 			{CATEGORIES.map((link) => (
 				<CategoryLink key={link.href} {...link} search={search} isCurrent={link.text === current} />
 			))}

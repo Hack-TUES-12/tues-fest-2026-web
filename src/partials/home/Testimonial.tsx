@@ -12,6 +12,7 @@ const MARGIN_Y = 10; // vertical offset (px) added per stacked card
 const Testimonial = () => {
 	const containerRef = useRef<HTMLUListElement>(null);
 	const cardRefs = useRef<(HTMLLIElement | null)[]>([]);
+	const cardHeightsRef = useRef<number[]>([]);
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 	const selected = selectedIndex !== null ? TESTIMONIALS[selectedIndex] : null;
 
@@ -24,20 +25,42 @@ const Testimonial = () => {
 		let animationId: number | null = null;
 		let listenerAttached = false;
 
+		const refreshCardHeights = () => {
+			const next: number[] = [];
+			cardRefs.current.forEach((card, i) => {
+				if (card) next[i] = card.offsetHeight;
+			});
+			cardHeightsRef.current = next;
+		};
+
+		refreshCardHeights();
+
+		const resizeObserver = new ResizeObserver(() => {
+			refreshCardHeights();
+		});
+		cardRefs.current.forEach((card) => {
+			if (card) resizeObserver.observe(card);
+		});
+
 		const animate = () => {
 			const containerTop = container.getBoundingClientRect().top;
+			const heights = cardHeightsRef.current;
 
 			cardRefs.current.forEach((card, i) => {
 				if (!card) return;
-				const cardHeight = card.offsetHeight;
+				let cardHeight = heights[i];
+				if (cardHeight == null || cardHeight <= 0) {
+					cardHeight = card.offsetHeight;
+					heights[i] = cardHeight;
+				}
 				// How many px past this card's natural sticky threshold we've scrolled
 				const scrolled = STICKY_TOP - containerTop - i * (cardHeight + MARGIN_Y);
 
 				if (scrolled > 0) {
 					const scale = Math.max((cardHeight - scrolled * 0.05) / cardHeight, 0.82);
-					card.style.transform = `translateY(${MARGIN_Y * i}px) scale(${scale})`;
+					card.style.transform = `translate3d(0, ${MARGIN_Y * i}px, 0) scale(${scale})`;
 				} else {
-					card.style.transform = `translateY(${MARGIN_Y * i}px)`;
+					card.style.transform = `translate3d(0, ${MARGIN_Y * i}px, 0)`;
 				}
 			});
 
@@ -67,6 +90,7 @@ const Testimonial = () => {
 		observer.observe(container);
 
 		return () => {
+			resizeObserver.disconnect();
 			observer.disconnect();
 			if (listenerAttached) window.removeEventListener('scroll', onScroll);
 			if (animationId) cancelAnimationFrame(animationId);

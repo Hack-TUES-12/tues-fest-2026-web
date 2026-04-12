@@ -30,7 +30,7 @@ export function SearchInput(props: Exclude<React.ComponentProps<typeof Input>, '
 	}, []);
 
 	return (
-		<div className="grow-1 relative flex items-center lg:max-w-lg">
+		<div className="grow-1 mx-auto sm:mx-0 relative flex items-center lg:max-w-lg">
 			<Input
 				{...props}
 				ref={inputRef}
