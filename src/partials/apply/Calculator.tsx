@@ -63,6 +63,10 @@ const CalculatorField = ({
 
 const MAX_SCORE = 100 + 300 + 50 + 50; // 500
 
+/** Track background is dark muted from 0 up to this score; the tail to MAX_SCORE uses a distinct tone. */
+const TRACK_MUTED_UNTIL_SCORE = 464.25;
+const TRACK_MUTED_SEGMENT_PERCENT = (TRACK_MUTED_UNTIL_SCORE / MAX_SCORE) * 100;
+
 const Calculator = ({ className }: { className?: string }) => {
 	const [result, setResult] = useState(0);
 	const [calculator, setCalculator] = useState<{
@@ -168,10 +172,21 @@ const Calculator = ({ className }: { className?: string }) => {
 						</span>
 						<span className="text-sm text-white/40 mb-1">/ {MAX_SCORE}</span>
 					</div>
-					{/* Progress bar */}
-					<div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+					{/* Progress bar: dark muted track up to 464.25, then lighter tail to 500 */}
+					<div className="relative h-2 w-full overflow-hidden rounded-full">
+						<div className="absolute inset-0 flex">
+							<div
+								className="h-full shrink-0 bg-white/[0.14]"
+								style={{ width: `${TRACK_MUTED_SEGMENT_PERCENT}%` }}
+							>
+								<div
+									className="h-full w-full shrink-0 bg-muted/15 rounded-full"
+								/>
+							</div>
+							<div className="h-full min-w-0 flex-1 bg-white/[0.14]" />
+						</div>
 						<div
-							className="h-full rounded-full bg-muted transition-all duration-500 ease-out"
+							className="absolute inset-y-0 left-0 z-10 rounded-full bg-muted transition-all duration-500 ease-out"
 							style={{ width: `${percentage}%` }}
 						/>
 					</div>
