@@ -426,22 +426,22 @@ export function AboutPageContent() {
 				className="mx-auto grid w-full max-w-5xl gap-6 md:grid-cols-[3fr,2fr] md:gap-8"
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
-				<div className="flex min-w-0 flex-col gap-6">
+				<div className="grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2">
 					<Card
 						variant="accent"
-						className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+						className="h-full bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
 					>
 						<CardContent className="flex flex-col gap-2 p-0">
 							<div className="space-y-2">
 								<p className="text-sm font-medium tracking-widest text-accent">Обучение</p>
 								<h2 className="font-title text-2xl text-white md:text-3xl">Освен специализирания план</h2>
-								<p className="text-sm text-foreground/65">ТУЕС предлага:</p>
+								<p className="text-sm">ТУЕС предлага:</p>
 							</div>
 							<ul className="flex flex-col gap-2 px-2">
 								{EDUCATION_ITEMS_IN_SCHOOL.map((item, i) => (
 									<motion.li
 										key={`education-in-${i}`}
-										className="flex items-center gap-2"
+										className="flex items-start gap-2"
 										{...listItemEntrance(
 											reducedMotion,
 											i,
@@ -463,7 +463,7 @@ export function AboutPageContent() {
 												aria-hidden
 											/>
 										</motion.span>
-										<span className="text-sm">
+										<span className="text-sm pt-1">
 											{renderEducationItem(item, EDUCATION_LINK_CLASS_ACCENT)}
 										</span>
 									</motion.li>
@@ -474,19 +474,19 @@ export function AboutPageContent() {
 
 					<Card
 						variant="muted"
-						className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+						className="h-full bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
 					>
 						<CardContent className="flex flex-col gap-2 p-0">
 							<div className="space-y-2">
 								<p className="text-sm font-medium tracking-widest text-muted">Извън обучението</p>
 								<h2 className="font-title text-2xl text-white md:text-3xl">Извън училищното обучение</h2>
-								<p className="text-sm text-foreground/65">ТУЕС предлага</p>
+								<p className="text-sm">ТУЕС предлага:</p>
 							</div>
 							<ul className="flex flex-col gap-2 px-2">
 								{EDUCATION_ITEMS_OUTSIDE_SCHOOL.map((item, i) => (
 									<motion.li
 										key={`education-out-${i}`}
-										className="flex items-center gap-2"
+										className="flex items-start gap-2"
 										{...listItemEntrance(
 											reducedMotion,
 											i,
@@ -508,7 +508,7 @@ export function AboutPageContent() {
 												aria-hidden
 											/>
 										</motion.span>
-										<span className="text-sm">
+										<span className="text-sm pt-1">
 											{renderEducationItem(item, EDUCATION_LINK_CLASS_MUTED)}
 										</span>
 									</motion.li>
