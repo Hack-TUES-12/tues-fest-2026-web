@@ -181,6 +181,9 @@ const cardSurface = 'rounded-2xl bg-card/70 shadow-lg backdrop-blur-sm transitio
 const EDUCATION_LIST_MOTION_BASE_SEC = 0.15;
 const EDUCATION_LIST_STAGGER_SEC = 0.08;
 
+/** Stagger card shells so each panel fades in after the previous (list animations unchanged inside). */
+const EDUCATION_CARD_FADE_STAGGER_SEC = 0.12;
+
 const EDUCATION_LINK_CLASS_ACCENT = 'font-medium text-accent underline-offset-2 transition-colors hover:underline';
 const EDUCATION_LINK_CLASS_MUTED = 'font-medium text-muted underline-offset-2 transition-colors hover:underline';
 
@@ -450,10 +453,14 @@ export function AboutPageContent() {
 						</motion.h1>
 					</div>
 					<div className="grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2">
-						<Card
-							variant="accent"
-							className="bg-card/70 h-full px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+						<motion.div
+							className="h-full min-w-0"
+							{...sectionFadeIn(reducedMotion, 0 * EDUCATION_CARD_FADE_STAGGER_SEC)}
 						>
+							<Card
+								variant="accent"
+								className="bg-card/70 h-full px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+							>
 							<CardContent className="flex flex-col gap-2 p-0">
 								<div className="space-y-2">
 									<p className="text-accent text-sm font-medium tracking-widest">Обучение</p>
@@ -496,11 +503,16 @@ export function AboutPageContent() {
 								</ul>
 							</CardContent>
 						</Card>
+						</motion.div>
 
-						<Card
-							variant="muted"
-							className="bg-card/70 h-full px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+						<motion.div
+							className="h-full min-w-0"
+							{...sectionFadeIn(reducedMotion, 1 * EDUCATION_CARD_FADE_STAGGER_SEC)}
 						>
+							<Card
+								variant="muted"
+								className="bg-card/70 h-full px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+							>
 							<CardContent className="flex flex-col gap-2 p-0">
 								<div className="space-y-2">
 									<p className="text-muted text-sm font-medium tracking-widest">Извън обучението</p>
@@ -543,10 +555,15 @@ export function AboutPageContent() {
 								</ul>
 							</CardContent>
 						</Card>
+						</motion.div>
 					</div>
 				</div>
 
-				<Card variant="primary" className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9">
+				<motion.div
+					className="min-w-0 md:h-full md:min-h-0"
+					{...sectionFadeIn(reducedMotion, 2 * EDUCATION_CARD_FADE_STAGGER_SEC)}
+				>
+					<Card variant="primary" className="bg-card/70 h-full px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9">
 					<CardContent className="flex flex-col gap-6 p-0">
 						<div className="space-y-2">
 							<p className="text-primary text-sm font-medium tracking-widest">Успех</p>
@@ -584,6 +601,7 @@ export function AboutPageContent() {
 						</ul>
 					</CardContent>
 				</Card>
+				</motion.div>
 			</motion.section>
 
 			{/* Hack TUES — split layout: visual column + reading column (lg+) */}
