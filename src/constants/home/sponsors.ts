@@ -18,11 +18,11 @@ const itGixLogo = '/sponsors/alpha/itGix.png';
 const m2m = '/sponsors/alpha/m2m.png';
 
 // Beta sponsors
+const ibm = '/sponsors/beta/ibm.jpg';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
 const devrixLogo = '/sponsors/beta/devrix.png';
 const haemimontLogo = '/sponsors/beta/haemimont.png';
-const ibm = '/sponsors/beta/ibm.jpg';
 const ocadoLogo = '/sponsors/beta/ocado-technology.png';
 const stamsoftLogo = '/sponsors/beta/stamsoft.png';
 const yettelLogo = '/sponsors/beta/yettelLogo.png';
@@ -163,13 +163,20 @@ Since 2016, Trading 212’s app has been the UK's #1 trading app, and in 2017 it
 ];
 
 const BETA_SPONSORS = [
+	// {
+	// 	name: "AxlеsSoft",
+	// 	logo: axlessoftLogo,
+	// 	url: "https://www.axlessoft.com/",
+	// 	description:
+	// 	`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+  	// },
 	{
-		name: "AxlеsSoft",
-		logo: axlessoftLogo,
-		url: "https://www.axlessoft.com/",
+		name: 'IBM Bulgaria',
+		logo: ibm,
+		url: 'https://www.ibm.com/us-en',
 		description:
-		`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-  	},
+		`IBM е базирана на ценности компания с хора, които създават и прилагат технологии, карайки света да работи по-добре. Днес, хиляди служители на IBM по целия свят изобретяват и интегрират хардуер, софтуер и услуги, за да позволяват на прогресивни предприятия, институции и хора да успеят и изградят една по-интелигентна планета.`,
+	},
 	// {
 	// 	name: 'Chaos',
 	// 	logo: chaosLogo,
@@ -198,13 +205,6 @@ const BETA_SPONSORS = [
 	// 	description:
 	// 	'Tам, където стандартните програмни продукти не могат да се приложат, се включваме ние от “Хемимонд“ АД с висококачествените си услуги и опит от 2003г. в разработка на индивидуални комплексни софтуерни решения. Експертизата ни в проектирането, разработката и тестването на специфични клиентски приложения и услуги ни дава богата възможност да предоставяме решения, базирани на технологии от Майкрософт (.NET, MSSQL, ASP.NET и др.). С младите разработчици в компанията и опитните софтуерни архитекти под ръководството на ерудираните проджект мениджъри „Хемимонд“ може да отговори на очакванията на всичките си клиенти - водещи интернационални корпорации в областта на застраховането, риска и др. Развитието на компанията в ИТ сферата през 2010 г. има пряк резултат в създаването и началото на предлаганите публични облачни услуги през 2014 г. през платформата oblak.bg и през 2016 г. с втората платформа disk.bg. За да отговорим на очакванията за качество и сигурност, създадохме собствен дейта-център според най-добрите стандaрти и практики.',
 	// 	supportedEditions: [],
-	// },
-	// {
-	// 	name: 'IBM Bulgaria',
-	// 	logo: ibm,
-	// 	url: 'https://www.ibm.com/us-en',
-	// 	description:
-	// 	'IBM е базирана на ценности компания с хора, които създават и прилагат технологии, карайки света да работи по-добре. Тази година празнуваме 31 години IBM България и сме много горди с това, което успяхме да постигнем. Днес, служителите на IBM  интегрират хардуер, софтуер и услуги, за да позволяват на прогресивни предприятия, институции и хора да успеят и изградят една по-интелигентна планета. Ние вярваме в приобщаващата и работна среда и се стремим да бъдем най-добрата версия на себе си всеки ден, изповядвайки ',
 	// },
 	// {
 	// 	name: "Ocado Technology",
