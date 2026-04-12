@@ -60,8 +60,8 @@ function ExpectationRow({
 		<div
 			className={cn(
 				reverse
-					? 'grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:gap-12'
-					: 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center lg:gap-12'
+					? 'grid gap-2 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:gap-12'
+					: 'grid gap-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-center lg:gap-12'
 			)}
 		>
 			{reverse ? (
@@ -103,7 +103,7 @@ const Expectations = () => {
 					<h2 className="font-title text-4xl text-white md:text-5xl">На ТУЕС Фест очаквайте</h2>
 				</motion.div>
 
-				<div className="mx-auto flex max-w-5xl flex-col gap-16 md:gap-20 lg:gap-24">
+				<div className="mx-auto flex max-w-5xl flex-col gap-8 md:gap-8 lg:gap-8">
 					{EXPECTATIONS.map((expectation, i) => {
 						const reverse = i % 2 === 1;
 						return (
