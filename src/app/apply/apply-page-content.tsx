@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { TbBrain, TbCheck, TbCode, TbCpu, TbExternalLink, TbNetwork } from 'react-icons/tb';
+import { TbArrowRight, TbBrain, TbCheck, TbCode, TbCpu, TbExternalLink, TbNetwork } from 'react-icons/tb';
 import { SiFacebook, SiInstagram, SiLinkedin, SiYoutube } from 'react-icons/si';
 import { motion, useReducedMotion } from 'motion/react';
 
@@ -215,7 +215,7 @@ export function ApplyPageContent() {
 						<SectionHeading
 							eyebrow="Уникалност"
 							title="Кое прави ТУЕС специално?"
-							toneIndex={1}
+							toneIndex={3}
 							align="start"
 						/>
 						<ul className="mt-2 flex flex-col gap-2">
@@ -232,6 +232,15 @@ export function ApplyPageContent() {
 								</motion.li>
 							))}
 						</ul>
+						<motion.div className="mt-4" {...sectionFadeUp(reducedMotion, 0.32)}>
+							<Link
+								href="/about"
+								className="text-muted hover:text-muted/90 inline-flex items-center gap-2 text-sm font-medium underline-offset-4 transition-colors hover:underline md:text-base"
+							>
+								Виж повече
+								<TbArrowRight size={18} aria-hidden />
+							</Link>
+						</motion.div>
 					</div>
 					<motion.div
 						className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40"
