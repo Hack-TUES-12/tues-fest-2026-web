@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "db:push": "drizzle-kit push",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "assets:bake-background": "node scripts/bake-background-brightness.cjs"
   },
   "dependencies": {
     "@fontsource/pt-mono": "^5.2.8",

@@ -175,7 +175,9 @@
 		position: relative;
 		isolation: isolate;
 	}
-	/* Repeating pattern on ::before so `background-image` is never cleared by Tailwind `bg-*` on `body`. */
+	/* Repeating pattern on ::before so `background-image` is never cleared by Tailwind `bg-*` on `body`.
+	   Brightness is baked into the PNG (see `scripts/bake-background-brightness.cjs`) so Safari avoids a
+	   full-viewport filtered compositing layer on scroll/resize. */
 	body::before {
 		content: '';
 		position: fixed;
@@ -185,7 +187,6 @@
 		background-image: url('/assets/background.png');
 		background-repeat: repeat;
 		background-size: 80rem 80rem;
-		filter: brightness(1.35);
 	}
 	h1, h2, h3, h4, h5, h6 {
 		color: oklch(1 0 0);
