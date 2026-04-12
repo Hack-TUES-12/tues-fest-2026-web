@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import Link from 'next/link';
 import {
 	TbArrowRight,
@@ -82,22 +83,72 @@ const SPECIALTY_CARD_TONES = [
 	{ icon: 'bg-muted/10 text-muted', text: "text-muted" },
 ] as const;
 
-const EDUCATION_ITEMS_IN_SCHOOL = [
+/** Plain string, or segments: `['текст ', { text: 'връзка', href: '/path' }, ' още']` */
+type EducationInlineLink = { text: string; href: string; external?: boolean };
+type EducationItem = string | readonly (string | EducationInlineLink)[];
+
+function renderEducationItem(item: EducationItem, linkClassName: string) {
+	if (typeof item === 'string') {
+		return item;
+	}
+	return item.map((part, j) => {
+		if (typeof part === 'string') {
+			return <Fragment key={j}>{part}</Fragment>;
+		}
+		const external = part.external ?? /^https?:\/\//.test(part.href);
+		if (external) {
+			return (
+				<a
+					key={j}
+					href={part.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					className={linkClassName}
+				>
+					{part.text}
+				</a>
+			);
+		}
+		return (
+			<Link key={j} href={part.href} className={linkClassName}>
+				{part.text}
+			</Link>
+		);
+	});
+}
+
+const EDUCATION_ITEMS_IN_SCHOOL: readonly EducationItem[] = [
 	'Разширено изучаване на английски и немски език',
 	'Стаж в реални ИТ компании',
-	'Cisco академия за актуалните мрежови технологии',
+	[
+		{ text: "Cisco академия ", href: 'https://elsys-bg.org/klubove/cisco-akademija' },
+		'за актуалните мрежови технологии',
+	],
 	'Workshop-и и лекции от ИТ професионалисти',
-	'Клубове по изкуствен интелект и роботика, в които по-големи ученици преподават на по-малките'
-] as const
+	[
+		'Клубове по ',
+		{ text: 'изкуствен интелект', href: 'https://elsys-bg.org/klubove/tues-ai-software' },
+		' и ',
+		{ text: 'роботика', href: 'https://elsys-bg.org/klubove/embedded-klub' },
+		', в които по-големи ученици преподават на по-малките'
+	],
+];
 
-const EDUCATION_ITEMS_OUTSIDE_SCHOOL = [
+const EDUCATION_ITEMS_OUTSIDE_SCHOOL: readonly EducationItem[] = [
 	'Участие в национални и международни състезания',
-	'Hack TUES — хакатон, организиран от ученици за ученици',
+	[
+		{ text: 'Hack TUES', href: 'https://hack-tues.com' },
+		' — хакатон, организиран от ученици за ученици',
+	],
 	'TUES Talks - първият ученически подкаст в България',
 	'Уникална общност от преподаватели, завършили и настоящи ученици',
-	'Извънкласни дейности и клубове в разнообразни сфери'
+	[
+		'Извънкласни дейности и ',
+		{ text: 'клубове', href: 'https://elsys-bg.org/uchenicheski-jivot/klubove' },
+		' в разнообразни сфери'
+	]
 	// 'Участие в мобилности по проекти Еразъм+',
-] as const
+];
 
 const SUCCESS_FACTORS = [
 	'Тясна интеграция с Технически университет — София',
@@ -141,6 +192,11 @@ const cardSurface =
 /** Education list: row fade + plus scale/rotate — shorter wait than full `SECTION_FADE_IN_DURATION_SEC`. */
 const EDUCATION_LIST_MOTION_BASE_SEC = 0.15;
 const EDUCATION_LIST_STAGGER_SEC = 0.08;
+
+const EDUCATION_LINK_CLASS_ACCENT =
+	'font-medium text-accent underline-offset-2 transition-colors hover:underline';
+const EDUCATION_LINK_CLASS_MUTED =
+	'font-medium text-muted underline-offset-2 transition-colors hover:underline';
 
 /** Same URLs and styling as schedule / footer — TUES community channels. */
 const ABOUT_HERO_SOCIAL_LINKS = [
@@ -384,7 +440,7 @@ export function AboutPageContent() {
 							<ul className="flex flex-col gap-2 px-2">
 								{EDUCATION_ITEMS_IN_SCHOOL.map((item, i) => (
 									<motion.li
-										key={item}
+										key={`education-in-${i}`}
 										className="flex items-center gap-2"
 										{...listItemEntrance(
 											reducedMotion,
@@ -407,7 +463,9 @@ export function AboutPageContent() {
 												aria-hidden
 											/>
 										</motion.span>
-										<span className="text-sm">{item}</span>
+										<span className="text-sm">
+											{renderEducationItem(item, EDUCATION_LINK_CLASS_ACCENT)}
+										</span>
 									</motion.li>
 								))}
 							</ul>
@@ -427,7 +485,7 @@ export function AboutPageContent() {
 							<ul className="flex flex-col gap-2 px-2">
 								{EDUCATION_ITEMS_OUTSIDE_SCHOOL.map((item, i) => (
 									<motion.li
-										key={item}
+										key={`education-out-${i}`}
 										className="flex items-center gap-2"
 										{...listItemEntrance(
 											reducedMotion,
@@ -450,7 +508,9 @@ export function AboutPageContent() {
 												aria-hidden
 											/>
 										</motion.span>
-										<span className="text-sm">{item}</span>
+										<span className="text-sm">
+											{renderEducationItem(item, EDUCATION_LINK_CLASS_MUTED)}
+										</span>
 									</motion.li>
 								))}
 							</ul>
