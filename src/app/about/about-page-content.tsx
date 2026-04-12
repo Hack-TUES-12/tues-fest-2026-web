@@ -138,7 +138,7 @@ const ABOUT_HERO_SOCIAL_LINKS = [
 ] as const;
 
 const ABOUT_HERO_SOCIAL_ICON_BUTTON =
-	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-muted/40 hover:bg-card/50 hover:text-muted';
+	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-primary/40 hover:bg-card/50 hover:text-primary';
 
 export function AboutPageContent() {
 	const reducedMotion = useReducedMotion();
@@ -165,7 +165,7 @@ export function AboutPageContent() {
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
 				<motion.p
-					className="text-sm font-medium tracking-widest text-muted"
+					className="text-sm font-medium tracking-widest text-primary"
 					{...sectionFadeUp(reducedMotion, 0.06)}
 				>
 					Училището
@@ -186,7 +186,7 @@ export function AboutPageContent() {
 					на ИТ сектора в България и отвъд.
 				</motion.p>
 				<motion.div {...sectionFadeUp(reducedMotion, 0.26)}>
-					<Button asChild variant="muted" size="lg" className="font-bold shadow-lg shadow-muted/25">
+					<Button asChild variant="default" size="lg" className="font-bold shadow-lg shadow-primary/20">
 						<Link href="https://elsys-bg.org" target="_blank" rel="noopener noreferrer">
 							<TbExternalLink size={18} />
 							Официален сайт на ТУЕС
