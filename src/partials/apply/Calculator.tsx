@@ -49,6 +49,7 @@ const CalculatorField = ({
 			name={name}
 			className={cn(
 				'w-full rounded-xl border bg-white/5 px-4 py-2.5 text-base font-medium text-white outline-none transition-colors duration-200 placeholder:text-white/20',
+				'[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
 				'focus:border-muted/60 focus:bg-muted/5',
 				error ? 'border-red-500/60' : 'border-white/10 hover:border-white/20',
 			)}
