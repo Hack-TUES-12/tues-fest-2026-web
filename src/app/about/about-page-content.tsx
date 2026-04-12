@@ -1,6 +1,7 @@
 'use client';
 
 import { Fragment } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { SiFacebook, SiInstagram, SiLinkedin, SiYoutube } from 'react-icons/si';
@@ -13,6 +14,7 @@ import {
 	TbExternalLink,
 	TbHistory,
 	TbNetwork,
+	TbBrandLinktree,
 	TbPlus,
 	TbSchool,
 	TbTrophy,
@@ -193,23 +195,40 @@ const ABOUT_HERO_SOCIAL_LINKS = [
 const ABOUT_HERO_SOCIAL_ICON_BUTTON =
 	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-primary/40 hover:bg-card/50 hover:text-primary';
 
+/** Same channels as schedule / footer — Hack TUES community. */
+const HACK_TUES_SOCIAL_LINKS = [
+	{ href: 'https://facebook.com/HackTUES', label: 'Hack TUES във Facebook', Icon: SiFacebook },
+	{ href: 'https://www.instagram.com/hacktuesfest/', label: 'Hack TUES в Instagram', Icon: SiInstagram },
+	{ href: 'https://www.linkedin.com/company/hacktues-tuesfest/', label: 'Hack TUES в LinkedIn', Icon: SiLinkedin },
+	{ href: 'https://linktr.ee/hack.tues.fest', label: 'Всички връзки към Hack TUES (Linktree)', Icon: TbBrandLinktree },
+] as const;
+
+const HACK_TUES_SOCIAL_ICON_BUTTON =
+	'rounded-full border-white/15 bg-card/30 text-white transition-colors hover:border-secondary/40 hover:bg-card/50 hover:text-secondary';
+
 export function AboutPageContent() {
 	const reducedMotion = useReducedMotion();
 
 	return (
 		<div className="relative flex w-full flex-col items-center gap-16 px-4 pt-10 pb-24 md:gap-20 md:px-8 md:pt-14">
 			{/* Background — matches location / schedule decorative language */}
-			<img
+			<Image
 				src="/decorations/purple-circle.svg"
 				alt=""
-				aria-hidden="true"
-				className="pointer-events-none absolute top-0 left-0 -z-10 w-[min(50vw,28rem)] max-w-2xl -translate-x-1/3 -translate-y-1/4 opacity-90 select-none"
+				width={448}
+				height={448}
+				unoptimized
+				aria-hidden
+				className="pointer-events-none absolute top-0 left-0 -z-10 h-auto w-[min(50vw,28rem)] max-w-2xl -translate-x-1/3 -translate-y-1/4 opacity-90 select-none"
 			/>
-			<img
+			<Image
 				src="/decorations/blue-circle.svg"
 				alt=""
-				aria-hidden="true"
-				className="pointer-events-none absolute right-0 bottom-[15%] -z-10 w-[min(42vw,22rem)] max-w-xl translate-x-1/4 opacity-80 select-none"
+				width={384}
+				height={384}
+				unoptimized
+				aria-hidden
+				className="pointer-events-none absolute right-0 bottom-[15%] -z-10 h-auto w-[min(42vw,22rem)] max-w-xl translate-x-1/4 opacity-80 select-none"
 			/>
 
 			{/* Hero */}
@@ -305,7 +324,10 @@ export function AboutPageContent() {
 						className="text-foreground/80 flex flex-col gap-5 leading-relaxed text-pretty"
 						{...sectionFadeUp(reducedMotion, 0.06)}
 					>
-						<motion.h2 className="font-title text-3xl text-white md:text-4xl" {...sectionFadeUp(reducedMotion, 0)}>
+						<motion.h2
+							className="font-title text-3xl text-white md:text-4xl"
+							{...sectionFadeUp(reducedMotion, 0)}
+						>
 							Кандидатстване
 						</motion.h2>
 						<p>
@@ -331,11 +353,15 @@ export function AboutPageContent() {
 						className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40"
 						{...sectionFadeUp(reducedMotion, 0.12)}
 					>
-						<img
-							src="/assets/about/about.png"
-							alt="Ученици на ТУЕС"
-							className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-						/>
+						<div className="relative aspect-[4/3] w-full">
+							<Image
+								src="/assets/about/about.png"
+								alt="Ученици на ТУЕС"
+								fill
+								sizes="(max-width: 768px) 100vw, min(42rem, 50vw)"
+								className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+							/>
+						</div>
 					</motion.div>
 				</div>
 			</motion.section>
@@ -560,66 +586,139 @@ export function AboutPageContent() {
 				</Card>
 			</motion.section>
 
-			{/* Hack TUES */}
+			{/* Hack TUES — split layout: visual column + reading column (lg+) */}
 			<motion.section className="mx-auto w-full max-w-5xl" {...sectionFadeIn(reducedMotion, 0)}>
-				<SectionHeading eyebrow="Хакатон" title="Hack TUES" toneIndex={3} />
-
-				<motion.div
-					className="overflow-hidden rounded-2xl shadow-2xl shadow-black/50"
-					{...sectionFadeUp(reducedMotion, 0.08)}
-				>
-					<img
-						src="/team/team1.webp"
-						alt="Организационният екип на Hack TUES 12"
-						className="aspect-[37/20] w-full object-cover"
-					/>
-				</motion.div>
-
-				<div className="mt-8 grid gap-4 md:grid-cols-2">
-					{[
-						{
-							label: 'Какво е?',
-							body: 'Hack TUES е едно от ключовите събития за ТУЕС — ученици в отбори от 3–5 участници създават от нулата ИТ проект за два дни по зададена тема и го представят пред професионално жури от преподаватели и ИТ специалисти.',
-						},
-						{
-							label: 'Значимост',
-							body: 'Единственият хакатон в България, организиран от ученици за ученици. Намерил е място сред иновативните практики на ЮНЕСКО за техническо и професионално образование — единствената образователна практика от България в тази инициатива.',
-						},
-					].map((block, i) => (
+				<div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-stretch lg:gap-12 xl:gap-14">
+					{/* Column A: heading + photo fills column width and remaining height (matches row on lg) */}
+					<div className="flex min-h-0 min-w-0 flex-col gap-6 lg:h-full lg:gap-8">
+						<div className="shrink-0 text-center lg:text-start flex flex-col gap-2">
+							<motion.p
+								className="text-muted text-sm font-medium tracking-widest"
+								{...sectionFadeUp(reducedMotion, 0)}
+							>
+								Хакатон
+							</motion.p>
+							<motion.h2
+								className="font-title text-3xl text-white md:text-4xl lg:text-[2.75rem] lg:leading-tight"
+								{...sectionFadeUp(reducedMotion, 0.06)}
+							>
+								Hack TUES
+							</motion.h2>
+						</div>
 						<motion.div
-							key={block.label}
-							className={cn('p-6 sm:p-7', cardSurface)}
-							{...listItemEntrance(reducedMotion, i, 0.08)}
+							className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/40 lg:aspect-auto lg:min-h-0 lg:flex-1"
+							{...sectionFadeUp(reducedMotion, 0.1)}
 						>
-							<p className="text-muted/90 mb-3 text-xs font-semibold tracking-[0.2em] uppercase">
-								{block.label}
-							</p>
-							<p className="text-foreground/80 text-sm leading-relaxed">{block.body}</p>
+							<Image
+								src="/team/team1.webp"
+								alt="Организационният екип на Hack TUES 12"
+								fill
+								unoptimized={true}
+								sizes="(max-width: 1023px) min(100vw - 2rem, 64rem), min(31rem, 52vw)"
+								className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+							/>
+							<div
+								className="pointer-events-none absolute inset-0 z-[1] rounded-2xl ring-1 ring-white/10 ring-inset"
+								aria-hidden
+							/>
 						</motion.div>
-					))}
-					<motion.div
-						className={cn('md:col-span-2', cardSurface, 'p-6 sm:p-7')}
-						{...listItemEntrance(reducedMotion, 2, 0.08)}
-					>
-						<p className="text-secondary/90 mb-3 text-xs font-semibold tracking-[0.2em] uppercase">
-							Организация
-						</p>
-						<p className="text-foreground/80 text-sm leading-relaxed">
-							Събитието стартира през 2015 г. и досега има единадесет издания. Всяка година се подготвя от
-							организационен екип, съставен от ученици в 11. клас, под менторството на АЗТУЕС. Участниците
-							развиват умения по програмиране, работа в екип и презентиране, а запознанствата с ментори
-							често прерастват в предложения за работа.
-						</p>
-					</motion.div>
-				</div>
+					</div>
 
-				<div className="mt-8 flex justify-center">
-					<Button asChild variant="muted" size="lg" className="shadow-muted/20 font-bold shadow-lg">
-						<Link href="https://hack-tues.com" target="_blank" rel="noopener noreferrer">
-							<TbExternalLink size={18} />
-							Виж повече за Hack TUES
-						</Link>
-					</Button>
+					{/* Column B: narrative stack + CTA */}
+					<div className="flex min-h-0 min-w-0 flex-col gap-6 lg:h-full">
+						<motion.div {...listItemEntrance(reducedMotion, 0, 0.08)}>
+							<Card
+								variant="accent"
+								className="bg-card/70 h-full border-white/5 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+							>
+								<CardContent className="flex flex-col gap-3 p-0">
+									<p className="text-muted text-sm font-medium tracking-widest">Какво представлява?</p>
+									<p className="text-foreground/80 text-sm leading-relaxed">
+										Hack TUES е едно от ключовите събития за ТУЕС — ученици в отбори от 3–5
+										участници създават от нулата ИТ проект за два дни по зададена тема и го
+										представят пред професионално жури от преподаватели и ИТ специалисти.
+									</p>
+								</CardContent>
+							</Card>
+						</motion.div>
+						<motion.div {...listItemEntrance(reducedMotion, 1, 0.08)}>
+							<Card
+								variant="muted"
+								className="bg-card/70 h-full border-white/5 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+							>
+								<CardContent className="flex flex-col gap-3 p-0">
+									<p className="text-secondary text-sm font-medium tracking-widest">Значимост</p>
+									<p className="text-foreground/80 text-sm leading-relaxed">
+										Единственият хакатон в България, организиран от ученици за ученици. Намерил е
+										място сред иновативните практики на ЮНЕСКО за техническо и професионално
+										образование — единствената образователна практика от България в тази инициатива.
+									</p>
+								</CardContent>
+							</Card>
+						</motion.div>
+						<motion.div {...listItemEntrance(reducedMotion, 2, 0.08)}>
+							<Card
+								variant="primary"
+								className="bg-card/70 border-white/5 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
+							>
+								<CardContent className="flex flex-col gap-3 p-0">
+									<p className="text-muted text-sm font-medium tracking-widest">Организация</p>
+									<p className="text-foreground/80 text-sm leading-relaxed">
+										Събитието стартира през 2015 г. и досега има дванадесет издания. Всяка година се
+										подготвя от организационен екип, съставен от ученици в 11. клас, под
+										менторството на АЗТУЕС. Участниците развиват умения по програмиране, работа в
+										екип и презентиране, а запознанствата с ментори често прерастват в предложения
+										за работа.
+									</p>
+								</CardContent>
+							</Card>
+						</motion.div>
+						<motion.div
+							className="flex flex-col items-center gap-4 pt-2 lg:items-start"
+							{...sectionFadeUp(reducedMotion, 0.14)}
+						>
+							<Button
+								asChild
+								variant="muted"
+								size="lg"
+								className="shadow-muted/20 w-full font-bold shadow-lg sm:w-auto"
+							>
+								<Link href="https://hack-tues.com" target="_blank" rel="noopener noreferrer">
+									<TbExternalLink size={18} />
+									Виж повече за Hack TUES
+								</Link>
+							</Button>
+							<div className="flex w-full flex-col gap-3">
+								<p className="text-center text-xs font-medium tracking-widest text-white/45 lg:text-left">
+									Hack TUES в социалните мрежи
+								</p>
+								<div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+									{HACK_TUES_SOCIAL_LINKS.map(({ href, label, Icon }, index) => (
+										<motion.div
+											key={href}
+											{...listItemIconEntrance(
+												reducedMotion,
+												index,
+												0.06,
+												SECTION_FADE_IN_DURATION_SEC
+											)}
+										>
+											<Button
+												variant="outline"
+												size="icon"
+												className={HACK_TUES_SOCIAL_ICON_BUTTON}
+												asChild
+											>
+												<Link href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+													<Icon className="size-5" aria-hidden />
+												</Link>
+											</Button>
+										</motion.div>
+									))}
+								</div>
+							</div>
+						</motion.div>
+					</div>
 				</div>
 			</motion.section>
 		</div>
