@@ -113,46 +113,50 @@ const Calculator = ({ className }: { className?: string }) => {
 				</div>
 
 				<form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-					<CalculatorField
-						name="bgl"
-						label="НВО — Български език"
-						hint="(0–100т.)"
-						min={0}
-						max={100}
-						value={calculator.bgl}
-						error={errorCalculator.bgl}
-						onChange={handleChange}
-					/>
-					<CalculatorField
-						name="math"
-						label="НВО — Математика"
-						hint="(0–100т.)"
-						min={0}
-						max={100}
-						value={calculator.math}
-						error={errorCalculator.math}
-						onChange={handleChange}
-					/>
-					<CalculatorField
-						name="math7"
-						label="Оценка Математика — 7. клас"
-						hint="(2–6)"
-						min={2}
-						max={6}
-						value={calculator.math7}
-						error={errorCalculator.math7}
-						onChange={handleChange}
-					/>
-					<CalculatorField
-						name="phys7"
-						label="Оценка Физика — 7. клас"
-						hint="(2–6)"
-						min={2}
-						max={6}
-						value={calculator.phys7}
-						error={errorCalculator.phys7}
-						onChange={handleChange}
-					/>
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<CalculatorField
+							name="bgl"
+							label="НВО — Български език"
+							hint=""
+							min={0}
+							max={100}
+							value={calculator.bgl}
+							error={errorCalculator.bgl}
+							onChange={handleChange}
+						/>
+						<CalculatorField
+							name="math"
+							label="НВО — Математика"
+							hint=""
+							min={0}
+							max={100}
+							value={calculator.math}
+							error={errorCalculator.math}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<CalculatorField
+							name="math7"
+							label="Оценка Математика — 7. клас"
+							hint=""
+							min={2}
+							max={6}
+							value={calculator.math7}
+							error={errorCalculator.math7}
+							onChange={handleChange}
+						/>
+						<CalculatorField
+							name="phys7"
+							label="Оценка Физика — 7. клас"
+							hint=""
+							min={2}
+							max={6}
+							value={calculator.phys7}
+							error={errorCalculator.phys7}
+							onChange={handleChange}
+						/>
+					</div>
 				</form>
 
 				{/* Result */}
