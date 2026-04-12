@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 type Color = 'primary' | 'secondary' | 'accent' | 'muted';
 
@@ -35,7 +35,7 @@ const Quote = ({
 	colorIndex = 0,
 	vertical = false,
 }: {
-	img: StaticImageData;
+	img: string;
 	name: string;
 	text: string;
 	desc: string;
