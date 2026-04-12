@@ -76,10 +76,10 @@ const SPECIALTIES = [
 ] as const;
 
 const SPECIALTY_CARD_TONES = [
-	{ icon: 'bg-primary/10 text-primary' },
-	{ icon: 'bg-secondary/10 text-secondary' },
-	{ icon: 'bg-accent/10 text-accent' },
-	{ icon: 'bg-muted/10 text-muted' },
+	{ icon: 'bg-primary/10 text-primary', text: "text-primary" },
+	{ icon: 'bg-secondary/10 text-secondary', text: "text-secondary" },
+	{ icon: 'bg-accent/10 text-accent', text: "text-accent" },
+	{ icon: 'bg-muted/10 text-muted', text: "text-muted" },
 ] as const;
 
 const EDUCATION_ITEMS = [
@@ -312,7 +312,10 @@ export function AboutPageContent() {
 									<p className="text-sm leading-relaxed text-foreground/70">{description}</p>
 								</div>
 								{href ? (
-									<span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+									<span className={cn(
+										"mt-auto inline-flex items-center gap-1 text-xs font-medium opacity-0 transition-opacity duration-200 group-hover:opacity-100",
+										tone.text
+									)}>
 										Научи повече <TbArrowRight size={13} />
 									</span>
 								) : null}
