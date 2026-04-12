@@ -5,12 +5,12 @@ import {
 	TbArrowRight,
 	TbBrain,
 	TbBriefcase,
-	TbCheck,
 	TbCode,
 	TbCpu,
 	TbExternalLink,
 	TbHistory,
 	TbNetwork,
+	TbPlus,
 	TbSchool,
 	TbTrophy,
 } from 'react-icons/tb';
@@ -85,10 +85,14 @@ const SPECIALTY_CARD_TONES = [
 const EDUCATION_ITEMS = [
 	'Участие в национални и международни състезания',
 	'Hack TUES — хакатон, организиран от ученици за ученици',
+	'TUES Talks - първият ученически подкаст в България',
 	'Workshop-и и лекции от ИТ професионалисти',
 	'Cisco академия за актуалните мрежови технологии',
+	'Стаж в реални ИТ компании',
 	'Разнообразни извънкласни дейности',
-	'Разширено изучаване на английски език',
+	'Разширено изучаване на английски и немски език',
+	'Уникална общност от преподаватели, завършили и настоящи ученици'
+	// 'Участие в мобилности по проекти Еразъм+',
 ] as const;
 
 const SUCCESS_FACTORS = [
@@ -129,6 +133,10 @@ function SectionHeading({
 
 const cardSurface =
 	'rounded-2xl bg-card/70 shadow-lg backdrop-blur-sm transition-colors duration-300 hover:bg-card/85';
+
+/** Education list: row fade + plus scale/rotate — shorter wait than full `SECTION_FADE_IN_DURATION_SEC`. */
+const EDUCATION_LIST_MOTION_BASE_SEC = 0.15;
+const EDUCATION_LIST_STAGGER_SEC = 0.08;
 
 /** Same URLs and styling as schedule / footer — TUES community channels. */
 const ABOUT_HERO_SOCIAL_LINKS = [
@@ -362,23 +370,42 @@ export function AboutPageContent() {
 					variant="accent"
 					className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
 				>
-					<CardContent className="flex flex-col gap-6 p-0">
+					<CardContent className="flex flex-col gap-2 p-0">
 						<div className="space-y-2">
 							<p className="text-sm font-medium tracking-widest text-accent">Обучение</p>
 							<h2 className="font-title text-2xl text-white md:text-3xl">Освен специализирания план</h2>
-							<p className="text-sm text-foreground/65">ТУЕС предлага:</p>
+							<p className="text-sm">ТУЕС предлага:</p>
 						</div>
-						<ul className="flex flex-col gap-2">
+						{/* Same row pattern as project participants (`Contributors`) + schedule exhibition lists */}
+						<ul className="flex flex-col gap-2 px-2">
 							{EDUCATION_ITEMS.map((item, i) => (
 								<motion.li
 									key={item}
-									className="flex items-start gap-3 rounded-xl bg-white/[0.04] px-4 py-3"
-									{...listItemEntrance(reducedMotion, i, 0.06)}
+									className="flex items-center gap-2"
+									{...listItemEntrance(
+										reducedMotion,
+										i,
+										EDUCATION_LIST_STAGGER_SEC,
+										EDUCATION_LIST_MOTION_BASE_SEC,
+									)}
 								>
-									<span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-										<TbCheck size={14} strokeWidth={2.5} />
+									<motion.span
+										className="inline-flex shrink-0 origin-center pt-0.5"
+										{...listItemIconEntrance(
+											reducedMotion,
+											i,
+											EDUCATION_LIST_STAGGER_SEC,
+											EDUCATION_LIST_MOTION_BASE_SEC,
+										)}
+									>
+										<TbPlus
+											className={cn('size-6 shrink-0 stroke-[3.5]', 'text-accent')}
+											aria-hidden
+										/>
+									</motion.span>
+									<span className="text-sm">
+										{item}
 									</span>
-									<span className="text-sm leading-relaxed text-foreground/85">{item}</span>
 								</motion.li>
 							))}
 						</ul>
