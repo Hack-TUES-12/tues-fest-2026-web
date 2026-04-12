@@ -213,27 +213,51 @@ export function AboutPageContent() {
 	const reducedMotion = useReducedMotion();
 
 	return (
-		<div className="relative flex w-full flex-col items-center gap-16 px-4 pt-10 pb-24 md:gap-20 md:px-8 md:pt-14">
-			{/* Background — matches location / schedule decorative language */}
-			<Image
-				src="/decorations/purple-circle.svg"
-				alt=""
-				width={448}
-				height={448}
-				unoptimized
-				aria-hidden
-				className="pointer-events-none absolute top-0 left-0 -z-10 h-auto w-[min(50vw,28rem)] max-w-2xl -translate-x-1/3 -translate-y-1/4 opacity-90 select-none"
-			/>
-			<Image
-				src="/decorations/blue-circle.svg"
-				alt=""
-				width={384}
-				height={384}
-				unoptimized
-				aria-hidden
-				className="pointer-events-none absolute right-0 bottom-[15%] -z-10 h-auto w-[min(42vw,22rem)] max-w-xl translate-x-1/4 opacity-80 select-none"
-			/>
+		<div className="relative overflow-x-hidden px-4 pt-10 pb-24 md:px-8 md:pt-14">
+			{/*
+			  Layer above globals.css `body::before` (z-[-1]). Negative z-index here painted
+			  below that texture, so blobs looked invisible on the dark page.
+			*/}
+			<div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+				<Image
+					src="/decorations/purple-circle.svg"
+					alt=""
+					width={448}
+					height={448}
+					unoptimized
+					aria-hidden
+					className="pointer-events-none absolute top-0 left-0 h-auto w-[min(50vw,40rem)] max-w-4xl -translate-x-1/3 -translate-y-1/4 opacity-90 select-none"
+				/>
+				<Image
+					src="/decorations/green-circle.svg"
+					alt=""
+					width={384}
+					height={384}
+					unoptimized
+					aria-hidden
+					className="pointer-events-none absolute right-0 bottom-0 h-auto w-[min(42vw,32rem)] translate-y-1/3 translate-x-1/4 opacity-80 select-none"
+				/>
+				<Image
+					src="/decorations/orange-circle.svg"
+					alt=""
+					width={400}
+					height={400}
+					unoptimized
+					aria-hidden
+					className="pointer-events-none absolute top-[16%] right-0 h-auto w-[min(42vw,32rem)] max-w-xl translate-x-1/2 opacity-75 select-none"
+				/>
+				<Image
+					src="/decorations/blue-circle.svg"
+					alt=""
+					width={384}
+					height={384}
+					unoptimized
+					aria-hidden
+					className="pointer-events-none absolute top-[40%] left-0 h-auto w-[min(48vw,40rem)] max-w-lg -translate-x-1/2 opacity-80 select-none"
+				/>
+			</div>
 
+			<div className="relative z-10 flex w-full flex-col items-center gap-16 md:gap-20">
 			{/* Hero */}
 			<motion.section
 				className="relative isolate mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center"
@@ -739,6 +763,7 @@ export function AboutPageContent() {
 					</div>
 				</div>
 			</motion.section>
+			</div>
 		</div>
 	);
 }
