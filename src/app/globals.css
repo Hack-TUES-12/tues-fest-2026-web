@@ -139,6 +139,27 @@
 			animation: none;
 		}
 	}
+
+	/**
+	 * Safari / iOS: `backdrop-filter` over large or stacked surfaces is disproportionately expensive.
+	 * `data-tf-webkit-cheap-backdrop` is set on `<html>` by a `beforeInteractive` script in the root layout.
+	 * Translucent `bg-*` layers stay the same; only the frosted-glass blur is removed so the look stays close
+	 * on the existing textured background.
+	 */
+	html[data-tf-webkit-cheap-backdrop] :is(
+		.backdrop-blur-xs,
+		.backdrop-blur-sm,
+		.backdrop-blur,
+		.backdrop-blur-md,
+		.backdrop-blur-lg,
+		.backdrop-blur-xl,
+		.backdrop-blur-2xl,
+		.backdrop-blur-3xl
+	),
+	html[data-tf-webkit-cheap-backdrop] .backdrop-filter {
+		-webkit-backdrop-filter: none !important;
+		backdrop-filter: none !important;
+	}
 }
 
 /* Custom scrollbar */

@@ -70,6 +70,9 @@ const mighty = localFont({
 	variable: '--font-mighty',
 });
 
+/** Runs before paint; sets `data-tf-webkit-cheap-backdrop` on `<html>` for CSS that strips `backdrop-filter` (Safari / iOS WebKit). */
+const webkitBackdropProfileScript = `(function(){try{var ua=navigator.userAgent;var iOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);var safariDesktop=/Safari/i.test(ua)&&!/Chrome|Chromium|Edg|OPR|Opera|Brave/i.test(ua);if(iOS||safariDesktop)document.documentElement.dataset.tfWebkitCheapBackdrop="";}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html
@@ -90,6 +93,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					'dark min-h-0 w-full min-w-0 overflow-x-clip'
 				)}
 			>
+				<Script id="tf-webkit-backdrop-profile" strategy="beforeInteractive">
+					{webkitBackdropProfileScript}
+				</Script>
 				<GrowthBookServerProvider>
 					<TRPCReactProvider>
 						<Navigation />
