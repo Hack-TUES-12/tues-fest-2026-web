@@ -18,7 +18,7 @@ export function ExpectationIllustration({
 	reverse: boolean
 }) {
 	const [failed, setFailed] = useState(false);
-	const src = `/assets/home/expectations/${index + 1}.png`;
+	const src = `/assets/home/expectations/${index + 1}.webp`;
 	const [aw, ah] = illustrationAspect;
 
 	return (

@@ -1,13 +1,13 @@
-const tf2016 = '/folders_images/tf2016_img1.jpg';
-const tf2017 = '/folders_images/tf2017_img1.jpg';
-const tf2018 = '/folders_images/tf2018_img1.jpg';
-const tf2019 = '/folders_images/tf2019_img1.jpg';
-const tf2020 = '/folders_images/tf2020_img1.png';
+const tf2016 = '/folders_images/tf2016_img1.webp';
+const tf2017 = '/folders_images/tf2017_img1.webp';
+const tf2018 = '/folders_images/tf2018_img1.webp';
+const tf2019 = '/folders_images/tf2019_img1.webp';
+const tf2020 = '/folders_images/tf2020_img1.webp';
 const tf2021 = '/folders_images/tf2021_new.webp';
 const tf2022 = '/folders_images/tf2022_new.webp';
 const tf2023 = '/folders_images/tf2023_new.webp'
 const tf2024_3 = '/folders_images/tf2024_new.webp';
-const tf2025 = '/folders_images/tf2025.jpg'
+const tf2025 = '/folders_images/tf2025.webp'
 
 export const FOLDERS = [
 	{

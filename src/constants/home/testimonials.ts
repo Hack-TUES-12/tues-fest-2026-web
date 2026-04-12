@@ -2,7 +2,7 @@ export const TESTIMONIALS_TITLE = 'Мнения за ТУЕС';
 
 export const TESTIMONIALS = [
 	{
-		img: '/assets/testimonials/kirkov.png',
+		img: '/assets/testimonials/kirkov.webp',
 		testimonyBody:
 			'Училище, място, общност, хора - уникална "мелница", която всъщност промени и определи траекторията на личния и професионалният ми живот.',
 		testimonyName: 'Петър Кирков',
