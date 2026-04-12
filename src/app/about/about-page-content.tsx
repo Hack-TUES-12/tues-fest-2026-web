@@ -186,6 +186,7 @@ const EDUCATION_LINK_CLASS_MUTED = 'font-medium text-muted underline-offset-2 tr
 const ABOUT_HERO_SOCIAL_LINKS = [
 	{ href: 'https://www.facebook.com/tues.bg', label: 'Facebook', Icon: SiFacebook },
 	{ href: 'https://www.instagram.com/tues.bg/', label: 'Instagram', Icon: SiInstagram },
+	{ href: 'https://www.linkedin.com/school/tues', label: 'LinkedIn', Icon: SiLinkedin },
 	{ href: 'https://www.youtube.com/@TUES', label: 'YouTube', Icon: SiYoutube },
 ] as const;
 
