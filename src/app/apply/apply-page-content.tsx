@@ -1,7 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { TbBrain, TbCheck, TbCode, TbCpu, TbExternalLink, TbNetwork } from 'react-icons/tb';
+import {
+	TbArrowRight,
+	TbBrain,
+	TbCheck,
+	TbCode,
+	TbCpu,
+	TbExternalLink,
+	TbNetwork,
+	TbPlus,
+} from 'react-icons/tb';
 import { SiFacebook, SiInstagram, SiLinkedin, SiYoutube } from 'react-icons/si';
 import { motion, useReducedMotion } from 'motion/react';
 
@@ -29,22 +38,28 @@ const SPECIALTIES = [
 	{
 		icon: TbBrain,
 		title: 'Интелигентни системи',
-		detail: '2 паралелки × 26 ученици',
+		lines: [
+			'Разширено изучаване на английски + втори език немски — 1 паралелка × 26 ученици',
+			'Разширено изучаване на немски + втори език английски — 1 паралелка × 26 ученици',
+		],
 	},
 	{
 		icon: TbCpu,
 		title: 'Роботика',
-		detail: '2 паралелки × 26 ученици',
+		lines: [
+			'Разширено изучаване на английски + втори език немски — 1 паралелка × 26 ученици',
+			'Разширено изучаване на немски + втори език английски — 1 паралелка × 26 ученици',
+		],
 	},
 	{
 		icon: TbCode,
 		title: 'Разработка на софтуер',
-		detail: '1 паралелка × 26 ученици',
+		lines: ['Разширено изучаване на английски + втори език немски — 1 паралелка × 26 ученици'],
 	},
 	{
 		icon: TbNetwork,
 		title: 'Комуникационни и компютърни мрежи',
-		detail: '1 паралелка × 26 ученици',
+		lines: ['Разширено изучаване на английски + втори език немски — 1 паралелка × 26 ученици'],
 	},
 ] as const;
 
@@ -61,6 +76,10 @@ const SCORE_FORMULA = [
 	{ label: 'Оценка по Математика (7. клас)', note: '' },
 	{ label: 'Оценка по Физика (7. клас)', note: '' },
 ] as const;
+
+/** Match about-page education lists (`listItemIconEntrance` timing). */
+const FORMULA_LIST_STAGGER_SEC = 0.08;
+const FORMULA_LIST_MOTION_BASE_SEC = 0.15;
 
 const SECTION_EYEBROW = [
 	'text-primary',
@@ -215,7 +234,7 @@ export function ApplyPageContent() {
 						<SectionHeading
 							eyebrow="Уникалност"
 							title="Кое прави ТУЕС специално?"
-							toneIndex={1}
+							toneIndex={3}
 							align="start"
 						/>
 						<ul className="mt-2 flex flex-col gap-2">
@@ -232,6 +251,15 @@ export function ApplyPageContent() {
 								</motion.li>
 							))}
 						</ul>
+						<motion.div className="mt-4" {...sectionFadeUp(reducedMotion, 0.32)}>
+							<Link
+								href="/about"
+								className="text-muted hover:text-muted/90 inline-flex items-center gap-2 text-sm font-medium underline-offset-4 transition-colors hover:underline md:text-base"
+							>
+								Виж повече
+								<TbArrowRight size={18} aria-hidden />
+							</Link>
+						</motion.div>
 					</div>
 					<motion.div
 						className="relative overflow-hidden rounded-2xl shadow-2xl shadow-black/40"
@@ -246,85 +274,111 @@ export function ApplyPageContent() {
 				</div>
 			</motion.section>
 
-			{/* How to apply + Calculator */}
+			{/* How to apply + Formula / Calculator (2-col: calculator left, formula right) */}
 			<motion.section
-				className="mx-auto grid w-full max-w-5xl gap-8 md:grid-cols-[3fr,2fr] md:gap-8"
+				className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 md:gap-8"
 				{...sectionFadeIn(reducedMotion, 0)}
 			>
-				<div className="flex min-w-0 flex-col gap-6">
-					<Card
-						variant="accent"
-						className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
-					>
-						<CardContent className="flex flex-col gap-6 p-0">
-							<div className="space-y-2">
-								<p className="text-sm font-medium tracking-widest text-accent">Професии</p>
-								<h2 className="font-title text-2xl text-white md:text-3xl">Как да кандидатствам?</h2>
-								<p className="text-sm text-foreground/70">
-									За учебната {TF_YEAR}/{TF_YEAR + 1} г. ТУЕС приема ученици по следните професии:
-								</p>
-							</div>
-							<ul className="flex flex-col gap-2">
-								{SPECIALTIES.map(({ icon: Icon, title, detail }, index) => (
-									<motion.li
-										key={title}
-										className="flex items-center gap-4 rounded-xl bg-white/[0.04] px-4 py-3.5 transition-colors duration-200 hover:bg-white/[0.06]"
-										{...listItemEntrance(reducedMotion, index, 0.06)}
+				<Card
+					variant="accent"
+					className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9 md:col-span-2"
+				>
+					<CardContent className="flex flex-col gap-6 p-0">
+						<div className="space-y-2">
+							<p className="text-sm font-medium tracking-widest text-primary">Професии</p>
+							<h2 className="font-title text-2xl text-white md:text-3xl">Как да кандидатствам?</h2>
+							<p className="text-sm text-foreground/70">
+								За учебната {TF_YEAR}/{TF_YEAR + 1} г. ТУЕС приема ученици по следните професии:
+							</p>
+						</div>
+						<ul className="flex flex-col gap-2">
+							{SPECIALTIES.map(({ icon: Icon, title, lines }, index) => (
+								<motion.li
+									key={title}
+									className="flex items-start gap-4 rounded-xl bg-white/[0.04] px-4 py-4 transition-colors duration-200 hover:bg-white/[0.06]"
+									{...listItemEntrance(reducedMotion, index, 0.06)}
+								>
+									<div
+										className={cn(
+											'flex size-9 shrink-0 items-center justify-center rounded-xl',
+											SPECIALTY_ICON_TONES[index % SPECIALTY_ICON_TONES.length],
+										)}
 									>
-										<div
-											className={cn(
-												'flex size-9 shrink-0 items-center justify-center rounded-xl',
-												SPECIALTY_ICON_TONES[index % SPECIALTY_ICON_TONES.length],
-											)}
-										>
-											<Icon size={18} />
-										</div>
-										<div>
-											<p className="font-semibold text-white">{title}</p>
-											<p className="mt-0.5 text-xs text-foreground/60">{detail}</p>
-										</div>
-									</motion.li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
+										<Icon size={18} />
+									</div>
+									<div className="min-w-0 flex-1">
+										<p className="font-semibold text-white">{title}</p>
+										<ul className="mt-2 space-y-1.5 border-l border-white/10 pl-3">
+											{lines.map((line) => (
+												<li
+													key={line}
+													className="text-xs leading-relaxed text-foreground/65 md:text-sm"
+												>
+													{line}
+												</li>
+											))}
+										</ul>
+									</div>
+								</motion.li>
+							))}
+						</ul>
+					</CardContent>
+				</Card>
 
-					<Card
-						variant="primary"
-						className="bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9"
-					>
-						<CardContent className="flex flex-col gap-6 p-0">
-							<div className="space-y-2">
-								<p className="text-sm font-medium tracking-widest text-primary">Формула</p>
-								<h2 className="font-title text-2xl text-white md:text-3xl">Как се формира балът?</h2>
-								<p className="text-sm text-foreground/70">Балът е сбор от следните компоненти:</p>
-							</div>
-							<ul className="flex flex-col gap-2">
-								{SCORE_FORMULA.map(({ label, note }, i) => (
-									<motion.li
-										key={label}
-										className="flex items-center justify-between gap-4 rounded-xl bg-white/[0.04] px-4 py-3"
-										{...listItemEntrance(reducedMotion, i, 0.06)}
+				<Card
+					variant="primary"
+					className="order-1 min-w-0 bg-card/70 px-6 py-8 shadow-lg backdrop-blur-md sm:px-8 sm:py-9 md:order-none"
+				>
+					<CardContent className="flex flex-col gap-6 p-0">
+						<div className="space-y-2">
+							<p className="text-sm uppercase font-medium text-primary">Формула</p>
+							<h2 className="font-title text-2xl text-white md:text-3xl">Как се формира балът?</h2>
+							<p className="text-sm text-foreground/70">Балът е сбор от следните компоненти:</p>
+						</div>
+						<ul className="flex flex-col gap-2 px-2">
+							{SCORE_FORMULA.map(({ label, note }, i) => (
+								<motion.li
+									key={label}
+									className="flex items-start gap-2"
+									{...listItemEntrance(
+										reducedMotion,
+										i,
+										FORMULA_LIST_STAGGER_SEC,
+										FORMULA_LIST_MOTION_BASE_SEC,
+									)}
+								>
+									<motion.span
+										className="inline-flex shrink-0 origin-center pt-0.5"
+										{...listItemIconEntrance(
+											reducedMotion,
+											i,
+											FORMULA_LIST_STAGGER_SEC,
+											FORMULA_LIST_MOTION_BASE_SEC,
+										)}
 									>
-										<div className="flex min-w-0 items-center gap-3">
-											<span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
-												{i + 1}
-											</span>
-											<span className="text-sm text-foreground/85">{label}</span>
-										</div>
+										<TbPlus
+											className="size-6 shrink-0 stroke-[3.5] text-primary"
+											aria-hidden
+										/>
+									</motion.span>
+									<div className="flex min-w-0 flex-1 items-center justify-between gap-2 rounded-xl">
+										<span className="pt-1 text-sm text-foreground/85">{label}</span>
 										{note ? (
-											<span className="shrink-0 rounded-full bg-primary/15 px-3 py-0.5 text-xs font-bold text-primary">
+											<span className="shrink-0 rounded-full bg-primary/15 px-3 py-0.5 mt-1 text-xs font-bold text-primary">
 												{note}
 											</span>
 										) : null}
-									</motion.li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
-				</div>
+									</div>
+								</motion.li>
+							))}
+						</ul>
+					</CardContent>
+				</Card>
 
-				<motion.div className="min-w-0" {...sectionFadeUp(reducedMotion, 0.08)}>
+				<motion.div
+					className="order-2 min-w-0 md:order-none"
+					{...sectionFadeUp(reducedMotion, 0.08)}
+				>
 					<Calculator className="bg-card/70 shadow-lg backdrop-blur-md" />
 				</motion.div>
 			</motion.section>

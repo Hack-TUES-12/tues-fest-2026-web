@@ -49,6 +49,7 @@ const CalculatorField = ({
 			name={name}
 			className={cn(
 				'w-full rounded-xl border bg-white/5 px-4 py-2.5 text-base font-medium text-white outline-none transition-colors duration-200 placeholder:text-white/20',
+				'[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
 				'focus:border-muted/60 focus:bg-muted/5',
 				error ? 'border-red-500/60' : 'border-white/10 hover:border-white/20',
 			)}
@@ -62,6 +63,10 @@ const CalculatorField = ({
 );
 
 const MAX_SCORE = 100 + 300 + 50 + 50; // 500
+
+/** Track background is dark muted from 0 up to this score; the tail to MAX_SCORE uses a distinct tone. */
+const TRACK_MUTED_UNTIL_SCORE = 464.25;
+const TRACK_MUTED_SEGMENT_PERCENT = (TRACK_MUTED_UNTIL_SCORE / MAX_SCORE) * 100;
 
 const Calculator = ({ className }: { className?: string }) => {
 	const [result, setResult] = useState(0);
@@ -113,46 +118,50 @@ const Calculator = ({ className }: { className?: string }) => {
 				</div>
 
 				<form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-					<CalculatorField
-						name="bgl"
-						label="НВО — Български език"
-						hint="(0–100т.)"
-						min={0}
-						max={100}
-						value={calculator.bgl}
-						error={errorCalculator.bgl}
-						onChange={handleChange}
-					/>
-					<CalculatorField
-						name="math"
-						label="НВО — Математика"
-						hint="(0–100т.)"
-						min={0}
-						max={100}
-						value={calculator.math}
-						error={errorCalculator.math}
-						onChange={handleChange}
-					/>
-					<CalculatorField
-						name="math7"
-						label="Оценка Математика — 7. клас"
-						hint="(2–6)"
-						min={2}
-						max={6}
-						value={calculator.math7}
-						error={errorCalculator.math7}
-						onChange={handleChange}
-					/>
-					<CalculatorField
-						name="phys7"
-						label="Оценка Физика — 7. клас"
-						hint="(2–6)"
-						min={2}
-						max={6}
-						value={calculator.phys7}
-						error={errorCalculator.phys7}
-						onChange={handleChange}
-					/>
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<CalculatorField
+							name="bgl"
+							label="НВО — Български език"
+							hint=""
+							min={0}
+							max={100}
+							value={calculator.bgl}
+							error={errorCalculator.bgl}
+							onChange={handleChange}
+						/>
+						<CalculatorField
+							name="math"
+							label="НВО — Математика"
+							hint=""
+							min={0}
+							max={100}
+							value={calculator.math}
+							error={errorCalculator.math}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+						<CalculatorField
+							name="math7"
+							label="Оценка Математика — 7. клас"
+							hint=""
+							min={2}
+							max={6}
+							value={calculator.math7}
+							error={errorCalculator.math7}
+							onChange={handleChange}
+						/>
+						<CalculatorField
+							name="phys7"
+							label="Оценка Физика — 7. клас"
+							hint=""
+							min={2}
+							max={6}
+							value={calculator.phys7}
+							error={errorCalculator.phys7}
+							onChange={handleChange}
+						/>
+					</div>
 				</form>
 
 				{/* Result */}
@@ -164,10 +173,21 @@ const Calculator = ({ className }: { className?: string }) => {
 						</span>
 						<span className="text-sm text-white/40 mb-1">/ {MAX_SCORE}</span>
 					</div>
-					{/* Progress bar */}
-					<div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+					{/* Progress bar: dark muted track up to 464.25, then lighter tail to 500 */}
+					<div className="relative h-2 w-full overflow-hidden rounded-full">
+						<div className="absolute inset-0 flex">
+							<div
+								className="h-full shrink-0 bg-white/[0.14]"
+								style={{ width: `${TRACK_MUTED_SEGMENT_PERCENT}%` }}
+							>
+								<div
+									className="h-full w-full shrink-0 bg-muted/15 rounded-full"
+								/>
+							</div>
+							<div className="h-full min-w-0 flex-1 bg-white/[0.14]" />
+						</div>
 						<div
-							className="h-full rounded-full bg-muted transition-all duration-500 ease-out"
+							className="absolute inset-y-0 left-0 z-10 rounded-full bg-muted transition-all duration-500 ease-out"
 							style={{ width: `${percentage}%` }}
 						/>
 					</div>
