@@ -37,7 +37,7 @@ export const SCHEDULE: ScheduleItem[] = [
 	},
 	{
 		start: '10:00',
-		end: '15:00',
+		end: '15:30',
 		title: 'Изложение на ученически проекти',
 		description: (
 			<div className="font-mono text-sm md:text-base">
@@ -102,7 +102,7 @@ export const SCHEDULE: ScheduleItem[] = [
 	{
 		start: '11:00',
 		end: '12:00',
-		title: 'TUES E&A Pitch',
+		title: 'Pitch to Reach',
 		description: `10 избрани отбора ще представят идеята си пред бизнес ориентарино жури, а проектът с най-добра бизнес идея и потенциал за превръщане в реален продукт ще получи специална награда. Посетителите могат да гледат презентациите на място в София Тех Парк.`,
 		icon: '',
 		pos: 'left',
