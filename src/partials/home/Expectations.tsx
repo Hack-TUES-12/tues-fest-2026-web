@@ -126,7 +126,7 @@ const Expectations = () => {
 
 				<IfTFFeatureOn feature="tf-schedule">
 					<motion.div className="mt-16 flex justify-center md:mt-20" {...sectionFadeUp(reducedMotion, 0.06)}>
-						<Button asChild variant="default" size="lg" className="w-fit font-bold">
+						<Button asChild variant="accent" size="lg" className="w-fit font-bold">
 							<Link href="/schedule">Виж програмата</Link>
 						</Button>
 					</motion.div>
