@@ -77,7 +77,7 @@ export default function OmegaSponsor() {
 	const logoSrc = OMEGA_SPONSOR.logo;
 
 	return (
-		<div className="relative z-10 mb-72 flex max-w-3xl flex-col items-center">
+		<div className="relative w-full z-10 flex flex-col items-center">
 			{/* Section title */}
 			<h2 className="font-mighty scroll-m-20 mb-6 text-center text-4xl first:mt-0 md:text-5xl">
 				Omega Sponsor
