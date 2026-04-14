@@ -39,8 +39,8 @@ const telebidProLogo = '/sponsors/gamma/telebidPro.png';
 const a1Logo = '/sponsors/partners/a1.png';
 const lightworkLogo = '/sponsors/partners/lightwork.svg'
 const bakersLogo = '/sponsors/partners/bakers.svg'
+const corporateLogo = '/sponsors/partners/corporate.svg';
 const aztuesLogo = '/sponsors/partners/aztues.png';
-const corporateLogo = '/sponsors/partners/corporate.png';
 const culligan = '/sponsors/partners/culligan.jpg';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
@@ -319,6 +319,19 @@ const PARTNERS = [
 
 			Тук не просто хапваш – потапяш се в аромат, текстура и наслада, които остават в съзнанието ти дълго след последната хапка. „Бейкърс“ е изкушение, на което не можеш да устоиш.`,
 	},
+	{
+		name: 'Corporate Gifts',
+		logo: corporateLogo,
+		url: 'https://corporategifts.bg',
+		description:
+			`Corporategifts.bg е сред водещите рекламни агенции в България в продуктовата, печатната и външната реклама. Агенцията разполага със собствена производствена база и предлага всички видове брандиране на продукти - лазерно гравиране, печат(трансферен, дигитален, тампонен, ситопечат), бродерия, преге и др. В своя 13 годишен опит агенцията се утвърди като водещ вносител за България на рекламни артикули от доказани дистрибутори в Европа и Китай. Към днешна дата агенцията предлага и услугите дигитален маркетинг и организиране на събития.
+			В уебсайта www.corporategifts.bg ще откриете над 30 000 промоционални продукти, подходящи за рекламата на всеки бизнес.
+			
+			https://www.linkedin.com/company/corporategifts-bg
+			https://www.facebook.com/Corporategifts.bg
+`,
+		supportedEditions: ['hacktues-security'],
+	},
 	// {
 	// 	name: 'АЗТУЕС',
 	// 	logo: aztuesLogo,
@@ -343,14 +356,6 @@ const PARTNERS = [
 	// 	url: 'https://www.culligan.bg/',
 	// 	description:
 	// 		'Culligan Bulgaria- всичко, от което се нуждаете, за да осигурите чиста, висококачествена вода за Вашия бизнес или домакинство. Водата, която обичате! Ние в Culligan се ангажираме да изградим по-добър, по-устойчив свят чрез подобряване както на социалното, така и на нашето въздействие върху околната среда. В Culligan вярваме, че по-чистата и по-здравословна вода може да допринесе за подобряване на живота на хората по света и е ключов двигател към решаването на някои от най-големите предизвикателства, които стоят в нашето бъдеще.',
-	// 	supportedEditions: ['hacktues-security'],
-	// },
-	// {
-	// 	name: 'Corporate Gifts',
-	// 	logo: corporateLogo,
-	// 	url: 'https://corporategifts.bg',
-	// 	description:
-	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 	// 	supportedEditions: ['hacktues-security'],
 	// },
 	// {
