@@ -11,8 +11,13 @@ export function cn(...inputs: ClassValue[]) {
  * Parses a string and converts:
  * - Markdown-style bold syntax (**text**) to bold React elements
  * - URLs (http://, https://, www.) to clickable links
+ *
+ * @param linkClassName – Tailwind classes for link `<a>` elements (default: primary)
  */
-export function parseBoldText(text: string): React.ReactNode[] {
+export function parseBoldText(
+	text: string,
+	linkClassName = 'text-primary hover:underline break-words'
+): React.ReactNode[] {
 	if (!text) {
 		return [text];
 	}
@@ -91,7 +96,13 @@ export function parseBoldText(text: string): React.ReactNode[] {
 			parts.push(
 				React.createElement(
 					Link,
-					{ key: `url-${keyCounter++}`, href: um.url, target: '_blank', rel: 'noopener noreferrer', className: 'text-primary hover:underline break-words' },
+					{
+						key: `url-${keyCounter++}`,
+						href: um.url,
+						target: '_blank',
+						rel: 'noopener noreferrer',
+						className: linkClassName,
+					},
 					um.displayText
 				)
 			);
@@ -111,7 +122,13 @@ export function parseBoldText(text: string): React.ReactNode[] {
 			parts.push(
 				React.createElement(
 					Link,
-					{ key: `url-${keyCounter++}`, href: m.content, target: '_blank', rel: 'noopener noreferrer', className: 'text-primary hover:underline break-words' },
+					{
+						key: `url-${keyCounter++}`,
+						href: m.content,
+						target: '_blank',
+						rel: 'noopener noreferrer',
+						className: linkClassName,
+					},
 					m.displayText || m.content
 				)
 			);

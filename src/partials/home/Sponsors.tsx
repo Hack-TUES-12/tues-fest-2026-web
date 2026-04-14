@@ -50,6 +50,7 @@ export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = 
 					imagePriority
 					startIndex={alphaStartIndex}
 					cardVariant="secondary"
+					sponsorDialogTier="alpha"
 				/>
 			</SponsorSectionFade>
 
@@ -60,6 +61,7 @@ export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = 
 					startIndex={betaStartIndex}
 					showGreenCircles
 					cardVariant="muted"
+					sponsorDialogTier="beta"
 				/>
 			</SponsorSectionFade>
 
@@ -70,6 +72,7 @@ export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = 
 					startIndex={gammaStartIndex}
 					showPurpleCircle
 					cardVariant="primary"
+					sponsorDialogTier="gamma"
 				/>
 			</SponsorSectionFade>
 
@@ -80,6 +83,7 @@ export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = 
 					startIndex={partnersStartIndex}
 					showGreenCircles
 					cardVariant="muted"
+					sponsorDialogTier="partner"
 				/>
 			</SponsorSectionFade>
 
@@ -91,6 +95,7 @@ export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = 
 						startIndex={mediaPartnersStartIndex}
 						showPurpleCircle
 						cardVariant="primary"
+						sponsorDialogTier="media"
 					/>
 				</SponsorSectionFade>
 			)}
