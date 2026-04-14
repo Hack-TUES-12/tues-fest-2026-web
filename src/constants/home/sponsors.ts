@@ -23,7 +23,6 @@ const storPoolLogo = '/sponsors/beta/storPool.svg'
 const m2m = '/sponsors/alpha/m2m.png';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
-const haemimontLogo = '/sponsors/beta/haemimont.png';
 const ocadoLogo = '/sponsors/beta/ocado-technology.png';
 const stamsoftLogo = '/sponsors/beta/stamsoft.png';
 const yettelLogo = '/sponsors/beta/yettelLogo.png';
@@ -31,6 +30,7 @@ const yettelLogo = '/sponsors/beta/yettelLogo.png';
 // Gamma sponsors
 const devrixLogo = '/sponsors/gamma/devrix.svg';
 const globalFoundriesLogo = '/sponsors/gamma/globalFoundries.png';
+const haemimontLogo = '/sponsors/gamma/haemimont.svg';
 const nemetschekLogo = '/sponsors/gamma/nemetschek.png';
 const strypesLogo = '/sponsors/gamma/strypes.png';
 const telebidProLogo = '/sponsors/gamma/telebidPro.png';
@@ -201,14 +201,6 @@ const BETA_SPONSORS = [
 	// 	'Cognyte is a global leader in investigative analytics software that empowers a variety of government and other organizations with Actionable Intelligence for a Safer World™. Our open interface software is designed to help customers accelerate and improve the effectiveness of investigations and decision-making. Hundreds of customers rely on our solutions to accelerate and conduct investigations and derive insights, with which they identify, neutralize, and tackle threats to national security and address different forms of criminal and terror activities.',
 	// },
 	// {
-	// 	name: 'Haemimont',
-	// 	logo: haemimontLogo,
-	// 	url: 'http://www.haemimont.com/',
-	// 	description:
-	// 	'Tам, където стандартните програмни продукти не могат да се приложат, се включваме ние от “Хемимонд“ АД с висококачествените си услуги и опит от 2003г. в разработка на индивидуални комплексни софтуерни решения. Експертизата ни в проектирането, разработката и тестването на специфични клиентски приложения и услуги ни дава богата възможност да предоставяме решения, базирани на технологии от Майкрософт (.NET, MSSQL, ASP.NET и др.). С младите разработчици в компанията и опитните софтуерни архитекти под ръководството на ерудираните проджект мениджъри „Хемимонд“ може да отговори на очакванията на всичките си клиенти - водещи интернационални корпорации в областта на застраховането, риска и др. Развитието на компанията в ИТ сферата през 2010 г. има пряк резултат в създаването и началото на предлаганите публични облачни услуги през 2014 г. през платформата oblak.bg и през 2016 г. с втората платформа disk.bg. За да отговорим на очакванията за качество и сигурност, създадохме собствен дейта-център според най-добрите стандaрти и практики.',
-	// 	supportedEditions: [],
-	// },
-	// {
 	// 	name: "Ocado Technology",
 	// 	logo: ocadoLogo,
 	// 	url: "https://careers.ocadogroup.com/teams/technology",
@@ -245,6 +237,14 @@ const GAMMA_SPONSORS = [
 		url: 'https://gf.com/',
 		description:
 			`GlobalFoundries е водещ световен производител на интегрални схеми, а екипът в София разработва ключови технологии за мобилната, автомобилната, медицинската и други индустрии. С над 300 специалисти и силен фокус върху развитието на млади таланти, компанията предлага цялостни услуги за дизайн и производство, които движат напред глобалната технологична индустрия.`,
+	},
+	{
+		name: 'Haemimont AD',
+		logo: haemimontLogo,
+		url: 'http://www.haemimont.com/',
+		description:
+		`„Хемимонд“ АД е компания, предлагаща качествени услуги по разработка на комплексни софтуерни решения, основана през 2003г. Специализира се в проектирането, разработката и тестването на специфични клиентски приложения и услуги, предоставяйки решения, базирани на технологии от Майкрософт (.NET, MSSQL, ASP.NET и др.), там, където стандартните програмни продукти не могат да се приложат. През 2010 г. екипът на Хемимонд АД започва проекти по разширяване и диверсифициране на дейността. Като пряк резултат от изпълнението им е началото на предлаганите публични облачни услуги през 2014 г. - появява се oblak.bg, а през 2016 г. новата облачна услуга disk.bg. `,
+		supportedEditions: [],
 	},
 	// {
 	// 	name: 'Немечек България',
