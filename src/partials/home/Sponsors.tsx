@@ -6,6 +6,7 @@ import {
 	PARTNERS,
 	Podkrepqsht,
 } from '@/constants/home/sponsors';
+import { growthbook } from '@/lib/growthbook/server';
 import PodkrepqAutoDisplay from './sponsors/PodkrepqAutoDisplay';
 import { SponsorSectionFade } from './sponsors/SponsorSectionFade';
 
@@ -27,14 +28,16 @@ type SponsorsProps = {
 };
 
 export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = {}) {
-	const [alphaStartIndex, betaStartIndex, gammaStartIndex, partnersStartIndex, mediaPartnersStartIndex] =
-		await Promise.all([
-			randomStartIndex(ALPHA_SPONSORS),
-			randomStartIndex(BETA_SPONSORS),
-			randomStartIndex(GAMMA_SPONSORS),
-			randomStartIndex(PARTNERS),
-			randomStartIndex(MEDIA_PARTNERS),
-		]);
+	const [gb, alphaStartIndex, betaStartIndex, gammaStartIndex, partnersStartIndex] = await Promise.all([
+		growthbook(),
+		randomStartIndex(ALPHA_SPONSORS),
+		randomStartIndex(BETA_SPONSORS),
+		randomStartIndex(GAMMA_SPONSORS),
+		randomStartIndex(PARTNERS),
+	]);
+
+	const showMediaPartners = gb.isOn('tf-show-media-partners');
+	const mediaPartnersStartIndex = showMediaPartners ? await randomStartIndex(MEDIA_PARTNERS) : 0;
 
 	const i = (n: number) => fadeIndexOffset + n;
 
@@ -80,15 +83,17 @@ export default async function Sponsors({ fadeIndexOffset = 0 }: SponsorsProps = 
 				/>
 			</SponsorSectionFade>
 
-			<SponsorSectionFade className="relative mb-20 w-full place-self-center" index={i(4)}>
-				<SectionTitle>Media Partners</SectionTitle>
-				<PodkrepqAutoDisplay
-					podkrepqshti={MEDIA_PARTNERS}
-					startIndex={mediaPartnersStartIndex}
-					showPurpleCircle
-					cardVariant="primary"
-				/>
-			</SponsorSectionFade>
+			{showMediaPartners && (
+				<SponsorSectionFade className="relative mb-20 w-full place-self-center" index={i(4)}>
+					<SectionTitle>Media Partners</SectionTitle>
+					<PodkrepqAutoDisplay
+						podkrepqshti={MEDIA_PARTNERS}
+						startIndex={mediaPartnersStartIndex}
+						showPurpleCircle
+						cardVariant="primary"
+					/>
+				</SponsorSectionFade>
+			)}
 		</div>
 	);
 }
