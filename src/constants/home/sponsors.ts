@@ -45,13 +45,13 @@ const diggerLogo = '/sponsors/partners/digger.svg'
 const jpointLogo = '/sponsors/partners/jpoint.svg'
 const sofiaTechParkLogo = '/sponsors/partners/sofia-tech-park.svg';
 const vibeSystemsLogo = '/sponsors/partners/vibeSystems.svg';
+const zayobayoLogo = '/sponsors/partners/zayobayoLogo.svg';
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
 const smartcomLogo = '/sponsors/partners/smartcom.png';
 const roobarLogo = '/sponsors/partners/roobar_logo.png';
 const nezavisimostLogo = '/sponsors/partners/nezavisimost_logo.png';
-const zayobayoLogo = '/sponsors/partners/zayobayoLogo.png';
 
 // Media partners
 const darikBusinessReviewLogo = '/media/dbr.webp';
@@ -401,6 +401,31 @@ const PARTNERS = [
 		description:
 			`Vibe Systems е компания за отдаване под наем и изграждане на професионални системи за събития. Предлагаме озвучаване, осветление, LED екрани, сцени и конструкции за концерти, корпоративни събития, фестивали и частни партита. Гарантираме надеждна техника, качествено изпълнение и пълна техническа поддръжка.`,
 	},
+	{
+		name: 'Зайо Байо',
+		logo: zayobayoLogo,
+		url: 'https://zayobayo.bg/',
+		description:
+			`Фирма „Сани-Конс Тодорови с-ие” СД е създадена през 1990 г. в
+			град Перник. Приоритетно насочва дейността си в
+			производството на царевични и пшеничени пръчици, като вече
+			35 години успешно реализира своята продукция на българския и
+			международен пазар.
+			През 2000 г. пуска на пазара продуктите под марката „Зайо
+			Байо”, които за кратко време получават широка популярност.
+			Продуктите „Зайо Байо“ са разработени на базата на
+			специално подбрана пшеница и царевица с високо качество без
+			ГМО. Те не съдържат консерванти, нямат изкуствени оцветители
+			и стабилизатори, в тях се влагат само натурални съставки. В
+			технологията на производство няма пържене и не се използва
+			хидрогенирана мазнина.
+			Фирма „Сани-Конс Тодорови с-ие” СД винаги се е стремяла да
+			предлага на своите клиенти качествени продукти, които са
+			изключително подходящи за всички. Сред широкото
+			разнообразие от вкусове има и такива, които не съдържат
+			ГЛУТЕН – Сладка царевица, Копър и сметана, Пица, Бекон, Сирене
+			и Фъстък.`
+	}
 	// {
 	// 	name: 'АЗТУЕС',
 	// 	logo: aztuesLogo,
@@ -464,13 +489,6 @@ const PARTNERS = [
 	// 	description:
 	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 	// },
-	// {
-	// 	name: 'Зайо Байо',
-	// 	logo: zayobayoLogo,
-	// 	url: 'https://zayobayo.bg/',
-	// 	description:
-	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-	// }
 ];
 
 const MEDIA_PARTNERS = [
