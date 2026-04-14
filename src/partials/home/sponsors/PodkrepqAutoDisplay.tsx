@@ -3,22 +3,16 @@
 import { useEffect, useState, useMemo, useCallback, Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Globe } from 'lucide-react';
 import invariant from 'tiny-invariant';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle, type CardVariant } from '@/components/ui/card';
-import {
-	Dialog,
-	DialogContent,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import { Podkrepqsht } from '@/constants/home/sponsors';
 import { cn, parseBoldText } from '@/lib/utils';
+
+import { SponsorReadMoreDialog } from './SponsorReadMoreDialog';
+import type { SponsorDialogTier } from './sponsor-dialog-tier';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -58,58 +52,18 @@ function isHorizontalRule(p: string) {
 	return p.startsWith('==');
 }
 
-// ─── Read-more dialog ────────────────────────────────────────────────────────
-
-function PodkrepqReadMore({
-	name,
-	description,
-	url,
-	onOpenChange,
-}: {
-	name: string;
-	description: string;
-	url: string;
-	onOpenChange?: (open: boolean) => void;
-}) {
-	return (
-		<div className="mt-4 flex justify-center">
-			<Dialog onOpenChange={onOpenChange}>
-				<DialogTrigger asChild>
-					<Button variant="ghost">Покажи повече</Button>
-				</DialogTrigger>
-				<DialogContent>
-					<DialogHeader>
-						<DialogTitle>{name}</DialogTitle>
-					</DialogHeader>
-					<div className="space-y-1 text-sm">
-						{description?.split('\n').map((p, i) =>
-							isHorizontalRule(p) ? <Separator key={i} /> : <p key={i}>{parseBoldText(p)}</p>
-						)}
-					</div>
-					<DialogFooter>
-						<Button asChild variant="ghost" className="w-full min-w-0 break-words sm:w-auto">
-							<Link href={url} target="_blank" className="flex items-center justify-center break-words">
-								<Globe className="mr-2 h-4 w-4 shrink-0" />
-								<span className="break-words">Уебсайт на {name}</span>
-							</Link>
-						</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
-		</div>
-	);
-}
-
 // ─── Partner info card ────────────────────────────────────────────────────────
 
 function PartnerCard({
 	podkrepqsht,
 	setIsPaused = () => {},
 	cardVariant,
+	sponsorDialogTier,
 }: {
 	podkrepqsht: Podkrepqsht;
 	setIsPaused?: Dispatch<SetStateAction<boolean>>;
 	cardVariant?: CardVariant;
+	sponsorDialogTier: SponsorDialogTier;
 }) {
 	return (
 		<Card className="relative flex w-full flex-col p-8" variant={cardVariant}>
@@ -129,12 +83,16 @@ function PartnerCard({
 									)}
 								</div>
 							</div>
-							<PodkrepqReadMore
-								name={podkrepqsht.name}
-								url={podkrepqsht.url}
-								description={podkrepqsht.description!}
-								onOpenChange={setIsPaused}
-							/>
+							<div className="mt-4 flex justify-center">
+								<SponsorReadMoreDialog
+									name={podkrepqsht.name}
+									url={podkrepqsht.url}
+									logo={podkrepqsht.logo}
+									description={podkrepqsht.description!}
+									tier={sponsorDialogTier}
+									onOpenChange={setIsPaused}
+								/>
+							</div>
 						</>
 					) : (
 						<div className="flex h-[150px] flex-col items-center justify-center gap-1">
@@ -163,6 +121,7 @@ export default function PodkrepqAutoDisplay({
 	showGreenCircles,
 	showPurpleCircle,
 	cardVariant,
+	sponsorDialogTier,
 }: {
 	podkrepqshti: Podkrepqsht[];
 	imagePriority?: boolean;
@@ -170,6 +129,7 @@ export default function PodkrepqAutoDisplay({
 	showGreenCircles?: boolean;
 	showPurpleCircle?: boolean;
 	cardVariant?: CardVariant;
+	sponsorDialogTier: SponsorDialogTier;
 }) {
 	invariant(
 		!startIndex || (startIndex >= 0 && startIndex < podkrepqshti.length),
@@ -360,7 +320,12 @@ export default function PodkrepqAutoDisplay({
 				</div>
 			)}
 			<div className="w-full">
-				<PartnerCard podkrepqsht={expandedList[liveIndex]!} setIsPaused={setIsPaused} cardVariant={cardVariant} />
+				<PartnerCard
+					podkrepqsht={expandedList[liveIndex]!}
+					setIsPaused={setIsPaused}
+					cardVariant={cardVariant}
+					sponsorDialogTier={sponsorDialogTier}
+				/>
 			</div>
 		</div>
 		</div>
