@@ -31,6 +31,7 @@ const yettelLogo = '/sponsors/beta/yettelLogo.png';
 const devrixLogo = '/sponsors/gamma/devrix.svg';
 const globalFoundriesLogo = '/sponsors/gamma/globalFoundries.png';
 const haemimontLogo = '/sponsors/gamma/haemimont.svg';
+const neterraLogo = '/sponsors/gamma/neterra.svg'
 const nemetschekLogo = '/sponsors/gamma/nemetschek.png';
 const strypesLogo = '/sponsors/gamma/strypes.png';
 const telebidProLogo = '/sponsors/gamma/telebidPro.png';
@@ -244,6 +245,15 @@ const GAMMA_SPONSORS = [
 		url: 'http://www.haemimont.com/',
 		description:
 		`„Хемимонд“ АД е компания, предлагаща качествени услуги по разработка на комплексни софтуерни решения, основана през 2003г. Специализира се в проектирането, разработката и тестването на специфични клиентски приложения и услуги, предоставяйки решения, базирани на технологии от Майкрософт (.NET, MSSQL, ASP.NET и др.), там, където стандартните програмни продукти не могат да се приложат. През 2010 г. екипът на Хемимонд АД започва проекти по разширяване и диверсифициране на дейността. Като пряк резултат от изпълнението им е началото на предлаганите публични облачни услуги през 2014 г. - появява се oblak.bg, а през 2016 г. новата облачна услуга disk.bg. `,
+		supportedEditions: [],
+	},
+	{
+		name: 'Neterra EOOD',
+		logo: neterraLogo,
+		url: 'https://neterra.net/',
+		description:
+		`Neterra is a global telecommunications services provider and IT asset management company with 30 years of history and more than 220 points of presence worldwide. The company has been recognized as the “Best Central & Eastern European Connectivity Provider” at the Capacity Global Connectivity Awards in 2023, 2024, and 2025.
+		Neterra is an authorized reseller of Starlink by SpaceX. Nine of the world’s ten largest telecommunications operators and nearly 1,000 global enterprises rely on Neterra’s services. Its portfolio includes well-known brands such as Sofia Data Center (SDC), NetIX, Neterra.Cloud, NetFleet, Sofia Teleport, Thracia Teleport, and Neterra.TV`,
 		supportedEditions: [],
 	},
 	// {
