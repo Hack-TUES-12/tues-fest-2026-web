@@ -18,6 +18,7 @@ const itGixLogo = '/sponsors/alpha/itGix.png';
 
 // Beta sponsors
 const ibm = '/sponsors/beta/ibm.jpg';
+const axlessoftLogo = '/sponsors/beta/axlessoft.svg';
 const m2m = '/sponsors/alpha/m2m.png';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
@@ -28,7 +29,6 @@ const stamsoftLogo = '/sponsors/beta/stamsoft.png';
 const yettelLogo = '/sponsors/beta/yettelLogo.png';
 
 // Gamma sponsors
-const axlessoftLogo = '/sponsors/gamma/axlessoft.png';
 const nemetschekLogo = '/sponsors/gamma/nemetschek.png';
 const strypesLogo = '/sponsors/gamma/strypes.png';
 const telebidProLogo = '/sponsors/gamma/telebidPro.png';
@@ -156,13 +156,13 @@ Since 2016, Trading 212’s app has been the UK's #1 trading app, and in 2017 it
 ];
 
 const BETA_SPONSORS = [
-	// {
-	// 	name: "AxlеsSoft",
-	// 	logo: axlessoftLogo,
-	// 	url: "https://www.axlessoft.com/",
-	// 	description:
-	// 	`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-  	// },
+	{
+		name: "AxlеsSoft",
+		logo: axlessoftLogo,
+		url: "https://www.axlessoft.com/",
+		description:
+		`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+  	},
 	{
 		name: 'IBM Bulgaria',
 		logo: ibm,
