@@ -12,7 +12,6 @@ const tbsLogo = '/sponsors/alpha/tbs.webp';
 const trading212Logo = '/sponsors/alpha/trading212.svg';
 const elevenVenturesLogo = '/sponsors/alpha/eleven-ventures.png';
 const festoLogo = '/sponsors/alpha/festo.png';
-const globalFoundriesLogo = '/sponsors/alpha/globalfoundries.png';
 const gttLogo = '/sponsors/alpha/gttLogo.png';
 const itGixLogo = '/sponsors/alpha/itGix.png';
 
@@ -31,6 +30,7 @@ const yettelLogo = '/sponsors/beta/yettelLogo.png';
 
 // Gamma sponsors
 const devrixLogo = '/sponsors/gamma/devrix.svg';
+const globalFoundriesLogo = '/sponsors/gamma/globalFoundries.png';
 const nemetschekLogo = '/sponsors/gamma/nemetschek.png';
 const strypesLogo = '/sponsors/gamma/strypes.png';
 const telebidProLogo = '/sponsors/gamma/telebidPro.png';
@@ -133,13 +133,6 @@ Since 2016, Trading 212’s app has been the UK's #1 trading app, and in 2017 it
 	// 	url: "https://www.festo.com/bg/bg/",
 	// 	description:
 	// 	"В България Festo присъства от 1986 г., а от 1990 г. започва своята производствена и развойна дейност.\nДнес тя развива дейността си в София, Смолян и Габрово в направленията продажби и дидактика,  производство и развой. Компанията притежава високотехнологичен инженерен център и произвежда Hi-Tech продукти за всички индустриални направления с фокус електроника и електрически задвижвания.",
-	// },
-	// {
-	// 	name: 'GlobalFoundries Bulgaria',
-	// 	logo: globalFoundriesLogo,
-	// 	url: 'https://gf.com/',
-	// 	description:
-	// 		'GlobalFoundries е един от най-големите производители на интегрални схеми в света.\nОт 2019 година насам, когато компанията придобива част от екипа на местния ИТ лидер „Смартком“, специалисти от България и чужбина разработват в София технологии с приложение в мобилната комуникация, автомобилната, медицинската и други индустрии. Днес екипът ни вече надхвърля 300 души. Над 50% от българските специалисти в GlobalFoundries започват кариерата си тук още от студентската скамейка и се развиват пълноценно в компанията.\nОсновната дейност в офиса ни в София е свързана с разработката на технологията, използвана за проектиране на интегрални схеми. Производствената ни дейност се извършва във фабрики в Америка, Германия и Сингапур.\nGlobalFoundries предоставя широка гама от услуги за дизайн, разработка и производство и гъвкаво се справя с динамичните нужди на клиенти от цял свят.\nНие променяме индустрията, която променя света. ',
 	// },
 	// {
 	// 	name: "GTT",
@@ -245,6 +238,13 @@ const GAMMA_SPONSORS = [
 		url: 'https://devrix.com/',
 		description:
 		`DevriX има богат опит в B2B сферата с помагането на бизнеси да преминат през нужното си развитие. Предлагайки RevOps услуги, DevriX трансформира компании чрез ясни данни и структуриран, устойчив код. С бързо и ефикасно съдействие, постигаме нашата цел клиента ни да е доволен и цялостно успешен.`,
+	},
+	{
+		name: 'GlobalFoundries Bulgaria EAD',
+		logo: globalFoundriesLogo,
+		url: 'https://gf.com/',
+		description:
+			`GlobalFoundries е водещ световен производител на интегрални схеми, а екипът в София разработва ключови технологии за мобилната, автомобилната, медицинската и други индустрии. С над 300 специалисти и силен фокус върху развитието на млади таланти, компанията предлага цялостни услуги за дизайн и производство, които движат напред глобалната технологична индустрия.`,
 	},
 	// {
 	// 	name: 'Немечек България',
