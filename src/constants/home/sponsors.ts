@@ -19,6 +19,7 @@ const itGixLogo = '/sponsors/alpha/itGix.png';
 // Beta sponsors
 const ibm = '/sponsors/beta/ibm.jpg';
 const axlessoftLogo = '/sponsors/beta/axlessoft.svg';
+const siteGroundLogo = '/sponsors/beta/siteGround.webp'
 const m2m = '/sponsors/alpha/m2m.png';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
@@ -169,6 +170,13 @@ const BETA_SPONSORS = [
 		url: 'https://www.ibm.com/us-en',
 		description:
 		`IBM е базирана на ценности компания с хора, които създават и прилагат технологии, карайки света да работи по-добре. Днес, хиляди служители на IBM по целия свят изобретяват и интегрират хардуер, софтуер и услуги, за да позволяват на прогресивни предприятия, институции и хора да успеят и изградят една по-интелигентна планета.`,
+	},
+	{
+		name: 'SiteGround',
+		logo: siteGroundLogo,
+		url: 'https://eu.siteground.com/',
+		description:
+		`СайтГраунд е българска технологична компания, разработваща собствени софтуерни продукти и услуги, които помагат на милиони клиенти в цял свят бързо, лесно и успешно да стартират и развиват своя онлайн бизнес – от водещи уеб хостинг решения, през SaaS платформа за изработка на уеб страници, онлайн магазини и продукти за дигитален маркетинг.`,
 	},
 	// {
 	// 	name: 'M2M Services',
