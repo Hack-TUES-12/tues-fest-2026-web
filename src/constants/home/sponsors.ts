@@ -41,6 +41,7 @@ const lightworkLogo = '/sponsors/partners/lightwork.svg'
 const bakersLogo = '/sponsors/partners/bakers.svg'
 const corporateLogo = '/sponsors/partners/corporate.svg';
 const culligan = '/sponsors/partners/culligan.svg';
+const diggerLogo = '/sponsors/partners/digger.svg'
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
@@ -357,6 +358,19 @@ const PARTNERS = [
 			**Culligan Bulgaria – За всяка глътка. За всеки ден. За бъдещето на България.**
 			📞 02 874 1046 | 🌍 www.culligan.bg | ✉ info@culligan.bg`,
 		supportedEditions: ['hacktues-security'],
+	},
+	{
+		name: 'DiggerVideo',
+		logo: diggerLogo,
+		url: 'https://diggervideo.com/',
+		description:
+			`DiggerVideo е екип от мотивирани и креативни доброволци, обединени от страстта към видеозаснемането и стрийминга на събития. Работим професионално и с внимание към детайла, като улавяме ключовите моменти и емоции по ясен, динамичен и автентичен начин. За нас всяко събитие е нова история, която чака да бъде разказана.
+
+			Имаме опит в заснемането на конференции, състезания, театрални постановки, културни и общностни инициативи. Независимо от мащаба на събитието, подхождаме с еднаква ангажираност и отговорност, защото вярваме, че всяко преживяване заслужава качествено визуално представяне.
+
+			Нашата мисия е да превръщаме събитията в дълготрайно видео съдържание, което разширява тяхното въздействие и достига до по-широка аудитория. Видеото не е просто запис, а средство за комуникация, разказване на истории и изграждане на доверие.
+
+			DiggerVideo работи с позитивна енергия, екипен дух и ясна цел – да създава визуално съдържание, което остава в паметта на публиката и подкрепя стойностни каузи, инициативи и общности.`,
 	},
 	// {
 	// 	name: 'АЗТУЕС',
