@@ -43,13 +43,13 @@ const corporateLogo = '/sponsors/partners/corporate.svg';
 const culligan = '/sponsors/partners/culligan.svg';
 const diggerLogo = '/sponsors/partners/digger.svg'
 const jpointLogo = '/sponsors/partners/jpoint.svg'
+const sofiaTechParkLogo = '/sponsors/partners/sofia-tech-park.svg';
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
 const smartcomLogo = '/sponsors/partners/smartcom.png';
 const roobarLogo = '/sponsors/partners/roobar_logo.png';
 const nezavisimostLogo = '/sponsors/partners/nezavisimost_logo.png';
-const sofiaTechParkLogo = '/sponsors/partners/sofia-tech-park.png';
 const zayobayoLogo = '/sponsors/partners/zayobayoLogo.png';
 
 // Media partners
@@ -385,6 +385,14 @@ const PARTNERS = [
 			Процесът при нас е изцяло затворен - от първоначалната идея и концепция, през дизайна и предпечата, до довършителните и монтажни услуги. Всеки проект получава индивидуално внимание, с фокус върху детайла и лично отношение на всеки етап.
 `,
 	},
+	{
+		name: 'Sofia Tech Park',
+		logo: sofiaTechParkLogo,
+		url: 'https://sofiatech.bg/',
+		description:
+			`София Тех Парк е първият научно-технологичен парк в България. Той е хъб за изследователи, иновативни стартиращи предприятия, зрели технологични компании и подкрепящи организации от България и региона. Паркът управлява и развива уникална среда за подпомагане и растеж на малки и средни фирми чрез предоставяне на ноу-хау, възможности за работа в мрежа и достъп до нови технологии в три ключови области: информационни и комуникационни технологии, науки за живота и чиста енергия. 
+			София Тех Парк подпомага свързването на знания, хора и технологии, и включва няколко основни компонента: Лабораторен комплекс с 11 високотехнологични звена, Бизнес инкубатор, форум за събития, интерактивен център за наука и технологии „ТехноМеджикЛенд“. Научно-технологичният парк предлага на стартиращи, малките и средни предприятия мрежа от контакти с различни организации, институции и инвеститори, офиси и споделени пространства за работа, зали за събития и срещи, където те могат да обменят знания и опит, да създават партньорства, да общуват и да развиват своите иновативни идеи и проекти в успешни бизнес начинания. София Тех Парк организира и е домакин всяка година на стотици технологични, бизнес и образователни конференции, семинари, обучения, изложения и др.`,
+	},
 	// {
 	// 	name: 'АЗТУЕС',
 	// 	logo: aztuesLogo,
@@ -455,15 +463,6 @@ const PARTNERS = [
 	// 	description:
 	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 	// }
-	// {
-	// 	name: 'Sofia Tech Park',
-	// 	logo: sofiaTechParkLogo,
-	// 	url: 'https://sofiatech.bg/',
-	// 	description:
-	// 		'София Тех Парк е първият научно-технологичен парк в България. Той е хъб за изследователи, иновативни стартиращи предприятия и зрели технологични компании от България и региона. Паркът управлява и развива уникална среда за подпомагане и растеж на малки и средни фирми чрез предоставяне на ноу-хау, възможности за работа в мрежа и достъп до нови технологии в три ключови области: информационни и комуникационни технологии, науки за живота и чиста енергия. ',
-
-	// 	supportedEditions: ['hacktues-security', 'hacktues-infinity', 'hacktues-6', 'hacktues-365', 'hacktues-30x'],
-	// },
 ];
 
 const MEDIA_PARTNERS = [
