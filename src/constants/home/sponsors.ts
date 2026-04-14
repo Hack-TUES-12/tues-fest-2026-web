@@ -38,6 +38,7 @@ const telebidProLogo = '/sponsors/gamma/telebidPro.png';
 // Partners
 const a1Logo = '/sponsors/partners/a1.png';
 const lightworkLogo = '/sponsors/partners/lightwork.svg'
+const bakersLogo = '/sponsors/partners/bakers.svg'
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const corporateLogo = '/sponsors/partners/corporate.png';
 const culligan = '/sponsors/partners/culligan.jpg';
@@ -308,6 +309,15 @@ const PARTNERS = [
 
 			Подготовка на визуално съдържание за проектни предложения по културни програми и европроекти.
 			www.lightwork.bg`,
+	},
+	{
+		name: 'Bakers',
+		logo: bakersLogo,
+		url: 'https://bakers-bg.com/',
+		description:
+			`„Бейкърс“ е мястото, където гладът се превръща в удоволствие, а всяко изкушение е създадено, за да те накара да се върнеш отново. Маслени кроасани с деликатни, хрупкави пластове, златисти баници с богат пълнеж, сочни сандвичи и пухкави козунаци, които се разтапят с всяка хапка – както и още много разнообразни, прясно приготвени вкусотии, създадени с внимание към детайла и страст към вкуса.
+
+			Тук не просто хапваш – потапяш се в аромат, текстура и наслада, които остават в съзнанието ти дълго след последната хапка. „Бейкърс“ е изкушение, на което не можеш да устоиш.`,
 	},
 	// {
 	// 	name: 'АЗТУЕС',
