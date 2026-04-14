@@ -24,13 +24,13 @@ const storPoolLogo = '/sponsors/beta/storPool.svg'
 const m2m = '/sponsors/alpha/m2m.png';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
-const devrixLogo = '/sponsors/beta/devrix.png';
 const haemimontLogo = '/sponsors/beta/haemimont.png';
 const ocadoLogo = '/sponsors/beta/ocado-technology.png';
 const stamsoftLogo = '/sponsors/beta/stamsoft.png';
 const yettelLogo = '/sponsors/beta/yettelLogo.png';
 
 // Gamma sponsors
+const devrixLogo = '/sponsors/gamma/devrix.svg';
 const nemetschekLogo = '/sponsors/gamma/nemetschek.png';
 const strypesLogo = '/sponsors/gamma/strypes.png';
 const telebidProLogo = '/sponsors/gamma/telebidPro.png';
@@ -208,13 +208,6 @@ const BETA_SPONSORS = [
 	// 	'Cognyte is a global leader in investigative analytics software that empowers a variety of government and other organizations with Actionable Intelligence for a Safer World™. Our open interface software is designed to help customers accelerate and improve the effectiveness of investigations and decision-making. Hundreds of customers rely on our solutions to accelerate and conduct investigations and derive insights, with which they identify, neutralize, and tackle threats to national security and address different forms of criminal and terror activities.',
 	// },
 	// {
-	// 	name: 'Devrix',
-	// 	logo: devrixLogo,
-	// 	url: 'https://devrix.com/',
-	// 	description:
-	// 	'DevriX е B2B дигитална агенция, предоставяща технически и маректинг решения на малки и средни предприятия, корпорации и бързо развиващи се стартъпи. С фокус върху стратегии, базирани на данни, автоматизация и оптимизация на процесите, помагаме на бизнесите да разширят своето дигитално присъствие и да постигнат устойчив растеж. Като лидер в WordPress разработката, сме мигрирали множество платформи към WordPress, а нашият екип е създал 10+ SaaS приложения и над 560 плъгина. В DevriX вярваме в силата на сътрудничеството между нашите технически и маркетингови екипи като гарантираме, че бизнесите на само растат, но и процъфтяват в днешния конкурентен дигитален пейзаж.',
-	// },
-	// {
 	// 	name: 'Haemimont',
 	// 	logo: haemimontLogo,
 	// 	url: 'http://www.haemimont.com/',
@@ -247,25 +240,32 @@ const BETA_SPONSORS = [
 
 const GAMMA_SPONSORS = [
 	{
-		name: 'Немечек България',
-		logo: nemetschekLogo,
-		url: 'https://www.nemetschek.bg/',
+		name: 'DevriX',
+		logo: devrixLogo,
+		url: 'https://devrix.com/',
 		description:
-		"Искаш ли да бъдеш част от истинска работна среда във водеща софтуерна компания, да получиш безценен опит, който ще ти е полезен в избора на кариера, да бъдеш част от ИТ общност? Немечек България организира ежегоден ИТ уъркшоп за ученици - Speed IT Up 🤗 Запиши се, за да получиш информация кога стартира следващото издание, виж историите на участниците и менторите, които предават знанието и опита си, и следвай своята страст 👉https://careers.nemetschek.bg/speeditup",
+		`DevriX има богат опит в B2B сферата с помагането на бизнеси да преминат през нужното си развитие. Предлагайки RevOps услуги, DevriX трансформира компании чрез ясни данни и структуриран, устойчив код. С бързо и ефикасно съдействие, постигаме нашата цел клиента ни да е доволен и цялостно успешен.`,
 	},
-	{
-		name: 'ICT Strypes',
-		logo: strypesLogo,
-		url: 'https://strypes.eu/',
-		description:
-		'Вече 17 години създаваме решения в полза на клиентите ни от цял свят, благодарение на опитния ни екип от професионалисти. Ще се изненадаш колко важна е ролята на ICT Strypes в развитието на мащабни технологични проекти в партньорство с част от лидерите в индустриите на бъдещето. Каним те да станеш част от всичко това и да намериш не просто своята работа при нас, но и дългосрочно професионално и личностно развитие, което да наричаш удоволствие.',
-	},
-	{
-		name: 'Telebid Pro',
-		logo: telebidProLogo,
-		url: 'https://telebid-pro.com/',
-		description: `Подкрепяме TUES FEST от години, защото наша мисия е инвестицията в ИТ образованието и бъдещето на сектора. Изложението е чудесен начин учениците да представят училището си пред бъдещите туесари чрез своите проекти, които са разработвали през годината.\nСпециално за учениците от ТУЕС сме разработили програма за кариерно развитие, включваща Практика, Платен стаж или Работа. Участниците в програмата имат възможност да се развиват като Full-Stack Developers и Systems & DevOps Engineers.\nТелебид Про е софтуерна продуктова компания, специализирана в разработването на бизнес системи, които изгражда от идея до завършен продукт.`,
-	},
+	// {
+	// 	name: 'Немечек България',
+	// 	logo: nemetschekLogo,
+	// 	url: 'https://www.nemetschek.bg/',
+	// 	description:
+	// 	"Искаш ли да бъдеш част от истинска работна среда във водеща софтуерна компания, да получиш безценен опит, който ще ти е полезен в избора на кариера, да бъдеш част от ИТ общност? Немечек България организира ежегоден ИТ уъркшоп за ученици - Speed IT Up 🤗 Запиши се, за да получиш информация кога стартира следващото издание, виж историите на участниците и менторите, които предават знанието и опита си, и следвай своята страст 👉https://careers.nemetschek.bg/speeditup",
+	// },
+	// {
+	// 	name: 'ICT Strypes',
+	// 	logo: strypesLogo,
+	// 	url: 'https://strypes.eu/',
+	// 	description:
+	// 	'Вече 17 години създаваме решения в полза на клиентите ни от цял свят, благодарение на опитния ни екип от професионалисти. Ще се изненадаш колко важна е ролята на ICT Strypes в развитието на мащабни технологични проекти в партньорство с част от лидерите в индустриите на бъдещето. Каним те да станеш част от всичко това и да намериш не просто своята работа при нас, но и дългосрочно професионално и личностно развитие, което да наричаш удоволствие.',
+	// },
+	// {
+	// 	name: 'Telebid Pro',
+	// 	logo: telebidProLogo,
+	// 	url: 'https://telebid-pro.com/',
+	// 	description: `Подкрепяме TUES FEST от години, защото наша мисия е инвестицията в ИТ образованието и бъдещето на сектора. Изложението е чудесен начин учениците да представят училището си пред бъдещите туесари чрез своите проекти, които са разработвали през годината.\nСпециално за учениците от ТУЕС сме разработили програма за кариерно развитие, включваща Практика, Платен стаж или Работа. Участниците в програмата имат възможност да се развиват като Full-Stack Developers и Systems & DevOps Engineers.\nТелебид Про е софтуерна продуктова компания, специализирана в разработването на бизнес системи, които изгражда от идея до завършен продукт.`,
+	// },
 ];
 
 const PARTNERS = [
