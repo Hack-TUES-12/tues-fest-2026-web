@@ -2,7 +2,6 @@
 const zettaLogo = "/sponsors/omega/zetta.svg"
 
 // Alpha sponsors
-const a1Logo = '/sponsors/alpha/a1.png';
 const boschECSLogo = '/sponsors/alpha/bosch-engineering-center-sofia.svg';
 const dxcLogo = '/sponsors/alpha/dxc.svg';
 const sapLogo = '/sponsors/alpha/sap.svg';
@@ -37,6 +36,7 @@ const strypesLogo = '/sponsors/gamma/strypes.png';
 const telebidProLogo = '/sponsors/gamma/telebidPro.png';
 
 // Partners
+const a1Logo = '/sponsors/partners/a1.png';
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const corporateLogo = '/sponsors/partners/corporate.png';
 const culligan = '/sponsors/partners/culligan.jpg';
@@ -280,30 +280,34 @@ const GAMMA_SPONSORS = [
 
 const PARTNERS = [
 	{
-		name: 'A1',
+		name: 'А1 България',
 		logo: a1Logo,
 		url: 'https://www.a1.bg/',
 		description:
-			'А1 България е водещ доставчик на дигитални услуги и телекомуникационни решения, който свързва хора, бизнеси и устройства, за да помогне на клиентите да се възползват от дигиталните технологии.\nКомпанията предоставя мобилни и фиксирани услуги, високоскоростен интернет, интерактивна, цифрова, сателитна и мобилна телевизия, четири собствени спортни канала с марката MAX Sport, платежни услуги, ICT, cloud и IoT бизнес решения.\nА1 има дълга история на технологичен пионер в страната от осъществяването на първия разговор по GSM и изпращането на първия SMS до старта на първата 5G мрежа, която осигурява гигабитови скорости на клиентите.\nДнес близо 3 600 служители и модерна телекомуникационна и ICT инфраструктура осигуряват достъп до дигитални технологии за потребителите и бизнеса, свързвайки хора, неща и локации.',
+			`Знаете ли, че А1 България работи и по международни проекти? 
+
+			Широкото ни портфолио отдавна надхвърли телекомуникационните услуги и вече предлагаме дигитални решения на милиони корпоративни и частни клиенти. 
+
+			Най-съвременни технологии, последни иновации и изключително талантливи професионалисти в различни области ни помагат да предоставяме най-добрите продукти, услуги и клиентско изживяване.`,
 	},
-	{
-		name: 'АЗТУЕС',
-		logo: aztuesLogo,
-		url: 'https://aztues.bg/',
-		supportedEditions: [
-			'hacktues-security',
-			'hacktues-infinity',
-			'hacktues-gg',
-			'hacktues-6',
-			'hacktues-365',
-			'hacktues-30x',
-			'hacktues-3',
-			'hacktues-2',
-			'hacktues',
-		],
-		description:
-			'Асоциацията на завършилите ТУЕС е неправителствена организация, която има за цел да обедини и подпомага общността от завършили и настоящи ученици в Технологично училище "Електронни Системи" към ТУ - София (ТУЕС), преподаватели и приятели на училището. Учредена е през декември 2014 и работи активно от средата на 2015, като вече наброява над 1,000 членове и се е превърнала в двигател на редица събития и инициативи, ключови за ТУЕС общността.',
-	},
+	// {
+	// 	name: 'АЗТУЕС',
+	// 	logo: aztuesLogo,
+	// 	url: 'https://aztues.bg/',
+	// 	supportedEditions: [
+	// 		'hacktues-security',
+	// 		'hacktues-infinity',
+	// 		'hacktues-gg',
+	// 		'hacktues-6',
+	// 		'hacktues-365',
+	// 		'hacktues-30x',
+	// 		'hacktues-3',
+	// 		'hacktues-2',
+	// 		'hacktues',
+	// 	],
+	// 	description:
+	// 		'Асоциацията на завършилите ТУЕС е неправителствена организация, която има за цел да обедини и подпомага общността от завършили и настоящи ученици в Технологично училище "Електронни Системи" към ТУ - София (ТУЕС), преподаватели и приятели на училището. Учредена е през декември 2014 и работи активно от средата на 2015, като вече наброява над 1,000 членове и се е превърнала в двигател на редица събития и инициативи, ключови за ТУЕС общността.',
+	// },
 	// {
 	// 	name: 'Culligan Bulgaria',
 	// 	logo: culligan,
@@ -312,66 +316,66 @@ const PARTNERS = [
 	// 		'Culligan Bulgaria- всичко, от което се нуждаете, за да осигурите чиста, висококачествена вода за Вашия бизнес или домакинство. Водата, която обичате! Ние в Culligan се ангажираме да изградим по-добър, по-устойчив свят чрез подобряване както на социалното, така и на нашето въздействие върху околната среда. В Culligan вярваме, че по-чистата и по-здравословна вода може да допринесе за подобряване на живота на хората по света и е ключов двигател към решаването на някои от най-големите предизвикателства, които стоят в нашето бъдеще.',
 	// 	supportedEditions: ['hacktues-security'],
 	// },
-	{
-		name: 'Corporate Gifts',
-		logo: corporateLogo,
-		url: 'https://corporategifts.bg',
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-		supportedEditions: ['hacktues-security'],
-	},
-	{
-		logo: greenCherryLogo,
-		name: 'Green Cherry Cafe',
-		url: 'https://bg-bg.facebook.com/greencherrycafe/',
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-		supportedEditions: ['hacktues-security'],
-	},
-	{
-		name: 'JOKER MEDIA RENTAL',
-		logo: jmrLogo,
-		url: 'https://jokermedia-rental.net/',
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-		supportedEditions: [],
-	},
-	{
-		name: 'Roobar',
-		logo: roobarLogo,
-		url: 'https://smartorganic.com/roobar/',
-		description:
-			"Roobar е бранд, създаден за всички, които искат здравословен и вкусен снак без компромиси. Нашите барчета са 100% органични, веган и създадени само с истински съставки – без скрити изненади, чиста енергия. От суперзаредени суперхрани до балансирани протеинови изкушения и шоколадово удоволствие – имаме вкус за всеки момент. Независимо дали си в движение, след тренировка или просто ти се хапва нещо полезно и вкусно, Roobar е тук, за да ти даде силата на природата в едно барче."
-	},
-	{
-		name: 'Smartcom',
-		logo: smartcomLogo,
-		url: 'https://smartcom.bg/',
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-		supportedEditions: [
-			'hacktues-security',
-			'hacktues-infinity',
-			'hacktues-6',
-			'hacktues-365',
-			'hacktues-30x',
-			'hacktues-3',
-		],
-	},
-	{
-		name: 'Музей за историята на София',
-		logo: nezavisimostLogo,
-		url: 'https://sofiahistorymuseum.bg/bg/',
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-	},
-	{
-		name: 'Зайо Байо',
-		logo: zayobayoLogo,
-		url: 'https://zayobayo.bg/',
-		description:
-			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-	}
+	// {
+	// 	name: 'Corporate Gifts',
+	// 	logo: corporateLogo,
+	// 	url: 'https://corporategifts.bg',
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+	// 	supportedEditions: ['hacktues-security'],
+	// },
+	// {
+	// 	logo: greenCherryLogo,
+	// 	name: 'Green Cherry Cafe',
+	// 	url: 'https://bg-bg.facebook.com/greencherrycafe/',
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+	// 	supportedEditions: ['hacktues-security'],
+	// },
+	// {
+	// 	name: 'JOKER MEDIA RENTAL',
+	// 	logo: jmrLogo,
+	// 	url: 'https://jokermedia-rental.net/',
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+	// 	supportedEditions: [],
+	// },
+	// {
+	// 	name: 'Roobar',
+	// 	logo: roobarLogo,
+	// 	url: 'https://smartorganic.com/roobar/',
+	// 	description:
+	// 		"Roobar е бранд, създаден за всички, които искат здравословен и вкусен снак без компромиси. Нашите барчета са 100% органични, веган и създадени само с истински съставки – без скрити изненади, чиста енергия. От суперзаредени суперхрани до балансирани протеинови изкушения и шоколадово удоволствие – имаме вкус за всеки момент. Независимо дали си в движение, след тренировка или просто ти се хапва нещо полезно и вкусно, Roobar е тук, за да ти даде силата на природата в едно барче."
+	// },
+	// {
+	// 	name: 'Smartcom',
+	// 	logo: smartcomLogo,
+	// 	url: 'https://smartcom.bg/',
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+	// 	supportedEditions: [
+	// 		'hacktues-security',
+	// 		'hacktues-infinity',
+	// 		'hacktues-6',
+	// 		'hacktues-365',
+	// 		'hacktues-30x',
+	// 		'hacktues-3',
+	// 	],
+	// },
+	// {
+	// 	name: 'Музей за историята на София',
+	// 	logo: nezavisimostLogo,
+	// 	url: 'https://sofiahistorymuseum.bg/bg/',
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+	// },
+	// {
+	// 	name: 'Зайо Байо',
+	// 	logo: zayobayoLogo,
+	// 	url: 'https://zayobayo.bg/',
+	// 	description:
+	// 		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+	// }
 	// {
 	// 	name: 'Sofia Tech Park',
 	// 	logo: sofiaTechParkLogo,
