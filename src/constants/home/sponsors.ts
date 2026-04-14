@@ -19,7 +19,7 @@ const ibm = '/sponsors/beta/ibm.jpg';
 const axlessoftLogo = '/sponsors/beta/axlessoft.svg';
 const siteGroundLogo = '/sponsors/beta/siteGround.webp'
 const storPoolLogo = '/sponsors/beta/storPool.svg'
-const m2m = '/sponsors/alpha/m2m.png';
+const m2m = '/sponsors/beta/m2m.svg';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
 const ocadoLogo = '/sponsors/beta/ocado-technology.png';
@@ -185,13 +185,15 @@ const BETA_SPONSORS = [
 		description:
 		`StorPool Storage е българска компания, разработваща софтуерни решения за съхранение на данни в облачни среди. Ние помагаме на големи корпорации и доставчици на IT услуги, обслужващи милиони потребители в цял свят, да предоставят бързи и надеждни услуги на своите клиенти.`,
 	},
-	// {
-	// 	name: 'M2M Services',
-	// 	logo: m2m,
-	// 	url: 'https://m2mservices.com/',
-	// 	description:
-	// 		`В M2M Services караме нещата да се случват. Създаваме достъпни IoT решения, с които правим работата на нашите клиенти по-бърза, лесна и ефективна, а животът на милиони хора по целия свят - по-сигурен. `,
-	// },
+	{
+		name: 'M2M Services',
+		logo: m2m,
+		url: 'https://m2mservices.com/',
+		description:
+			`В М2М Services ценим хората не по-малко от технологиите. Подхранваме любопитството, експериментаторския дух, логиката, проактивността и креативността, които ни водят напред към следващата иновация и постижение. 
+ 
+			В нашия екип правим това, което е нужно, вместо това, което е най-лесно. Целим се високо и търсим ефикасност. Работим с много сърце и се вълнуваме от резултата. Любопитни сме и си задаваме въпроси, а всяко предизвикателство е нова възможност да намерим отговор. Проактивни сме, не чакаме някой да ни води или да ни дава задачи – всеки е СЕО на скоупа и задачите си.  Обичаме реалния контакт, бързите обсъждания и решените проблеми, заради което да работим от офиса не ни тежи.`,
+	},
 	// {
 	// 	name: 'Chaos',
 	// 	logo: chaosLogo,
