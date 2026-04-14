@@ -20,6 +20,7 @@ const itGixLogo = '/sponsors/alpha/itGix.png';
 const ibm = '/sponsors/beta/ibm.jpg';
 const axlessoftLogo = '/sponsors/beta/axlessoft.svg';
 const siteGroundLogo = '/sponsors/beta/siteGround.webp'
+const storPoolLogo = '/sponsors/beta/storPool.svg'
 const m2m = '/sponsors/alpha/m2m.png';
 const chaosLogo = '/sponsors/beta/chaos.png';
 const cognyteLogo = '/sponsors/beta/cognyte.png';
@@ -177,6 +178,13 @@ const BETA_SPONSORS = [
 		url: 'https://eu.siteground.com/',
 		description:
 		`СайтГраунд е българска технологична компания, разработваща собствени софтуерни продукти и услуги, които помагат на милиони клиенти в цял свят бързо, лесно и успешно да стартират и развиват своя онлайн бизнес – от водещи уеб хостинг решения, през SaaS платформа за изработка на уеб страници, онлайн магазини и продукти за дигитален маркетинг.`,
+	},
+	{
+		name: 'StorPool Storage',
+		logo: storPoolLogo,
+		url: 'https://storpool.com/',
+		description:
+		`StorPool Storage е българска компания, разработваща софтуерни решения за съхранение на данни в облачни среди. Ние помагаме на големи корпорации и доставчици на IT услуги, обслужващи милиони потребители в цял свят, да предоставят бързи и надеждни услуги на своите клиенти.`,
 	},
 	// {
 	// 	name: 'M2M Services',
