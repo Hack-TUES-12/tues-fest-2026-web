@@ -3976,7 +3976,6 @@ export const PROJECTS = [
             "demoUrl": null,
             "repoUrls": [
                 "https://github.com/moris071651/ergo-android",
-                "и",
                 "https://github.com/moris071651/ergo-server"
             ]
         },
