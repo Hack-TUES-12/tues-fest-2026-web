@@ -1353,7 +1353,6 @@ export const PROJECTS = [
         "links": {
             "demoUrl": null,
             "repoUrls": [
-                "https://git.yasentsv.top/"
             ]
         },
         "youtubeId": null,
@@ -4041,9 +4040,7 @@ export const PROJECTS = [
         "links": {
             "demoUrl": null,
             "repoUrls": [
-                "1.",
                 "https://github.com/Monika950/frontend1",
-                "2.",
                 "https://github.com/Monika950/backend"
             ]
         },
@@ -4107,7 +4104,6 @@ export const PROJECTS = [
         "links": {
             "demoUrl": null,
             "repoUrls": [
-                "https://gitlab.com/contact1169-group/carbnp"
             ]
         },
         "youtubeId": null,
@@ -4540,7 +4536,6 @@ export const PROJECTS = [
         "links": {
             "demoUrl": null,
             "repoUrls": [
-                "https://gitlab.itgix.com/elsys/ivan-lambev/diplomna.git"
             ]
         },
         "youtubeId": null,
