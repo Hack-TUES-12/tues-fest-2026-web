@@ -1,7 +1,11 @@
 import React from 'react';
 import { unstable_cache } from 'next/cache';
 
+import { TF_YEAR } from '@/constants/event';
 import { isProjectCategory, type ProjectCategory } from '@/constants/projects';
+
+/** Use with `revalidateTag(PROJECTS_CACHE_TAG)` after project data changes. */
+export const PROJECTS_CACHE_TAG = `tf-${TF_YEAR}-projects` as const;
 
 import TF2025ProjectsAdapter from './adapter';
 
@@ -29,8 +33,9 @@ export const getProjects = unstable_cache(
 		const projects = await adapter.getProjects();
 		return projects.map(toProjectType);
 	}),
-	['all-projects'],
+	['all-projects', String(TF_YEAR)],
 	{
+		tags: [PROJECTS_CACHE_TAG],
 		revalidate: 20 * 60 * 1000,
 	}
 );
@@ -40,8 +45,9 @@ export const getProjectsByCategory = unstable_cache(
 		const projects = await adapter.getProjectsByCategory(category);
 		return projects.map(toProjectType);
 	}),
-	['projects-by-category'],
+	['projects-by-category', String(TF_YEAR)],
 	{
+		tags: [PROJECTS_CACHE_TAG],
 		revalidate: 20 * 60 * 1000,
 	}
 );
