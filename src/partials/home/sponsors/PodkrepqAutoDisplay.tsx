@@ -18,6 +18,8 @@ import type { SponsorDialogTier } from './sponsor-dialog-tier';
 
 const CENTER_SLOT_INDEX = 3;
 const VISIBLE_SLOTS = 7;
+/** Horizontal offset between adjacent logo slots (% of each logo’s own width in translateX) */
+const LOGO_SLOT_SPACING_PERCENT = 200;
 const AUTO_ADVANCE_INTERVAL = 4000;
 const ROLL_STEP_DELAY = 200;
 
@@ -211,7 +213,7 @@ export default function PodkrepqAutoDisplay({
 								isCenter ? 'z-25' : 'z-20'
 							)}
 							style={{
-								transform: `translateX(calc(-50% + ${distanceFromCenter * 110}%)) translateY(${getTranslateY(distanceFromCenter)}) scale(${isCenter ? 1.6 : 1})`,
+								transform: `translateX(calc(-50% + ${distanceFromCenter * LOGO_SLOT_SPACING_PERCENT}%)) translateY(${getTranslateY(distanceFromCenter)}) scale(${isCenter ? 1.6 : 1})`,
 							}}
 							onClick={(e) => {
 								e.preventDefault();
