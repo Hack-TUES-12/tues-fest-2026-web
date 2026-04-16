@@ -36,7 +36,7 @@ export const getProjects = unstable_cache(
 	['all-projects', String(TF_YEAR)],
 	{
 		tags: [PROJECTS_CACHE_TAG],
-		revalidate: 20 * 60 * 1000,
+		revalidate: 60,
 	}
 );
 
@@ -48,6 +48,6 @@ export const getProjectsByCategory = unstable_cache(
 	['projects-by-category', String(TF_YEAR)],
 	{
 		tags: [PROJECTS_CACHE_TAG],
-		revalidate: 20 * 60 * 1000,
+		revalidate: 60,
 	}
 );
