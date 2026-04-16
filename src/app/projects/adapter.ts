@@ -3867,7 +3867,6 @@ export const PROJECTS = [
         "links": {
             "demoUrl": null,
             "repoUrls": [
-                "https://github.com/anastassow/Quicx"
             ]
         },
         "youtubeId": null,
