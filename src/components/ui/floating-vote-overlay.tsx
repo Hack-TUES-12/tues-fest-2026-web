@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { Duration } from 'effect';
@@ -578,9 +579,25 @@ function SuccessStep() {
 function RegisterVoterButton(props: React.ComponentPropsWithoutRef<typeof Button>) {
 	const trpc = useTRPC();
 	const { data: currentVoter } = useSuspenseQuery(trpc.voting.getCurrentVoter.queryOptions());
-	const [wasVerificationEmailSent, setWasVerificationEmailSent] = useState(false);
 	const votedProjects = useVotedProjects();
 	const selectedCount = votedProjects.length;
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const voteParam = searchParams.get('vote');
+	const isOpen = voteParam !== null;
+	const wasVerificationEmailSent = voteParam === 'verify';
+
+	const setVoteParam = (value: string | null) => {
+		const params = new URLSearchParams(searchParams.toString());
+		if (value === null) {
+			params.delete('vote');
+		} else {
+			params.set('vote', value);
+		}
+		const query = params.toString();
+		router.replace(query ? `?${query}` : window.location.pathname, { scroll: false });
+	};
 
 	const step = !currentVoter
 		? ('register' as const)
@@ -591,9 +608,9 @@ function RegisterVoterButton(props: React.ComponentPropsWithoutRef<typeof Button
 				: ('enter-verification-code' as const);
 
 	return (
-		<Dialog>
+		<Dialog open={isOpen} onOpenChange={(open) => setVoteParam(open ? 'open' : null)}>
 			<DialogTrigger asChild>
-				<Button className="w-full" size="lg" disabled={selectedCount === 0} {...props}>
+				<Button className="w-full" size="lg" disabled={selectedCount === 0} {...props} onClick={() => setVoteParam('open')}>
 					{selectedCount === 0
 						? 'Изберете поне един проект'
 						: `Гласувайте за ${selectedCount} ${selectedCount === 1 ? 'проект' : 'проекта'}`}
@@ -631,13 +648,13 @@ function RegisterVoterButton(props: React.ComponentPropsWithoutRef<typeof Button
 				</DialogHeader>
 
 				{step === 'register' && (
-					<RegisterVoterStep onVerificationEmailSent={() => setWasVerificationEmailSent(true)} />
+					<RegisterVoterStep onVerificationEmailSent={() => setVoteParam('verify')} />
 				)}
 				{step === 'send-verification-email' && (
-					<SendVerificationEmailStep onVerificationEmailSent={() => setWasVerificationEmailSent(true)} />
+					<SendVerificationEmailStep onVerificationEmailSent={() => setVoteParam('verify')} />
 				)}
 				{step === 'enter-verification-code' && (
-					<EnterVerificationCodeStep onBackToEmailStep={() => setWasVerificationEmailSent(false)} />
+					<EnterVerificationCodeStep onBackToEmailStep={() => setVoteParam('open')} />
 				)}
 				{step === 'success' && <SuccessStep />}
 			</DialogContent>
