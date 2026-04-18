@@ -7,6 +7,18 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+/** Ensures external links have a URL scheme so Next.js doesn't treat them as relative paths. */
+export function normalizeExternalUrl(url: string): string {
+	const trimmedUrl = url.trim();
+	if (!trimmedUrl) return trimmedUrl;
+
+	if (/^https?:\/\//i.test(trimmedUrl)) {
+		return trimmedUrl;
+	}
+
+	return `https://${trimmedUrl}`;
+}
+
 /**
  * Parses a string and converts:
  * - Markdown-style bold syntax (**text**) to bold React elements

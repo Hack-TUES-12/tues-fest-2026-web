@@ -14,7 +14,7 @@ import {
 	PROJECT_CATEGORY_TEXT_CLASS,
 } from '@/constants/projects';
 import { listItemEntrance, listItemIconEntrance } from '@/lib/motion/section-in-view';
-import { cn } from '@/lib/utils';
+import { cn, normalizeExternalUrl } from '@/lib/utils';
 
 const LINK_ICON_SIZE = 28;
 
@@ -82,29 +82,32 @@ function buildLinkEntries(links: Readonly<Links>): LinkEntry[] {
 
 	if (links.repoUrls.length > 1) {
 		links.repoUrls.forEach((url, i) => {
+			const normalizedUrl = normalizeExternalUrl(url);
 			entries.push({
 				key: `repo-${i}-${url}`,
-				text: new URL(url).pathname,
-				url,
-				icon: <GithubIcon repoUrl={url} size={LINK_ICON_SIZE} />,
+				text: new URL(normalizedUrl).pathname,
+				url: normalizedUrl,
+				icon: <GithubIcon repoUrl={normalizedUrl} size={LINK_ICON_SIZE} />,
 			});
 		});
 	} else if (links.repoUrls.length === 1) {
 		const url = links.repoUrls[0];
 		invariant(url, 'No repo URLs');
+		const normalizedUrl = normalizeExternalUrl(url);
 		entries.push({
 			key: 'repo',
 			text: 'Код на проекта',
-			url,
-			icon: <GithubIcon repoUrl={url} size={LINK_ICON_SIZE} />,
+			url: normalizedUrl,
+			icon: <GithubIcon repoUrl={normalizedUrl} size={LINK_ICON_SIZE} />,
 		});
 	}
 
 	if (links.demoUrl) {
+		const normalizedDemoUrl = normalizeExternalUrl(links.demoUrl);
 		entries.push({
 			key: 'demo',
 			text: 'Уебсайт',
-			url: links.demoUrl,
+			url: normalizedDemoUrl,
 			icon: <TbGlobe size={LINK_ICON_SIZE} />,
 		});
 	}

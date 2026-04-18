@@ -9,7 +9,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import type { ProjectType } from '@/app/projects/actions';
 import { IfTFFeatureOn } from '@/lib/growthbook/react/client';
 import { PROJECT_CATEGORIES } from '@/constants/projects';
-import { cn } from '@/lib/utils';
+import { cn, normalizeExternalUrl } from '@/lib/utils';
 import { VoteSelectProjectButton } from './VoteButton';
 
 export const ProjectCard = ({ project }: { project: ProjectType }) => {
@@ -58,7 +58,7 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 						)}
 						{project.links.repoUrls[0] && (
 							<Button variant="muted-secondary" size="icon" className="rounded-full" asChild>
-								<Link href={project.links.repoUrls[0]} target="_blank">
+								<Link href={normalizeExternalUrl(project.links.repoUrls[0])} target="_blank">
 									<TbBrandGithub size={20} />
 								</Link>
 							</Button>
