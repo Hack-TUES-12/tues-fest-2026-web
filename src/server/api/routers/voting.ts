@@ -3,7 +3,7 @@ import { randomInt } from 'node:crypto';
 import { cookies } from 'next/headers';
 import { after } from 'next/server';
 import { TRPCError } from '@trpc/server';
-import { and, eq, not } from 'drizzle-orm';
+import { and, count, desc, eq, not, sql } from 'drizzle-orm';
 import { Duration } from 'effect';
 import { env } from 'env.mjs';
 import invariant from 'tiny-invariant';
@@ -285,6 +285,32 @@ export const votingRouter = createTRPCRouter({
 				);
 			});
 		}),
+
+	getTopProjectsByVotes: publicProcedure.query(async ({ ctx }) => {
+		const allProjects = await getProjects();
+		const projectsMap = new Map(allProjects.map((p) => [p.id, p]));
+
+		const topVotedProjects = await ctx.db
+			.select({
+				projectId: votes.projectId,
+				voteCount: count(votes.id),
+			})
+			.from(votes)
+			.groupBy(votes.projectId)
+			.orderBy(desc(count(votes.id)))
+			.limit(10);
+
+		return topVotedProjects
+			.map(({ projectId, voteCount }) => {
+				const project = projectsMap.get(projectId);
+				return {
+					id: projectId,
+					name: project?.title ?? 'Unknown Project',
+					voteCount: voteCount,
+				};
+			})
+			.filter((p) => projectsMap.has(p.id));
+	}),
 });
 
 async function isVerificationRequestSuspicious(normalizedEmail: string, db: Database) {
