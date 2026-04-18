@@ -83,6 +83,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.2",
+    "@react-email/preview-server": "5.2.9",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^25.3.2",
     "@types/nodemailer": "^7.0.11",

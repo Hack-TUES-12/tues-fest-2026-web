@@ -1,6 +1,22 @@
-import { Body, Container, Head, Heading, Html, Img, Link, Preview, Section, Text } from '@react-email/components';
+import {
+	Body,
+	Column,
+	Container,
+	Font,
+	Head,
+	Heading,
+	Hr,
+	Html,
+	Img,
+	Preview,
+	Row,
+	Section,
+	Text,
+} from '@react-email/components';
+
 import { Duration } from 'effect';
 
+import { TF_YEAR } from '@/constants/event';
 import { TF_TITLE } from '@/constants/seo';
 import { VOTE_VERIFICATION_CODE_EXPIRATION_DURATION } from '@/constants/voting';
 
@@ -12,8 +28,8 @@ interface VerificationEmailProps {
 	verificationCodeExpiryMinutes: number;
 }
 
-// const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERVEL_URL}` : 'http://localhost:3000';
-const baseUrl = 'http://localhost:3000';
+const baseUrl =
+	"https://tuesfest.bg"
 
 export default function VerificationCodeEmail({
 	verificationCode,
@@ -21,46 +37,109 @@ export default function VerificationCodeEmail({
 	name,
 	verificationCodeExpiryMinutes,
 }: VerificationEmailProps) {
-	return (
-		<Html>
-			<Head />
-			<Preview>Потвърждение на имейл за гласуване в {TF_TITLE}</Preview>
-			<Body style={main}>
-				<Section style={mottoSection}>
-					<Img
-						src={`${baseUrl}/logo/motto.png`}
-						width={294}
-						height={122}
-						alt={`Логото на ${TF_TITLE}`}
-						style={mottoImg}
-					/>
-				</Section>
-				<Container style={container}>
-					<Section style={contentSection}>
-						<Heading style={h1}>Здравейте, {name}!</Heading>
-						<Text style={mainText}>
-							Започнахте процеса по гласуване за наградата {'"Избор на публиката"'} на {TF_TITLE}. За да
-							потвърдите вашия глас, моля въведете следния код в уебсайта:
-						</Text>
+	const digits = verificationCode.split('');
 
-						<Section style={codeSection}>
-							<Text style={codeText}>{verificationCode}</Text>
-							<Text style={validityText}>(Кодът е валиден {verificationCodeExpiryMinutes} минути)</Text>
+	return (
+		<Html lang="bg">
+			<Head>
+				<Font
+					fontFamily="PT Sans"
+					fallbackFontFamily="sans-serif"
+					webFont={{
+						url: 'https://fonts.gstatic.com/s/ptsans/v17/jizaRExUiTo99u79P0WOxOGMMDQ.woff2',
+						format: 'woff2',
+					}}
+					fontWeight={400}
+					fontStyle="normal"
+				/>
+				<Font
+					fontFamily="PT Sans"
+					fallbackFontFamily="sans-serif"
+					webFont={{
+						url: 'https://fonts.gstatic.com/s/ptsans/v17/jizfRExUiTo99u79B_mh0O6tLR8a8zI.woff2',
+						format: 'woff2',
+					}}
+					fontWeight={700}
+					fontStyle="normal"
+				/>
+			</Head>
+
+			<Preview>
+				Вашият код: {verificationCode} — {TF_TITLE}
+			</Preview>
+
+			<Body style={body}>
+				<Container style={wrapper}>
+					{/* ── Header ────────────────────────────────────────── */}
+					<Section style={header}>
+						<Row>
+							<Column align="center">
+								<Img
+									src={`${baseUrl}/logo/motto.png`}
+									width={460}
+									height={191}
+									alt={`Логото на ${TF_TITLE}`}
+									style={logo}
+								/>
+							</Column>
+						</Row>
+					</Section>
+
+					{/* ── Card ──────────────────────────────────────────── */}
+					<Container style={card}>
+						{/* Pink accent stripe */}
+						<Section style={stripe} />
+
+						<Section style={cardBody}>
+							{/* Section label */}
+							<Text style={label}>ЛЮБИМЕЦ НА ПУБЛИКАТА — TUES FEST {TF_YEAR}</Text>
+
+							{/* Greeting */}
+							<Heading style={heading}>Здравейте, {name}!</Heading>
+
+							<Text style={bodyText}>
+								Започнахте процеса по гласуване за наградата „Избор на публиката" на {TF_TITLE}. За да
+								потвърдите вашия глас, моля въведете следния код в уебсайта:
+							</Text>
+
+							{/* ── OTP box ───────────────────────────────── */}
+							<Section style={codeBox}>
+								<Text style={codeLabel}>КОД ЗА ПОТВЪРЖДЕНИЕ</Text>
+
+								{/* All digits in one Text so they copy as a single string */}
+								<Text style={digitsContainer}>
+									{digits.map((digit, i) => (
+										<span key={i} style={digitSpan}>{digit}</span>
+									))}
+								</Text>
+
+								<Text style={validity}>
+									Валиден {verificationCodeExpiryMinutes} минути
+								</Text>
+							</Section>
+
+							<Text style={bodyText}>
+								Ако не сте започнали процеса по гласуване, можете спокойно да игнорирате това
+								съобщение.
+							</Text>
+
+							<Text style={signature}>
+								Поздрави,
+								<br />
+								<span style={sigName}>Екипът на {TF_TITLE}</span>
+							</Text>
 						</Section>
 
-						<Text style={signatureText}>
-							Поздрави,
-							<br />
-							Екипът на {TF_TITLE}
-						</Text>
-					</Section>
+						{/* ── Footer ────────────────────────────────────── */}
+						<Hr style={divider} />
+						<Section style={footerSection}>
+							<Text style={footerText}>
+								Този имейл е изпратен до {email}, защото някой въведе този адрес в процеса по
+								гласуване в {TF_TITLE}. Ако не сте вие, можете спокойно да го игнорирате.
+							</Text>
+						</Section>
+					</Container>
 
-					<Section style={footerSection}>
-						<Text style={footerText}>
-							Този имейл е изпратен до {email}, защото някой въведе този адрес в процеса по гласуване в{' '}
-							{TF_TITLE}. Ако не сте вие, можете спокойно да игнорирате това съобщение.
-						</Text>
-					</Section>
 				</Container>
 			</Body>
 		</Html>
@@ -75,96 +154,162 @@ VerificationCodeEmail.PreviewProps = {
 	verificationCodeExpiryMinutes: 10,
 } satisfies VerificationEmailProps;
 
-const main = {
-	backgroundColor: '#020817',
-	fontFamily:
-		"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+// ─── Styles ───────────────────────────────────────────────────────────────────
+
+const sans =
+	"'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif";
+const mono = "'PT Mono', 'Courier New', Courier, monospace";
+
+const body = {
+	backgroundColor: '#000000',
+	fontFamily: sans,
+	padding: '32px 0 48px',
 };
 
-const container = {
-	margin: '40px auto',
-	padding: '20px 0',
-	backgroundColor: '#232c3d',
-	borderRadius: '16px',
-	border: '1px solid #334155',
-	boxShadow: '0 4px 16px 0 rgba(30,41,59,0.25), 0 2px 4px -1px rgba(0,0,0,0.10)',
-	maxWidth: '600px',
-	backdropFilter: 'blur(8px)',
+const wrapper = {
+	maxWidth: '580px',
+	margin: '0 auto',
 };
 
-const mottoSection = {
-	textAlign: 'center' as const,
-	margin: '0 0 16px 0',
+// Header (logo area, outside the card)
+const header = {
+	marginBottom: '48px',
 };
 
-const mottoImg = {
-	display: 'inline-block',
-	width: '294px',
-	height: '122px',
+const logo = {
+	display: 'block',
 	maxWidth: '100%',
+};
+
+
+// Card
+const card = {
+	backgroundColor: '#0f0f0f',
+	border: '1px solid #1c1c1c',
 	borderRadius: '12px',
+	overflow: 'hidden' as const,
 };
 
-const contentSection = {
-	padding: '0 32px',
+const stripe = {
+	height: '4px',
+	backgroundColor: '#c93b70',
+	background: 'linear-gradient(90deg, #c93b70 0%, #8d1c5c 100%)',
+	margin: '0',
+	padding: '0',
 };
 
-const h1 = {
-	color: '#f8fafc',
-	fontSize: '24px',
-	fontWeight: 'bold',
-	textAlign: 'left' as const,
-	margin: '16px 0',
+const cardBody = {
+	padding: '32px 40px 28px',
 };
 
-const mainText = {
-	color: '#f8fafc',
-	fontSize: '16px',
-	lineHeight: '24px',
-	textAlign: 'left' as const,
-	margin: '0 0 24px 0',
+const label = {
+	fontFamily: sans,
+	fontSize: '11px',
+	fontWeight: '700',
+	letterSpacing: '0.12em',
+	color: '#c93b70',
+	textTransform: 'uppercase' as const,
+	margin: '0 0 12px',
 };
 
-const codeSection = {
-	margin: '32px 0',
-	padding: '24px',
-	backgroundColor: '#0f172a',
-	borderRadius: '12px',
-	border: '1px solid #1e293b',
+const heading = {
+	fontFamily: sans,
+	fontSize: '26px',
+	fontWeight: '700',
+	color: '#ffffff',
+	margin: '0 0 20px',
+	lineHeight: '1.25',
+};
+
+const bodyText = {
+	fontFamily: sans,
+	fontSize: '15px',
+	lineHeight: '1.65',
+	color: '#8a8a8a',
+	margin: '0 0 20px',
+};
+
+// OTP box
+const codeBox = {
+	backgroundColor: '#080808',
+	border: '1px solid #1c1c1c',
+	borderRadius: '10px',
+	margin: '8px 0 24px',
+	padding: '0 0 20px',
+	overflow: 'hidden' as const,
+};
+
+const codeLabel = {
+	fontFamily: sans,
+	fontSize: '10px',
+	fontWeight: '700',
+	letterSpacing: '0.14em',
+	color: '#444444',
 	textAlign: 'center' as const,
+	margin: '18px 0 14px',
+	padding: '0',
+	textTransform: 'uppercase' as const,
 };
 
-const codeText = {
-	// color: '#e11d48',
-	color: '#f8fafc',
-	fontSize: '48px',
-	fontWeight: 'bold',
-	letterSpacing: '0.1em',
-	margin: '8px 0 8px 0',
+const digitsContainer = {
+	textAlign: 'center' as const,
+	margin: '0',
+	padding: '4px 24px 0',
+	lineHeight: '1',
 };
 
-const validityText = {
-	color: '#94a3b8',
-	fontSize: '14px',
+const digitSpan = {
+	fontFamily: mono,
+	fontSize: '36px',
+	fontWeight: '700',
+	color: '#ffffff',
+	backgroundColor: '#161616',
+	border: '1px solid #2a2a2a',
+	borderRadius: '8px',
+	display: 'inline-block' as const,
+	width: '44px',
+	textAlign: 'center' as const,
+	padding: '10px 0',
+	margin: '0 3px',
+	lineHeight: '1',
+};
+
+const validity = {
+	fontFamily: sans,
+	fontSize: '11px',
+	color: '#3d3d3d',
+	textAlign: 'center' as const,
+	margin: '12px 0 0',
+	padding: '0',
+};
+
+const signature = {
+	fontFamily: sans,
+	fontSize: '15px',
+	lineHeight: '1.65',
+	color: '#8a8a8a',
+	margin: '8px 0 0',
+};
+
+const sigName = {
+	color: '#d4d4d4',
+	fontWeight: '700',
+};
+
+const divider = {
+	borderColor: '#1c1c1c',
 	margin: '0',
 };
 
-const signatureText = {
-	color: '#f8fafc',
-	fontSize: '16px',
-	lineHeight: '24px',
-	margin: '32px 0',
-};
-
 const footerSection = {
-	padding: '12px 32px 0 32px',
-	borderTop: '1px solid #334155',
-	marginTop: '32px',
+	padding: '16px 40px',
 };
 
 const footerText = {
-	color: '#94a3b8',
-	fontSize: '12px',
-	lineHeight: '18px',
+	fontFamily: sans,
+	fontSize: '11px',
+	lineHeight: '1.55',
+	color: '#3a3a3a',
 	textAlign: 'center' as const,
+	margin: '0',
 };
