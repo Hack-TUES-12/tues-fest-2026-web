@@ -144,7 +144,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 					<section className="mx-auto w-full max-w-5xl">
 						{top3.length >= 3 ? (
 							<motion.div layout className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-end md:gap-6">
-								{/* Render order: 2nd, 1st, 3rd — natural grid placement gives the podium layout */}
+								{/* DOM order: 2nd, 1st, 3rd. Mobile: CSS order by place (1,2,3). Desktop: podium (2=col1, 1=col2, 3=col3). */}
 								{([top3[1]!, top3[0]!, top3[2]!] as const).map((project, slotIdx) => {
 									const place = slotIdx === 1 ? 1 : slotIdx === 0 ? 2 : 3;
 									const entryDelay = slotIdx === 1 ? 0.22 : slotIdx === 0 ? 0.35 : 0.45;
@@ -156,6 +156,11 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 											initial={reducedMotion ? false : { opacity: 0, y: 24 }}
 											animate={{ opacity: 1, y: 0 }}
 											transition={{ layout: LAYOUT_SPRING, duration: 0.55, delay: entryDelay, ease: EASE_OUT }}
+											className={cn(
+												place === 1 && 'order-1 md:order-2',
+												place === 2 && 'order-2 md:order-1',
+												place === 3 && 'order-3 md:order-3',
+											)}
 										>
 											<TopPlaceCard place={place} project={project} isFirst={place === 1} />
 										</motion.div>
