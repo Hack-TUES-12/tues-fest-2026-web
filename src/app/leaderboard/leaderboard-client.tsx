@@ -143,38 +143,25 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 				{hasData && top3.length > 0 && (
 					<section className="mx-auto w-full max-w-5xl">
 						{top3.length >= 3 ? (
-							<div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-end md:gap-6">
-								{/* 2nd */}
-								<motion.div
-									key={top3[1]!.id}
-									initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.55, delay: 0.35, ease: EASE_OUT }}
-									className="md:order-1"
-								>
-									<TopPlaceCard place={2} project={top3[1]!} />
-								</motion.div>
-								{/* 1st */}
-								<motion.div
-									key={top3[0]!.id}
-									initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.55, delay: 0.22, ease: EASE_OUT }}
-									className="md:order-2"
-								>
-									<TopPlaceCard place={1} project={top3[0]!} isFirst />
-								</motion.div>
-								{/* 3rd */}
-								<motion.div
-									key={top3[2]!.id}
-									initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.55, delay: 0.45, ease: EASE_OUT }}
-									className="md:order-3"
-								>
-									<TopPlaceCard place={3} project={top3[2]!} />
-								</motion.div>
-							</div>
+							<motion.div layout className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-end md:gap-6">
+								{/* Render order: 2nd, 1st, 3rd — natural grid placement gives the podium layout */}
+								{([top3[1]!, top3[0]!, top3[2]!] as const).map((project, slotIdx) => {
+									const place = slotIdx === 1 ? 1 : slotIdx === 0 ? 2 : 3;
+									const entryDelay = slotIdx === 1 ? 0.22 : slotIdx === 0 ? 0.35 : 0.45;
+									return (
+										<motion.div
+											key={project.id}
+											layoutId={`top-card-${project.id}`}
+											layout="position"
+											initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ layout: LAYOUT_SPRING, duration: 0.55, delay: entryDelay, ease: EASE_OUT }}
+										>
+											<TopPlaceCard place={place} project={project} isFirst={place === 1} />
+										</motion.div>
+									);
+								})}
+							</motion.div>
 						) : (
 							<div className={cn('grid gap-4', top3.length === 2 ? 'md:grid-cols-2' : '')}>
 								{top3.map((project, idx) => (
