@@ -97,7 +97,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 
 			<div className="relative z-10 flex w-full flex-col items-center gap-16 md:gap-20">
 				{/* Hero */}
-				<section className="relative isolate mx-auto flex w-full max-w-3xl flex-col items-center gap-6 text-center">
+				<section className="relative isolate mx-auto flex w-full max-w-3xl flex-col items-center gap-2 text-center">
 					<motion.p
 						className="text-primary text-sm font-medium tracking-widest"
 						initial={reducedMotion ? false : { opacity: 0, y: 16 }}
@@ -115,12 +115,12 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 						Класация
 					</motion.h1>
 					<motion.p
-						className="text-foreground/75 max-w-2xl text-lg leading-relaxed text-pretty"
+						className="text-foreground/75 max-w-2xl text-lg leading-relaxed text-pretty mb-2"
 						initial={reducedMotion ? false : { opacity: 0, y: 16 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: 0.18, ease: EASE_OUT }}
 					>
-						Вижте най-гласуваните проекти от ТУЕС Фест. Класацията се обновява на всеки 5 секунди.
+						Вижте десетте проекта с най-много гласове на TUES Fest.
 					</motion.p>
 
 					<IfTFFeatureOn feature="project-voting">
