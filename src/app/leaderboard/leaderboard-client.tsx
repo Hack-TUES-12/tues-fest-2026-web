@@ -82,7 +82,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 				aria-hidden
 			>
 				<img
-					src="/decorations/purple-circle.svg"
+					src="/decorations/green-circle.svg"
 					alt=""
 					aria-hidden="true"
 					className="pointer-events-none absolute top-0 left-0 h-auto w-[min(50vw,40rem)] max-w-4xl -translate-x-1/4 -translate-y-1/4 opacity-90 select-none"
@@ -99,7 +99,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 				{/* Hero */}
 				<section className="relative isolate mx-auto flex w-full max-w-3xl flex-col items-center gap-2 text-center">
 					<motion.p
-						className="text-primary text-sm font-medium tracking-widest"
+						className="text-muted text-sm font-medium tracking-widest"
 						initial={reducedMotion ? false : { opacity: 0, y: 16 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: 0.05, ease: EASE_OUT }}
@@ -129,7 +129,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: 0.26, ease: EASE_OUT }}
 						>
-							<Button asChild variant="default" size="lg" className="shadow-primary/20 font-bold shadow-lg">
+							<Button asChild variant="muted" size="lg" className="shadow-muted/20 font-bold shadow-lg">
 								<Link href="/projects">
 									<TbArrowRight size={18} />
 									Гласувайте
@@ -227,7 +227,10 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 												x: { duration: 0.35, delay: isLoading ? 0 : index * 0.04, ease: EASE_OUT },
 											}}
 										>
-											<div className="bg-card/70 rounded-xl px-4 py-3.5 shadow-sm backdrop-blur-md transition-colors duration-200 hover:bg-card/85 md:px-6 md:py-4">
+											<Link
+												href={`/projects/${project.id}`}
+												className="bg-card/70 rounded-xl px-4 py-3.5 shadow-sm backdrop-blur-md transition-colors duration-200 hover:bg-card/85 md:px-6 md:py-4 block"
+											>
 												<div className="flex items-center gap-4 md:gap-6">
 													<div className="flex w-10 shrink-0 items-center justify-center md:w-14">
 														<span
@@ -256,7 +259,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 														<span className="text-xs text-foreground/40">гласа</span>
 													</div>
 												</div>
-											</div>
+											</Link>
 										</motion.div>
 									);
 								})}
@@ -285,6 +288,7 @@ function TopPlaceCard({ place, project, isFirst }: TopPlaceCardProps) {
 	const toneClass = MEDAL_TONES[place - 1]!;
 
 	return (
+		<Link href={`/projects/${project.id}`} className="block">
 		<Card
 			variant="primary"
 			className={cn(
@@ -310,8 +314,11 @@ function TopPlaceCard({ place, project, isFirst }: TopPlaceCardProps) {
 					<p className="text-xs text-foreground/50">Гласове</p>
 					<p
 						className={cn(
-							'font-title font-bold text-primary',
+							'font-title font-bold',
 							isFirst ? 'text-4xl md:text-5xl' : 'text-3xl md:text-4xl',
+							place === 1 && 'text-yellow-400',
+							place === 2 && 'text-gray-300',
+							place === 3 && 'text-orange-400',
 						)}
 					>
 						{project.voteCount}
@@ -330,5 +337,6 @@ function TopPlaceCard({ place, project, isFirst }: TopPlaceCardProps) {
 				</div>
 			</CardContent>
 		</Card>
+		</Link>
 	);
 }
