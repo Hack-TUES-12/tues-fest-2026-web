@@ -472,7 +472,9 @@ export const PROJECTS = [
         "links": {
             "demoUrl": null,
             "repoUrls": [
-                "https://github.com/shestakov-dev/ClassCompassInfrastructure"
+                "https://github.com/shestakov-dev/ClassCompassFrontend",
+                "https://github.com/shestakov-dev/ClassCompassServer",
+                " https://github.com/shestakov-dev/ClassCompassInfrastructure"
             ]
         },
         "youtubeId": "2ElulQ2DboI",
