@@ -27,6 +27,7 @@ import { TFLogo } from '../home/TFLogo';
 const LINKS = [
 	// { href: '/', title: 'Начало' },
 	{ href: '/projects', title: 'Проекти' },
+	{ href: '/leaderboard', title: 'Класация' },
 	{ href: '/schedule', title: 'Програма' },
 	{ href: '/regulation', title: 'Регламент' },
 	{ href: '/partners', title: 'Спонсори && Партньори' },
@@ -101,12 +102,14 @@ export function Navigation() {
 	const isPartnersEnabled = useTFFeatureIsOn('tf-show-partners');
 	const isTUESTalksEnabled = useTFFeatureIsOn('tf-show-tuestalks');
 	const isApplyEnabled = useTFFeatureIsOn('tf-show-apply');
+	const isLeaderboardEnabled = useTFFeatureIsOn('tf-show-leaderboard')
 
 	const visibleLinks = LINKS.filter(
 		(link) =>
 			(isScheduleEnabled || link.href !== '/schedule') &&
 			(isProjectsEnabled || link.href !== '/projects') &&
-			(isPartnersEnabled || link.href !== '/partners'),
+			(isPartnersEnabled || link.href !== '/partners') &&
+			(isLeaderboardEnabled || link.href !== '/leaderboard'),
 	);
 
 	const visibleSchoolLinks = SCHOOL_LINKS.filter(
