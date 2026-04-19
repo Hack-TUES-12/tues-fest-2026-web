@@ -339,7 +339,7 @@ function TopPlaceCard({ place, project, isFirst }: TopPlaceCardProps) {
 						place === 3 && 'bg-orange-400/15 text-orange-400',
 					)}
 				>
-					{place === 1 ? '🥇' : place === 2 ? '🥈' : '🥉'} Място {place}
+					Място {place}
 				</div>
 			</CardContent>
 		</Card>
