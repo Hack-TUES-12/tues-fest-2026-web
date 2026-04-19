@@ -305,8 +305,6 @@ async function _getTopProjectsUncached() {
 	const allProjects = await getProjects();
 	const projectsMap = new Map(allProjects.map((p) => [p.id, p]));
 
-	console.log("Hit endpoint")
-
 	const topVotedProjects = await db
 		.select({
 			projectId: votes.projectId,
@@ -317,7 +315,7 @@ async function _getTopProjectsUncached() {
 		.orderBy(desc(count(votes.id)))
 		.limit(10);
 
-	return topVotedProjects
+	const ranked = topVotedProjects
 		.map(({ projectId, voteCount }) => {
 			const project = projectsMap.get(projectId);
 			return {
@@ -327,6 +325,22 @@ async function _getTopProjectsUncached() {
 			};
 		})
 		.filter((p) => projectsMap.has(p.id));
+
+	const needed = 10 - ranked.length;
+	if (needed > 0) {
+		const rankedIds = new Set(ranked.map((p) => p.id));
+		const unvoted = allProjects.filter((p) => !rankedIds.has(p.id));
+		// Fisher-Yates shuffle to pick random unvoted projects
+		for (let i = unvoted.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[unvoted[i], unvoted[j]] = [unvoted[j]!, unvoted[i]!];
+		}
+		for (const project of unvoted.slice(0, needed)) {
+			ranked.push({ id: project.id, name: project.title, voteCount: 0 });
+		}
+	}
+
+	return ranked;
 }
 
 const getTopProjectsCached = unstable_cache(_getTopProjectsUncached, [TOP_PROJECTS_CACHE_TAG], {
