@@ -11,6 +11,7 @@ export type TFFeatures = {
 		label: string;
 		link: string;
 	};
+	'tf-show-leaderboard': boolean;
 };
 
 export type TFFeature = keyof TFFeatures;

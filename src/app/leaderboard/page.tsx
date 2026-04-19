@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default async function LeaderboardPage() {
 	// Check feature flag
 	const gb = await growthbook();
-	if (gb.isOff('project-voting')) {
+	if (gb.isOff('tf-show-leaderboard')) {
 		notFound();
 	}
 
