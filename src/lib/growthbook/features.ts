@@ -12,6 +12,9 @@ export type TFFeatures = {
 		link: string;
 	};
 	'tf-show-leaderboard': boolean;
+	'tf-battle-bots-stream': {
+		youtubeId: string;
+	};
 };
 
 export type TFFeature = keyof TFFeatures;

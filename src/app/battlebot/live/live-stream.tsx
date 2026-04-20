@@ -5,13 +5,16 @@ import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 
 import { TF_TITLE } from '@/constants/seo';
 import { sectionFadeIn, sectionFadeUp } from '@/lib/motion/section-in-view';
+import { useTFFeature } from '@/lib/growthbook/react/hooks';
 
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
-const STREAM_ID = 'jfKfPfyJRdk';
+const FALLBACK_STREAM_ID = 'jfKfPfyJRdk';
 
 export const LiveStream = () => {
 	const reducedMotion = useReducedMotion();
+	const streamFeature = useTFFeature('tf-battle-bots-stream');
+	const streamId = streamFeature.value?.youtubeId ?? FALLBACK_STREAM_ID;
 
 	return (
 		<motion.section
@@ -42,7 +45,7 @@ export const LiveStream = () => {
 				className="w-full overflow-hidden rounded-2xl border border-white/10 shadow-lg shadow-black/30"
 				{...sectionFadeUp(reducedMotion, 0.26)}
 			>
-				<LiteYouTubeEmbed id={STREAM_ID} title={`Battle Bots На живо | ${TF_TITLE}`} poster="hqdefault" />
+				<LiteYouTubeEmbed id={streamId} title={`Battle Bots На живо | ${TF_TITLE}`} poster="hqdefault" />
 			</motion.div>
 		</motion.section>
 	);
