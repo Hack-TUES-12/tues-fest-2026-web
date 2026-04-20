@@ -2,6 +2,8 @@ import { type Metadata } from 'next';
 
 import { HydrateClient, api } from '@/lib/trpc/server';
 
+import { LiveStream } from './live-stream';
+import { ResultsHeader } from './results-header';
 import { BracketLive } from './bracket-live';
 
 export const metadata: Metadata = {
@@ -34,19 +36,13 @@ export default async function BattlebotLivePage() {
 					/>
 				</div>
 
-				<div className="relative z-10 flex w-full flex-col items-center gap-14">
-					{/* Header — same pattern as /about, /schedule, /leaderboard */}
-					<section className="flex flex-col items-center gap-2 text-center">
-						<p className="text-secondary text-sm font-medium tracking-widest uppercase">
-							TUES Battle Bots
-						</p>
-						<h1 className="font-title text-5xl text-white md:text-6xl">Резултати от турнира</h1>
-						<p className="text-foreground/70 max-w-xl text-pretty text-lg leading-relaxed">
-							Следете резултатите от състезанието TUES Battle Bots 2026 в реално време.
-						</p>
-					</section>
+				<div className="relative z-10 flex w-full flex-col items-center gap-24">
+					<LiveStream />
 
-					<BracketLive />
+					<div className='flex flex-col gap-12'>
+						<ResultsHeader />
+						<BracketLive />
+					</div>
 				</div>
 			</div>
 		</HydrateClient>
