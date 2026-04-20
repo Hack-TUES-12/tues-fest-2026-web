@@ -75,6 +75,16 @@ export const votesRelations = relations(votes, ({ one }) => ({
 	}),
 }));
 
+export const battleBots = createTable('battle_bots', (d) => ({
+	id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+	name: d.varchar({ length: 256 }).notNull().unique(),
+	primaryColor: d.varchar({ length: 32 }).notNull(),
+	textColor: d.varchar({ length: 32 }).notNull(),
+	quarterFinalResult: d.integer(),
+	semiFinalResult: d.integer(),
+	finalResult: d.integer(),
+}));
+
 // FIXME: drizzle-kit really wants to delete these, so even though they are not used, they must be defined here as well
 // This is because we are sharing the same schema for multiple projects
 export const __DO_NOT_USE_classEnum = pgEnum('class', ['А', 'Б', 'В', 'Г']);
