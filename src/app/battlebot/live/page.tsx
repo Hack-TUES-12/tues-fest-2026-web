@@ -24,7 +24,7 @@ function MatchRow({ participant, isWinner }: { participant: Participant; isWinne
 }
 
 export default async function BattlebotLivePage() {
-	const rounds = await api.tournament.getBracket();
+	const rounds = await api.tournament.getTournament();
 
 	return (
 		<main style={{ padding: '2rem', fontFamily: 'monospace' }}>
