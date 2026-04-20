@@ -2,8 +2,9 @@ import { randomInt } from 'node:crypto';
 
 import { cookies } from 'next/headers';
 import { after } from 'next/server';
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { TRPCError } from '@trpc/server';
-import { and, eq, not } from 'drizzle-orm';
+import { and, count, desc, eq, not, sql } from 'drizzle-orm';
 import { Duration } from 'effect';
 import { env } from 'env.mjs';
 import invariant from 'tiny-invariant';
@@ -20,6 +21,7 @@ import {
 	VOTE_VERIFICATION_EMAIL_COOLDOWN_DURATION,
 } from '@/constants/voting';
 import { type Database } from '@/server/db';
+import { db } from '@/server/db';
 import { voters, votes } from '@/server/db/schema';
 import { Mailer } from '@/server/email';
 import { renderEmail } from '@/server/email/render';
@@ -28,6 +30,7 @@ import { createTRPCRouter, growthbookFeatureMiddleware, publicProcedure } from '
 
 const COOKIE_PREFIX = env.NODE_ENV !== 'development' ? '__Secure-' : '_';
 const PUBLIC_VOTER_ID_COOKIE_NAME = `${COOKIE_PREFIX}tf${TF_YEAR_SHORT}_voter_ref`;
+const TOP_PROJECTS_CACHE_TAG = 'top-projects-by-votes';
 
 const publicVotingProcedure = publicProcedure
 	.use(growthbookFeatureMiddleware('project-voting', 'Гласуването за проекти не е позволено по това време'))
@@ -261,6 +264,11 @@ export const votingRouter = createTRPCRouter({
 					);
 				});
 			}
+			if (verificationCodeMatches) {
+				after(() => {
+					revalidateTag(TOP_PROJECTS_CACHE_TAG, 'max');
+				});
+			}
 			return { warning: REVERSE_ENGINEERING_PROTECTION_MESSAGE, matches: verificationCodeMatches };
 		}),
 
@@ -284,7 +292,60 @@ export const votingRouter = createTRPCRouter({
 					}))
 				);
 			});
+
+			after(() => {
+				revalidateTag(TOP_PROJECTS_CACHE_TAG, 'max');
+			});
 		}),
+
+	getTopProjectsByVotes: publicProcedure.query(() => getTopProjectsCached()),
+});
+
+async function _getTopProjectsUncached() {
+	const allProjects = await getProjects();
+	const projectsMap = new Map(allProjects.map((p) => [p.id, p]));
+
+	const topVotedProjects = await db
+		.select({
+			projectId: votes.projectId,
+			voteCount: count(votes.id),
+		})
+		.from(votes)
+		.groupBy(votes.projectId)
+		.orderBy(desc(count(votes.id)))
+		.limit(10);
+
+	const ranked = topVotedProjects
+		.map(({ projectId, voteCount }) => {
+			const project = projectsMap.get(projectId);
+			return {
+				id: projectId,
+				name: project?.title ?? 'Unknown Project',
+				voteCount: voteCount,
+			};
+		})
+		.filter((p) => projectsMap.has(p.id));
+
+	const needed = 10 - ranked.length;
+	if (needed > 0) {
+		const rankedIds = new Set(ranked.map((p) => p.id));
+		const unvoted = allProjects.filter((p) => !rankedIds.has(p.id));
+		// Fisher-Yates shuffle to pick random unvoted projects
+		for (let i = unvoted.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[unvoted[i], unvoted[j]] = [unvoted[j]!, unvoted[i]!];
+		}
+		for (const project of unvoted.slice(0, needed)) {
+			ranked.push({ id: project.id, name: project.title, voteCount: 0 });
+		}
+	}
+
+	return ranked;
+}
+
+const getTopProjectsCached = unstable_cache(_getTopProjectsUncached, [TOP_PROJECTS_CACHE_TAG], {
+	revalidate: 5 * 60, // 5 minutes
+	tags: [TOP_PROJECTS_CACHE_TAG],
 });
 
 async function isVerificationRequestSuspicious(normalizedEmail: string, db: Database) {
