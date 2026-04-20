@@ -55,6 +55,11 @@ export const fetchTournamentBracket = unstable_cache(
 		const { data: matchData, included } = MatchesResponseSchema.parse(matchesJson);
 		const participantMap = buildParticipantMap(included ?? []);
 
+		const dbBots = await db
+			.select({ name: battleBots.name, primaryColor: battleBots.primaryColor, textColor: battleBots.textColor })
+			.from(battleBots);
+		const colorMap = new Map(dbBots.map((b) => [b.name, { primaryColor: b.primaryColor, textColor: b.textColor }]));
+
 		const positiveMatches = matchData.filter((m) => m.attributes.round > 0);
 		const maxRound = Math.max(...positiveMatches.map((m) => m.attributes.round));
 		const roundNumbers = [
@@ -70,10 +75,27 @@ export const fetchTournamentBracket = unstable_cache(
 					const p1 = p1Id !== undefined ? participantMap.get(p1Id) : undefined;
 					const p2 = p2Id !== undefined ? participantMap.get(p2Id) : undefined;
 
+					const p1Colors = p1 ? (colorMap.get(p1.name) ?? { primaryColor: null, textColor: null }) : null;
+					const p2Colors = p2 ? (colorMap.get(p2.name) ?? { primaryColor: null, textColor: null }) : null;
+
 					return {
 						id: parseInt(m.id, 10),
-						player1: p1 ? { ...p1, score: parseScore(m.attributes.scores, 0) } : null,
-						player2: p2 ? { ...p2, score: parseScore(m.attributes.scores, 1) } : null,
+						player1: p1
+							? {
+									...p1,
+									score: parseScore(m.attributes.scores, 0),
+									primaryColor: p1Colors?.primaryColor ?? null,
+									textColor: p1Colors?.textColor ?? null,
+								}
+							: null,
+						player2: p2
+							? {
+									...p2,
+									score: parseScore(m.attributes.scores, 1),
+									primaryColor: p2Colors?.primaryColor ?? null,
+									textColor: p2Colors?.textColor ?? null,
+								}
+							: null,
 						winnerId: m.attributes.winners ?? null,
 						state: m.attributes.state,
 					};

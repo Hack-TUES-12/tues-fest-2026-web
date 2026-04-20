@@ -36,7 +36,14 @@ export const MatchesResponseSchema = z.object({
 });
 
 export const BracketParticipantSchema = z
-	.object({ id: z.number(), name: z.string(), seed: z.number(), score: z.number().nullable() })
+	.object({
+		id: z.number(),
+		name: z.string(),
+		seed: z.number(),
+		score: z.number().nullable(),
+		primaryColor: z.string().nullable(),
+		textColor: z.string().nullable(),
+	})
 	.nullable();
 
 export const BracketMatchSchema = z.object({
