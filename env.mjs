@@ -9,6 +9,7 @@ export const env = createEnv({
 
 		CHALLONGE_API_KEY: z.string(),
 		CHALLONGE_TOURNAMENT_ID: z.string(),
+		REVALIDATION_SECRET: z.string(),
 
 		EMAIL_SMTP_HOST: z.string(),
 		EMAIL_SMTP_USER: z.string(),
