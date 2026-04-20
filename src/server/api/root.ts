@@ -9,7 +9,7 @@ import { createCallerFactory, createTRPCRouter } from '@/server/api/trpc';
  */
 export const appRouter = createTRPCRouter({
 	voting: votingRouter,
-	tournament: battleBotsRouter,
+	battleBots: battleBotsRouter,
 });
 
 // export type definition of API
