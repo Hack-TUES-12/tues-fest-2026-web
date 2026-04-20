@@ -3089,7 +3089,7 @@ export const PROJECTS = [
                 "https://github.com/Tan4y/diploma-project-tudy-backend"
             ]
         },
-        "youtubeId": null,
+        "youtubeId":  "G2nnPCnEYM4",
         "contributors": [
             {
                 "name": "Таня Колева",
