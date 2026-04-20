@@ -1,7 +1,10 @@
 import { unstable_cache } from 'next/cache';
+import { eq } from 'drizzle-orm';
 import { type z } from 'zod';
 
 import { env } from 'env.mjs';
+import { db } from '@/server/db';
+import { battleBots } from '@/server/db/schema';
 
 import { MatchesResponseSchema, type ParticipantEntrySchema } from './battle-bots.schemas';
 
@@ -58,7 +61,7 @@ export const fetchTournamentBracket = unstable_cache(
 			...new Set(positiveMatches.map((m) => m.attributes.round)),
 		].sort((a, b) => a - b);
 
-		return roundNumbers.map((round) => {
+		const rounds = roundNumbers.map((round) => {
 			const matches = positiveMatches
 				.filter((m) => m.attributes.round === round)
 				.map((m) => {
@@ -76,8 +79,36 @@ export const fetchTournamentBracket = unstable_cache(
 					};
 				});
 
-			return { label: getRoundLabel(round, maxRound), matches };
+			return { label: getRoundLabel(round, maxRound), matches, round };
 		});
+
+		// Sync scores to DB for participants whose names exist in the battle_bots table
+		await Promise.all(
+			rounds.flatMap(({ round, matches }) => {
+				const column =
+					round === maxRound
+						? battleBots.finalResult
+						: round === maxRound - 1
+							? battleBots.semiFinalResult
+							: battleBots.quarterFinalResult;
+
+				return matches.flatMap(({ player1, player2 }) =>
+					[
+						player1 && player1.score !== null ? { name: player1.name, score: player1.score } : null,
+						player2 && player2.score !== null ? { name: player2.name, score: player2.score } : null,
+					]
+						.filter((p) => p !== null)
+						.map(({ name, score }) =>
+							db
+								.update(battleBots)
+								.set({ [column.name]: score })
+								.where(eq(battleBots.name, name)),
+						),
+				);
+			}),
+		);
+
+		return rounds.map(({ label, matches }) => ({ label, matches }));
 	},
 	['battle-bots-bracket'],
 	{ tags: [BATTLE_BOTS_CACHE_TAG], revalidate: 300 },
