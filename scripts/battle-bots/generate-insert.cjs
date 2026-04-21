@@ -66,6 +66,7 @@ const REQUIRED_HEADERS = [
 	'Тегло (кг)',
 	'Брой снимки',
 	'Име на участник',
+	'Клас / Паралелка',
 ];
 
 for (const h of REQUIRED_HEADERS) {
@@ -83,7 +84,13 @@ for (let r = 1; r <= range.e.r; r++) {
 	const name = get(r, col('Име на Battle Bot')).trim();
 	if (!name) continue;
 
-	const participantRaw = get(r, col('Име на участник')).trim();
+	const participantName = get(r, col('Име на участник')).trim();
+	const participantClass = get(r, col('Клас / Паралелка')).trim();
+	const participantRaw = participantName
+		? participantClass
+			? `${participantName} (${participantClass})`
+			: participantName
+		: '';
 
 	const existing = bots.find((b) => b.name === name);
 	if (existing) {
