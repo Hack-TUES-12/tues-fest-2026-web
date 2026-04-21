@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { TbMapPin, TbMenu2, TbSchool } from 'react-icons/tb';
+import { TbChevronDown, TbMapPin, TbMenu2, TbSchool } from 'react-icons/tb';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -24,23 +24,22 @@ import { useTFFeatureIsOn } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 import { TFLogo } from '../home/TFLogo';
 
-const LINKS = [
-	// { href: '/', title: 'Начало' },
-	{ href: '/projects', title: 'Проекти' },
-	{ href: '/leaderboard', title: 'Класация' },
-	{ href: '/schedule', title: 'Програма' },
-	{ href: '/regulation', title: 'Регламент' },
-	{ href: '/partners', title: 'Спонсори && Партньори' },
-	// { href: '/projects', title: 'Гласуване' },
-];
-
 const SCHOOL_LINKS = [
 	{ href: '/about', title: 'Училището' },
 	{ href: '/apply', title: 'Кандидатстване' },
 	{ href: '/tuestalks', title: 'TUES Talks' },
 ];
 
-/** Desktop nav link — PT Mono, transitions to primary (pink) on hover. */
+const dropdownContentClass =
+	'min-w-[200px] rounded-xl border border-white/10 bg-background/90 p-2 shadow-xl shadow-black/50 backdrop-blur-xl';
+
+const dropdownItemClass =
+	'cursor-pointer rounded-lg px-3 py-2.5 focus:bg-white/5 focus:text-primary';
+
+const dropdownLinkClass =
+	'font-title text-sm tracking-widest text-white/60 transition-colors hover:text-primary';
+
+/** Desktop nav link */
 function NavLink({
 	href,
 	children,
@@ -61,7 +60,44 @@ function NavLink({
 	);
 }
 
-/** Mobile drawer link — larger, same typography. */
+/** Desktop dropdown group */
+function NavDropdown({
+	label,
+	children,
+}: {
+	label: string;
+	children: React.ReactNode;
+}) {
+	const [open, setOpen] = useState(false);
+	return (
+		<DropdownMenu modal={false} open={open} onOpenChange={setOpen}>
+			<DropdownMenuTrigger asChild>
+				<button className="inline-flex items-center gap-1 font-title text-sm tracking-widest text-white/60 transition-colors duration-200 hover:text-primary focus:outline-none focus-visible:text-primary rounded px-3 py-1.5 cursor-pointer">
+					{label}
+					<TbChevronDown
+						className="h-3.5 w-3.5 opacity-60 transition-transform duration-200"
+						style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+					/>
+				</button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent align="start" sideOffset={8} className={dropdownContentClass}>
+				{children}
+			</DropdownMenuContent>
+		</DropdownMenu>
+	);
+}
+
+function NavDropdownItem({ href, children }: { href: string; children: React.ReactNode }) {
+	return (
+		<DropdownMenuItem asChild className={dropdownItemClass}>
+			<Link href={href} className={dropdownLinkClass}>
+				{children}
+			</Link>
+		</DropdownMenuItem>
+	);
+}
+
+/** Mobile drawer link */
 function DrawerLink({
 	href,
 	children,
@@ -102,21 +138,27 @@ export function Navigation() {
 	const isPartnersEnabled = useTFFeatureIsOn('tf-show-partners');
 	const isTUESTalksEnabled = useTFFeatureIsOn('tf-show-tuestalks');
 	const isApplyEnabled = useTFFeatureIsOn('tf-show-apply');
-	const isLeaderboardEnabled = useTFFeatureIsOn('tf-show-leaderboard')
-
-	const visibleLinks = LINKS.filter(
-		(link) =>
-			(isScheduleEnabled || link.href !== '/schedule') &&
-			(isProjectsEnabled || link.href !== '/projects') &&
-			(isPartnersEnabled || link.href !== '/partners') &&
-			(isLeaderboardEnabled || link.href !== '/leaderboard'),
-	);
+	const isLeaderboardEnabled = useTFFeatureIsOn('tf-show-leaderboard');
 
 	const visibleSchoolLinks = SCHOOL_LINKS.filter(
 		(link) =>
 			(isTUESTalksEnabled || link.href !== '/tuestalks') &&
 			(isApplyEnabled || link.href !== '/apply'),
 	);
+
+	// "За събитието" items
+	const eventItems = [
+		isScheduleEnabled && { href: '/schedule', title: 'Програма' },
+		{ href: '/regulation', title: 'Регламент' },
+		isPartnersEnabled && { href: '/partners', title: 'Спонсори && Партньори' },
+	].filter(Boolean) as { href: string; title: string }[];
+
+	// "Battle Bots" items
+	const battleBotItems = [
+		{ href: '/battlebot/about', title: 'Инфо' },
+		{ href: '/battlebot', title: 'Роботи' },
+		{ href: '/battlebot/live', title: 'На Живо' },
+	].filter(Boolean) as { href: string; title: string }[];
 
 	useEffect(() => {
 		const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -139,11 +181,31 @@ export function Navigation() {
 					</Link>
 
 					<nav className="hidden items-center gap-1 lg:flex">
-						{visibleLinks.map((link) => (
-							<NavLink key={link.href} href={link.href}>
-								{link.title}
-							</NavLink>
-						))}
+						{/* За събитието */}
+						{eventItems.length > 0 && (
+							<NavDropdown label="За събитието">
+								{eventItems.map((item) => (
+									<NavDropdownItem key={item.href} href={item.href}>
+										{item.title}
+									</NavDropdownItem>
+								))}
+							</NavDropdown>
+						)}
+
+						{/* Battle Bots */}
+						<NavDropdown label="Battle Bots">
+							{battleBotItems.map((item) => (
+								<NavDropdownItem key={item.href} href={item.href}>
+									{item.title}
+								</NavDropdownItem>
+							))}
+						</NavDropdown>
+
+						{/* Проекти */}
+						{isProjectsEnabled && <NavLink href="/projects">Проекти</NavLink>}
+
+						{/* Класация */}
+						{isLeaderboardEnabled && <NavLink href="/leaderboard">Класация</NavLink>}
 					</nav>
 				</div>
 
@@ -171,18 +233,15 @@ export function Navigation() {
 						<DropdownMenuContent
 							align="end"
 							sideOffset={8}
-							className="min-w-[200px] rounded-xl border border-white/10 bg-background/90 p-2 shadow-xl shadow-black/50 backdrop-blur-xl"
+							className={dropdownContentClass}
 						>
 							{visibleSchoolLinks.map((link) => (
 								<DropdownMenuItem
 									asChild
 									key={link.href}
-									className="cursor-pointer rounded-lg px-3 py-2.5 focus:bg-white/5 focus:text-primary"
+									className={dropdownItemClass}
 								>
-									<Link
-										href={link.href}
-										className="font-title text-sm tracking-widest text-white/60 transition-colors hover:text-primary"
-									>
+									<Link href={link.href} className={dropdownLinkClass}>
 										{link.title}
 									</Link>
 								</DropdownMenuItem>
@@ -217,11 +276,12 @@ export function Navigation() {
 						</SheetHeader>
 
 						<div className="flex flex-col">
-							{visibleLinks.length > 0 && (
+							{/* За събитието */}
+							{eventItems.length > 0 && (
 								<>
-									<DrawerSectionLabel>Събитие</DrawerSectionLabel>
+									<DrawerSectionLabel>За събитието</DrawerSectionLabel>
 									<div className="border-b border-white/10 pb-4">
-										{visibleLinks.map((link) => (
+										{eventItems.map((link) => (
 											<DrawerLink key={link.href} href={link.href}>
 												{link.title}
 											</DrawerLink>
@@ -230,6 +290,32 @@ export function Navigation() {
 								</>
 							)}
 
+							{/* Battle Bots */}
+							<DrawerSectionLabel>Battle Bots</DrawerSectionLabel>
+							<div className="border-b border-white/10 pb-4">
+								{battleBotItems.map((link) => (
+									<DrawerLink key={link.href} href={link.href}>
+										{link.title}
+									</DrawerLink>
+								))}
+							</div>
+
+							{/* Проекти + Класация */}
+							{(isProjectsEnabled || isLeaderboardEnabled) && (
+								<>
+									<DrawerSectionLabel>Проекти</DrawerSectionLabel>
+									<div className="border-b border-white/10 pb-4">
+										{isProjectsEnabled && (
+											<DrawerLink href="/projects">Проекти</DrawerLink>
+										)}
+										{isLeaderboardEnabled && (
+											<DrawerLink href="/leaderboard">Класация</DrawerLink>
+										)}
+									</div>
+								</>
+							)}
+
+							{/* За ТУЕС */}
 							{visibleSchoolLinks.length > 0 && (
 								<>
 									<DrawerSectionLabel>За ТУЕС</DrawerSectionLabel>
