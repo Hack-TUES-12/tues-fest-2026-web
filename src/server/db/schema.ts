@@ -78,11 +78,39 @@ export const votesRelations = relations(votes, ({ one }) => ({
 export const battleBots = createTable('battle_bots', (d) => ({
 	id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
 	name: d.varchar({ length: 256 }).notNull().unique(),
+	teamName: d.varchar({ length: 256 }).notNull(),
+	description: d.text().notNull(),
+	slogan: d.varchar({ length: 512 }).notNull(),
+	weapon: d.varchar({ length: 256 }).notNull(),
+	weightKg: d.numeric({ precision: 6, scale: 2 }).notNull(),
+	repoUrl: d.varchar({ length: 512 }),
+	youtubeId: d.varchar({ length: 64 }),
+	photoCount: d.integer().notNull().default(0),
 	primaryColor: d.varchar({ length: 32 }).notNull(),
 	textColor: d.varchar({ length: 32 }).notNull(),
 	quarterFinalResult: d.integer(),
 	semiFinalResult: d.integer(),
 	finalResult: d.integer(),
+}));
+
+export const battleBotParticipants = createTable('battle_bot_participants', (d) => ({
+	id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+	botId: d
+		.integer()
+		.notNull()
+		.references(() => battleBots.id, { onDelete: 'cascade' }),
+	participantName: d.varchar({ length: 256 }).notNull(),
+}));
+
+export const battleBotsRelations = relations(battleBots, ({ many }) => ({
+	participants: many(battleBotParticipants),
+}));
+
+export const battleBotParticipantsRelations = relations(battleBotParticipants, ({ one }) => ({
+	bot: one(battleBots, {
+		fields: [battleBotParticipants.botId],
+		references: [battleBots.id],
+	}),
 }));
 
 // FIXME: drizzle-kit really wants to delete these, so even though they are not used, they must be defined here as well
