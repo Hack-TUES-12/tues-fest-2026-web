@@ -1,5 +1,7 @@
 import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
+import { growthbook } from '@/lib/growthbook/server';
 import { HydrateClient, api } from '@/lib/trpc/server';
 
 import { LiveStream } from './live-stream';
@@ -12,6 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default async function BattlebotLivePage() {
+	const gb = await growthbook();
+	const streamIsOn = gb.isOn('tf-battle-bots-stream');
+	const resultsIsOn = gb.isOn('tf-battle-bots-results');
+
+	if (!streamIsOn && !resultsIsOn) {
+		notFound();
+	}
+
 	void api.battleBots.getTournament.prefetch();
 
 	return (
@@ -39,10 +49,12 @@ export default async function BattlebotLivePage() {
 				<div className="relative z-10 flex w-full flex-col items-center gap-24">
 					<LiveStream />
 
-					<div className='flex flex-col gap-12'>
-						<ResultsHeader />
-						<BracketLive />
-					</div>
+					{resultsIsOn && (
+						<div className='flex flex-col gap-12'>
+							<ResultsHeader />
+							<BracketLive />
+						</div>
+					)}
 				</div>
 			</div>
 		</HydrateClient>

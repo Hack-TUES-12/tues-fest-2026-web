@@ -139,6 +139,9 @@ export function Navigation() {
 	const isTUESTalksEnabled = useTFFeatureIsOn('tf-show-tuestalks');
 	const isApplyEnabled = useTFFeatureIsOn('tf-show-apply');
 	const isLeaderboardEnabled = useTFFeatureIsOn('tf-show-leaderboard');
+	const isBattleBotsStreamOn = useTFFeatureIsOn('tf-battle-bots-stream');
+	const isBattleBotsResultsOn = useTFFeatureIsOn('tf-battle-bots-results');
+	const isBattleBotsLiveEnabled = isBattleBotsStreamOn || isBattleBotsResultsOn;
 
 	const visibleSchoolLinks = SCHOOL_LINKS.filter(
 		(link) =>
@@ -157,7 +160,7 @@ export function Navigation() {
 	const battleBotItems = [
 		{ href: '/battlebot/about', title: 'Инфо' },
 		{ href: '/battlebot', title: 'Роботи' },
-		{ href: '/battlebot/live', title: 'На Живо' },
+		isBattleBotsLiveEnabled && { href: '/battlebot/live', title: 'На Живо' },
 	].filter(Boolean) as { href: string; title: string }[];
 
 	useEffect(() => {

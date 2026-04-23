@@ -15,6 +15,7 @@ export type TFFeatures = {
 	'tf-battle-bots-stream': {
 		youtubeId: string;
 	};
+	'tf-battle-bots-results': boolean;
 };
 
 export type TFFeature = keyof TFFeatures;

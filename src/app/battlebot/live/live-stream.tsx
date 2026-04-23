@@ -16,6 +16,8 @@ export const LiveStream = () => {
 	const streamFeature = useTFFeature('tf-battle-bots-stream');
 	const streamId = streamFeature.value?.youtubeId ?? FALLBACK_STREAM_ID;
 
+	if (!streamFeature.on) return null;
+
 	return (
 		<motion.section
 			className="flex w-full max-w-4xl flex-col items-center gap-6"

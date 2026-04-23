@@ -22,6 +22,7 @@ import {
 	sectionFadeIn,
 	sectionFadeUp,
 } from '@/lib/motion/section-in-view';
+import { useTFFeatureIsOn } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 
 const WHAT_IS_LIST = [
@@ -80,6 +81,8 @@ const LIST_BASE = 0.15;
 
 export function BattlebotPageContent() {
 	const reducedMotion = useReducedMotion();
+	const streamIsOn = useTFFeatureIsOn('tf-battle-bots-stream');
+	const resultsIsOn = useTFFeatureIsOn('tf-battle-bots-results');
 
 	return (
 		<div className="relative px-4 pt-10 pb-24 md:px-8 md:pt-14">
@@ -136,27 +139,31 @@ export function BattlebotPageContent() {
 						className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center"
 						{...sectionFadeUp(reducedMotion, 0.26)}
 					>
-						<Button
-							asChild
-							variant="default"
-							size="lg"
-							className="shadow-primary/20 font-bold shadow-lg"
-						>
-							<Link href="/battlebot/live">
-								Гледай на живо
-							</Link>
-						</Button>
-						<Button
-							asChild
-							variant="default-secondary"
-							size="lg"
-							className=""
-						>
-							<Link href="/battlebot/live">
-								Резултати от турнира
-								<TbArrowRight size={18} />
-							</Link>
-						</Button>
+						{streamIsOn && (
+							<Button
+								asChild
+								variant="default"
+								size="lg"
+								className="shadow-primary/20 font-bold shadow-lg"
+							>
+								<Link href="/battlebot/live">
+									Гледай на живо
+								</Link>
+							</Button>
+						)}
+						{resultsIsOn && (
+							<Button
+								asChild
+								variant="default-secondary"
+								size="lg"
+								className=""
+							>
+								<Link href="/battlebot/live">
+									Резултати от турнира
+									<TbArrowRight size={18} />
+								</Link>
+							</Button>
+						)}
 					</motion.div>
 				</motion.section>
 
@@ -222,6 +229,7 @@ export function BattlebotPageContent() {
 				</motion.section>
 
 				{/* Rules + CTA */}
+				{(streamIsOn || resultsIsOn) && (
 				<motion.section
 					className="mx-auto flex w-full max-w-5xl gap-8 flex-col items-center"
 					{...sectionFadeIn(reducedMotion, 0)}
@@ -238,31 +246,36 @@ export function BattlebotPageContent() {
 							className="flex gap-3"
 							{...sectionFadeUp(reducedMotion, 0.14)}
 						>
-							<Button
-								asChild
-								variant="default"
-								size="lg"
-								className="shadow-primary/20 font-bold shadow-lg"
-							>
-								<Link href="/battlebot/live">
-									<TbVideo size={18} />
-									Гледай на живо
-								</Link>
-							</Button>
-							<Button
-								asChild
-								variant="default-secondary"
-								size="lg"
-								className="font-bold"
-							>
-								<Link href="/battlebot/live">
-									Резултати от турнира
-									<TbArrowRight size={18} />
-								</Link>
-							</Button>
+							{streamIsOn && (
+								<Button
+									asChild
+									variant="default"
+									size="lg"
+									className="shadow-primary/20 font-bold shadow-lg"
+								>
+									<Link href="/battlebot/live">
+										<TbVideo size={18} />
+										Гледай на живо
+									</Link>
+								</Button>
+							)}
+							{resultsIsOn && (
+								<Button
+									asChild
+									variant="default-secondary"
+									size="lg"
+									className="font-bold"
+								>
+									<Link href="/battlebot/live">
+										Резултати от турнира
+										<TbArrowRight size={18} />
+									</Link>
+								</Button>
+							)}
 						</motion.div>
 					</div>
 				</motion.section>
+				)}
 			</div>
 		</div>
 	);

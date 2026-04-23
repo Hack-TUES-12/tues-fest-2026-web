@@ -20,6 +20,7 @@ import {
 	sectionFadeIn,
 	sectionFadeUp,
 } from '@/lib/motion/section-in-view';
+import { useTFFeatureIsOn } from '@/lib/growthbook/react/hooks';
 import { cn } from '@/lib/utils';
 
 /** Matches `SCHEDULE_PART_STYLES` order — border/label in each card’s hue. */
@@ -94,6 +95,7 @@ const SOCIAL_LINKS = [
 function Schedule() {
 	const reducedMotion = useReducedMotion();
 	const sectionIds = useMemo(() => scheduleSectionIds(), []);
+	const streamIsOn = useTFFeatureIsOn('tf-battle-bots-stream');
 	const { isSectionActive } = useRegulationActiveSection(sectionIds, {
 		focalYRatio: SCHEDULE_FOCAL_Y_RATIO,
 	});
@@ -204,7 +206,7 @@ function Schedule() {
 										{item.description}
 									</div>
 
-									{item.liveStream && (
+									{item.liveStream && streamIsOn && (
 										<Button
 											variant={SCHEDULE_LIVE_BUTTON_VARIANTS[i % 4]}
 											className="mt-6 font-title text-xs tracking-widest w-fit"
