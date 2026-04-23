@@ -47,6 +47,7 @@ const sofiaTechParkLogo = '/sponsors/partners/sofia-tech-park.svg';
 const vibeSystemsLogo = '/sponsors/partners/vibeSystems.svg';
 const zayobayoLogo = '/sponsors/partners/zayobayoLogo.svg';
 const gelatoLogo = '/sponsors/partners/gelato.svg'
+const lavaBearLogo = '/sponsors/partners/lavaBear.svg'
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
@@ -437,6 +438,15 @@ const PARTNERS = [
 		url: 'https://atelierdelgelatobaci.com/',
 		description:
 			`Atelier Del Gelato е бутикова италианска джелатерия, в центъра на София (на Г.С.Раковски 149) която съчетава традиционно майсторство с модерно усещане за градски живот. Всеки ден създаваме автентично италианско джелато от подбрани съставки, превръщайки вкуса в емоция и всяко посещение в малък ритуал на радост. За нас джелатото не е просто десерт — то е изкуството да се наслаждаваш на момента. `
+	},
+	{
+		name: 'Lava Bear',
+		logo: lavaBearLogo,
+		url: 'https://lavabear.bg/',
+		description:
+			`LAVA BEAR е една мечта, с която искаме да вдъхновим ТЕБ и твоите ПРИЯТЕЛИ да постигате ВАШИТЕ МЕЧТИ! LAVA BEAR ООД е български бранд, създаден през 2024 година, с мисия да докаже, че младите хора могат да се развиват успешно ТУК, в България!
+			Нашата мисия е да ти напомняме, че приятелството е най-ценното богатство, че успехите, споделени с приятели, са най-сладки, и че работата в екип е най-FUN!
+			Бъди смел, вярвай в идеите си и не спирай да създаваш. Бъди искрата, която запалва вдъхновението – за теб и за всички около теб! 🐻🔥`
 	},
 	// {
 	// 	name: 'АЗТУЕС',
