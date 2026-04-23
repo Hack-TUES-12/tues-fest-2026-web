@@ -896,33 +896,6 @@ export const PROJECTS = [
         "images": []
     },
     {
-        "id": 22,
-        "title": "Лабиринчо",
-        "category": "embedded",
-        "description": "робот, създаден да минава през 3D лабиринт",
-        "links": {
-            "demoUrl": null,
-            "repoUrls": [
-                "https://github.com/VictorMarinchev/Labirinthcho"
-            ]
-        },
-        "youtubeId": "FY4qJ6_pkdM",
-        "contributors": [
-            {
-                "name": "Виктор Маринчев",
-                "class": "10 А"
-            },
-            {
-                "name": "Лия Илиева",
-                "class": "10 А"
-            }
-        ],
-        "thumbnail": project22$thumbnail,
-        "images": [
-            project22$image1
-        ]
-    },
-    {
         "id": 23,
         "title": "IR-Multiboard",
         "category": "embedded",
