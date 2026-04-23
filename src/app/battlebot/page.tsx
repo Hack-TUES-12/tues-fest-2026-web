@@ -1,5 +1,9 @@
+import Link from 'next/link';
 import { type Metadata } from 'next';
+import { TbArrowRight, TbVideo } from 'react-icons/tb';
 
+import { Button } from '@/components/ui/button';
+import { growthbook } from '@/lib/growthbook/server';
 import { HydrateClient, api } from '@/lib/trpc/server';
 
 import { BotsGrid } from './bots-grid';
@@ -11,6 +15,11 @@ export const metadata: Metadata = {
 
 export default async function BattlebotsPage() {
 	void api.battleBots.getBots.prefetch();
+
+	const gb = await growthbook();
+	const streamIsOn = gb.isOn('tf-battle-bots-stream');
+	const resultsIsOn = gb.isOn('tf-battle-bots-results');
+	const livePageIsOn = streamIsOn || resultsIsOn;
 
 	return (
 		<HydrateClient>
@@ -35,14 +44,37 @@ export default async function BattlebotsPage() {
 				</div>
 
 				<div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-10">
-					<div className="flex flex-col gap-2">
-						<p className="text-primary text-sm font-medium tracking-widest uppercase">
-							TUES Fest 2026
-						</p>
-						<h1 className="font-title text-4xl text-white md:text-5xl">Battle Bots</h1>
-						<p className="text-foreground/65 max-w-xl text-base leading-relaxed">
-							Осем отбора. Осем робота. Само един победител. Запознай се с участниците в турнира.
-						</p>
+					<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-2">
+							<p className="text-primary text-sm font-medium tracking-widest uppercase">
+								TUES Fest 2026
+							</p>
+							<h1 className="font-title text-4xl text-white md:text-5xl">Battle Bots</h1>
+							<p className="text-foreground/65 max-w-xl text-base leading-relaxed">
+								Осем отбора. Осем робота. Само един победител. Запознай се с участниците в турнира.
+							</p>
+						</div>
+
+						{livePageIsOn && (
+							<div className="flex gap-3">
+								{streamIsOn && (
+									<Button asChild variant="default" size="default" className="font-bold">
+										<Link href="/battlebot/live">
+											<TbVideo size={16} />
+											Гледай на живо
+										</Link>
+									</Button>
+								)}
+								{resultsIsOn && (
+									<Button asChild variant="default-secondary" size="default" className="font-bold">
+										<Link href="/battlebot/live">
+											Резултати от турнира
+											<TbArrowRight size={16} />
+										</Link>
+									</Button>
+								)}
+							</div>
+						)}
 					</div>
 
 					<BotsGrid />
