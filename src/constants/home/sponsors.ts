@@ -48,6 +48,7 @@ const vibeSystemsLogo = '/sponsors/partners/vibeSystems.svg';
 const zayobayoLogo = '/sponsors/partners/zayobayoLogo.svg';
 const gelatoLogo = '/sponsors/partners/gelato.svg'
 const lavaBearLogo = '/sponsors/partners/lavaBear.svg'
+const ibecoLogo = '/sponsors/partners/ibeco.svg'
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
@@ -447,6 +448,13 @@ const PARTNERS = [
 			`LAVA BEAR е една мечта, с която искаме да вдъхновим ТЕБ и твоите ПРИЯТЕЛИ да постигате ВАШИТЕ МЕЧТИ! LAVA BEAR ООД е български бранд, създаден през 2024 година, с мисия да докаже, че младите хора могат да се развиват успешно ТУК, в България!
 			Нашата мисия е да ти напомняме, че приятелството е най-ценното богатство, че успехите, споделени с приятели, са най-сладки, и че работата в екип е най-FUN!
 			Бъди смел, вярвай в идеите си и не спирай да създаваш. Бъди искрата, която запалва вдъхновението – за теб и за всички около теб! 🐻🔥`
+	},
+	{
+		name: 'Ibeco',
+		logo: ibecoLogo,
+		url: 'https://ibeco.bg/',
+		description:
+			`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
 	},
 	// {
 	// 	name: 'АЗТУЕС',
