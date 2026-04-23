@@ -7,6 +7,10 @@ export const env = createEnv({
 		NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 		GROWTHBOOK_WEBHOOK_SECRET: z.string(),
 
+		CHALLONGE_API_KEY: z.string(),
+		CHALLONGE_TOURNAMENT_ID: z.string(),
+		REVALIDATION_SECRET: z.string(),
+
 		EMAIL_SMTP_HOST: z.string(),
 		EMAIL_SMTP_USER: z.string(),
 		EMAIL_SMTP_PASSWORD: z.string(),
