@@ -46,6 +46,7 @@ const jpointLogo = '/sponsors/partners/jpoint.svg'
 const sofiaTechParkLogo = '/sponsors/partners/sofia-tech-park.svg';
 const vibeSystemsLogo = '/sponsors/partners/vibeSystems.svg';
 const zayobayoLogo = '/sponsors/partners/zayobayoLogo.svg';
+const gelatoLogo = '/sponsors/partners/gelato.svg'
 const aztuesLogo = '/sponsors/partners/aztues.png';
 const greenCherryLogo = '/sponsors/partners/green_cherry.png';
 const jmrLogo = '/sponsors/partners/joker-media-rental.png';
@@ -429,7 +430,14 @@ const PARTNERS = [
 			разнообразие от вкусове има и такива, които не съдържат
 			ГЛУТЕН – Сладка царевица, Копър и сметана, Пица, Бекон, Сирене
 			и Фъстък.`
-	}
+	},
+	{
+		name: 'Atelier Del Gelato',
+		logo: gelatoLogo,
+		url: 'https://atelierdelgelatobaci.com/',
+		description:
+			`Atelier Del Gelato е бутикова италианска джелатерия, в центъра на София (на Г.С.Раковски 149) която съчетава традиционно майсторство с модерно усещане за градски живот. Всеки ден създаваме автентично италианско джелато от подбрани съставки, превръщайки вкуса в емоция и всяко посещение в малък ритуал на радост. За нас джелатото не е просто десерт — то е изкуството да се наслаждаваш на момента. `
+	},
 	// {
 	// 	name: 'АЗТУЕС',
 	// 	logo: aztuesLogo,
