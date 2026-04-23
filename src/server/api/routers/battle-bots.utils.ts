@@ -9,6 +9,31 @@ import { battleBots } from '@/server/db/schema';
 import { MatchesResponseSchema, type ParticipantEntrySchema } from './battle-bots.schemas';
 
 export const BATTLE_BOTS_CACHE_TAG = 'battle-bots-tournament';
+export const BATTLE_BOTS_LIST_CACHE_TAG = 'battle-bots-list';
+
+async function fetchBotsUncached() {
+	return db
+		.select({
+			id: battleBots.id,
+			name: battleBots.name,
+			teamName: battleBots.teamName,
+			slogan: battleBots.slogan,
+			weapon: battleBots.weapon,
+			weightKg: battleBots.weightKg,
+			photoCount: battleBots.photoCount,
+			primaryColor: battleBots.primaryColor,
+			textColor: battleBots.textColor,
+		})
+		.from(battleBots);
+}
+
+export const fetchBots =
+	env.NODE_ENV === 'development'
+		? fetchBotsUncached
+		: unstable_cache(fetchBotsUncached, [BATTLE_BOTS_LIST_CACHE_TAG], {
+				tags: [BATTLE_BOTS_LIST_CACHE_TAG],
+				revalidate: 5 * 60,
+			});
 
 const BASE = 'https://api.challonge.com/v2';
 

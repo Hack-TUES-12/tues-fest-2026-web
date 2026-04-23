@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '@/server/db';
 import { battleBots, battleBotParticipants } from '@/server/db/schema';
 import { BracketRoundSchema } from './battle-bots.schemas';
-import { fetchTournamentBracket } from './battle-bots.utils';
+import { fetchBots, fetchTournamentBracket } from './battle-bots.utils';
 import { createTRPCRouter, publicProcedure } from '../trpc';
 
 export const battleBotsRouter = createTRPCRouter({
@@ -13,19 +13,7 @@ export const battleBotsRouter = createTRPCRouter({
 	}),
 
 	getBots: publicProcedure.query(() => {
-		return db
-			.select({
-				id: battleBots.id,
-				name: battleBots.name,
-				teamName: battleBots.teamName,
-				slogan: battleBots.slogan,
-				weapon: battleBots.weapon,
-				weightKg: battleBots.weightKg,
-				photoCount: battleBots.photoCount,
-				primaryColor: battleBots.primaryColor,
-				textColor: battleBots.textColor,
-			})
-			.from(battleBots);
+		return fetchBots();
 	}),
 
 	getBot: publicProcedure.input(z.object({ id: z.number() })).query(async ({ input }) => {
