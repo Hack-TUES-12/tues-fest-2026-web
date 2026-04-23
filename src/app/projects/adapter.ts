@@ -4339,7 +4339,7 @@ export const PROJECTS = [
                 "https://github.com/Loraaa12/Diplomna-Rabota.git"
             ]
         },
-        "youtubeId": null,
+        "youtubeId": "aeZDJz6Fu3o",
         "contributors": [
             {
                 "name": "Лора Апостолова",
