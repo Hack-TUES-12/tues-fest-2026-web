@@ -163,7 +163,7 @@ Since 2016, Trading 212’s app has been the UK's #1 trading app, and in 2017 it
 
 const BETA_SPONSORS = [
 	{
-		name: "AxlеsSoft",
+		name: "Axlеs Soft",
 		logo: axlessoftLogo,
 		url: "https://www.axlessoft.com/",
 		description:
