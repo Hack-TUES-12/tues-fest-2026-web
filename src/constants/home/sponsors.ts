@@ -245,7 +245,7 @@ const GAMMA_SPONSORS = [
 		`DevriX има богат опит в B2B сферата с помагането на бизнеси да преминат през нужното си развитие. Предлагайки RevOps услуги, DevriX трансформира компании чрез ясни данни и структуриран, устойчив код. С бързо и ефикасно съдействие, постигаме нашата цел клиента ни да е доволен и цялостно успешен.`,
 	},
 	{
-		name: 'GlobalFoundries Bulgaria EAD',
+		name: 'GlobalFoundries',
 		logo: globalFoundriesLogo,
 		url: 'https://gf.com/',
 		description:
