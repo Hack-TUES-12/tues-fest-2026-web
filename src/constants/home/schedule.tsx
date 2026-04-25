@@ -97,7 +97,8 @@ export const SCHEDULE: ScheduleItem[] = [
 			</div>
 		),
 		icon: '',
-		pos: 'right'
+		pos: 'right',
+		liveStream: SCHEDULE_LIVE_STREAM,
 	},
 	{
 		start: '11:00',
