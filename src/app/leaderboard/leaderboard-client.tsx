@@ -307,8 +307,9 @@ function TopPlaceCard({ place, project, isFirst }: TopPlaceCardProps) {
 				</div>
 
 				<p
+					title={project.name}
 					className={cn(
-						'font-title text-center font-bold leading-tight text-white',
+						'font-title w-full text-center font-bold leading-tight text-white truncate',
 						isFirst ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl',
 					)}
 				>
