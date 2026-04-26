@@ -8,6 +8,8 @@ import { LiveStream } from './live-stream';
 import { ResultsHeader } from './results-header';
 import { BracketLive } from './bracket-live';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
 	title: 'Battle Bots — На живо',
 	description: 'Следете резултатите на Battle Bots турнира на TUES Fest 2026 в реално време.',
