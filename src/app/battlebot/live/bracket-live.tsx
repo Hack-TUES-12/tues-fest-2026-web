@@ -26,7 +26,6 @@ function ParticipantRow({
 }) {
 	const name = participant?.name ?? 'TBD';
 	const seed = participant?.seed;
-	const score = participant?.score ?? null;
 	const hasColors = !!participant?.primaryColor && !!participant?.textColor;
 
 	return (
@@ -49,25 +48,6 @@ function ParticipantRow({
 			>
 				{name}
 			</span>
-			{score !== null && (
-				<span
-					className={cn(
-						'min-w-[2rem] rounded-md px-2 py-0.5 text-center font-mono text-xs font-bold tabular-nums',
-						isWinner && !hasColors && 'bg-primary/20 text-primary',
-						!isWinner && 'bg-white/5 text-foreground/60',
-					)}
-					style={
-						isWinner && hasColors
-							? {
-									backgroundColor: participant!.primaryColor!,
-									color: participant!.textColor!,
-								}
-							: {}
-					}
-				>
-					{score}
-				</span>
-			)}
 		</div>
 	);
 }
