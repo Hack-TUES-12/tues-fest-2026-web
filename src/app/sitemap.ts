@@ -6,8 +6,8 @@ import { getProjects } from './projects/actions';
 
 const BASE_URL = 'https://tuesfest.bg';
 
-// Revalidate the sitemap every hour (matches GrowthBook prod cache TTL)
-export const revalidate = 3600;
+// Revalidate the sitemap every day
+export const revalidate = 43200;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const gb = await growthbook();
