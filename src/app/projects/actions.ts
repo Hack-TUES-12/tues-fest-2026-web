@@ -36,7 +36,7 @@ export const getProjects = unstable_cache(
 	['all-projects', String(TF_YEAR)],
 	{
 		tags: [PROJECTS_CACHE_TAG],
-		revalidate: 60,
+		revalidate: 3600,
 	}
 );
 
