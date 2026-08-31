@@ -3838,7 +3838,11 @@ export const PROJECTS = [
         "id": 124,
         "title": "Quicx",
         "category": "software",
-        "description": "Quicx е лек, бърз и лесен за интегриране task queue engine, написан изцяло на C. Проектиран да реши един от най-честите проблеми в production среди — неконтролируемото нарастване на паметта при обработка на фонови задачи.\nЗа разлика от съществуващите решения като Celery и BullMQ, които разчитат на езици с garbage collector или стандартния системен алокатор, Quicx използва PMAD — custom slab алокатор, разработен специално за целта. PMAD разпределя паметта предварително при стартиране, в фиксирани блокове с различни размери. Всяка задача получава блок от подходящия размер в O(1) време, без malloc, без фрагментация, без изненади.\nРезултатът е измерим и конкретен: там където Celery изисква рестартиране на worker процесите след определен брой задачи заради нарастване на паметта, Quicx работи с идентичен memory footprint от стартиране до спиране — независимо дали са обработени хиляди или милиони задачи.",
+        "description": `Quicx is a deterministic-memory task queue daemon written in C. Instead of allocating as it goes, it's handed a fixed memory pool at startup — backed by PMAD, a custom O(1) slab allocator — and it never grows past that budget: 0 KB RSS growth measured over 443,912 tasks. It routes work over a compact 6-byte-header binary protocol between producers, the daemon, and a worker pool, using epoll/kqueue and Unix domain sockets under the hood.
+
+        Every performance number is measured, not estimated: 74,300 tasks/sec end-to-end throughput (single thread), 51 µs median submit-to-done latency (p99 111 µs), and a 54 KB binary with zero dependencies — all reproducible via bench/run.sh. It ships a Java client (dev.quicx:quicx-client, published to Maven Central); every other language talks the documented wire protocol directly.
+
+        Read more at https://quicx.dev`,
         "links": {
             "demoUrl": null,
             "repoUrls": [
