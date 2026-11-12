@@ -3838,11 +3838,19 @@ export const PROJECTS = [
         "id": 124,
         "title": "Quicx",
         "category": "software",
-        "description": `Quicx is a deterministic-memory task queue daemon written in C. Instead of allocating as it goes, it's handed a fixed memory pool at startup — backed by PMAD, a custom O(1) slab allocator — and it never grows past that budget: 0 KB RSS growth measured over 443,912 tasks. It routes work over a compact 6-byte-header binary protocol between producers, the daemon, and a worker pool, using epoll/kqueue and Unix domain sockets under the hood.
+        "description": `Изкуственият интелект вече работи в роботи, камери и дронове. Там първа свършва паметта, а когато свърши, устройството спира и губи всичко, което чака.
 
-        Every performance number is measured, not estimated: 74,300 tasks/sec end-to-end throughput (single thread), 51 µs median submit-to-done latency (p99 111 µs), and a 54 KB binary with zero dependencies — all reproducible via bench/run.sh. It ships a Java client (dev.quicx:quicx-client, published to Maven Central); every other language talks the documented wire protocol directly.
+        Работих по автономен робот, който открива болести по растенията. Моделът изоставаше от кадрите, паметта свърши и роботът спря насред полето.
 
-        Read more at https://quicx.dev`,
+        Затова написах Quicx: опашка за задачи на C, която получава един бюджет памет и никога не го надхвърля. Моят алокатор apool дава паметта на пристигащите задачи. Той и протоколът ми QXP са направени за скорост, с оптимизации от научни статии и мои надграждания.
+
+        Когато паметта е пълна, Quicx пази най-ценната работа. Той е първата опашка за задачи, която изхвърля по-малко ценна задача само ако алокаторът докаже, че мястото ѝ ще побере новата. При претоварване се обработват 100 % от ценните задачи срещу 31,6 % при обикновена опашка.
+
+        Quicx дава и изолация: на едно устройство всяка част може да има свой независим Quicx с отделна памет и ядро. Това е изключително полезно в по-сложни проекти: камерата не може да заеме паметта на двигателите. Мощността расте с ядрата, тествано на Linux сървър: два Quicx на две ядра вършат 1,92 пъти повече работа от един.
+
+        Quicx е самостоятелна програма от около 36 KB без външни библиотеки и върви на всяко устройство с Linux. Има пълен команден ред, отворен код, сайт quicx.dev и моя Java библиотека в Maven Central.
+
+        Пиша научни статии за метода. Следва машинно обучение, с което Quicx сам научава стойността на задачите.`,
         "links": {
             "demoUrl": null,
             "repoUrls": [
